@@ -1,0 +1,290 @@
+/* ======================================================
+   COLLECTION
+====================================================== */
+
+.collection-hero{
+
+    width:min(1400px,92%);
+    margin:auto;
+
+    padding:180px 0 100px;
+
+}
+
+.collection-hero span{
+
+    display:block;
+
+    font-size:12px;
+
+    letter-spacing:4px;
+
+    color:#8A8A8A;
+
+    text-transform:uppercase;
+
+}
+
+.collection-hero h1{
+
+    margin-top:18px;
+
+    font-size:clamp(52px,8vw,92px);
+
+    line-height:.95;
+
+    letter-spacing:-4px;
+
+    font-weight:700;
+
+}
+
+/* ======================================================
+FILTERS
+====================================================== */
+
+.filters{
+
+    width:min(1400px,92%);
+    margin:0 auto 80px;
+
+    display:flex;
+
+    gap:14px;
+
+    overflow-x:auto;
+
+    scrollbar-width:none;
+
+}
+
+.filters::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.filters button{
+
+    height:46px;
+
+    padding:0 26px;
+
+    border:none;
+
+    border-radius:999px;
+
+    background:#F5F5F7;
+
+    color:#555;
+
+    font-size:14px;
+
+    transition:.35s;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+}
+
+.filters button:hover{
+
+    background:#111;
+
+    color:white;
+
+}
+
+.filters .active{
+
+    background:#111;
+
+    color:white;
+
+}
+
+/* ======================================================
+PRODUCT GRID
+====================================================== */
+
+.products-grid{
+
+    width:min(1400px,92%);
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:42px;
+
+    padding-bottom:160px;
+
+}
+
+/* ======================================================
+PRODUCT CARD
+====================================================== */
+
+.product-card{
+
+    text-decoration:none;
+
+    color:#111;
+
+    transition:.45s;
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.product-card img{
+
+    width:100%;
+
+    aspect-ratio:1/1;
+
+    object-fit:cover;
+
+    background:#F5F5F7;
+
+    border-radius:28px;
+
+    transition:.6s;
+
+}
+
+.product-card:hover img{
+
+    transform:scale(1.03);
+
+}
+
+.product-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-end;
+
+    margin-top:22px;
+
+}
+
+.product-info h3{
+
+    font-size:24px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.product-card:hover h3{
+
+    transform:translateX(6px);
+
+}
+
+.product-info span{
+
+    font-size:18px;
+
+    color:#6E6E73;
+
+}
+
+/* ======================================================
+ARROW
+====================================================== */
+
+.product-info::after{
+
+    content:"→";
+
+    font-size:24px;
+
+    opacity:0;
+
+    transform:translateX(-12px);
+
+    transition:.35s;
+
+}
+
+.product-card:hover .product-info::after{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+/* ======================================================
+FOOTER
+====================================================== */
+
+footer{
+
+    padding:100px 0 60px;
+
+    border-top:1px solid #ECECEC;
+
+}
+
+/* ======================================================
+RESPONSIVE
+====================================================== */
+
+@media (max-width:1100px){
+
+.products-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media (max-width:768px){
+
+.collection-hero{
+
+padding-top:140px;
+
+}
+
+.collection-hero h1{
+
+font-size:48px;
+
+}
+
+.products-grid{
+
+grid-template-columns:1fr;
+
+gap:55px;
+
+}
+
+.product-info h3{
+
+font-size:22px;
+
+}
+
+.product-info span{
+
+font-size:17px;
+
+}
+
+}
