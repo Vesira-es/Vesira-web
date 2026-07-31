@@ -217,6 +217,26 @@ button{
 
 }
 
+#botonIA {
+    margin-right: 50px;
+    cursor: pointer;
+
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+
+.IA-activa {
+    color:#F4B400;
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
 </style>
 
 </head>
@@ -247,6 +267,8 @@ button{
         type="text"
         placeholder="¿Qué estás buscando?">
 
+        <span class="material-symbols-outlined" id = "botonIA">auto_awesome</span>
+
         <button id="cerrarBusqueda">
             ✕
         </button>
@@ -276,22 +298,44 @@ button{
 const normal = document.querySelector(".normal");
 const buscar = document.querySelector(".buscar");
 const iconos = document.querySelector(".iconos");
+const IA = document.getElementById("botonIA");
+
+let iaActiva = false;
+
 
 document.getElementById("abrirBusqueda").addEventListener("click",()=>{
 
-    normal.style.display="none";
-    iconos.style.display="none";
-    buscar.style.display="flex";
+    normal.style.display = "none";
+    iconos.style.display = "none";
+    buscar.style.display = "flex";
 
     buscar.querySelector("input").focus();
 
 });
 
+
 document.getElementById("cerrarBusqueda").addEventListener("click",()=>{
 
-    buscar.style.display="none";
-    normal.style.display="flex";
-    iconos.style.display="flex";
+    buscar.style.display = "none";
+    normal.style.display = "flex";
+    iconos.style.display = "flex";
+
+});
+
+
+IA.addEventListener("click",()=>{
+
+    iaActiva = !iaActiva;
+
+    if(iaActiva){
+
+        IA.classList.add("IA-activa");
+
+    } else {
+
+        IA.classList.remove("IA-activa");
+
+    }
 
 });
 
