@@ -111,6 +111,8 @@ body{
 
     flex: 1;
 
+    min-width: 0;
+
     background:transparent;
 
     border:none;
@@ -205,9 +207,7 @@ button{
 
     }
 
-    #botonIA {
-        margin-right: 5px;
-    }
+
     
     .eslogan{
 
@@ -241,7 +241,8 @@ button{
 }
 
 #botonIA {
-    margin-right: 50px;
+    margin-left:12px;
+    margin-right: 25px;
     cursor: pointer;
 
     font-variation-settings:
@@ -262,15 +263,11 @@ button{
 
 .eslogan{
 
-    font-family:"Bricolage Grotesque", sans-serif;
+    width:100%;
 
-    font-size:18px;
+    max-width:420px;
 
-    font-weight:bold;
-
-    letter-spacing:.45em;
-
-    text-transform:uppercase;
+    height:auto;
 
     animation:introEslogan 4s ease forwards;
 
@@ -308,23 +305,6 @@ button{
 
 }
 
-.born{
-
-    color: #0768A9;
-}
-
-.in-the{
-
-    color:#FFCC02;
-
-}
-
-.atlantic{
-
-    color:#0768A9;
-
-}
-
 .intro{
 
     position:fixed;
@@ -357,13 +337,7 @@ button{
 
 <div class="intro">
 
-    <div class="eslogan">
-
-        <span class="born">BORN</span>
-        <span class="in-the">IN THE</span>
-        <span class="atlantic">ATLANTIC</span>
-
-    </div>
+    <img src="img/eslogan.png" alt="Born in the Atlantic" class="eslogan">
 
 </div>
 
@@ -450,6 +424,8 @@ document.getElementById("cerrarBusqueda").addEventListener("click",()=>{
 });
 
 
+
+const input = document.querySelector(".buscar input");
 IA.addEventListener("click",()=>{
 
     iaActiva = !iaActiva;
@@ -457,10 +433,12 @@ IA.addEventListener("click",()=>{
     if(iaActiva){
 
         IA.classList.add("IA-activa");
+        input.placeholder = "Descríbele a la IA lo que buscas";
 
     } else {
 
         IA.classList.remove("IA-activa");
+        input.placeholder = "¿Qué estás buscando?";
 
     }
 
