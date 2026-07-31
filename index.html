@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,10 +18,10 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
 }
 
 body{
-    background:#fff;
+    background:white;
 }
 
-/* ---------------- NAVBAR ---------------- */
+/* ================= NAVBAR ================= */
 
 .barra-navegacion{
 
@@ -31,37 +32,50 @@ body{
     align-items:center;
     justify-content:space-between;
 
-    padding:0 40px;
+    padding:0 30px;
 
     background:white;
+
+    border-bottom:1px solid #ececec;
 }
+
+/* ---------- LOGO + LUPA ---------- */
 
 .normal{
 
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:15px;
 
 }
+
+.logo{
+
+    width:110px;
+    height:auto;
+
+}
+
+/* ---------- BUSCADOR ---------- */
 
 .buscar{
 
     display:none;
 
-    align-items:center;
-    gap:15px;
-
     flex:1;
 
-    max-width:700px;
+    align-items:center;
+
+    gap:12px;
 
     background:#f3f3f3;
 
-    border-radius:40px;
+    border-radius:999px;
 
     padding:12px 20px;
 
-    margin-right:30px;
+    margin:0 25px;
+
 }
 
 .buscar input{
@@ -74,28 +88,23 @@ body{
 
     background:transparent;
 
-    font-size:17px;
+    font-size:16px;
 
 }
+
+/* ---------- ICONOS ---------- */
 
 .iconos{
 
     display:flex;
     align-items:center;
-    gap:20px;
-
-}
-
-.logo{
-
-    width:170px;
-    height:auto;
+    gap:18px;
 
 }
 
 .material-symbols-outlined{
 
-    font-size:34px;
+    font-size:32px;
     cursor:pointer;
 
 }
@@ -103,13 +112,13 @@ body{
 button{
 
     border:none;
-    background:transparent;
-    font-size:22px;
+    background:none;
     cursor:pointer;
+    font-size:22px;
 
 }
 
-/* ---------- MÓVIL ---------- */
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
 
@@ -121,19 +130,27 @@ button{
 
     .logo{
 
-        width:120px;
+        width:85px;
 
     }
 
     .material-symbols-outlined{
 
-        font-size:30px;
+        font-size:28px;
 
     }
 
     .buscar{
 
-        margin-right:10px;
+        margin:0 10px;
+
+        padding:10px 15px;
+
+    }
+
+    .buscar input{
+
+        font-size:14px;
 
     }
 
@@ -151,7 +168,9 @@ button{
 
         <img src="img/logo.png" class="logo">
 
-        <span class="material-symbols-outlined" id="abrirBusqueda">
+        <span
+        class="material-symbols-outlined"
+        id="abrirBusqueda">
             search
         </span>
 
@@ -167,7 +186,9 @@ button{
         type="text"
         placeholder="¿Qué estás buscando?">
 
-        <button id="cerrarBusqueda">✕</button>
+        <button id="cerrarBusqueda">
+            ✕
+        </button>
 
     </div>
 
@@ -189,28 +210,30 @@ button{
 
 const normal = document.querySelector(".normal");
 const buscar = document.querySelector(".buscar");
+const iconos = document.querySelector(".iconos");
 
-document
-.getElementById("abrirBusqueda")
-.addEventListener("click",()=>{
+document.getElementById("abrirBusqueda").addEventListener("click",()=>{
 
     normal.style.display="none";
+    iconos.style.display="none";
+
     buscar.style.display="flex";
 
     buscar.querySelector("input").focus();
 
 });
 
-document
-.getElementById("cerrarBusqueda")
-.addEventListener("click",()=>{
+document.getElementById("cerrarBusqueda").addEventListener("click",()=>{
 
     buscar.style.display="none";
+
     normal.style.display="flex";
+    iconos.style.display="flex";
 
 });
 
 </script>
 
 </body>
+
 </html>
