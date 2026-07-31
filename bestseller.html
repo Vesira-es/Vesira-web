@@ -286,43 +286,32 @@ const productos = document.getElementById("productos");
 
 if(window.innerWidth <= 900){
 
-    let posicion = 0;
-
-    const anchoTarjeta = 248; // 230px + 18px de separación
-
-    let intervalo;
+    let velocidad = 0.4;
+    let pausado = false;
 
     function mover(){
 
-        posicion += anchoTarjeta;
+        if(!pausado){
 
-        if(posicion >= productos.scrollWidth - productos.clientWidth){
+            productos.scrollLeft += velocidad;
 
-            posicion = 0;
+            if(productos.scrollLeft >= productos.scrollWidth - productos.clientWidth){
+
+                productos.scrollLeft = 0;
+
+            }
 
         }
 
-        productos.scrollTo({
-
-            left:posicion,
-
-            behavior:"smooth"
-
-        });
+        requestAnimationFrame(mover);
 
     }
 
-    function iniciar(){
-
-        intervalo = setInterval(mover,3000);
-
-    }
-
-    iniciar();
+    mover();
 
     productos.addEventListener("touchstart",()=>{
 
-        clearInterval(intervalo);
+        pausado = true;
 
     });
 
@@ -330,15 +319,13 @@ if(window.innerWidth <= 900){
 
         setTimeout(()=>{
 
-            clearInterval(intervalo);
-            iniciar();
+            pausado = false;
 
-        },5000);
+        },3000);
 
     });
 
 }
-
 </script>
 </body>
 </html>
