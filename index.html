@@ -90,6 +90,7 @@ body{
 
 .buscar input{
 
+    flex: 1;
     background:transparent;
 
     border:none;
@@ -184,6 +185,29 @@ button{
 
         font-size:14px;
 
+    }
+
+}
+
+#abrirBusqueda {
+    animation: moverLupa 0.75s;
+}
+
+
+@keyframes moverLupa {
+
+    0%{
+        transform: translate(-60px, 0);
+        opacity: 0;
+    }
+
+    60%{
+        transform: translate(-10px, -8px);
+        opacity: 1;
+    }
+
+    100%{
+        transform: translate(0, 0);
     }
 
 }
