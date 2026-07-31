@@ -152,6 +152,10 @@ h3{
 
     padding-bottom:10px;
 
+    scroll-behavior:smooth;
+
+    scrollbar-width:none;
+
     scroll-snap-type:x mandatory;
 
 }
@@ -166,9 +170,18 @@ h3{
 
     min-width:230px;
 
+    flex-shrink:0;
+
     scroll-snap-align:start;
 
 }
+
+h1{
+
+    font-size:32px;
+
+}
+
 
 h1{
 
@@ -198,7 +211,7 @@ Best Sellers
 
 </h1>
 
-<div class="grid">
+<div class="grid" id = "productos">
 
 <div class="producto">
 
@@ -267,6 +280,65 @@ Best Sellers
 </div>
 
 </section>
+<script>
 
+const productos = document.getElementById("productos");
+
+if(window.innerWidth <= 900){
+
+    let posicion = 0;
+
+    const anchoTarjeta = 248; // 230px + 18px de separación
+
+    let intervalo;
+
+    function mover(){
+
+        posicion += anchoTarjeta;
+
+        if(posicion >= productos.scrollWidth - productos.clientWidth){
+
+            posicion = 0;
+
+        }
+
+        productos.scrollTo({
+
+            left:posicion,
+
+            behavior:"smooth"
+
+        });
+
+    }
+
+    function iniciar(){
+
+        intervalo = setInterval(mover,3000);
+
+    }
+
+    iniciar();
+
+    productos.addEventListener("touchstart",()=>{
+
+        clearInterval(intervalo);
+
+    });
+
+    productos.addEventListener("touchend",()=>{
+
+        setTimeout(()=>{
+
+            clearInterval(intervalo);
+            iniciar();
+
+        },5000);
+
+    });
+
+}
+
+</script>
 </body>
 </html>
