@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Bricolage Grotesque",sans-serif;
+}
+
+body{
+
+    background:#fafafa;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:25px;
+
+}
+
+/* ---------- CONTENEDOR ---------- */
+
+.selector{
+
+    width:min(950px,100%);
+
+    background:white;
+
+    border:1px solid #ececec;
+
+    border-radius:26px;
+
+    padding:35px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.04);
+
+}
+
+h1{
+
+    text-align:center;
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+}
+
+p{
+
+    text-align:center;
+
+    color:#777;
+
+    margin-bottom:35px;
+
+}
+
+/* ---------- FILA ---------- */
+
+.filtros{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+}
+
+/* ---------- SELECTOR ---------- */
+
+.selector-item{
+
+    flex:1;
+
+    position:relative;
+
+}
+
+.boton{
+
+    height:60px;
+
+    border:1px solid #e8e8e8;
+
+    border-radius:16px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    cursor:pointer;
+
+    background:white;
+
+    transition:.25s;
+
+}
+
+.boton:hover{
+
+    border-color:black;
+
+}
+
+.texto{
+
+    font-size:17px;
+
+}
+
+.flecha{
+
+    transition:.25s;
+
+}
+
+.abierto .flecha{
+
+    transform:rotate(180deg);
+
+}
+
+/* ---------- LISTA ---------- */
+
+.lista{
+
+    position:absolute;
+
+    top:70px;
+
+    left:0;
+
+    width:100%;
+
+    background:white;
+
+    border:1px solid #ececec;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    display:none;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    animation:fade .18s;
+
+    z-index:20;
+
+}
+
+.opcion{
+
+    padding:16px 20px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.opcion:hover{
+
+    background:#f5f5f5;
+
+    padding-left:28px;
+
+}
+
+/* ---------- BOTÓN ---------- */
+
+.buscar{
+
+    width:65px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:black;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    transition:.25s;
+
+}
+
+.buscar:hover{
+
+    transform:scale(1.04);
+
+}
+
+/* ---------- ANIMACIÓN ---------- */
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(-8px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:850px){
+
+.filtros{
+
+    flex-direction:column;
+
+}
+
+.buscar{
+
+    width:100%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="selector">
+
+<h1>Find your accessories</h1>
+
+<p>Select your device in a few seconds.</p>
+
+<div class="filtros">
+
+<div class="selector-item">
+
+<div class="boton">
+
+<span class="texto" id="marcaTexto">Apple</span>
+
+<span class="flecha">⌄</span>
+
+</div>
+
+<div class="lista" id="marcaLista"></div>
+
+</div>
+
+<div class="selector-item">
+
+<div class="boton">
+
+<span class="texto" id="modeloTexto">Select model</span>
+
+<span class="flecha">⌄</span>
+
+</div>
+
+<div class="lista" id="modeloLista"></div>
+
+</div>
+
+<div class="selector-item">
+
+<div class="boton">
+
+<span class="texto" id="tipoTexto">All products</span>
+
+<span class="flecha">⌄</span>
+
+</div>
+
+<div class="lista" id="tipoLista">
+
+<div class="opcion">All products</div>
+<div class="opcion">Cases</div>
+<div class="opcion">Screen protectors</div>
+<div class="opcion">Chargers</div>
+<div class="opcion">Cables</div>
+<div class="opcion">Power banks</div>
+
+</div>
+
+</div>
+
+<button class="buscar">
+
+→
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+const datos={
+
+Apple:[
+"iPhone 16",
+"iPhone 16 Plus",
+"iPhone 16 Pro",
+"iPhone 16 Pro Max",
+"iPhone 15",
+"iPhone 14"
+],
+
+Samsung:[
+"Galaxy S25",
+"Galaxy S25 Ultra",
+"Galaxy S24",
+"Galaxy A56"
+],
+
+Google:[
+"Pixel 9",
+"Pixel 9 Pro"
+],
+
+Xiaomi:[
+"Xiaomi 15",
+"Redmi Note 14"
+],
+
+Nothing:[
+"Phone (3)",
+"Phone (2)"
+]
+
+};
+
+const marcaTexto=document.getElementById("marcaTexto");
+const modeloTexto=document.getElementById("modeloTexto");
+const tipoTexto=document.getElementById("tipoTexto");
+
+const marcaLista=document.getElementById("marcaLista");
+const modeloLista=document.getElementById("modeloLista");
+
+Object.keys(datos).forEach(m=>{
+
+marcaLista.innerHTML+=`<div class="opcion">${m}</div>`;
+
+});
+
+document.querySelectorAll(".boton").forEach((boton,i)=>{
+
+boton.onclick=()=>{
+
+document.querySelectorAll(".lista").forEach((lista,index)=>{
+
+if(index===i){
+
+lista.style.display=lista.style.display==="block"?"none":"block";
+
+}else{
+
+lista.style.display="none";
+
+}
+
+});
+
+document.querySelectorAll(".boton").forEach(b=>b.classList.remove("abierto"));
+
+boton.classList.add("abierto");
+
+}
+
+});
+
+marcaLista.addEventListener("click",e=>{
+
+if(!e.target.classList.contains("opcion")) return;
+
+marcaTexto.textContent=e.target.textContent;
+
+modeloTexto.textContent="Select model";
+
+modeloLista.innerHTML="";
+
+datos[e.target.textContent].forEach(modelo=>{
+
+modeloLista.innerHTML+=`<div class="opcion">${modelo}</div>`;
+
+});
+
+marcaLista.style.display="none";
+
+});
+
+modeloLista.addEventListener("click",e=>{
+
+if(!e.target.classList.contains("opcion")) return;
+
+modeloTexto.textContent=e.target.textContent;
+
+modeloLista.style.display="none";
+
+});
+
+document.querySelectorAll("#tipoLista .opcion").forEach(op=>{
+
+op.onclick=()=>{
+
+tipoTexto.textContent=op.textContent;
+
+document.getElementById("tipoLista").style.display="none";
+
+}
+
+});
+
+document.addEventListener("click",e=>{
+
+if(!e.target.closest(".selector-item")){
+
+document.querySelectorAll(".lista").forEach(l=>l.style.display="none");
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
