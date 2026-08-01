@@ -69,9 +69,8 @@ h1{
 
 .producto{
 
-    cursor:pointer;
-
-    transition:.35s;
+    min-width:170px;
+    max-width:170px;
 
 }
 
@@ -142,37 +141,27 @@ h3{
 
 @media(max-width:900px){
 
+.carrusel{
+
+    overflow:hidden;
+
+}
+
 .grid{
 
     display:flex;
 
-    overflow-x:auto;
-
     gap:18px;
 
-    padding-bottom:10px;
-
-    scroll-behavior:smooth;
-
-    scrollbar-width:none;
-
-    scroll-snap-type:x mandatory;
-
-}
-
-.grid::-webkit-scrollbar{
-
-    display:none;
+    width:max-content;
 
 }
 
 .producto{
 
-    min-width:230px;
+    width:170px;
 
-    flex-shrink:0;
-
-    scroll-snap-align:start;
+    flex:none;
 
 }
 
@@ -182,14 +171,9 @@ h1{
 
 }
 
-
-h1{
-
-    font-size:32px;
-
 }
 
-}
+
 
 </style>
 
@@ -211,8 +195,9 @@ Best Sellers
 
 </h1>
 
-<div class="grid" id = "productos">
+<div class="carrusel">
 
+    <div class="grid" id="productos">
 <div class="producto">
 
 <div class="imagen">
@@ -247,6 +232,7 @@ Best Sellers
 
 <div class="producto">
 
+
 <div class="imagen">
 
 <img src="https://picsum.photos/500?3">
@@ -276,7 +262,73 @@ Best Sellers
 <div class="precio">29,99 €</div>
 
 </div>
+<div class="producto">
 
+<div class="imagen">
+
+<img src="https://picsum.photos/500?1">
+
+</div>
+
+<h3>MagSafe Case</h3>
+
+<div class="modelo">iPhone 16 Pro</div>
+
+<div class="precio">24,99 €</div>
+
+</div>
+
+<div class="producto">
+
+<div class="imagen">
+
+<img src="https://picsum.photos/500?2">
+
+</div>
+
+<h3>Clear Case</h3>
+
+<div class="modelo">Galaxy S25</div>
+
+<div class="precio">19,99 €</div>
+
+</div>
+
+<div class="producto">
+
+
+<div class="imagen">
+
+<img src="https://picsum.photos/500?3">
+
+</div>
+
+<h3>Silicone Case</h3>
+
+<div class="modelo">Pixel 9</div>
+
+<div class="precio">22,99 €</div>
+
+</div>
+
+<div class="producto">
+
+<div class="imagen">
+
+<img src="https://picsum.photos/500?4">
+
+</div>
+
+<h3>Leather Case</h3>
+
+<div class="modelo">iPhone 15</div>
+
+<div class="precio">29,99 €</div>
+
+</div>
+        </div>
+
+</div>
 </div>
 
 </section>
@@ -286,20 +338,17 @@ const productos = document.getElementById("productos");
 
 if(window.innerWidth <= 900){
 
-    let velocidad = 0.4;
-    let pausado = false;
+    let posicion = 0;
 
     function mover(){
 
-        if(!pausado){
+        posicion += 0.35;
 
-            productos.scrollLeft += velocidad;
+        productos.style.transform = `translateX(-${posicion}px)`;
 
-            if(productos.scrollLeft >= productos.scrollWidth - productos.clientWidth){
+        if(posicion >= productos.scrollWidth / 2){
 
-                productos.scrollLeft = 0;
-
-            }
+            posicion = 0;
 
         }
 
@@ -308,22 +357,6 @@ if(window.innerWidth <= 900){
     }
 
     mover();
-
-    productos.addEventListener("touchstart",()=>{
-
-        pausado = true;
-
-    });
-
-    productos.addEventListener("touchend",()=>{
-
-        setTimeout(()=>{
-
-            pausado = false;
-
-        },3000);
-
-    });
 
 }
 </script>
