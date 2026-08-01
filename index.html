@@ -10,7 +10,7 @@ href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 <style>
 
@@ -335,6 +335,92 @@ button{
 
 }
 
+.best-sellers{
+    margin-top: 45px;
+    padding: 0 20px;
+}
+
+.subtitulo{
+
+    font-family:"Outfit", sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:#8b8b8b;
+
+}
+
+.best-sellers h2{
+    font-family:"Outfit", sans-serif;
+    font-size:35px;
+    font-weight:700;
+    color:#111;
+    margin-top:8px;
+    line-height:1.1;
+}
+
+.carrusel-productos {
+    display: flex;
+    gap: 24px;
+    margin-top: 35px;
+    overflow:visible;
+    align-items:flex-start;
+}
+
+@media(max-width:768px){
+
+    .carrusel-productos{
+
+        overflow-x:auto;
+
+    }
+
+}
+
+.producto{
+    font-family:"Outfit", sans-serif;
+    width:240px;
+    flex:none;    
+    max-width: 280px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: left;
+}
+
+.producto:hover{
+    transform:translateY(-8px);
+}
+
+.producto img{
+    width:80%;
+    display:block;
+    margin-right:auto;
+    aspect-ratio:1;
+    object-fit:cover;
+    border-radius:20px;
+    transition: 0.3s;
+}
+
+.producto:hover img {
+    transform: scale(1.05);
+}
+
+.producto h3{
+    margin-top: 12px;
+}
+
+.modelo{
+    margin-top: 8px;
+    color:#4e4a4a;
+    font-size: 15px;
+}
+
+.precio{
+    font-weight:bold;
+    font-size: 15px;
+}
+
 </style>
 
 </head>
@@ -397,6 +483,35 @@ button{
     </div>  
 
 </nav>
+
+<section class = "best-sellers">
+    <p class = "subtitulo">TE ENCANTARÁ</p>
+    <h2>Más vendidos</h2>
+
+    <div class = "carrusel-productos">
+
+        <div class = "producto">
+            <div class = "imagen-producto">
+                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
+            </div>
+            <h3>Funda con Magsafe</h3>
+            <p class = "modelo">iPhone 17 Pro Max</p>
+            <span class = "precio">9,99 €</span>
+        </div>
+
+        <div class = "producto">
+            <div class = "imagen-producto">
+                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
+            </div>
+            <h3>Funda con Magsafe</h3>
+            <p class = "modelo">iPhone 17 Pro Max</p>
+            <span class = "precio">9,99 €</span>
+        </div>
+
+
+    </div>
+
+</section>
 
 
 
