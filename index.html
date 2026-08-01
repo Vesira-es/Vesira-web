@@ -438,6 +438,59 @@ button{
 
 }
 
+/*1 AGOSTO*/
+.buscar-dispositivo {
+    margin-top: 60px;
+    margin-left: 8px;
+}
+
+.buscar-dispositivo h2 {
+    font-family:"Outfit", sans-serif;    
+}
+
+.selectores {
+    margin-top: 20px;
+    display: flex;
+    gap: 25px;
+}
+
+.selectores select {
+    width: 100%;
+}
+
+.marca {
+}
+
+.modelo {
+
+}
+
+.ir{
+
+    display:flex;
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:15px;
+
+    background:black;
+    color:white;
+
+    border-radius:10px;
+
+    padding:4px 3px 4px 10px;
+    width:fit-content;
+
+    cursor:pointer;
+    font-size: 17px;
+
+}
+
+#flecha-ir {
+    font-size: 30px;
+}
+
 </style>
 
 </head>
@@ -544,6 +597,34 @@ button{
         </div>
 
     </div>
+
+</section>
+
+<!--1 AGOSTO-->
+<section class = "buscar-dispositivo">
+    <h2>Busca tu dispositivo</h2>
+
+    <div class = "selectores">
+        <select name = "Marca del dispositivo" class = "marca">
+            <option>Apple</option>
+            <option>Samsung</option>
+            <option>Xiaomi</option>
+            <option>Oppo</option>
+        </select>
+
+        <select name = "Modelo" class = "modelo">
+            <option>Piña</option>
+            <option></option>
+            <option></option>
+            <option></option>
+        </select>
+
+    </div>
+
+    <button class = "ir">
+        Buscar
+        <span class="material-symbols-outlined" id = "flecha-ir">keyboard_arrow_right</span>
+    </button>
 
 </section>
 

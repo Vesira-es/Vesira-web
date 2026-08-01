@@ -4,367 +4,307 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Bricolage Grotesque",sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Outfit",sans-serif;
 }
 
 body{
 
-background:#fafafa;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-min-height:100vh;
-
-padding:20px;
+    background:#fafafa;
+    color:#111;
+    display:flex;
+    justify-content:center;
+    padding:60px 20px;
 
 }
 
-.selector{
+.finder{
 
-width:min(850px,100%);
+    width:100%;
+    max-width:650px;
+
+}
+
+.subtitulo{
+
+    font-size:12px;
+    letter-spacing:.35em;
+    text-transform:uppercase;
+    color:#8b8b8b;
 
 }
 
 h2{
 
-font-size:40px;
-
-font-weight:600;
-
-text-align:center;
-
-margin-bottom:15px;
+    margin-top:8px;
+    font-size:38px;
+    font-weight:700;
+    line-height:1.1;
 
 }
 
-.sub{
+.descripcion{
 
-text-align:center;
-
-color:#777;
-
-margin-bottom:45px;
+    margin-top:12px;
+    color:#666;
+    line-height:1.5;
 
 }
 
-.barra{
+.selector{
 
-display:flex;
+    margin-top:35px;
 
-align-items:center;
+    background:white;
 
-gap:12px;
+    border:1px solid #e8e8e8;
 
-background:white;
+    border-radius:18px;
 
-border:1px solid #ececec;
+    padding:18px 22px;
 
-border-radius:999px;
+    cursor:pointer;
 
-padding:12px;
-
-}
-
-.item{
-
-position:relative;
-
-padding:12px 18px;
-
-border-radius:999px;
-
-cursor:pointer;
-
-transition:.25s;
-
-white-space:nowrap;
+    transition:.25s;
 
 }
 
-.item:hover{
+.selector:hover{
 
-background:#f4f4f4;
-
-}
-
-.separador{
-
-color:#d5d5d5;
+    border-color:#111;
 
 }
 
-.buscar{
+.titulo{
 
-margin-left:auto;
-
-width:46px;
-height:46px;
-
-border:none;
-
-border-radius:50%;
-
-background:black;
-
-color:white;
-
-cursor:pointer;
-
-font-size:18px;
-
-transition:.25s;
+    font-size:13px;
+    color:#888;
 
 }
 
-.buscar:hover{
+.valor{
 
-transform:scale(1.05);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-top:6px;
+
+    font-size:18px;
+    font-weight:500;
+
+}
+
+.popup{
+
+    margin-top:12px;
+
+    background:white;
+
+    border:1px solid #e8e8e8;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    display:none;
+
+}
+
+.popup input{
+
+    width:100%;
+
+    border:none;
+    border-bottom:1px solid #ececec;
+
+    padding:16px 18px;
+
+    font-size:15px;
+
+    outline:none;
 
 }
 
 .lista{
 
-display:none;
+    max-height:260px;
 
-position:absolute;
+    overflow-y:auto;
 
-top:60px;
-left:0;
+}
 
-background:white;
+.lista::-webkit-scrollbar{
 
-border:1px solid #ececec;
+    width:5px;
 
-border-radius:18px;
+}
 
-min-width:220px;
+.lista::-webkit-scrollbar-thumb{
 
-box-shadow:0 15px 35px rgba(0,0,0,.08);
+    background:#d9d9d9;
 
-overflow:hidden;
-
-animation:fade .18s;
-
-z-index:100;
+    border-radius:20px;
 
 }
 
 .opcion{
 
-padding:14px 18px;
+    padding:16px 18px;
 
-cursor:pointer;
+    transition:.2s;
 
-transition:.2s;
+    cursor:pointer;
 
 }
 
 .opcion:hover{
 
-background:#f5f5f5;
-
-padding-left:24px;
+    background:#f5f5f5;
 
 }
 
-@keyframes fade{
+.boton{
 
-from{
+    margin-top:30px;
 
-opacity:0;
-transform:translateY(-10px);
+    width:100%;
 
-}
+    border:none;
 
-to{
+    background:#111;
 
-opacity:1;
-transform:translateY(0);
+    color:white;
 
-}
+    border-radius:18px;
 
-}
+    padding:18px;
 
-@media(max-width:700px){
+    font-size:16px;
 
-.barra{
-
-flex-wrap:wrap;
-
-border-radius:24px;
+    cursor:pointer;
 
 }
 
-.item{
+.boton:hover{
 
-width:100%;
-
-}
-
-.separador{
-
-display:none;
+    background:black;
 
 }
 
-.buscar{
+@media(max-width:768px){
 
-width:100%;
+    h2{
 
-border-radius:14px;
+        font-size:30px;
 
-margin-left:0;
-
-margin-top:8px;
-
-}
+    }
 
 }
 
 </style>
 
 </head>
-
 <body>
 
-<div class="selector">
+<section class="finder">
 
-<h2>Find your accessory</h2>
+    <div class="subtitulo">
+        ENCUENTRA TU MÓVIL
+    </div>
 
-<div class="sub">Fast. Clean. Compatible.</div>
+    <h2>
+        Todo empieza por tu dispositivo.
+    </h2>
 
-<div class="barra">
+    <p class="descripcion">
+        Selecciona tu marca para descubrir todos los accesorios compatibles.
+    </p>
 
-<div class="item">
+    <div class="selector" id="selector">
 
-<span id="marca">🍎 Apple</span>
+        <div class="titulo">
+            Marca
+        </div>
 
-<div class="lista">
+        <div class="valor">
 
-<div class="opcion">🍎 Apple</div>
-<div class="opcion">📱 Samsung</div>
-<div class="opcion">🔷 Google</div>
-<div class="opcion">⚡ Xiaomi</div>
+            <span id="marca">
+                Selecciona una marca
+            </span>
 
-</div>
+            <span>⌄</span>
 
-</div>
+        </div>
 
-<div class="separador">·</div>
+    </div>
 
-<div class="item">
+    <div class="popup" id="popup">
 
-<span id="modelo">iPhone 16 Pro</span>
+        <input
+        type="text"
+        placeholder="Buscar marca...">
 
-<div class="lista">
+        <div class="lista">
 
-<div class="opcion">iPhone 16</div>
-<div class="opcion">iPhone 16 Plus</div>
-<div class="opcion">iPhone 16 Pro</div>
-<div class="opcion">iPhone 16 Pro Max</div>
+            <div class="opcion">Apple</div>
+            <div class="opcion">Samsung</div>
+            <div class="opcion">Google</div>
+            <div class="opcion">Nothing</div>
+            <div class="opcion">Xiaomi</div>
+            <div class="opcion">OnePlus</div>
+            <div class="opcion">Motorola</div>
+            <div class="opcion">Huawei</div>
+            <div class="opcion">Oppo</div>
+            <div class="opcion">Vivo</div>
+            <div class="opcion">Sony</div>
+            <div class="opcion">Honor</div>
+            <div class="opcion">Realme</div>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
-<div class="separador">·</div>
+    <button class="boton">
+        Ver accesorios
+    </button>
 
-<div class="item">
-
-<span id="producto">All products</span>
-
-<div class="lista">
-
-<div class="opcion">All products</div>
-<div class="opcion">Cases</div>
-<div class="opcion">Screen Protectors</div>
-<div class="opcion">Chargers</div>
-
-</div>
-
-</div>
-
-<button class="buscar">
-
-→
-
-</button>
-
-</div>
-
-</div>
+</section>
 
 <script>
 
-document.querySelectorAll(".item").forEach(item=>{
+const selector = document.getElementById("selector");
+const popup = document.getElementById("popup");
+const marca = document.getElementById("marca");
 
-item.onclick=(e)=>{
+selector.onclick = ()=>{
 
-e.stopPropagation();
-
-const lista=item.querySelector(".lista");
-
-document.querySelectorAll(".lista").forEach(l=>{
-
-if(l!==lista){
-
-l.style.display="none";
+    popup.style.display =
+    popup.style.display=="block"
+    ? "none"
+    : "block";
 
 }
 
-});
+document.querySelectorAll(".opcion").forEach(opcion=>{
 
-lista.style.display=
+    opcion.onclick=()=>{
 
-lista.style.display==="block"
+        marca.innerHTML=opcion.innerHTML;
 
-?
+        popup.style.display="none";
 
-"none"
-
-:
-
-"block";
-
-};
+    }
 
 });
-
-document.querySelectorAll(".opcion").forEach(op=>{
-
-op.onclick=(e)=>{
-
-e.stopPropagation();
-
-op.parentElement.previousElementSibling.textContent=
-
-op.textContent;
-
-op.parentElement.style.display="none";
-
-};
-
-});
-
-document.onclick=()=>{
-
-document.querySelectorAll(".lista").forEach(l=>{
-
-l.style.display="none";
-
-});
-
-};
 
 </script>
 
