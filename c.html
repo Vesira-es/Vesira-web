@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -16,194 +17,201 @@
 }
 
 body{
+
     background:#fff;
     color:#111;
-    padding:70px 22px;
+
 }
 
 .colecciones{
 
-    max-width:1250px;
+    max-width:1200px;
+
     margin:auto;
+
+    padding:90px 28px;
 
 }
 
 .subtitulo{
 
     font-size:12px;
+
     letter-spacing:.35em;
+
     text-transform:uppercase;
-    color:#8A8A8A;
+
+    color:#8d8d8d;
 
 }
 
 h2{
 
-    margin-top:8px;
-    font-size:40px;
-    font-weight:700;
-    line-height:1.1;
+    margin-top:10px;
 
-}
+    font-size:48px;
 
-.grid{
-
-    margin-top:35px;
-
-    display:grid;
-
-    grid-template-columns:repeat(12,1fr);
-
-    gap:18px;
-
-}
-
-.tarjeta{
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:24px;
-
-    cursor:pointer;
-
-    min-height:240px;
-
-}
-
-.tarjeta img{
-
-    width:100%;
-    height:100%;
-    object-fit:cover;
-
-    transition:.45s;
-
-}
-
-.tarjeta:hover img{
-
-    transform:scale(1.08);
-
-}
-
-.tarjeta::before{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:linear-gradient(to top,rgba(0,0,0,.55),transparent);
-
-}
-
-.info{
-
-    position:absolute;
-
-    left:24px;
-    bottom:22px;
-
-    color:white;
-
-}
-
-.info h3{
-
-    font-size:30px;
     font-weight:700;
 
-}
-
-.info p{
-
-    margin-top:4px;
-
-    font-size:15px;
-    opacity:.9;
+    line-height:1.05;
 
 }
 
-/* tamaños */
+.lista{
 
-.fundas{
-
-    grid-column:span 7;
-    height:420px;
-
-}
-
-.protectores{
-
-    grid-column:span 5;
-    height:420px;
-
-}
-
-.cargadores{
-
-    grid-column:span 4;
-    height:220px;
-
-}
-
-.accesorios{
-
-    grid-column:span 8;
-    height:220px;
-
-}
-
-@media(max-width:768px){
-
-body{
-
-    padding:50px 16px;
-
-}
-
-h2{
-
-    font-size:30px;
-
-}
-
-.grid{
+    margin-top:70px;
 
     display:flex;
 
-    overflow-x:auto;
+    flex-direction:column;
 
-    gap:16px;
-
-    scroll-snap-type:x mandatory;
-
-    padding-bottom:8px;
+    gap:70px;
 
 }
 
-.grid::-webkit-scrollbar{
+.item{
 
-    display:none;
+    display:grid;
 
-}
+    grid-template-columns:1.2fr 1fr;
 
-.tarjeta{
+    gap:50px;
 
-    min-width:270px;
-    height:340px;
+    align-items:center;
 
-    flex:none;
-
-    scroll-snap-align:start;
+    cursor:pointer;
 
 }
 
-.info h3{
+.item:nth-child(even){
 
-    font-size:26px;
+    grid-template-columns:1fr 1.2fr;
+
+}
+
+.item:nth-child(even) .texto{
+
+    order:2;
+
+}
+
+.item:nth-child(even) .imagen{
+
+    order:1;
+
+}
+
+.imagen{
+
+    overflow:hidden;
+
+    border-radius:28px;
+
+}
+
+.imagen img{
+
+    width:100%;
+
+    display:block;
+
+    transition:.5s;
+
+}
+
+.item:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.texto h3{
+
+    font-size:58px;
+
+    font-weight:700;
+
+    line-height:1;
+
+}
+
+.texto p{
+
+    margin-top:18px;
+
+    font-size:18px;
+
+    color:#666;
+
+    line-height:1.5;
+
+    max-width:360px;
+
+}
+
+.flecha{
+
+    margin-top:30px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+@media(max-width:900px){
+
+.colecciones{
+
+    padding:60px 20px;
+
+}
+
+h2{
+
+    font-size:34px;
+
+}
+
+.lista{
+
+    gap:45px;
+
+}
+
+.item{
+
+    display:block;
+
+}
+
+.item:nth-child(even) .texto{
+
+    order:0;
+
+}
+
+.item:nth-child(even) .imagen{
+
+    order:0;
+
+}
+
+.imagen{
+
+    margin-bottom:22px;
+
+}
+
+.texto h3{
+
+    font-size:34px;
+
+}
+
+.texto p{
+
+    font-size:16px;
 
 }
 
@@ -217,62 +225,82 @@ h2{
 
 <section class="colecciones">
 
-<p class="subtitulo">DESCUBRE</p>
+<p class="subtitulo">
+EXPLORA
+</p>
 
-<h2>Explora nuestras colecciones</h2>
+<h2>
+Encuentra lo que buscas
+</h2>
 
-<div class="grid">
+<div class="lista">
 
-<div class="tarjeta fundas">
+<div class="item">
+
+<div class="imagen">
 
 <img src="https://picsum.photos/900/700?1">
 
-<div class="info">
+</div>
+
+<div class="texto">
 
 <h3>Fundas</h3>
 
-<p>Protección con estilo.</p>
+<p>
+Protección premium con un diseño pensado para tu dispositivo.
+</p>
 
+<div class="flecha">
+Descubrir →
 </div>
 
 </div>
 
-<div class="tarjeta protectores">
+</div>
 
-<img src="https://picsum.photos/700/700?2">
+<div class="item">
 
-<div class="info">
+<div class="imagen">
+
+<img src="https://picsum.photos/900/700?2">
+
+</div>
+
+<div class="texto">
 
 <h3>Protectores</h3>
 
-<p>Cristal templado premium.</p>
+<p>
+Cristal templado de alta resistencia con máxima transparencia.
+</p>
 
+<div class="flecha">
+Descubrir →
 </div>
 
 </div>
 
-<div class="tarjeta cargadores">
+</div>
 
-<img src="https://picsum.photos/600/500?3">
+<div class="item">
 
-<div class="info">
+<div class="imagen">
+
+<img src="https://picsum.photos/900/700?3">
+
+</div>
+
+<div class="texto">
 
 <h3>Cargadores</h3>
 
-</div>
+<p>
+Carga rápida y accesorios compatibles con los últimos dispositivos.
+</p>
 
-</div>
-
-<div class="tarjeta accesorios">
-
-<img src="https://picsum.photos/900/500?4">
-
-<div class="info">
-
-<h3>Accesorios</h3>
-
-<p>Todo para tu dispositivo.</p>
-
+<div class="flecha">
+Descubrir →
 </div>
 
 </div>
