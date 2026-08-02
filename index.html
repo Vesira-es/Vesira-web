@@ -621,6 +621,22 @@ button{
 
 }
 
+@keyframes kenburnsMobile{
+
+    from{
+
+        transform:translateX(-50%) scale(1);
+
+    }
+
+    to{
+
+        transform:translateX(-50%) scale(1.05);
+
+    }
+
+}
+
 /* ---------- IMÁGENES ESCRITORIO ---------- */
 
 #fundas{
@@ -700,7 +716,7 @@ button{
 
     .slide.active img{
 
-        animation:none;
+        animation:kenburnsMobile 5s linear forwards;
 
     }
 
@@ -709,7 +725,7 @@ button{
 
         width:500px;
 
-        left:63%;
+        left:57%;
 
         bottom:0;
 
@@ -725,11 +741,11 @@ button{
 
         width:450px;
 
-        left:65%;
+        left:60%;
 
         bottom:6px;
 
-        top:5%;
+        top:8%;
 
         right:auto;
 
@@ -759,7 +775,7 @@ button{
 
         left:70%;
 
-        bottom:5px;
+        bottom:5%;
 
         top:auto;
 
