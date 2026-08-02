@@ -443,29 +443,26 @@ button{
 .colecciones{
 
     position:relative;
-
+    width:min(97.5%,1450px);
     max-width:1450px;
 
-    width:min(97.5%,1450px);
-
     margin:70px auto;
-    margin-left: 13px;
+    margin-left:13px;
 
-    aspect-ratio:16/9;
+    height:450px;
 
     border-radius:32px;
-
     overflow:hidden;
-    height: 450px;
-    touch-action: pan-y;
-    background: transparent;
+
+    background:#f7f7f5;
+
+    touch-action:pan-y;
 
 }
 
 .slide{
 
     position:absolute;
-
     inset:0;
 
     opacity:0;
@@ -479,7 +476,7 @@ button{
     text-decoration:none;
 
     color:white;
-background:transparent;
+
 }
 
 .slide.active{
@@ -491,16 +488,15 @@ background:transparent;
     z-index:2;
 
 }
+
 .slide img{
 
     position:absolute;
 
     right:5%;
-
     bottom:0;
 
     width:100%;
-
     max-width:4000px;
 
     height:auto;
@@ -522,9 +518,8 @@ background:transparent;
     justify-content:flex-end;
 
     padding:40px;
-    margin-bottom: 18px;
 
-
+    margin-bottom:18px;
 
 }
 
@@ -534,39 +529,75 @@ background:transparent;
 
     font-size:52px;
 
-    color: rgb(214, 212, 212);
+    color:#515151;
+
 }
 
 .overlay span{
-    
+
     display:flex;
 
-align-items:center;
+    align-items:center;
 
-gap:8px;
+    gap:8px;
+
     margin-top:10px;
 
     font-family:"Outfit",sans-serif;
 
     font-size:18px;
 
+    color:#515151;
+
     opacity:.95;
-        color: rgb(214, 212, 212);
 
 }
 
-
 .overlay svg{
 
-transition:.25s;
+    transition:.25s;
 
 }
 
 .slide:hover svg{
 
-transform:translateX(5px);
+    transform:translateX(5px);
 
 }
+
+.slide:hover span{
+
+    transform:translateX(6px);
+
+}
+
+.overlay h2,
+.overlay span{
+
+    transform:translateY(20px);
+
+    opacity:0;
+
+    transition:.8s;
+
+}
+
+.slide.active .overlay h2,
+.slide.active .overlay span{
+
+    transform:none;
+
+    opacity:1;
+
+}
+
+.slide.active .overlay span{
+
+    transition-delay:.15s;
+
+}
+
+/* Animación escritorio */
 
 .slide.active img{
 
@@ -589,181 +620,156 @@ transform:translateX(5px);
     }
 
 }
-.slide:hover span{
 
-    transform:translateX(6px);
+/* ---------- IMÁGENES ESCRITORIO ---------- */
 
-}
+#fundas{
 
-.overlay h2,
-.overlay span{
+    width:720px;
 
-    transform:translateY(20px);
-
-    opacity:0;
-
-    transition:.8s;
-    color: rgb(81, 81, 81);
+    top:2px;
 
 }
 
-.slide.active .overlay h2{
+#protectores{
 
-    transform:none;
+    width:550px;
 
-    opacity:1;
+    right:35px;
+
+    bottom:10%;
+
+}
+
+#cargadores{
+
+    top:40px;
 
 }
 
-.slide.active .overlay span{
+#accesorios{
 
-    transform:none;
+    width:550px;
 
-    opacity:1;
+    right:35px;
 
-    transition-delay:.15s;
+    top:105px;
 
 }
+
+/* ================= MÓVIL ================= */
 
 @media(max-width:768px){
 
     .colecciones{
 
+        width:100%;
+
         margin:60px 0;
 
-        aspect-ratio:4/5;
+        height:350px;
 
         border-radius:24px;
-        height: 350px;
 
     }
 
     .overlay{
 
         padding:24px;
-        background: transparent;
+
+        margin-bottom:25px;
 
     }
 
     .overlay h2{
 
         font-size:34px;
-        color: rgb(0, 0, 0);
+
+        color:#111;
+
 
     }
 
     .overlay span{
 
         font-size:16px;
-        color: rgb(0, 0, 0);
+
+        color:#111;
 
     }
 
-}
-.slide{
+    .slide.active img{
 
-        background:#f7f7f5;
+        animation:none;
 
     }
 
-    .slide img{
 
-        position:absolute;
+    #fundas{
 
-        right:5%;
+        width:500px;
+
+        left:63%;
 
         bottom:0;
-
-        width:100%;
-
-        max-width:700px;
-
-        height:auto;
-
-        object-fit:contain;
-
-    }
-
-    @media(max-width:768px){
-
-    .colecciones{
-
-        height:350px;
-
-    }
-
-    .slide img{
-
-        position:absolute;
-
-        left:50%;
-
-        bottom:0;
-
-        transform:translateX(-50%);
-
-        width:85%;
-
-        max-width:300px;
-
-        height:auto;
-
-        object-fit:contain;
-
-    }
-
-    #fundas,
-    #protectores,
-    #cargadores,
-    #accesorios{
-
-        width:85%;
-
-        max-width:300px;
-
-        right:auto;
-
-        left:50%;
 
         top:auto;
 
-        bottom:0;
+        right:auto;
 
-        margin:0;
+        transform:translateX(-50%);
+
+    }
+
+    #protectores{
+
+        width:450px;
+
+        left:65%;
+
+        bottom:6px;
+
+        top:5%;
+
+        right:auto;
+
+        transform:translateX(-50%);
+
+    }
+
+    #cargadores{
+
+        width:350px;
+
+        left:50%;
+
+        bottom:25%;
+
+        top:auto;
+
+        right:auto;
+
+        transform:translateX(-50%);
+
+    }
+
+    #accesorios{
+
+        width:400px;
+
+        left:65%;
+
+        bottom:5px;
+
+        top:auto;
+
+        right:auto;
 
         transform:translateX(-50%);
 
     }
 
 }
-
-#protectores {
-width:550px;      /* o el tamaño que quieras */
-margin-right: 35px;
-
-    bottom:10%;
-}
-
-
-
-#accesorios {
-    width: 550px;
-    top: 105px;
-    bottom: 0;
-    right: 35px;
-}
-
-#fundas {
-    width: 4500px;
-    height: auto;
-    top: 2px;
-}
-
-#cargadores {
-    top: 40px;
-}
-
-
 
 .buscar-dispositivo {
     margin-top: 60px;
