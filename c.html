@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -25,191 +24,195 @@ body{
 
 .colecciones{
 
-    max-width:1200px;
+    padding:90px 0;
 
+}
+
+.contenedor{
+
+    max-width:1300px;
     margin:auto;
-
-    padding:90px 28px;
+    padding:0 25px;
 
 }
 
 .subtitulo{
 
     font-size:12px;
-
     letter-spacing:.35em;
-
     text-transform:uppercase;
-
-    color:#8d8d8d;
+    color:#8b8b8b;
 
 }
 
 h2{
 
-    margin-top:10px;
-
-    font-size:48px;
-
+    margin-top:8px;
+    font-size:42px;
     font-weight:700;
-
-    line-height:1.05;
 
 }
 
-.lista{
-
-    margin-top:70px;
+.carrusel{
 
     display:flex;
 
-    flex-direction:column;
+    gap:24px;
 
-    gap:70px;
+    overflow-x:auto;
+
+    padding:45px 25px 10px;
+
+    scroll-snap-type:x mandatory;
 
 }
 
-.item{
+.carrusel::-webkit-scrollbar{
 
-    display:grid;
+    display:none;
 
-    grid-template-columns:1.2fr 1fr;
+}
 
-    gap:50px;
+.tarjeta{
 
-    align-items:center;
+    position:relative;
+
+    min-width:420px;
+    height:520px;
+
+    border-radius:32px;
+
+    overflow:hidden;
+
+    flex:none;
+
+    scroll-snap-align:start;
 
     cursor:pointer;
 
 }
 
-.item:nth-child(even){
-
-    grid-template-columns:1fr 1.2fr;
-
-}
-
-.item:nth-child(even) .texto{
-
-    order:2;
-
-}
-
-.item:nth-child(even) .imagen{
-
-    order:1;
-
-}
-
-.imagen{
-
-    overflow:hidden;
-
-    border-radius:28px;
-
-}
-
-.imagen img{
+.tarjeta img{
 
     width:100%;
-
-    display:block;
+    height:100%;
+    object-fit:cover;
 
     transition:.5s;
 
 }
 
-.item:hover img{
+.tarjeta:hover img{
 
-    transform:scale(1.05);
-
-}
-
-.texto h3{
-
-    font-size:58px;
-
-    font-weight:700;
-
-    line-height:1;
+    transform:scale(1.08);
 
 }
 
-.texto p{
+.tarjeta::before{
 
-    margin-top:18px;
+    content:"";
 
-    font-size:18px;
+    position:absolute;
+    inset:0;
 
-    color:#666;
+    background:linear-gradient(to top,
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.08));
 
-    line-height:1.5;
+}
 
-    max-width:360px;
+.info{
+
+    position:absolute;
+
+    left:32px;
+    bottom:30px;
+
+    color:white;
+
+}
+
+.info span{
+
+    font-size:13px;
+
+    letter-spacing:.22em;
+
+    text-transform:uppercase;
+
+    opacity:.8;
+
+}
+
+.info h3{
+
+    margin-top:8px;
+
+    font-size:42px;
 
 }
 
 .flecha{
 
-    margin-top:30px;
+    margin-top:18px;
 
     font-size:18px;
 
-    font-weight:600;
+    font-weight:500;
 
 }
 
-@media(max-width:900px){
+@media(max-width:768px){
 
 .colecciones{
 
-    padding:60px 20px;
+    padding:60px 0;
+
+}
+
+.contenedor{
+
+    padding:0 18px;
 
 }
 
 h2{
 
-    font-size:34px;
+    font-size:30px;
 
 }
 
-.lista{
+.carrusel{
 
-    gap:45px;
+    padding:35px 18px 5px;
 
-}
-
-.item{
-
-    display:block;
+    gap:18px;
 
 }
 
-.item:nth-child(even) .texto{
+.tarjeta{
 
-    order:0;
+    min-width:280px;
+    height:400px;
 
-}
-
-.item:nth-child(even) .imagen{
-
-    order:0;
+    border-radius:24px;
 
 }
 
-.imagen{
+.info{
 
-    margin-bottom:22px;
-
-}
-
-.texto h3{
-
-    font-size:34px;
+    left:22px;
+    bottom:22px;
 
 }
 
-.texto p{
+.info h3{
+
+    font-size:30px;
+
+}
+
+.flecha{
 
     font-size:16px;
 
@@ -225,32 +228,30 @@ h2{
 
 <section class="colecciones">
 
+<div class="contenedor">
+
 <p class="subtitulo">
 EXPLORA
 </p>
 
 <h2>
-Encuentra lo que buscas
+Encuentra el accesorio perfecto
 </h2>
-
-<div class="lista">
-
-<div class="item">
-
-<div class="imagen">
-
-<img src="https://picsum.photos/900/700?1">
 
 </div>
 
-<div class="texto">
+<div class="carrusel">
+
+<div class="tarjeta">
+
+<img src="https://picsum.photos/800/1200?1">
+
+<div class="info">
+
+<span>Colección</span>
 
 <h3>Fundas</h3>
 
-<p>
-Protección premium con un diseño pensado para tu dispositivo.
-</p>
-
 <div class="flecha">
 Descubrir →
 </div>
@@ -259,22 +260,16 @@ Descubrir →
 
 </div>
 
-<div class="item">
+<div class="tarjeta">
 
-<div class="imagen">
+<img src="https://picsum.photos/800/1200?2">
 
-<img src="https://picsum.photos/900/700?2">
+<div class="info">
 
-</div>
-
-<div class="texto">
+<span>Colección</span>
 
 <h3>Protectores</h3>
 
-<p>
-Cristal templado de alta resistencia con máxima transparencia.
-</p>
-
 <div class="flecha">
 Descubrir →
 </div>
@@ -283,24 +278,38 @@ Descubrir →
 
 </div>
 
-<div class="item">
+<div class="tarjeta">
 
-<div class="imagen">
+<img src="https://picsum.photos/800/1200?3">
 
-<img src="https://picsum.photos/900/700?3">
+<div class="info">
 
-</div>
-
-<div class="texto">
+<span>Colección</span>
 
 <h3>Cargadores</h3>
 
-<p>
-Carga rápida y accesorios compatibles con los últimos dispositivos.
-</p>
+<div class="flecha">
+Descubrir →
+</div>
+
+</div>
+
+</div>
+
+<div class="tarjeta">
+
+<img src="https://picsum.photos/800/1200?4">
+
+<div class="info">
+
+<span>Colección</span>
+
+<h3>Accesorios</h3>
 
 <div class="flecha">
 Descubrir →
+</div>
+
 </div>
 
 </div>
