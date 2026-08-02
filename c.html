@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,212 +10,262 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Outfit",sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Outfit",sans-serif;
 }
 
 body{
 
-    background:#fff;
-    color:#111;
+background:#f5f5f7;
+color:#111;
 
 }
 
 .colecciones{
 
-    padding:90px 0;
+max-width:1300px;
 
-}
+margin:auto;
 
-.contenedor{
-
-    max-width:1300px;
-    margin:auto;
-    padding:0 25px;
+padding:80px 22px;
 
 }
 
 .subtitulo{
 
-    font-size:12px;
-    letter-spacing:.35em;
-    text-transform:uppercase;
-    color:#8b8b8b;
+font-size:12px;
+
+letter-spacing:.35em;
+
+text-transform:uppercase;
+
+color:#8a8a8a;
 
 }
 
 h2{
 
-    margin-top:8px;
-    font-size:42px;
-    font-weight:700;
+margin-top:8px;
+
+font-size:42px;
+
+font-weight:700;
+
+line-height:1.1;
 
 }
 
-.carrusel{
+.grid{
 
-    display:flex;
+margin-top:40px;
 
-    gap:24px;
+display:grid;
 
-    overflow-x:auto;
+grid-template-columns:2fr 1fr;
 
-    padding:45px 25px 10px;
-
-    scroll-snap-type:x mandatory;
+gap:22px;
 
 }
 
-.carrusel::-webkit-scrollbar{
+.grande{
 
-    display:none;
+position:relative;
 
-}
+height:620px;
 
-.tarjeta{
+background:white;
 
-    position:relative;
+border-radius:32px;
 
-    min-width:420px;
-    height:520px;
+overflow:hidden;
 
-    border-radius:32px;
+transition:.35s;
 
-    overflow:hidden;
-
-    flex:none;
-
-    scroll-snap-align:start;
-
-    cursor:pointer;
+cursor:pointer;
 
 }
 
-.tarjeta img{
+.grande:hover{
 
-    width:100%;
-    height:100%;
-    object-fit:cover;
-
-    transition:.5s;
+transform:translateY(-6px);
 
 }
 
-.tarjeta:hover img{
+.grande img{
 
-    transform:scale(1.08);
+width:100%;
 
-}
+height:100%;
 
-.tarjeta::before{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:linear-gradient(to top,
-    rgba(0,0,0,.55),
-    rgba(0,0,0,.08));
+object-fit:cover;
 
 }
 
 .info{
 
-    position:absolute;
+position:absolute;
 
-    left:32px;
-    bottom:30px;
+left:40px;
 
-    color:white;
-
-}
-
-.info span{
-
-    font-size:13px;
-
-    letter-spacing:.22em;
-
-    text-transform:uppercase;
-
-    opacity:.8;
+top:40px;
 
 }
 
 .info h3{
 
-    margin-top:8px;
+font-size:48px;
 
-    font-size:42px;
-
-}
-
-.flecha{
-
-    margin-top:18px;
-
-    font-size:18px;
-
-    font-weight:500;
+font-weight:700;
 
 }
 
-@media(max-width:768px){
+.info p{
 
-.colecciones{
+margin-top:10px;
 
-    padding:60px 0;
+font-size:18px;
+
+color:#666;
+
+max-width:320px;
 
 }
 
-.contenedor{
+.boton{
 
-    padding:0 18px;
+margin-top:25px;
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:13px 22px;
+
+border-radius:999px;
+
+background:#111;
+
+color:white;
+
+font-size:15px;
+
+}
+
+.columna{
+
+display:flex;
+
+flex-direction:column;
+
+gap:22px;
+
+}
+
+.peque{
+
+background:white;
+
+border-radius:32px;
+
+overflow:hidden;
+
+height:299px;
+
+position:relative;
+
+transition:.35s;
+
+cursor:pointer;
+
+}
+
+.peque:hover{
+
+transform:translateY(-6px);
+
+}
+
+.peque img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+.peque .info{
+
+left:28px;
+
+top:28px;
+
+}
+
+.peque h3{
+
+font-size:32px;
+
+}
+
+.peque p{
+
+font-size:15px;
+
+max-width:220px;
+
+}
+
+@media(max-width:900px){
+
+.grid{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.grande{
+
+height:420px;
+
+}
+
+.peque{
+
+height:220px;
+
+}
+
+.info{
+
+left:24px;
+
+top:24px;
+
+}
+
+.info h3{
+
+font-size:34px;
+
+}
+
+.info p{
+
+font-size:15px;
 
 }
 
 h2{
 
-    font-size:30px;
-
-}
-
-.carrusel{
-
-    padding:35px 18px 5px;
-
-    gap:18px;
-
-}
-
-.tarjeta{
-
-    min-width:280px;
-    height:400px;
-
-    border-radius:24px;
-
-}
-
-.info{
-
-    left:22px;
-    bottom:22px;
-
-}
-
-.info h3{
-
-    font-size:30px;
-
-}
-
-.flecha{
-
-    font-size:16px;
+font-size:32px;
 
 }
 
@@ -228,86 +279,90 @@ h2{
 
 <section class="colecciones">
 
-<div class="contenedor">
-
 <p class="subtitulo">
-EXPLORA
+
+DESCUBRE
+
 </p>
 
 <h2>
-Encuentra el accesorio perfecto
+
+Explora nuestras colecciones
+
 </h2>
 
-</div>
+<div class="grid">
 
-<div class="carrusel">
+<div class="grande">
 
-<div class="tarjeta">
-
-<img src="https://picsum.photos/800/1200?1">
+<img src="https://picsum.photos/1200/900?1">
 
 <div class="info">
 
-<span>Colección</span>
+<h3>
 
-<h3>Fundas</h3>
+Fundas
 
-<div class="flecha">
+</h3>
+
+<p>
+
+Diseños minimalistas para proteger tu dispositivo con estilo.
+
+</p>
+
+<div class="boton">
+
 Descubrir →
-</div>
 
 </div>
 
 </div>
 
-<div class="tarjeta">
+</div>
 
-<img src="https://picsum.photos/800/1200?2">
+<div class="columna">
+
+<div class="peque">
+
+<img src="https://picsum.photos/700/700?2">
 
 <div class="info">
 
-<span>Colección</span>
+<h3>
 
-<h3>Protectores</h3>
+Protectores
 
-<div class="flecha">
-Descubrir →
+</h3>
+
+<p>
+
+Cristal templado premium.
+
+</p>
+
 </div>
 
 </div>
 
-</div>
+<div class="peque">
 
-<div class="tarjeta">
-
-<img src="https://picsum.photos/800/1200?3">
+<img src="https://picsum.photos/700/700?3">
 
 <div class="info">
 
-<span>Colección</span>
+<h3>
 
-<h3>Cargadores</h3>
+Cargadores
 
-<div class="flecha">
-Descubrir →
-</div>
+</h3>
 
-</div>
+<p>
 
-</div>
+Carga rápida y segura.
 
-<div class="tarjeta">
+</p>
 
-<img src="https://picsum.photos/800/1200?4">
-
-<div class="info">
-
-<span>Colección</span>
-
-<h3>Accesorios</h3>
-
-<div class="flecha">
-Descubrir →
 </div>
 
 </div>
