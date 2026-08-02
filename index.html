@@ -457,6 +457,7 @@ button{
 
     overflow:hidden;
     height: 450px;
+    touch-action: pan-y;
 
 }
 
@@ -1099,17 +1100,19 @@ const slides = document.querySelectorAll(".slide");
 
 let actual = 0;
 
-function cambiarSlide(){
-
+function cambiarSlide(direccion = 1){
     const anterior = slides[actual];
 
-    actual++;
+    actual += direccion;
 
-    if(actual >= slides.length){
+if(actual < 0){
+    actual = slides.length - 1;
+}
+if(actual >= slides.length){
+    actual = 0;
+}
 
-        actual = 0;
 
-    }
 
     const siguiente = slides[actual];
 
@@ -1153,7 +1156,36 @@ function cambiarSlide(){
 }
 
 setInterval(cambiarSlide,5000);
+let inicioX = 0;
+let finX = 0;
 
+const slider = document.querySelector(".colecciones");
+
+slider.addEventListener("touchstart", (e) => {
+
+    inicioX = e.touches[0].clientX;
+
+});
+
+slider.addEventListener("touchend", (e) => {
+
+    finX = e.changedTouches[0].clientX;
+
+    const diferencia = inicioX - finX;
+
+    if(Math.abs(diferencia) < 60) return;
+
+    if(diferencia > 0){
+
+        cambiarSlide(1);
+
+    }else{
+
+        cambiarSlide(-1);
+
+    }
+
+});
 </script>
 
 </body>
