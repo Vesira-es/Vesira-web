@@ -862,6 +862,37 @@ button{
     font-size: 25px;
 }
 
+.titulo-animado span{
+
+    display:inline-block;
+
+}
+.titulo-animado{
+
+    display:inline-block;
+
+    font:inherit;
+
+    letter-spacing:inherit;
+
+    line-height:inherit;
+
+}
+
+.titulo-animado span{
+
+    display:inline-block;
+
+    font:inherit;
+
+    letter-spacing:inherit;
+
+    line-height:inherit;
+
+}
+
+
+
 </style>
 
 </head>
@@ -979,7 +1010,7 @@ button{
 
         <div class="overlay">
 
-            <h2>Fundas</h2>
+            <h2 class = "titulo-animado">Fundas</h2>
 
             <span>
 
@@ -997,7 +1028,7 @@ Ver colección
 
         <div class="overlay">
 
-            <h2>Protectores</h2>
+            <h2 class = "titulo-animado">Protectores</h2>
 
             <span>
 
@@ -1015,7 +1046,7 @@ Ver colección
 
         <div class="overlay">
 
-            <h2>Cargadores</h2>
+            <h2 class = "titulo-animado">Cargadores</h2>
 
             <span>
 
@@ -1033,7 +1064,7 @@ Ver colección
 
         <div class="overlay">
 
-            <h2>Accesorios</h2>
+            <h2 class = "titulo-animado">Accesorios</h2>
 
             <span>
 
@@ -1242,6 +1273,7 @@ if(actual >= slides.length){
 
         siguiente.classList.add("active");
 
+        animarTitulo(siguiente);
         siguiente.style.opacity = "1";
 
         siguiente.style.transform = "translateX(0)";
@@ -1250,7 +1282,7 @@ if(actual >= slides.length){
 
 }
 
-setInterval(cambiarSlide,5000);
+setInterval(cambiarSlide,3500);
 const slider = document.querySelector(".colecciones");
 
 let startX = 0;
@@ -1281,6 +1313,42 @@ slider.addEventListener("pointerup",(e)=>{
     }
 
 });
+
+function animarTitulo(slide){
+
+    const titulo = slide.querySelector(".titulo-animado");
+
+    const texto = titulo.dataset.text || titulo.textContent;
+
+    titulo.dataset.text = texto;
+
+    titulo.innerHTML = "";
+
+    [...texto].forEach((letra,i)=>{
+
+        const span = document.createElement("span");
+
+        span.textContent = letra;
+
+        span.style.opacity = "0";
+        span.style.transform = "translateY(10px)";
+        span.style.display = "inline-block";
+        span.style.transition = ".35s ease";
+
+        titulo.appendChild(span);
+
+        setTimeout(()=>{
+
+            span.style.opacity = "1";
+            span.style.transform = "translateY(0)";
+
+        },i*45);
+
+    });
+
+}
+
+animarTitulo(slides[0]);
 </script>
 
 </body>
