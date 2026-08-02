@@ -18,9 +18,19 @@ font-family:"Outfit",sans-serif;
 
 body{
 
-background:white;
+background:#fafafa;
 
-overflow:hidden;
+color:#111;
+
+}
+
+.colecciones{
+
+max-width:1200px;
+
+margin:auto;
+
+padding:90px 25px;
 
 }
 
@@ -28,8 +38,7 @@ overflow:hidden;
 
 position:relative;
 
-    min-height:78vh;
-    padding:60px 0;
+height:680px;
 
 overflow:hidden;
 
@@ -43,17 +52,17 @@ inset:0;
 
 display:flex;
 
+flex-direction:column;
+
 align-items:center;
 
-justify-content:space-between;
-
-padding:0 8%;
+justify-content:center;
 
 opacity:0;
 
-pointer-events:none;
+transform:translateY(25px);
 
-transition:opacity .8s ease;
+transition:.7s ease;
 
 }
 
@@ -61,67 +70,97 @@ transition:opacity .8s ease;
 
 opacity:1;
 
-pointer-events:auto;
+transform:none;
 
 }
 
-.texto{
-
-width:40%;
-
-}
-
-.texto span{
+.tag{
 
 font-size:12px;
 
 letter-spacing:.35em;
 
-color:#999;
-
 text-transform:uppercase;
 
-}
-
-.texto h2{
-
-    font-size:60px;
-    font-weight:700;
-    line-height:.95;
+color:#999;
 
 }
 
-.texto p{
+h2{
 
-margin-top:24px;
+margin-top:12px;
 
-font-size:20px;
+font-size:50px;
 
-color:#666;
+font-weight:700;
 
-line-height:1.6;
+}
 
-max-width:450px;
+.imagen{
+
+margin-top:45px;
+
+width:100%;
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.imagen img{
+
+width:min(90%,520px);
+
+aspect-ratio:1;
+
+object-fit:cover;
+
+border-radius:36px;
+
+box-shadow:0 25px 60px rgba(0,0,0,.08);
+
+transition:.5s;
+
+}
+
+.slide.active img{
+
+animation:flotar 5s ease-in-out infinite;
+
+}
+
+@keyframes flotar{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
 
 }
 
 .boton{
 
-display:inline-block;
+margin-top:45px;
 
-margin-top:40px;
+display:flex;
 
-padding:16px 34px;
+align-items:center;
+
+gap:10px;
+
+padding:14px 28px;
+
+border-radius:999px;
 
 background:#111;
 
 color:white;
 
-border-radius:999px;
-
 text-decoration:none;
 
-transition:.3s;
+font-size:15px;
+
+transition:.25s;
 
 }
 
@@ -131,145 +170,57 @@ transform:translateY(-3px);
 
 }
 
-.imagen{
+.boton span{
 
-width:58%;
-
-display:flex;
-
-justify-content:center;
+transition:.25s;
 
 }
 
-.imagen img{
+.boton:hover span{
 
-width:100%;
-
-max-width:560px;
-
-transition:1s;
+transform:translateX(5px);
 
 }
 
-.slide.active img{
+@media(max-width:768px){
 
-transform:scale(1);
+.colecciones{
 
-animation:flotar 5s ease-in-out infinite;
-
-}
-
-@keyframes flotar{
-
-0%{
-
-transform:translateY(0);
+padding:60px 18px;
 
 }
 
-50%{
+.slider{
 
-transform:translateY(-10px);
-
-}
-
-100%{
-
-transform:translateY(0);
+height:520px;
 
 }
 
-}
+h2{
 
-.indicadores{
-
-position:absolute;
-
-bottom:40px;
-
-left:50%;
-
-transform:translateX(-50%);
-
-display:flex;
-
-gap:12px;
-
-}
-
-.dot{
-
-width:12px;
-
-height:12px;
-
-border-radius:50%;
-
-background:#ddd;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-.dot.active{
-
-width:42px;
-
-border-radius:999px;
-
-background:#111;
-
-}
-
-@media(max-width:900px){
-
-.slide{
-
-flex-direction:column-reverse;
-
-justify-content:center;
-
-text-align:center;
-
-gap:40px;
-
-padding:40px 25px;
-
-}
-
-.texto{
-
-width:100%;
+font-size:34px;
 
 }
 
 .imagen{
 
-width:100%;
-
-}
-
-.texto h2{
-
-font-size:38px;
-
-}
-
-.texto p{
-
-font-size:16px;
-
-margin:auto;
-
-margin-top:18px;
+margin-top:30px;
 
 }
 
 .imagen img{
 
-width:90%;
+width:92%;
+
+border-radius:26px;
+
+}
+
+.boton{
+
+margin-top:30px;
+
+padding:12px 22px;
 
 }
 
@@ -281,102 +232,129 @@ width:90%;
 
 <body>
 
-<section class="slider">
+<section class="colecciones">
+
+<div class="slider">
 
 <div class="slide active">
 
-<div class="texto">
+<div class="tag">
 
-<span>Colección</span>
-
-<h2>Fundas</h2>
-
-<p>Protección elegante diseñada para durar.</p>
-
-<a href="#" class="boton">Descubrir →</a>
+COLECCIÓN
 
 </div>
+
+<h2>
+
+Fundas
+
+</h2>
 
 <div class="imagen">
 
-<img src="https://picsum.photos/700/900?1">
+<img src="https://picsum.photos/800/800?1">
 
 </div>
+
+<a href="#" class="boton">
+
+Ver colección
+
+<span>→</span>
+
+</a>
 
 </div>
 
 <div class="slide">
 
-<div class="texto">
+<div class="tag">
 
-<span>Colección</span>
-
-<h2>Protectores</h2>
-
-<p>Cristal templado premium para una protección total.</p>
-
-<a href="#" class="boton">Descubrir →</a>
+COLECCIÓN
 
 </div>
+
+<h2>
+
+Protectores
+
+</h2>
 
 <div class="imagen">
 
-<img src="https://picsum.photos/700/900?2">
+<img src="https://picsum.photos/800/800?2">
 
 </div>
+
+<a href="#" class="boton">
+
+Ver colección
+
+<span>→</span>
+
+</a>
 
 </div>
 
 <div class="slide">
 
-<div class="texto">
+<div class="tag">
 
-<span>Colección</span>
-
-<h2>Cargadores</h2>
-
-<p>Potencia y velocidad para todos tus dispositivos.</p>
-
-<a href="#" class="boton">Descubrir →</a>
+COLECCIÓN
 
 </div>
+
+<h2>
+
+Cargadores
+
+</h2>
 
 <div class="imagen">
 
-<img src="https://picsum.photos/700/900?3">
+<img src="https://picsum.photos/800/800?3">
 
 </div>
+
+<a href="#" class="boton">
+
+Ver colección
+
+<span>→</span>
+
+</a>
 
 </div>
 
 <div class="slide">
 
-<div class="texto">
+<div class="tag">
 
-<span>Colección</span>
-
-<h2>Accesorios</h2>
-
-<p>Completa tu experiencia con accesorios premium.</p>
-
-<a href="#" class="boton">Descubrir →</a>
+COLECCIÓN
 
 </div>
+
+<h2>
+
+Accesorios
+
+</h2>
 
 <div class="imagen">
 
-<img src="https://picsum.photos/700/900?4">
+<img src="https://picsum.photos/800/800?4">
 
 </div>
 
+<a href="#" class="boton">
+
+Ver colección
+
+<span>→</span>
+
+</a>
+
 </div>
-
-<div class="indicadores">
-
-<div class="dot active"></div>
-<div class="dot"></div>
-<div class="dot"></div>
-<div class="dot"></div>
 
 </div>
 
@@ -385,37 +363,18 @@ width:90%;
 <script>
 
 const slides=document.querySelectorAll(".slide");
-const dots=document.querySelectorAll(".dot");
 
 let actual=0;
 
-function mostrar(i){
-
-slides.forEach(s=>s.classList.remove("active"));
-dots.forEach(d=>d.classList.remove("active"));
-
-slides[i].classList.add("active");
-dots[i].classList.add("active");
-
-actual=i;
-
-}
-
-dots.forEach((dot,i)=>{
-
-dot.onclick=()=>mostrar(i);
-
-});
-
 setInterval(()=>{
 
-actual++;
+slides[actual].classList.remove("active");
 
-if(actual>=slides.length) actual=0;
+actual=(actual+1)%slides.length;
 
-mostrar(actual);
+slides[actual].classList.add("active");
 
-},5000);
+},4500);
 
 </script>
 
