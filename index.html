@@ -478,8 +478,7 @@ button{
     text-decoration:none;
 
     color:white;
-    background:#f7f7f5;
-
+background:#f7f7f7;
 }
 
 .slide.active{
@@ -491,16 +490,21 @@ button{
     z-index:2;
 
 }
-
 .slide img{
 
-    width:100%;
+    position:absolute;
 
-    height:100%;
+    right:5%;
 
-    object-fit:cover;
+    bottom:0;
 
-    transition:1.2s;
+    width:42%;
+
+    max-width:520px;
+
+    height:auto;
+
+    object-fit:contain;
 
 }
 
@@ -1156,26 +1160,26 @@ if(actual >= slides.length){
 }
 
 setInterval(cambiarSlide,5000);
-let inicioX = 0;
-let finX = 0;
-
 const slider = document.querySelector(".colecciones");
 
-slider.addEventListener("touchstart", (e) => {
+let startX = 0;
+let endX = 0;
 
-    inicioX = e.touches[0].clientX;
+slider.addEventListener("pointerdown",(e)=>{
+
+    startX = e.clientX;
 
 });
 
-slider.addEventListener("touchend", (e) => {
+slider.addEventListener("pointerup",(e)=>{
 
-    finX = e.changedTouches[0].clientX;
+    endX = e.clientX;
 
-    const diferencia = inicioX - finX;
+    const distancia = endX - startX;
 
-    if(Math.abs(diferencia) < 60) return;
+    if(Math.abs(distancia) < 50) return;
 
-    if(diferencia > 0){
+    if(distancia < 0){
 
         cambiarSlide(1);
 
