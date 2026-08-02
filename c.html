@@ -1,536 +1,353 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Vesira - Colecciones</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Outfit",sans-serif;
 }
 
 body{
 
-background:white;
-    font-family:"Outfit",sans-serif;
+background:#f7f7f8;
 
-    color:#111;
-
-}
-
-.colecciones{
-
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:90px 25px 120px;
+padding:80px 20px;
 
 }
 
-.subtitulo{
+section{
 
-    font-size:12px;
+max-width:1100px;
 
-    letter-spacing:.35em;
+margin:auto;
 
-    text-transform:uppercase;
+}
 
-    color:#8d8d8d;
+small{
+
+letter-spacing:.35em;
+
+font-size:12px;
+
+color:#999;
 
 }
 
 h2{
 
-    margin-top:8px;
+margin-top:8px;
 
-    font-size:44px;
+font-size:44px;
 
-    font-weight:700;
-
-    line-height:1.1;
+margin-bottom:55px;
 
 }
 
 .stack{
 
-    position:relative;
+position:relative;
 
-    margin-top:70px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:flex-start;
+height:650px;
 
 }
 
 .card{
 
-    position:relative;
+position:absolute;
 
-    width:88%;
+left:50%;
 
-    height:165px;
+transform:translateX(-50%);
 
-    background:white;
+width:92%;
 
-    border-radius:32px;
+height:220px;
 
-    display:flex;
+border-radius:34px;
 
-    align-items:center;
+background:white;
 
-    justify-content:space-between;
+box-shadow:0 18px 45px rgba(0,0,0,.08);
 
-    padding:0 45px;
+overflow:hidden;
 
-    text-decoration:none;
+cursor:pointer;
 
-    color:#111;
+transition:.45s cubic-bezier(.22,1,.36,1);
 
-    overflow:visible;
+display:flex;
 
-    cursor:pointer;
+align-items:center;
 
-    box-shadow:
-    0 18px 45px rgba(0,0,0,.08);
+justify-content:space-between;
 
-    border:1px solid transparent;
-
-    transition:
-    .45s cubic-bezier(.22,1,.36,1);
+padding:0 45px;
 
 }
 
-/* efecto de pila */
+.card:nth-child(1){
+
+top:0;
+z-index:4;
+
+}
 
 .card:nth-child(2){
 
-    margin-top:-55px;
-
-    margin-left:45px;
-
-    width:84%;
+top:110px;
+width:88%;
+z-index:3;
 
 }
 
 .card:nth-child(3){
 
-    margin-top:-55px;
-
-    margin-left:90px;
-
-    width:80%;
+top:220px;
+width:84%;
+z-index:2;
 
 }
 
 .card:nth-child(4){
 
-    margin-top:-55px;
-
-    margin-left:135px;
-
-    width:76%;
-
-}
-
-/* imagen flotante */
-
-.producto{
-
-    position:absolute;
-
-    width:180px;
-    left:-20px;
-
-
-
-    transition:.45s;
-
-    pointer-events:none;
-
-    filter:drop-shadow(0 18px 25px rgba(0,0,0,.18));
-
-}
-
-.contenido{
-
-    margin-left:160px;
-
-}
-
-.contenido h3{
-
-    font-size:33px;
-
-    font-weight:700;
-
-}
-
-.contenido p{
-
-    margin-top:8px;
-
-    color:#666;
-
-    font-size:16px;
-
-}
-
-.flecha{
-
-    font-size:34px;
-
-    transition:.35s;
+top:330px;
+width:80%;
+z-index:1;
 
 }
 
 .card:hover{
 
-    transform:translateY(-12px) translateX(-15px);
+transform:translateX(-50%) translateY(-8px);
 
-    border-color:#111;
+width:95%;
 
-    box-shadow:
-    0 35px 70px rgba(0,0,0,.14);
-
-    z-index:50;
+z-index:20;
 
 }
 
-.card:hover .producto{
+.card img{
 
-    transform:
-    translateY(-8px)
-    rotate(-6deg)
-    scale(1.08);
+position:absolute;
 
-}
+left:-25px;
 
-.card:hover .flecha{
+bottom:-18px;
 
-    transform:translateX(10px);
+height:250px;
 
-}
+transition:.45s;
 
-.card::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    bottom:0;
-
-    width:0%;
-
-    height:2px;
-
-    background:#111;
-
-    border-radius:999px;
-
-
-    transition:.4s;
+filter:drop-shadow(0 18px 25px rgba(0,0,0,.15));
 
 }
 
-.card:hover::after{
+.card:hover img{
 
-    width:100%;
-
-}
-
-/* Animación inicial */
-
-.card{
-
-    opacity:0;
-
-    transform:translateY(-60px);
+transform:rotate(-8deg) scale(1.06);
 
 }
 
-.card.visible{
+.info{
 
-    opacity:1;
-
-    transform:none;
+margin-left:210px;
 
 }
 
-@media(max-width:900px){
+.info h3{
+
+font-size:38px;
+
+}
+
+.info p{
+
+margin-top:8px;
+
+color:#666;
+
+font-size:17px;
+
+}
+
+.arrow{
+
+font-size:40px;
+
+transition:.3s;
+
+}
+
+.card:hover .arrow{
+
+transform:translateX(10px);
+
+}
+
+@media(max-width:768px){
 
 .stack{
 
-    margin-top:45px;
+height:500px;
 
 }
 
 .card{
 
-    width:100%;
+height:150px;
 
-    margin-left:0!important;
-
-    margin-top:18px!important;
-
-    height:125px;
-
-    padding:0 22px;
-
-    border-radius:24px;
+padding:0 22px;
 
 }
 
-.producto{
+.card:nth-child(2){
 
-    width:180px;
-    left:-20px;
-
-}
-
-.contenido{
-
-    margin-left:95px;
+top:80px;
 
 }
 
-.contenido h3{
+.card:nth-child(3){
 
-    font-size:24px;
-
-}
-
-.contenido p{
-
-    font-size:14px;
-
-    margin-top:4px;
+top:160px;
 
 }
 
-.flecha{
+.card:nth-child(4){
 
-    font-size:24px;
+top:240px;
+
+}
+
+.card img{
+
+height:155px;
+
+left:-8px;
+
+}
+
+.info{
+
+margin-left:120px;
+
+}
+
+.info h3{
+
+font-size:24px;
+
+}
+
+.info p{
+
+display:none;
+
+}
+
+.arrow{
+
+font-size:26px;
+
+}
+
+h2{
+
+font-size:32px;
 
 }
 
 }
+
 </style>
+
 </head>
 
 <body>
 
-<section class="colecciones">
+<section>
 
-<p class="subtitulo">
+<small>EXPLORA</small>
 
-EXPLORA
-
-</p>
-
-<h2>
-
-Descubre nuestras colecciones
-
-</h2>
+<h2>Descubre nuestras colecciones</h2>
 
 <div class="stack">
 
-<a href="fundas.html" class="card">
+<div class="card">
 
-<img src="img/funda.png" class="producto">
+<img src="https://picsum.photos/400/400?1">
 
-<div class="contenido">
+<div class="info">
 
 <h3>Fundas</h3>
 
-<p>Protección elegante para tu dispositivo.</p>
+<p>Protección premium.</p>
 
 </div>
 
-<div class="flecha">
-
-→
+<div class="arrow">→</div>
 
 </div>
 
-</a>
+<div class="card">
 
-<a href="protectores.html" class="card">
+<img src="https://picsum.photos/400/400?2">
 
-<img src="img/protector.png" class="producto">
-
-<div class="contenido">
+<div class="info">
 
 <h3>Protectores</h3>
 
-<p>Cristal templado de máxima resistencia.</p>
+<p>Cristal templado.</p>
 
 </div>
 
-<div class="flecha">
-
-→
+<div class="arrow">→</div>
 
 </div>
 
-</a>
+<div class="card">
 
-<a href="cargadores.html" class="card">
+<img src="https://picsum.photos/400/400?3">
 
-<img src="img/cargador.png" class="producto">
-
-<div class="contenido">
+<div class="info">
 
 <h3>Cargadores</h3>
 
-<p>Carga rápida y accesorios MagSafe.</p>
+<p>Carga rápida.</p>
 
 </div>
 
-<div class="flecha">
-
-→
+<div class="arrow">→</div>
 
 </div>
 
-</a>
+<div class="card">
 
-<a href="accesorios.html" class="card">
+<img src="https://picsum.photos/400/400?4">
 
-<img src="img/accesorio.png" class="producto">
-
-<div class="contenido">
+<div class="info">
 
 <h3>Accesorios</h3>
 
-<p>Todo para completar tu setup.</p>
+<p>Todo para tu dispositivo.</p>
 
 </div>
 
-<div class="flecha">
-
-→
+<div class="arrow">→</div>
 
 </div>
-
-</a>
 
 </div>
 
 </section>
-
-<script>
-
-const cards = document.querySelectorAll(".card");
-
-/* Entrada escalonada */
-
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach((entry,index)=>{
-
-        if(entry.isIntersecting){
-
-            setTimeout(()=>{
-
-                entry.target.classList.add("visible");
-
-            },index*170);
-
-        }
-
-    });
-
-},{threshold:.3});
-
-cards.forEach(card=>{
-
-    observer.observe(card);
-
-});
-
-
-/* Selección */
-
-cards.forEach(card=>{
-
-    card.addEventListener("click",(e)=>{
-
-        e.preventDefault();
-
-        cards.forEach(c=>{
-
-            c.classList.remove("active");
-
-        });
-
-        card.classList.add("active");
-
-        card.style.transform="translateY(-18px) translateX(-20px)";
-
-        setTimeout(()=>{
-
-            window.location.href=card.href;
-
-        },250);
-
-    });
-
-});
-
-
-/* Efecto de profundidad */
-
-cards.forEach((card,index)=>{
-
-    card.addEventListener("mouseenter",()=>{
-
-        cards.forEach((c,i)=>{
-
-            if(i!==index){
-
-                c.style.transform=`translateY(${i*2}px) scale(.985)`;
-
-                c.style.opacity=".75";
-
-            }
-
-        });
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-
-        cards.forEach(c=>{
-
-            c.style.transform="";
-
-            c.style.opacity="1";
-
-        });
-
-    });
-
-});
-
-</script>
 
 </body>
 
