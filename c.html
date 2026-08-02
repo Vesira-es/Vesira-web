@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -16,16 +16,14 @@
 }
 
 body{
-
     background:#fff;
     color:#111;
-    padding:60px 20px;
-
+    padding:70px 22px;
 }
 
 .colecciones{
 
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
 
 }
@@ -35,7 +33,7 @@ body{
     font-size:12px;
     letter-spacing:.35em;
     text-transform:uppercase;
-    color:#8a8a8a;
+    color:#8A8A8A;
 
 }
 
@@ -44,6 +42,7 @@ h2{
     margin-top:8px;
     font-size:40px;
     font-weight:700;
+    line-height:1.1;
 
 }
 
@@ -53,9 +52,9 @@ h2{
 
     display:grid;
 
-    grid-template-columns:2fr 1fr;
+    grid-template-columns:repeat(12,1fr);
 
-    gap:20px;
+    gap:18px;
 
 }
 
@@ -65,11 +64,11 @@ h2{
 
     overflow:hidden;
 
-    border-radius:28px;
+    border-radius:24px;
 
     cursor:pointer;
 
-    height:320px;
+    min-height:240px;
 
 }
 
@@ -79,7 +78,7 @@ h2{
     height:100%;
     object-fit:cover;
 
-    transition:.5s;
+    transition:.45s;
 
 }
 
@@ -89,66 +88,122 @@ h2{
 
 }
 
-.overlay{
+.tarjeta::before{
+
+    content:"";
 
     position:absolute;
-
     inset:0;
 
     background:linear-gradient(to top,rgba(0,0,0,.55),transparent);
 
-    display:flex;
-
-    align-items:flex-end;
-
-    padding:28px;
-
 }
 
-.overlay h3{
+.info{
+
+    position:absolute;
+
+    left:24px;
+    bottom:22px;
 
     color:white;
+
+}
+
+.info h3{
+
     font-size:30px;
+    font-weight:700;
 
 }
 
-.columna{
+.info p{
 
-    display:grid;
+    margin-top:4px;
 
-    gap:20px;
-
-}
-
-.pequeña{
-
-    height:150px;
+    font-size:15px;
+    opacity:.9;
 
 }
 
-.pequeña h3{
+/* tamaños */
 
-    font-size:22px;
+.fundas{
+
+    grid-column:span 7;
+    height:420px;
+
+}
+
+.protectores{
+
+    grid-column:span 5;
+    height:420px;
+
+}
+
+.cargadores{
+
+    grid-column:span 4;
+    height:220px;
+
+}
+
+.accesorios{
+
+    grid-column:span 8;
+    height:220px;
 
 }
 
 @media(max-width:768px){
 
+body{
+
+    padding:50px 16px;
+
+}
+
+h2{
+
+    font-size:30px;
+
+}
+
 .grid{
 
-    grid-template-columns:1fr;
+    display:flex;
+
+    overflow-x:auto;
+
+    gap:16px;
+
+    scroll-snap-type:x mandatory;
+
+    padding-bottom:8px;
+
+}
+
+.grid::-webkit-scrollbar{
+
+    display:none;
 
 }
 
 .tarjeta{
 
-    height:240px;
+    min-width:270px;
+    height:340px;
+
+    flex:none;
+
+    scroll-snap-align:start;
 
 }
 
-.pequeña{
+.info h3{
 
-    height:180px;
+    font-size:26px;
 
 }
 
@@ -162,51 +217,65 @@ h2{
 
 <section class="colecciones">
 
-<p class="subtitulo">EXPLORA</p>
+<p class="subtitulo">DESCUBRE</p>
 
-<h2>Colecciones</h2>
+<h2>Explora nuestras colecciones</h2>
 
 <div class="grid">
 
-    <div class="tarjeta">
+<div class="tarjeta fundas">
 
-        <img src="https://picsum.photos/900/700?1">
+<img src="https://picsum.photos/900/700?1">
 
-        <div class="overlay">
+<div class="info">
 
-            <h3>Fundas</h3>
+<h3>Fundas</h3>
 
-        </div>
+<p>Protección con estilo.</p>
 
-    </div>
+</div>
 
-    <div class="columna">
+</div>
 
-        <div class="tarjeta pequeña">
+<div class="tarjeta protectores">
 
-            <img src="https://picsum.photos/600/400?2">
+<img src="https://picsum.photos/700/700?2">
 
-            <div class="overlay">
+<div class="info">
 
-                <h3>Protectores</h3>
+<h3>Protectores</h3>
 
-            </div>
+<p>Cristal templado premium.</p>
 
-        </div>
+</div>
 
-        <div class="tarjeta pequeña">
+</div>
 
-            <img src="https://picsum.photos/600/400?3">
+<div class="tarjeta cargadores">
 
-            <div class="overlay">
+<img src="https://picsum.photos/600/500?3">
 
-                <h3>Cargadores</h3>
+<div class="info">
 
-            </div>
+<h3>Cargadores</h3>
 
-        </div>
+</div>
 
-    </div>
+</div>
+
+<div class="tarjeta accesorios">
+
+<img src="https://picsum.photos/900/500?4">
+
+<div class="info">
+
+<h3>Accesorios</h3>
+
+<p>Todo para tu dispositivo.</p>
+
+</div>
+
+</div>
 
 </div>
 
