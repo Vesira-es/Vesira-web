@@ -3,142 +3,173 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Outfit",sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Outfit",sans-serif;
 }
 
 body{
 
-background:#fafafa;
+    background:#fafafa;
 
-padding:70px 20px;
+    padding:70px 20px;
+
+}
+
+.colecciones{
+
+    max-width:1200px;
+
+    margin:auto;
 
 }
 
 .slider{
 
-max-width:1200px;
+    position:relative;
 
-height:620px;
+    width:100%;
 
-margin:auto;
+    aspect-ratio:16/9;
 
-position:relative;
+    max-height:650px;
 
-overflow:hidden;
+    overflow:hidden;
 
-border-radius:34px;
+    border-radius:34px;
 
 }
 
 .slide{
 
-position:absolute;
+    position:absolute;
 
-inset:0;
+    inset:0;
 
-display:flex;
+    opacity:0;
 
-flex-direction:column;
+    transform:translateX(100%);
 
-justify-content:center;
+    transition:
+    transform .9s cubic-bezier(.22,1,.36,1),
+    opacity .9s;
 
-align-items:center;
+    text-decoration:none;
 
-background:white;
-
-transform:translateX(100%);
-
-transition:1s cubic-bezier(.22,1,.36,1);
+    color:white;
 
 }
 
 .slide.active{
 
-transform:translateX(0);
+    opacity:1;
+
+    transform:translateX(0);
+
+    z-index:2;
 
 }
 
 .slide.salida{
 
-transform:translateX(-100%);
+    transform:translateX(-100%);
+
+    opacity:1;
 
 }
 
-h2{
+.slide img{
 
-font-size:46px;
+    width:100%;
 
-margin-bottom:35px;
+    height:100%;
 
-}
-
-img{
-
-width:85%;
-
-max-width:760px;
-
-height:380px;
-
-object-fit:cover;
-
-border-radius:30px;
-
-box-shadow:0 20px 45px rgba(0,0,0,.10);
+    object-fit:cover;
 
 }
 
-a{
+.overlay{
 
-margin-top:35px;
+    position:absolute;
 
-text-decoration:none;
+    inset:0;
 
-color:#111;
-
-font-size:18px;
-
-font-weight:600;
+    background:linear-gradient(to top,
+    rgba(0,0,0,.45),
+    rgba(0,0,0,.08),
+    transparent);
 
 }
 
-a:hover{
+.info{
 
-letter-spacing:.05em;
+    position:absolute;
+
+    left:45px;
+
+    bottom:40px;
+
+}
+
+.info h2{
+
+    font-size:52px;
+
+    font-weight:700;
+
+}
+
+.info p{
+
+    margin-top:8px;
+
+    font-size:17px;
+
+    opacity:.95;
 
 }
 
 @media(max-width:768px){
 
+body{
+
+padding:18px;
+
+}
+
 .slider{
 
-height:470px;
+aspect-ratio:4/5;
+
+border-radius:24px;
 
 }
 
-h2{
+.info{
 
-font-size:32px;
+left:24px;
+
+bottom:24px;
 
 }
 
-img{
+.info h2{
 
-height:220px;
+font-size:34px;
 
-width:92%;
+}
 
-border-radius:22px;
+.info p{
+
+font-size:15px;
 
 }
 
@@ -150,74 +181,107 @@ border-radius:22px;
 
 <body>
 
+<section class="colecciones">
+
 <div class="slider">
 
-<div class="slide active">
+<a href="#" class="slide active">
+
+<img src="https://picsum.photos/1400/900?1">
+
+<div class="overlay"></div>
+
+<div class="info">
 
 <h2>Fundas</h2>
 
-<img src="https://picsum.photos/1000/600?1">
-
-<a href="">Ver colección →</a>
+<p>Ver colección →</p>
 
 </div>
 
-<div class="slide">
+</a>
+
+<a href="#" class="slide">
+
+<img src="https://picsum.photos/1400/900?2">
+
+<div class="overlay"></div>
+
+<div class="info">
 
 <h2>Protectores</h2>
 
-<img src="https://picsum.photos/1000/600?2">
-
-<a href="">Ver colección →</a>
+<p>Ver colección →</p>
 
 </div>
 
-<div class="slide">
+</a>
+
+<a href="#" class="slide">
+
+<img src="https://picsum.photos/1400/900?3">
+
+<div class="overlay"></div>
+
+<div class="info">
 
 <h2>Cargadores</h2>
 
-<img src="https://picsum.photos/1000/600?3">
-
-<a href="">Ver colección →</a>
+<p>Ver colección →</p>
 
 </div>
 
+</a>
+
+<a href="#" class="slide">
+
+<img src="https://picsum.photos/1400/900?4">
+
+<div class="overlay"></div>
+
+<div class="info">
+
+<h2>Accesorios</h2>
+
+<p>Ver colección →</p>
+
 </div>
+
+</a>
+
+</div>
+
+</section>
 
 <script>
 
 const slides=document.querySelectorAll(".slide");
 
-let i=0;
+let actual=0;
 
 setInterval(()=>{
 
-slides[i].classList.remove("active");
-slides[i].classList.add("salida");
+const anterior=slides[actual];
 
-i=(i+1)%slides.length;
+actual=(actual+1)%slides.length;
 
-slides[i].classList.remove("salida");
-slides[i].classList.add("active");
+const siguiente=slides[actual];
+
+anterior.classList.add("salida");
+anterior.classList.remove("active");
+
+siguiente.classList.add("active");
 
 setTimeout(()=>{
 
-slides.forEach((s,index)=>{
+anterior.classList.remove("salida");
 
-if(index!==i){
-
-s.classList.remove("salida");
-s.style.transform="translateX(100%)";
-
-}
-
-});
-
-},1000);
+},900);
 
 },4500);
 
 </script>
 
 </body>
+
 </html>
