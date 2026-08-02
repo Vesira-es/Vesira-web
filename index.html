@@ -683,19 +683,55 @@ transform:translateX(5px);
         object-fit:contain;
 
     }
-@media(max-width:768px){
+
+    @media(max-width:768px){
+
+    .colecciones{
+
+        height:350px;
+
+    }
 
     .slide img{
 
-        position:static;
+        position:absolute;
 
-        width:100%;
+        left:50%;
 
-        height:100%;
+        bottom:0;
 
-        object-fit:cover;
+        transform:translateX(-50%);
 
-        max-width:none;
+        width:85%;
+
+        max-width:300px;
+
+        height:auto;
+
+        object-fit:contain;
+
+    }
+
+    #fundas,
+    #protectores,
+    #cargadores,
+    #accesorios{
+
+        width:85%;
+
+        max-width:300px;
+
+        right:auto;
+
+        left:50%;
+
+        top:auto;
+
+        bottom:0;
+
+        margin:0;
+
+        transform:translateX(-50%);
 
     }
 
