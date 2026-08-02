@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,27 +18,26 @@ font-family:"Outfit",sans-serif;
 body{
 
 background:#f5f5f7;
-color:#111;
+
+padding:80px 20px;
+
+overflow-x:hidden;
 
 }
 
-.colecciones{
+section{
 
-max-width:1300px;
+max-width:900px;
 
 margin:auto;
 
-padding:80px 22px;
-
 }
 
-.subtitulo{
-
-font-size:12px;
+small{
 
 letter-spacing:.35em;
 
-text-transform:uppercase;
+font-size:12px;
 
 color:#8a8a8a;
 
@@ -47,225 +45,153 @@ color:#8a8a8a;
 
 h2{
 
-margin-top:8px;
+margin-top:10px;
 
 font-size:42px;
 
 font-weight:700;
 
-line-height:1.1;
-
 }
 
-.grid{
+.pila{
 
-margin-top:40px;
+margin-top:60px;
 
-display:grid;
+display:flex;
 
-grid-template-columns:2fr 1fr;
-
-gap:22px;
-
-}
-
-.grande{
-
-position:relative;
-
-height:620px;
-
-background:white;
-
-border-radius:32px;
-
-overflow:hidden;
-
-transition:.35s;
-
-cursor:pointer;
-
-}
-
-.grande:hover{
-
-transform:translateY(-6px);
-
-}
-
-.grande img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-}
-
-.info{
-
-position:absolute;
-
-left:40px;
-
-top:40px;
-
-}
-
-.info h3{
-
-font-size:48px;
-
-font-weight:700;
-
-}
-
-.info p{
-
-margin-top:10px;
-
-font-size:18px;
-
-color:#666;
-
-max-width:320px;
-
-}
-
-.boton{
-
-margin-top:25px;
-
-display:inline-flex;
+flex-direction:column;
 
 align-items:center;
 
-gap:8px;
-
-padding:13px 22px;
-
-border-radius:999px;
-
-background:#111;
-
-color:white;
-
-font-size:15px;
+gap:0;
 
 }
 
-.columna{
+.carta{
 
-display:flex;
+width:100%;
 
-flex-direction:column;
+max-width:700px;
 
-gap:22px;
-
-}
-
-.peque{
+height:150px;
 
 background:white;
 
-border-radius:32px;
+border-radius:30px;
 
-overflow:hidden;
+box-shadow:0 20px 45px rgba(0,0,0,.08);
 
-height:299px;
+display:flex;
 
-position:relative;
+justify-content:space-between;
 
-transition:.35s;
+align-items:center;
+
+padding:0 40px;
+
+margin-top:-90px;
+
+opacity:0;
+
+transform:translateY(-180px) rotate(-4deg);
+
+transition:1s cubic-bezier(.2,.9,.2,1);
 
 cursor:pointer;
 
 }
 
-.peque:hover{
+.carta:first-child{
 
-transform:translateY(-6px);
-
-}
-
-.peque img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
+margin-top:0;
 
 }
 
-.peque .info{
+.carta.visible{
 
-left:28px;
+opacity:1;
 
-top:28px;
-
-}
-
-.peque h3{
-
-font-size:32px;
+transform:translateY(0) rotate(0deg);
 
 }
 
-.peque p{
+.carta:hover{
 
-font-size:15px;
-
-max-width:220px;
+transform:scale(1.02);
 
 }
 
-@media(max-width:900px){
+.numero{
 
-.grid{
+font-size:60px;
 
-display:flex;
+font-weight:200;
 
-flex-direction:column;
-
-}
-
-.grande{
-
-height:420px;
+color:#d9d9d9;
 
 }
 
-.peque{
-
-height:220px;
-
-}
-
-.info{
-
-left:24px;
-
-top:24px;
-
-}
-
-.info h3{
+.texto h3{
 
 font-size:34px;
 
 }
 
-.info p{
+.texto p{
 
-font-size:15px;
+margin-top:6px;
+
+color:#777;
+
+font-size:16px;
+
+}
+
+.flecha{
+
+font-size:34px;
+
+}
+
+@media(max-width:768px){
+
+body{
+
+padding:50px 16px;
 
 }
 
 h2{
 
-font-size:32px;
+font-size:30px;
+
+}
+
+.carta{
+
+height:120px;
+
+padding:0 24px;
+
+margin-top:-65px;
+
+}
+
+.texto h3{
+
+font-size:24px;
+
+}
+
+.texto p{
+
+font-size:14px;
+
+}
+
+.numero{
+
+font-size:42px;
 
 }
 
@@ -277,101 +203,101 @@ font-size:32px;
 
 <body>
 
-<section class="colecciones">
+<section>
 
-<p class="subtitulo">
+<small>EXPLORA</small>
 
-DESCUBRE
+<h2>Colecciones</h2>
 
-</p>
+<div class="pila">
 
-<h2>
+<div class="carta">
 
-Explora nuestras colecciones
+<div class="texto">
 
-</h2>
+<h3>Fundas</h3>
 
-<div class="grid">
-
-<div class="grande">
-
-<img src="https://picsum.photos/1200/900?1">
-
-<div class="info">
-
-<h3>
-
-Fundas
-
-</h3>
-
-<p>
-
-Diseños minimalistas para proteger tu dispositivo con estilo.
-
-</p>
-
-<div class="boton">
-
-Descubrir →
+<p>Protección con estilo.</p>
 
 </div>
 
-</div>
+<div class="numero">01</div>
 
 </div>
 
-<div class="columna">
+<div class="carta">
 
-<div class="peque">
+<div class="texto">
 
-<img src="https://picsum.photos/700/700?2">
+<h3>Protectores</h3>
 
-<div class="info">
-
-<h3>
-
-Protectores
-
-</h3>
-
-<p>
-
-Cristal templado premium.
-
-</p>
+<p>Cristal templado premium.</p>
 
 </div>
 
-</div>
-
-<div class="peque">
-
-<img src="https://picsum.photos/700/700?3">
-
-<div class="info">
-
-<h3>
-
-Cargadores
-
-</h3>
-
-<p>
-
-Carga rápida y segura.
-
-</p>
+<div class="numero">02</div>
 
 </div>
 
+<div class="carta">
+
+<div class="texto">
+
+<h3>Cargadores</h3>
+
+<p>Carga rápida.</p>
+
 </div>
+
+<div class="numero">03</div>
+
+</div>
+
+<div class="carta">
+
+<div class="texto">
+
+<h3>Accesorios</h3>
+
+<p>Completa tu setup.</p>
+
+</div>
+
+<div class="numero">04</div>
 
 </div>
 
 </div>
 
 </section>
+
+<script>
+
+const observer=new IntersectionObserver((entries)=>{
+
+entries.forEach((entry,index)=>{
+
+if(entry.isIntersecting){
+
+setTimeout(()=>{
+
+entry.target.classList.add("visible");
+
+},index*250);
+
+}
+
+});
+
+},{threshold:.4});
+
+document.querySelectorAll(".carta").forEach(carta=>{
+
+observer.observe(carta);
+
+});
+
+</script>
 
 </body>
 </html>
