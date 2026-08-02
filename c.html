@@ -19,67 +19,41 @@ body{
 
 background:#f5f5f7;
 
-padding:80px 20px;
-
-overflow-x:hidden;
-
-}
-
-section{
-
-max-width:900px;
-
-margin:auto;
-
-}
-
-small{
-
-letter-spacing:.35em;
-
-font-size:12px;
-
-color:#8a8a8a;
-
-}
-
-h2{
-
-margin-top:10px;
-
-font-size:42px;
-
-font-weight:700;
-
-}
-
-.pila{
-
-margin-top:60px;
-
 display:flex;
 
-flex-direction:column;
+justify-content:center;
 
 align-items:center;
 
-gap:0;
+height:100vh;
+
+overflow:hidden;
 
 }
 
-.carta{
+.stack{
+
+position:relative;
+
+width:360px;
+
+height:340px;
+
+}
+
+.card{
+
+position:absolute;
 
 width:100%;
-
-max-width:700px;
 
 height:150px;
 
 background:white;
 
-border-radius:30px;
+border-radius:28px;
 
-box-shadow:0 20px 45px rgba(0,0,0,.08);
+padding:28px;
 
 display:flex;
 
@@ -87,113 +61,101 @@ justify-content:space-between;
 
 align-items:center;
 
-padding:0 40px;
-
-margin-top:-90px;
-
-opacity:0;
-
-transform:translateY(-180px) rotate(-4deg);
-
-transition:1s cubic-bezier(.2,.9,.2,1);
-
 cursor:pointer;
 
-}
+box-shadow:0 18px 40px rgba(0,0,0,.08);
 
-.carta:first-child{
-
-margin-top:0;
+transition:.55s cubic-bezier(.2,.9,.2,1);
 
 }
 
-.carta.visible{
-
-opacity:1;
-
-transform:translateY(0) rotate(0deg);
-
-}
-
-.carta:hover{
-
-transform:scale(1.02);
-
-}
-
-.numero{
-
-font-size:60px;
-
-font-weight:200;
-
-color:#d9d9d9;
-
-}
-
-.texto h3{
+.card h2{
 
 font-size:34px;
 
+font-weight:700;
+
 }
 
-.texto p{
+.card p{
 
 margin-top:6px;
 
-color:#777;
+color:#7a7a7a;
 
-font-size:16px;
-
-}
-
-.flecha{
-
-font-size:34px;
+font-size:15px;
 
 }
 
-@media(max-width:768px){
+.estado{
 
-body{
+width:34px;
 
-padding:50px 16px;
+height:34px;
 
-}
+border-radius:50%;
 
-h2{
+border:2px solid #d8d8d8;
 
-font-size:30px;
+display:flex;
 
-}
+align-items:center;
 
-.carta{
+justify-content:center;
 
-height:120px;
+font-weight:700;
 
-padding:0 24px;
-
-margin-top:-65px;
+transition:.3s;
 
 }
 
-.texto h3{
+.card:nth-child(1){
 
-font-size:24px;
-
-}
-
-.texto p{
-
-font-size:14px;
+transform:translateY(70px) rotate(-6deg);
 
 }
 
-.numero{
+.card:nth-child(2){
 
-font-size:42px;
+transform:translateY(100px) rotate(6deg);
 
 }
+
+.stack.loaded .card:nth-child(1){
+
+transform:translateY(0) rotate(-2deg);
+
+}
+
+.stack.loaded .card:nth-child(2){
+
+transform:translateY(120px) rotate(2deg);
+
+}
+
+.card.active{
+
+transform:translateY(-12px) rotate(0deg)!important;
+
+border:2px solid #111;
+
+z-index:10;
+
+}
+
+.card.active .estado{
+
+background:#111;
+
+border-color:#111;
+
+color:white;
+
+}
+
+.card:not(.active){
+
+opacity:.88;
 
 }
 
@@ -203,97 +165,61 @@ font-size:42px;
 
 <body>
 
-<section>
+<div class="stack">
 
-<small>EXPLORA</small>
+<div class="card active">
 
-<h2>Colecciones</h2>
+<div>
 
-<div class="pila">
+<h2>Fundas</h2>
 
-<div class="carta">
-
-<div class="texto">
-
-<h3>Fundas</h3>
-
-<p>Protección con estilo.</p>
+<p>Protección premium.</p>
 
 </div>
 
-<div class="numero">01</div>
+<div class="estado">✓</div>
 
 </div>
 
-<div class="carta">
+<div class="card">
 
-<div class="texto">
+<div>
 
-<h3>Protectores</h3>
+<h2>Protectores</h2>
 
-<p>Cristal templado premium.</p>
-
-</div>
-
-<div class="numero">02</div>
+<p>Cristal templado.</p>
 
 </div>
 
-<div class="carta">
-
-<div class="texto">
-
-<h3>Cargadores</h3>
-
-<p>Carga rápida.</p>
-
-</div>
-
-<div class="numero">03</div>
-
-</div>
-
-<div class="carta">
-
-<div class="texto">
-
-<h3>Accesorios</h3>
-
-<p>Completa tu setup.</p>
-
-</div>
-
-<div class="numero">04</div>
+<div class="estado"></div>
 
 </div>
 
 </div>
-
-</section>
 
 <script>
 
-const observer=new IntersectionObserver((entries)=>{
-
-entries.forEach((entry,index)=>{
-
-if(entry.isIntersecting){
+const stack=document.querySelector(".stack");
 
 setTimeout(()=>{
 
-entry.target.classList.add("visible");
+stack.classList.add("loaded");
 
-},index*250);
+},200);
+
+document.querySelectorAll(".card").forEach(card=>{
+
+card.onclick=()=>{
+
+document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
+
+card.classList.add("active");
+
+document.querySelectorAll(".estado").forEach(e=>e.textContent="");
+
+card.querySelector(".estado").textContent="✓";
 
 }
-
-});
-
-},{threshold:.4});
-
-document.querySelectorAll(".carta").forEach(carta=>{
-
-observer.observe(carta);
 
 });
 
