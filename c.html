@@ -1,229 +1,537 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vesira - Colecciones</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Outfit",sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
 
-background:#f5f5f7;
+background:white;
+    font-family:"Outfit",sans-serif;
 
-display:flex;
+    color:#111;
 
-justify-content:center;
+}
 
-align-items:center;
+.colecciones{
 
-height:100vh;
+    max-width:1200px;
 
-overflow:hidden;
+    margin:auto;
+
+    padding:90px 25px 120px;
+
+}
+
+.subtitulo{
+
+    font-size:12px;
+
+    letter-spacing:.35em;
+
+    text-transform:uppercase;
+
+    color:#8d8d8d;
+
+}
+
+h2{
+
+    margin-top:8px;
+
+    font-size:44px;
+
+    font-weight:700;
+
+    line-height:1.1;
 
 }
 
 .stack{
 
-position:relative;
+    position:relative;
 
-width:360px;
+    margin-top:70px;
 
-height:340px;
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
 
 }
 
 .card{
 
-position:absolute;
+    position:relative;
 
-width:100%;
+    width:88%;
 
-height:150px;
+    height:165px;
 
-background:white;
+    background:white;
 
-border-radius:28px;
+    border-radius:32px;
 
-padding:28px;
+    display:flex;
 
-display:flex;
+    align-items:center;
 
-justify-content:space-between;
+    justify-content:space-between;
 
-align-items:center;
+    padding:0 45px;
 
-cursor:pointer;
+    text-decoration:none;
 
-box-shadow:0 18px 40px rgba(0,0,0,.08);
+    color:#111;
 
-transition:.55s cubic-bezier(.2,.9,.2,1);
+    overflow:visible;
 
-}
+    cursor:pointer;
 
-.card h2{
+    box-shadow:
+    0 18px 45px rgba(0,0,0,.08);
 
-font-size:34px;
+    border:1px solid transparent;
 
-font-weight:700;
-
-}
-
-.card p{
-
-margin-top:6px;
-
-color:#7a7a7a;
-
-font-size:15px;
+    transition:
+    .45s cubic-bezier(.22,1,.36,1);
 
 }
 
-.estado{
-
-width:34px;
-
-height:34px;
-
-border-radius:50%;
-
-border:2px solid #d8d8d8;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-weight:700;
-
-transition:.3s;
-
-}
-
-.card:nth-child(1){
-
-transform:translateY(70px) rotate(-6deg);
-
-}
+/* efecto de pila */
 
 .card:nth-child(2){
 
-transform:translateY(100px) rotate(6deg);
+    margin-top:-55px;
+
+    margin-left:45px;
+
+    width:84%;
 
 }
 
-.stack.loaded .card:nth-child(1){
+.card:nth-child(3){
 
-transform:translateY(0) rotate(-2deg);
+    margin-top:-55px;
 
-}
+    margin-left:90px;
 
-.stack.loaded .card:nth-child(2){
-
-transform:translateY(120px) rotate(2deg);
+    width:80%;
 
 }
 
-.card.active{
+.card:nth-child(4){
 
-transform:translateY(-12px) rotate(0deg)!important;
+    margin-top:-55px;
 
-border:2px solid #111;
+    margin-left:135px;
 
-z-index:10;
-
-}
-
-.card.active .estado{
-
-background:#111;
-
-border-color:#111;
-
-color:white;
+    width:76%;
 
 }
 
-.card:not(.active){
+/* imagen flotante */
 
-opacity:.88;
+.producto{
+
+    position:absolute;
+
+    width:180px;
+    left:-20px;
+
+
+
+    transition:.45s;
+
+    pointer-events:none;
+
+    filter:drop-shadow(0 18px 25px rgba(0,0,0,.18));
 
 }
 
+.contenido{
+
+    margin-left:160px;
+
+}
+
+.contenido h3{
+
+    font-size:33px;
+
+    font-weight:700;
+
+}
+
+.contenido p{
+
+    margin-top:8px;
+
+    color:#666;
+
+    font-size:16px;
+
+}
+
+.flecha{
+
+    font-size:34px;
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-12px) translateX(-15px);
+
+    border-color:#111;
+
+    box-shadow:
+    0 35px 70px rgba(0,0,0,.14);
+
+    z-index:50;
+
+}
+
+.card:hover .producto{
+
+    transform:
+    translateY(-8px)
+    rotate(-6deg)
+    scale(1.08);
+
+}
+
+.card:hover .flecha{
+
+    transform:translateX(10px);
+
+}
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:0;
+
+    width:0%;
+
+    height:2px;
+
+    background:#111;
+
+    border-radius:999px;
+
+
+    transition:.4s;
+
+}
+
+.card:hover::after{
+
+    width:100%;
+
+}
+
+/* Animación inicial */
+
+.card{
+
+    opacity:0;
+
+    transform:translateY(-60px);
+
+}
+
+.card.visible{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+@media(max-width:900px){
+
+.stack{
+
+    margin-top:45px;
+
+}
+
+.card{
+
+    width:100%;
+
+    margin-left:0!important;
+
+    margin-top:18px!important;
+
+    height:125px;
+
+    padding:0 22px;
+
+    border-radius:24px;
+
+}
+
+.producto{
+
+    width:180px;
+    left:-20px;
+
+}
+
+.contenido{
+
+    margin-left:95px;
+
+}
+
+.contenido h3{
+
+    font-size:24px;
+
+}
+
+.contenido p{
+
+    font-size:14px;
+
+    margin-top:4px;
+
+}
+
+.flecha{
+
+    font-size:24px;
+
+}
+
+}
 </style>
-
 </head>
 
 <body>
 
+<section class="colecciones">
+
+<p class="subtitulo">
+
+EXPLORA
+
+</p>
+
+<h2>
+
+Descubre nuestras colecciones
+
+</h2>
+
 <div class="stack">
 
-<div class="card active">
+<a href="fundas.html" class="card">
 
-<div>
+<img src="img/funda.png" class="producto">
 
-<h2>Fundas</h2>
+<div class="contenido">
 
-<p>Protección premium.</p>
+<h3>Fundas</h3>
 
-</div>
-
-<div class="estado">✓</div>
+<p>Protección elegante para tu dispositivo.</p>
 
 </div>
 
-<div class="card">
+<div class="flecha">
 
-<div>
-
-<h2>Protectores</h2>
-
-<p>Cristal templado.</p>
+→
 
 </div>
 
-<div class="estado"></div>
+</a>
+
+<a href="protectores.html" class="card">
+
+<img src="img/protector.png" class="producto">
+
+<div class="contenido">
+
+<h3>Protectores</h3>
+
+<p>Cristal templado de máxima resistencia.</p>
 
 </div>
 
+<div class="flecha">
+
+→
+
 </div>
+
+</a>
+
+<a href="cargadores.html" class="card">
+
+<img src="img/cargador.png" class="producto">
+
+<div class="contenido">
+
+<h3>Cargadores</h3>
+
+<p>Carga rápida y accesorios MagSafe.</p>
+
+</div>
+
+<div class="flecha">
+
+→
+
+</div>
+
+</a>
+
+<a href="accesorios.html" class="card">
+
+<img src="img/accesorio.png" class="producto">
+
+<div class="contenido">
+
+<h3>Accesorios</h3>
+
+<p>Todo para completar tu setup.</p>
+
+</div>
+
+<div class="flecha">
+
+→
+
+</div>
+
+</a>
+
+</div>
+
+</section>
 
 <script>
 
-const stack=document.querySelector(".stack");
+const cards = document.querySelectorAll(".card");
 
-setTimeout(()=>{
+/* Entrada escalonada */
 
-stack.classList.add("loaded");
+const observer = new IntersectionObserver((entries)=>{
 
-},200);
+    entries.forEach((entry,index)=>{
 
-document.querySelectorAll(".card").forEach(card=>{
+        if(entry.isIntersecting){
 
-card.onclick=()=>{
+            setTimeout(()=>{
 
-document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
+                entry.target.classList.add("visible");
 
-card.classList.add("active");
+            },index*170);
 
-document.querySelectorAll(".estado").forEach(e=>e.textContent="");
+        }
 
-card.querySelector(".estado").textContent="✓";
+    });
 
-}
+},{threshold:.3});
+
+cards.forEach(card=>{
+
+    observer.observe(card);
+
+});
+
+
+/* Selección */
+
+cards.forEach(card=>{
+
+    card.addEventListener("click",(e)=>{
+
+        e.preventDefault();
+
+        cards.forEach(c=>{
+
+            c.classList.remove("active");
+
+        });
+
+        card.classList.add("active");
+
+        card.style.transform="translateY(-18px) translateX(-20px)";
+
+        setTimeout(()=>{
+
+            window.location.href=card.href;
+
+        },250);
+
+    });
+
+});
+
+
+/* Efecto de profundidad */
+
+cards.forEach((card,index)=>{
+
+    card.addEventListener("mouseenter",()=>{
+
+        cards.forEach((c,i)=>{
+
+            if(i!==index){
+
+                c.style.transform=`translateY(${i*2}px) scale(.985)`;
+
+                c.style.opacity=".75";
+
+            }
+
+        });
+
+    });
+
+    card.addEventListener("mouseleave",()=>{
+
+        cards.forEach(c=>{
+
+            c.style.transform="";
+
+            c.style.opacity="1";
+
+        });
+
+    });
 
 });
 
 </script>
 
 </body>
+
 </html>
