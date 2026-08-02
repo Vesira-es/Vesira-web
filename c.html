@@ -20,27 +20,23 @@ body{
 
 background:#fafafa;
 
-color:#111;
-
-}
-
-.colecciones{
-
-max-width:1200px;
-
-margin:auto;
-
-padding:90px 25px;
+padding:70px 20px;
 
 }
 
 .slider{
 
+max-width:1200px;
+
+height:620px;
+
+margin:auto;
+
 position:relative;
 
-height:680px;
-
 overflow:hidden;
+
+border-radius:34px;
 
 }
 
@@ -54,173 +50,95 @@ display:flex;
 
 flex-direction:column;
 
-align-items:center;
-
 justify-content:center;
 
-opacity:0;
+align-items:center;
 
-transform:translateY(25px);
+background:white;
 
-transition:.7s ease;
+transform:translateX(100%);
+
+transition:1s cubic-bezier(.22,1,.36,1);
 
 }
 
 .slide.active{
 
-opacity:1;
-
-transform:none;
+transform:translateX(0);
 
 }
 
-.tag{
+.slide.salida{
 
-font-size:12px;
-
-letter-spacing:.35em;
-
-text-transform:uppercase;
-
-color:#999;
+transform:translateX(-100%);
 
 }
 
 h2{
 
-margin-top:12px;
+font-size:46px;
 
-font-size:50px;
-
-font-weight:700;
+margin-bottom:35px;
 
 }
 
-.imagen{
+img{
 
-margin-top:45px;
+width:85%;
 
-width:100%;
+max-width:760px;
 
-display:flex;
-
-justify-content:center;
-
-}
-
-.imagen img{
-
-width:min(90%,520px);
-
-aspect-ratio:1;
+height:380px;
 
 object-fit:cover;
 
-border-radius:36px;
+border-radius:30px;
 
-box-shadow:0 25px 60px rgba(0,0,0,.08);
-
-transition:.5s;
+box-shadow:0 20px 45px rgba(0,0,0,.10);
 
 }
 
-.slide.active img{
+a{
 
-animation:flotar 5s ease-in-out infinite;
-
-}
-
-@keyframes flotar{
-
-0%{transform:translateY(0);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0);}
-
-}
-
-.boton{
-
-margin-top:45px;
-
-display:flex;
-
-align-items:center;
-
-gap:10px;
-
-padding:14px 28px;
-
-border-radius:999px;
-
-background:#111;
-
-color:white;
+margin-top:35px;
 
 text-decoration:none;
 
-font-size:15px;
+color:#111;
 
-transition:.25s;
+font-size:18px;
 
-}
-
-.boton:hover{
-
-transform:translateY(-3px);
+font-weight:600;
 
 }
 
-.boton span{
+a:hover{
 
-transition:.25s;
-
-}
-
-.boton:hover span{
-
-transform:translateX(5px);
+letter-spacing:.05em;
 
 }
 
 @media(max-width:768px){
 
-.colecciones{
-
-padding:60px 18px;
-
-}
-
 .slider{
 
-height:520px;
+height:470px;
 
 }
 
 h2{
 
-font-size:34px;
+font-size:32px;
 
 }
 
-.imagen{
+img{
 
-margin-top:30px;
-
-}
-
-.imagen img{
+height:220px;
 
 width:92%;
 
-border-radius:26px;
-
-}
-
-.boton{
-
-margin-top:30px;
-
-padding:12px 22px;
+border-radius:22px;
 
 }
 
@@ -232,152 +150,74 @@ padding:12px 22px;
 
 <body>
 
-<section class="colecciones">
-
 <div class="slider">
 
 <div class="slide active">
 
-<div class="tag">
+<h2>Fundas</h2>
 
-COLECCIÓN
+<img src="https://picsum.photos/1000/600?1">
 
-</div>
-
-<h2>
-
-Fundas
-
-</h2>
-
-<div class="imagen">
-
-<img src="https://picsum.photos/800/800?1">
-
-</div>
-
-<a href="#" class="boton">
-
-Ver colección
-
-<span>→</span>
-
-</a>
+<a href="">Ver colección →</a>
 
 </div>
 
 <div class="slide">
 
-<div class="tag">
+<h2>Protectores</h2>
 
-COLECCIÓN
+<img src="https://picsum.photos/1000/600?2">
 
-</div>
-
-<h2>
-
-Protectores
-
-</h2>
-
-<div class="imagen">
-
-<img src="https://picsum.photos/800/800?2">
-
-</div>
-
-<a href="#" class="boton">
-
-Ver colección
-
-<span>→</span>
-
-</a>
+<a href="">Ver colección →</a>
 
 </div>
 
 <div class="slide">
 
-<div class="tag">
+<h2>Cargadores</h2>
 
-COLECCIÓN
+<img src="https://picsum.photos/1000/600?3">
 
-</div>
-
-<h2>
-
-Cargadores
-
-</h2>
-
-<div class="imagen">
-
-<img src="https://picsum.photos/800/800?3">
-
-</div>
-
-<a href="#" class="boton">
-
-Ver colección
-
-<span>→</span>
-
-</a>
-
-</div>
-
-<div class="slide">
-
-<div class="tag">
-
-COLECCIÓN
-
-</div>
-
-<h2>
-
-Accesorios
-
-</h2>
-
-<div class="imagen">
-
-<img src="https://picsum.photos/800/800?4">
-
-</div>
-
-<a href="#" class="boton">
-
-Ver colección
-
-<span>→</span>
-
-</a>
+<a href="">Ver colección →</a>
 
 </div>
 
 </div>
-
-</section>
 
 <script>
 
 const slides=document.querySelectorAll(".slide");
 
-let actual=0;
+let i=0;
 
 setInterval(()=>{
 
-slides[actual].classList.remove("active");
+slides[i].classList.remove("active");
+slides[i].classList.add("salida");
 
-actual=(actual+1)%slides.length;
+i=(i+1)%slides.length;
 
-slides[actual].classList.add("active");
+slides[i].classList.remove("salida");
+slides[i].classList.add("active");
+
+setTimeout(()=>{
+
+slides.forEach((s,index)=>{
+
+if(index!==i){
+
+s.classList.remove("salida");
+s.style.transform="translateX(100%)";
+
+}
+
+});
+
+},1000);
 
 },4500);
 
 </script>
 
 </body>
-
 </html>
