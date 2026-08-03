@@ -849,7 +849,7 @@ button{
 
 .buscar-dispositivo h2 {
     font-family:"Outfit", sans-serif; 
-    font-size:32px;
+    font-size:30px;
     font-weight:700;
     color:#111;
     margin-bottom:10px;   
@@ -1272,14 +1272,14 @@ Ver colección
 
     <div class = "selectores">
         <select name = "Marca del dispositivo" id = "marca">
-            <option value = "marca">Marca</option>
+            <option value = "marca" selected disabled>Marca</option>
             <option value = "apple">Apple</option>
             <option value = "samsung">Samsung</option>
             <option value = "xiaomi">Xiaomi</option>
         </select>
 
         <select name = "Modelo" id = "modelo" disabled>
-            <option>Modelo</option>
+            <option selected disabled>Modelo</option>
         </select>
 
     </div>
@@ -1377,6 +1377,11 @@ marca.addEventListener("change", ()=> {
     modelo.disabled = false;
     modelo.innerHTML = "";
     
+    marca.innerHTML =
+    '<option value = "apple">Apple</option>' +
+    '<option value = "samsung">Samsung</option>' +
+    '<option value = "xiaomi">Xiaomi</option>';
+
     if(marca.value == "apple"){
         modelo.innerHTML = `
             <option>iPhone 17 Pro Max</option>
