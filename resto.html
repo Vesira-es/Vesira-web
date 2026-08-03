@@ -1,0 +1,183 @@
+
+
+
+<!-- SELECT -->
+
+
+<!-- FOOTER -->
+ <footer>
+    <img class = "footer-img-tres" src = "img/footer/tres.png">
+    <img class = "footer-img-uno" src = "img/footer/uno.png">
+    <img class = "footer-img-dos" src = "img/footer/dos.png">
+    
+    <div class = "pie-pagina">
+
+    </div>
+    
+</footer>
+
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:#151515;
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-bottom: calc(50% - 50vw);
+    height: 100%;
+    padding: 10px 0 15px 0; 
+    border-bottom: 3px solid rgb(144, 143, 143);
+}
+
+.footer-img-uno {
+    width: 230px;
+    height: 290;
+}
+
+.footer-img-dos {
+    width: 135px;
+}
+
+.footer-img-tres {
+    margin-top: 5px;
+    width: 125px;
+    margin-bottom: 12px;
+}
+
+.pie-pagina {
+    margin-top: 0;
+    display: flex;
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    color: white;
+    gap: 65px;
+}
+
+
+
+<!-- POR QUÉ COMPRAR EN VESIRA -->
+<section class = "frase-marca">
+    <h2>¿Por qué comprar en Vesira?</h2>
+    <p class = "texto-uno">Podríamos intentar convencerte.</p> 
+    <p class = "texto-dos">Si necesitáramos hacerlo, significaría que aún nos queda mucho por mejorar.</p>
+</section>
+.frase-marca{
+
+    background-image:url("img/fondo.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    padding:60px;
+
+    position:relative;
+    
+    max-width:700px;
+
+    margin:90px 18px 90px 13px;
+
+    padding-left:28px;
+
+    font-family:"Outfit",sans-serif;
+
+}
+
+.frase-marca::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:4px;
+
+    width:2px;
+
+    height:130px;
+
+    background:linear-gradient(
+        to bottom,
+        #111,
+        #d9d9d9
+    );
+
+    border-radius:999px;
+
+}
+
+.frase-marca h2{
+
+    font-size:28px;
+    font-weight:700;
+    line-height:1.15;
+    color:#111;
+
+}
+
+.texto-uno{
+
+    margin-top:22px;
+
+    font-size:19px;
+
+    color:#777;
+
+    line-height:1.55;
+
+}
+
+.texto-dos{
+
+    margin-top:10px;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    line-height:1.45;
+
+    color:#111;
+
+}
+
+.descubre{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:34px;
+
+    text-decoration:none;
+
+    color:#111;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.descubre:hover{
+
+    gap:14px;
+
+}
+@media (max-width:768px){
+
+    .frase-marca{
+
+        background-size:320px;
+
+    }
+
+}
+
+
+

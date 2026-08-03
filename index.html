@@ -438,648 +438,216 @@ button{
 
 }
 
-/*================ COLECCIONES =================*/
+.buscar-dispositivo{
 
-.colecciones{
-
-    position:relative;
-    width:min(97.5%,1450px);
-    max-width:1450px;
-
-    margin:70px auto;
-    margin-left:13px;
-
-    height:450px;
-
-    border-radius:32px;
-    overflow:hidden;
-
-    background:#f7f7f5;
-
-    touch-action:pan-y;
+    margin:45px 18px 0 13px;
 
 }
 
-.slide{
+.buscar-dispositivo h2{
 
-    position:absolute;
-    inset:0;
+    font-family:"Outfit",sans-serif;
 
-    opacity:0;
+    font-size:32px;
 
-    transform:translateX(100%);
+    font-weight:700;
 
-    transition:
-    transform .9s cubic-bezier(.22,1,.36,1),
-    opacity .9s;
-
-    text-decoration:none;
-
-    color:white;
-
-}
-
-.slide.active{
-
-    opacity:1;
-
-    transform:translateX(0);
-
-    z-index:2;
-
-}
-
-.slide img{
-
-    position:absolute;
-
-    right:5%;
-    bottom:0;
-
-    width:100%;
-    max-width:4000px;
-
-    height:auto;
-
-    object-fit:contain;
-
-}
-
-.overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-end;
-
-    padding:40px;
+    color:#111;
 
     margin-bottom:18px;
 
 }
 
-.overlay h2{
-
-    font-family:"Outfit",sans-serif;
-
-    font-size:52px;
-
-    color:#515151;
-
-}
-
-.overlay span{
+.contenedor-selectores{
 
     display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-top:10px;
-
-    font-family:"Outfit",sans-serif;
-
-    font-size:18px;
-
-    color:#515151;
-
-    opacity:.95;
+    gap:5px;
+    margin-bottom: 15px;
 
 }
 
-.overlay svg{
-
-    transition:.25s;
-
-}
-
-.slide:hover svg{
-
-    transform:translateX(5px);
-
-}
-
-.slide:hover span{
-
-    transform:translateX(6px);
-
-}
-
-.overlay h2,
-.overlay span{
-
-    transform:translateY(20px);
-
-    opacity:0;
-
-    transition:.8s;
-
-}
-
-.slide.active .overlay h2,
-.slide.active .overlay span{
-
-    transform:none;
-
-    opacity:1;
-
-}
-
-.slide.active .overlay span{
-
-    transition-delay:.15s;
-
-}
-
-/* Animación escritorio */
-
-.slide.active img{
-
-    animation:kenburns 5s linear forwards;
-
-}
-
-@keyframes kenburns{
-
-    from{
-
-        transform:scale(1);
-
-    }
-
-    to{
-
-        transform:scale(1.05);
-
-    }
-
-}
-
-@keyframes kenburnsMobile{
-
-    from{
-
-        transform:translateX(-50%) scale(1);
-
-    }
-
-    to{
-
-        transform:translateX(-50%) scale(1.05);
-
-    }
-
-}
-
-/* ---------- IMÁGENES ESCRITORIO ---------- */
-
-#fundas{
-
-    width:720px;
-
-    top:2px;
-
-}
-
-#protectores{
-
-    width:550px;
-
-    right:35px;
-
-    bottom:10%;
-
-}
-
-#cargadores{
-
-    top:40px;
-
-}
-
-#accesorios{
-
-    width:550px;
-
-    right:35px;
-
-    top:105px;
-
-}
-
-/* ================= MÓVIL ================= */
-
-@media(max-width:768px){
-
-    .colecciones{
-
-        width:calc(100% - 31px);
-
-        margin:60px 18px 0 10px;
-
-        height:350px;
-
-        border-radius:24px;
-
-    }
-
-    .overlay{
-
-        padding:24px;
-
-        margin-bottom:45px;
-
-    }
-
-    .overlay h2{
-
-        font-size:34px;
-
-        color:#111;
-
-
-    }
-
-    .overlay span{
-
-        font-size:16px;
-
-        color:#111;
-
-    }
-
-    .slide.active img{
-
-        animation:kenburnsMobile 5s linear forwards;
-
-    }
-
-
-    #fundas{
-
-        width:500px;
-
-        left:57%;
-
-        bottom:3%;
-
-        top:auto;
-
-        right:auto;
-
-        transform:translateX(-50%);
-
-    }
-
-    #protectores{
-
-        width:450px;
-
-        left:60%;
-
-        bottom:6px;
-
-        top:8%;
-
-        right:auto;
-
-        transform:translateX(-50%);
-
-    }
-
-    #cargadores{
-
-        width:350px;
-
-        left:50%;
-
-        bottom:25%;
-
-        top:auto;
-
-        right:auto;
-
-        transform:translateX(-50%);
-
-    }
-
-    #accesorios{
-
-        width:400px;
-
-        left:70%;
-
-        bottom:2%;
-
-        top:auto;
-
-        right:auto;
-
-        transform:translateX(-50%);
-
-    }
-
-}
-.titulo-animado span{
-
-    display:inline-block;
-
-}
-.titulo-animado{
-
-    display:inline-block;
-
-    font:inherit;
-
-    letter-spacing:inherit;
-
-    line-height:inherit;
-
-}
-
-.titulo-animado span{
-
-    display:inline-block;
-
-    font:inherit;
-
-    letter-spacing:inherit;
-
-    line-height:inherit;
-
-}
-.overlay h2{
-
-    opacity:0;
-
-    transform:translateY(18px);
-
-    filter:blur(8px);
-
-    transition:
-        opacity .6s ease,
-        transform .6s ease,
-        filter .6s ease;
-
-}
-
-.slide.active .overlay h2{
-
-    opacity:1;
-
-    transform:none;
-
-    filter:blur(0);
-
-}
-
-/* comienzo selectores */
-
-.buscar-dispositivo {
-    margin-top: 60px;
-    margin-left: 8px;
-    margin-right: 15px;
-}
-
-.buscar-dispositivo h2 {
-    font-family:"Outfit", sans-serif; 
-    font-size:30px;
-    font-weight:700;
-    color:#111;
-    margin-bottom:10px;   
-}
-
-.selectores {
-    margin-top: 20px;
-    display: flex;
-    gap: 25px;
-    align-items: center;
-}
-
-.selectores select {
-    flex: 1;
-    height: 50px;
-    border:1px solid #E9E9E9;
-    border-radius:16px;
-    background:white;
-    font-family:"Outfit",sans-serif;
-    font-size:16px;
-    font-weight:500;
-    color:#222;
-    cursor:pointer;
-    transition:.25s;
-}
-
-@media (max-width: 768px) {
-    
-    .selectores select {
-        padding: 10px 10px 10px 10px;
-    }
-
-}
-
-.selectores select:hover{
-    border-color:black;
-}
-
-.selectores select:focus{
-    outline:none;
-    border-color:#111;
-}
-
-.selectores select:disabled{
-    background: rgb(248, 247, 247);
-}
-
-/* fin selectores */
-
-.ir{
-
-    display:flex;
-    align-items:center;
-
-    gap:8px;
-
-    margin-top:15px;
-
-    background:black;
-    color:white;
-
-    border-radius:7px;
-
-    padding:5px 3px 5px 10px;
-    width:fit-content;
-
-    cursor:pointer;
-    font-size: 17px;
-
-}
-
-#flecha-ir {
-    font-size: 20px;
-}
-
-
-
-.frase-marca{
-
-    background-image:url("img/fondo.png");
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-
-    padding:60px;
+.selector-marca,
+.selector-modelo{
 
     position:relative;
-    
-    max-width:700px;
 
-    margin:90px 18px 90px 13px;
-
-    padding-left:28px;
+    flex:1;
 
     font-family:"Outfit",sans-serif;
 
 }
 
-.frase-marca::before{
+.selector-marca-cabecera,
+.selector-modelo-cabecera{
 
-    content:"";
+    height:54px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    border:1px solid #E9E9E9;
+
+    border-radius:16px;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.selector-marca-cabecera:hover,
+.selector-modelo-cabecera:hover{
+
+    border-color:#111;
+
+}
+
+.selector-marca-opciones,
+.selector-modelo-opciones{
 
     position:absolute;
 
+    top:60px;
+
     left:0;
 
-    top:4px;
+    width:100%;
 
-    width:2px;
+    background:white;
 
-    height:130px;
+    border:1px solid #E9E9E9;
 
-    background:linear-gradient(
-        to bottom,
-        #111,
-        #d9d9d9
-    );
+    border-radius:16px;
 
-    border-radius:999px;
+    overflow:hidden;
 
-}
+    display:none;
 
-.frase-marca h2{
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
 
-    font-size:28px;
-    font-weight:700;
-    line-height:1.15;
-    color:#111;
+    z-index:20;
 
 }
 
-.texto-uno{
+.opcion-marca,
+.opcion-modelo{
 
-    margin-top:22px;
+    padding:15px 18px;
 
-    font-size:19px;
+    cursor:pointer;
 
-    color:#777;
-
-    line-height:1.55;
-
-}
-
-.texto-dos{
-
-    margin-top:10px;
-
-    font-size:20px;
-
-    font-weight:600;
-
-    line-height:1.45;
-
-    color:#111;
+    transition:.2s;
 
 }
 
-.descubre{
+.opcion-marca:hover,
+.opcion-modelo:hover{
+
+    background:#F7F7F7;
+
+}
+
+.selector-marca.abierto .selector-marca-opciones{
+
+    display:block;
+
+}
+
+.selector-modelo.abierto .selector-modelo-opciones{
+
+    display:block;
+
+}
+
+.flecha-marca,
+.flecha-modelo{
+
+    transition:.25s;
+
+}
+
+.selector-marca.abierto .flecha-marca{
+
+    transform:rotate(180deg);
+
+}
+
+.selector-modelo.abierto .flecha-modelo{
+
+    transform:rotate(180deg);
+
+}
+
+.desactivado{
+
+    opacity:.45;
+
+    pointer-events:none;
+
+}
+
+@media(max-width:768px){
+
+    .contenedor-selectores{
+
+        flex-direction:row;
+
+        gap:10px;
+
+    }
+
+}
+
+
+.ir{
 
     display:inline-flex;
 
     align-items:center;
 
-    gap:8px;
+    justify-content:space-between;
 
-    margin-top:34px;
+    gap:10px;
 
-    text-decoration:none;
+    background:#111;
 
-    color:#111;
+    border-radius:10px;
 
-    font-size:18px;
+    color:white;
 
-    font-weight:600;
+    font-size:15px;
+
+    font-family:"Outfit",sans-serif;
+
+    font-weight:500;
+
+    padding:10px 18px;
+
+    cursor:pointer;
 
     transition:.25s;
 
 }
 
-.descubre:hover{
+.ir:hover{
 
-    gap:14px;
-
-}
-@media (max-width:768px){
-
-    .frase-marca{
-
-        background-size:320px;
-
-    }
+    background:#222;
 
 }
 
-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background:#151515;
-    width:100vw;
-    margin-left:calc(50% - 50vw);
-    margin-bottom: calc(50% - 50vw);
-    height: 100%;
-    padding: 10px 0 15px 0; 
-    border-bottom: 3px solid rgb(144, 143, 143);
-}
+#flecha-ir{
 
-.footer-img-uno {
-    width: 230px;
-    height: 290;
-}
+    font-size:20px;
 
-.footer-img-dos {
-    width: 135px;
-}
+    margin-top: 3px;
 
-.footer-img-tres {
-    margin-top: 5px;
-    width: 125px;
-    margin-bottom: 12px;
-}
-
-.pie-pagina {
-    margin-top: 0;
-    display: flex;
-    font-family: 'Outfit', sans-serif;
-    font-size: 15px;
-    color: white;
-    gap: 65px;
 }
 
 </style>
@@ -1191,122 +759,70 @@ footer {
 
 </section>
 
-<section class="colecciones">
+<section class="buscar-dispositivo">
 
-    <a href="#" class="slide active">
-
-        <img id = "fundas" src="img/colecciones/fundas.png">
-
-        <div class="overlay">
-
-            <h2 class = "titulo-animado">Fundas</h2>
-
-            <span>
-
-Ver colección
-
-</span>
-
-        </div>
-
-    </a>
-
-    <a href="#" class="slide">
-
-        <img id = "protectores" src="img/colecciones/protectores.png">
-
-        <div class="overlay">
-
-            <h2 class = "titulo-animado">Protectores</h2>
-
-            <span>
-
-                Ver colección
-
-            </span>
-
-        </div>
-
-    </a>
-
-    <a href="#" class="slide">
-
-        <img id = "cargadores" src="img/colecciones/cargadores.png">
-
-        <div class="overlay">
-
-            <h2 class = "titulo-animado">Cargadores</h2>
-
-            <span>
-
-                Ver colección
-
-            </span>
-
-        </div>
-
-    </a>
-
-    <a href="#" class="slide">
-
-        <img id = "accesorios" src="img/colecciones/accesorios.png">
-
-        <div class="overlay">
-
-            <h2 class = "titulo-animado">Accesorios</h2>
-
-            <span>
-
-                Ver colección
-
-            </span>
-
-        </div>
-
-    </a>
-
-</section>
-
-<section class = "buscar-dispositivo">
     <h2>Busca tu dispositivo</h2>
 
-    <div class = "selectores">
-        <select name = "Marca del dispositivo" id = "marca">
-            <option value = "marca" selected disabled>Marca</option>
-            <option value = "apple">Apple</option>
-            <option value = "samsung">Samsung</option>
-            <option value = "xiaomi">Xiaomi</option>
-        </select>
+    <div class="contenedor-selectores">
 
-        <select name = "Modelo" id = "modelo" disabled>
-            <option selected disabled>Modelo</option>
-        </select>
+        <div class="selector-marca" id="selectorMarca">
+
+            <div class="selector-marca-cabecera">
+
+                <span id="textoMarca">Marca</span>
+
+                <span class="material-symbols-outlined flecha-marca">
+                    keyboard_arrow_down
+                </span>
+
+            </div>
+
+            <div class="selector-marca-opciones">
+
+                <div class="opcion-marca">Apple</div>
+                <div class="opcion-marca">Samsung</div>
+                <div class="opcion-marca">Xiaomi</div>
+                <div class="opcion-marca">Oppo</div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="selector-modelo desactivado" id="selectorModelo">
+
+            <div class="selector-modelo-cabecera">
+
+                <span id="textoModelo">Modelo</span>
+
+                <span class="material-symbols-outlined flecha-modelo">
+                    keyboard_arrow_down
+                </span>
+
+            </div>
+
+            <div class="selector-modelo-opciones">
+
+            </div>
+
+        </div>
 
     </div>
 
-    <button class = "ir">
+    <button class="ir">
+
         Buscar
-        <span class="material-symbols-outlined" id = "flecha-ir">keyboard_arrow_right</span>
+
+        <span class="material-symbols-outlined" id="flecha-ir">
+            keyboard_arrow_right
+        </span>
+
     </button>
 
 </section>
 
-<section class = "frase-marca">
-    <h2>¿Por qué comprar en Vesira?</h2>
-    <p class = "texto-uno">Podríamos intentar convencerte.</p> 
-    <p class = "texto-dos">Si necesitáramos hacerlo, significaría que aún nos queda mucho por mejorar.</p>
-</section>
 
-<footer>
-    <img class = "footer-img-tres" src = "img/footer/tres.png">
-    <img class = "footer-img-uno" src = "img/footer/uno.png">
-    <img class = "footer-img-dos" src = "img/footer/dos.png">
-    
-    <div class = "pie-pagina">
-
-    </div>
-    
-</footer>
 
 <script>
 
@@ -1370,194 +886,137 @@ setTimeout(()=>{
 
 },1500);
 
-const marca = document.getElementById("marca");
-const modelo = document.getElementById("modelo");
 
-marca.addEventListener("change", ()=> {
-    modelo.disabled = false;
-    modelo.innerHTML = "";
-    
-    marca.innerHTML =
-    '<option value = "apple">Apple</option>' +
-    '<option value = "samsung">Samsung</option>' +
-    '<option value = "xiaomi">Xiaomi</option>';
+// SELECTOR MARCA Y MODELO
+const selectorMarca = document.getElementById("selectorMarca");
+const selectorModelo = document.getElementById("selectorModelo");
 
-    if(marca.value == "apple"){
-        modelo.innerHTML = `
-            <option>iPhone 17 Pro Max</option>
-            <option>iPhone 17 Pro</option>
-            <option>iPhone 17</option>
-            <option>iPhone 16 Pro Max</option>
-            <option>iPhone 16 Pro</option>
-            <option>iPhone 16</option>
-        `;
-    }
-        
-    else if(marca.value == "samsung"){
+const cabeceraMarca = selectorMarca.querySelector(".selector-marca-cabecera");
+const cabeceraModelo = selectorModelo.querySelector(".selector-modelo-cabecera");
 
-            modelo.innerHTML = `
-                <option>Galaxy S25 Ultra</option>
-                <option>Galaxy S25+</option>
-                <option>Galaxy S25</option>
-                <option>Galaxy S24 Ultra</option>
-                <option>Galaxy S24+</option>
-                <option>Galaxy S24</option>
-                <option>Galaxy A56</option>
-                <option>Galaxy A36</option>
-            `;
+const opcionesMarca = selectorMarca.querySelectorAll(".opcion-marca");
 
-        }
+const textoMarca = document.getElementById("textoMarca");
+const textoModelo = document.getElementById("textoModelo");
 
-        else if(marca.value == "xiaomi"){
+const listaModelos = selectorModelo.querySelector(".selector-modelo-opciones");
 
-            modelo.innerHTML = `
-                <option>Xiaomi 15 Ultra</option>
-                <option>Xiaomi 15 Pro</option>
-                <option>Xiaomi 15</option>
-                <option>Xiaomi 14 Ultra</option>
-                <option>Xiaomi 14</option>
-                <option>Redmi Note 14 Pro+</option>
-                <option>Redmi Note 14 Pro</option>
-                <option>Redmi Note 14</option>
-            `;
 
-        }
-        else {
-            modelo.innerHTML = `
-                <option>Modelo</option>
-            `;
-            modelo.disabled = true;
-        }
+/*================ ABRIR / CERRAR MARCA ================*/
+
+cabeceraMarca.addEventListener("click",()=>{
+
+    selectorMarca.classList.toggle("abierto");
 
 });
 
-const slides = document.querySelectorAll(".slide");
 
-let actual = 0;
+/*================ ABRIR / CERRAR MODELO ================*/
 
-function cambiarSlide(direccion = 1){
-    const anterior = slides[actual];
+cabeceraModelo.addEventListener("click",()=>{
 
-    actual += direccion;
+    if(selectorModelo.classList.contains("desactivado")) return;
 
-if(actual < 0){
-    actual = slides.length - 1;
-}
-if(actual >= slides.length){
-    actual = 0;
-}
+    selectorModelo.classList.toggle("abierto");
+
+});
 
 
+/*================ ELEGIR MARCA ================*/
 
-    const siguiente = slides[actual];
+opcionesMarca.forEach(opcion=>{
 
-    anterior.style.zIndex = 2;
-    siguiente.style.zIndex = 3;
+    opcion.addEventListener("click",()=>{
 
-    anterior.style.transform = "translateX(-100%)";
-    anterior.style.opacity = "1";
+        textoMarca.textContent = opcion.textContent;
 
-    siguiente.style.transition = "none";
-    siguiente.style.transform = "translateX(100%)";
-    siguiente.style.opacity = "1";
+        selectorMarca.classList.remove("abierto");
 
-    requestAnimationFrame(()=>{
+        selectorModelo.classList.remove("desactivado");
 
-        siguiente.style.transition = "transform .9s cubic-bezier(.22,1,.36,1)";
-        siguiente.style.transform = "translateX(0)";
+        textoModelo.textContent = "Modelo";
+
+        listaModelos.innerHTML = "";
+
+
+
+        /*================ MODELOS ================*/
+
+        if(opcion.textContent==="Apple"){
+
+            añadirModelo("iPhone 17");
+            añadirModelo("iPhone 17 Pro");
+            añadirModelo("iPhone 17 Pro Max");
+
+        }
+
+        if(opcion.textContent==="Samsung"){
+
+            añadirModelo("Galaxy S25");
+            añadirModelo("Galaxy S25+");
+            añadirModelo("Galaxy S25 Ultra");
+
+        }
+
+        if(opcion.textContent==="Xiaomi"){
+
+            añadirModelo("Xiaomi 15");
+            añadirModelo("Xiaomi 15 Pro");
+
+        }
+
+        if(opcion.textContent==="Oppo"){
+
+            añadirModelo("Find X8");
+            añadirModelo("Reno 13");
+
+        }
 
     });
 
-    setTimeout(()=>{
+});
 
-        slides.forEach(slide=>{
 
-            slide.classList.remove("active");
+/*================ AÑADIR MODELOS ================*/
 
-            slide.style.opacity = "0";
+function añadirModelo(nombre){
 
-            slide.style.transform = "translateX(100%)";
+    const modelo = document.createElement("div");
 
-        });
+    modelo.className = "opcion-modelo";
 
-        siguiente.classList.add("active");
+    modelo.textContent = nombre;
 
-        animarTitulo(siguiente);
-        siguiente.style.opacity = "1";
+    modelo.addEventListener("click",()=>{
 
-        siguiente.style.transform = "translateX(0)";
+        textoModelo.textContent = nombre;
 
-    },900);
+        selectorModelo.classList.remove("abierto");
+
+    });
+
+    listaModelos.appendChild(modelo);
 
 }
 
-setInterval(cambiarSlide,3500);
-const slider = document.querySelector(".colecciones");
 
-let startX = 0;
-let endX = 0;
+/*================ CERRAR AL PULSAR FUERA ================*/
 
-slider.addEventListener("pointerdown",(e)=>{
+document.addEventListener("click",(e)=>{
 
-    startX = e.clientX;
+    if(!selectorMarca.contains(e.target)){
 
-});
+        selectorMarca.classList.remove("abierto");
 
-slider.addEventListener("pointerup",(e)=>{
+    }
 
-    endX = e.clientX;
+    if(!selectorModelo.contains(e.target)){
 
-    const distancia = endX - startX;
-
-    if(Math.abs(distancia) < 50) return;
-
-    if(distancia < 0){
-
-        cambiarSlide(1);
-
-    }else{
-
-        cambiarSlide(-1);
+        selectorModelo.classList.remove("abierto");
 
     }
 
 });
-
-function animarTitulo(slide){
-
-    const titulo = slide.querySelector(".titulo-animado");
-
-    const texto = titulo.dataset.text || titulo.textContent;
-
-    titulo.dataset.text = texto;
-
-    titulo.innerHTML = "";
-
-    [...texto].forEach((letra,i)=>{
-
-        const span = document.createElement("span");
-
-        span.textContent = letra;
-
-        span.style.opacity = "0";
-        span.style.transform = "translateY(10px)";
-        span.style.display = "inline-block";
-        span.style.transition = ".35s ease";
-
-        titulo.appendChild(span);
-
-        setTimeout(()=>{
-
-            span.style.opacity = "1";
-            span.style.transform = "translateY(0)";
-
-        },i*45);
-
-    });
-
-}
-
-animarTitulo(slides[0]);
 </script>
 
 </body>
