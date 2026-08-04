@@ -448,6 +448,9 @@ button{
 
 .buscar-dispositivo h2{
 
+    position: relative;
+    display: inline-block;
+
     font-family:"Outfit",sans-serif;
 
     font-size:32px;
@@ -460,6 +463,17 @@ button{
 
 }
 
+
+.buscar-dispositivo h2::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-8px;
+    width:70px;
+    height:4px;
+    border-radius:999px;
+    background:linear-gradient(90deg,#0A66C2,#F2C94C);
+}
 
 
 .contenedor-selectores{
