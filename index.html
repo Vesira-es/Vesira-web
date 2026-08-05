@@ -788,7 +788,6 @@ button{
 
     .cargadores{
         width:45% !important;
-        height: 280px !important;
     }
 
     .accesorios{
@@ -819,6 +818,94 @@ button{
     font-size: 20px;
     letter-spacing: 3px;
 }
+
+.flecha{
+
+    position:absolute;
+
+    top:50%;
+    transform:translateY(-50%);
+
+    width:52px;
+    height:52px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:none;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.88);
+
+    backdrop-filter:blur(10px);
+
+    cursor:pointer;
+
+    z-index:20;
+
+    transition:.25s;
+
+}
+
+.flecha:hover{
+
+    transform:translateY(-50%) scale(1.08);
+
+    background:white;
+
+}
+
+.flecha .material-symbols-outlined{
+
+    font-size:30px;
+
+    color:#111;
+
+}
+
+.flecha-izquierda{
+
+    left:20px;
+
+}
+
+.flecha-derecha{
+
+    right:20px;
+
+}
+
+@media(max-width:768px){
+
+    .flecha{
+
+        width:44px;
+        height:44px;
+        top:40%;
+
+    }
+
+    .flecha .material-symbols-outlined{
+
+        font-size:26px;
+
+    }
+
+    .flecha-izquierda{
+
+        left:10px;
+
+    }
+
+    .flecha-derecha{
+
+        right:10px;
+
+    }
+
+}
+
 /* FIN CSS COLECCIONES */
 
 
@@ -1038,6 +1125,18 @@ footer{
 <section class = "colecciones">
     
     <!-- Fundas -->
+    <button class="flecha flecha-izquierda">
+        <span class="material-symbols-outlined">
+            chevron_left
+        </span>
+    </button>
+
+    <button class="flecha flecha-derecha">
+        <span class="material-symbols-outlined">
+            chevron_right
+        </span>
+    </button>
+
     <a href = "#" class = "slide activa">
         
         <div class = "contenido-slide">
@@ -1197,6 +1296,8 @@ setTimeout(()=>{
 
 // COLECCIONES
 const slides = document.querySelectorAll(".slide");
+const flechaIzquierda = document.querySelector(".flecha-izquierda");
+const flechaDerecha = document.querySelector(".flecha-derecha");
 let actual = 0;
 let animando = false;
 
@@ -1258,6 +1359,17 @@ function cambiarSlide(direccion = 1){
 }
 
 setInterval(cambiarSlide,4000);
+flechaDerecha.addEventListener("click",()=>{
+
+    cambiarSlide(1);
+
+});
+
+flechaIzquierda.addEventListener("click",()=>{
+
+    cambiarSlide(-1);
+
+});
 // FIN COLECCIONES
 
 

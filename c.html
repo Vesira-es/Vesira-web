@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -13,89 +12,193 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Outfit",sans-serif;
 }
 
 body{
+    font-family:"Outfit",sans-serif;
     background:#fff;
     color:#111;
 }
 
-.por-que{
+/* ---------- CONTENEDOR ---------- */
 
-    max-width:760px;
+.producto{
 
-    margin:110px auto;
+    max-width:1300px;
+    margin:auto;
 
-    padding:0 25px;
+    padding:120px 40px;
 
-}
-
-.por-que h2{
-
-    font-size:46px;
-
-    font-weight:700;
-
-    line-height:1.1;
-
-    margin-bottom:40px;
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:90px;
 
 }
 
-.por-que p{
+/* ---------- GALERÍA ---------- */
 
-    font-size:24px;
+.galeria{
 
-    line-height:1.6;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    color:#666;
+}
 
+.galeria img{
+
+    width:100%;
+    max-width:520px;
+    transition:.35s;
+
+}
+
+.galeria img:hover{
+
+    transform:scale(1.04);
+
+}
+
+/* ---------- INFORMACIÓN ---------- */
+
+.info{
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+}
+
+.categoria{
+
+    font-size:13px;
+    letter-spacing:.35em;
+    color:#888;
     margin-bottom:18px;
 
 }
 
-.por-que a{
+h1{
 
-    display:inline-block;
+    font-size:54px;
+    line-height:1.05;
+    margin-bottom:18px;
 
-    margin-top:22px;
+}
 
-    color:#111;
-
-    text-decoration:none;
+.descripcion{
 
     font-size:18px;
-
-    font-weight:600;
-
-}
-
-.por-que a:hover{
-
-    opacity:.65;
+    color:#666;
+    line-height:1.7;
+    margin-bottom:35px;
 
 }
 
-@media(max-width:768px){
-
-.por-que{
-
-    margin:70px auto;
-
-}
-
-.por-que h2{
+.precio{
 
     font-size:34px;
+    font-weight:700;
+    margin-bottom:30px;
 
 }
 
-.por-que p{
+/* ---------- COLORES ---------- */
 
-    font-size:19px;
+.colores{
+
+    display:flex;
+    gap:12px;
+    margin-bottom:35px;
 
 }
+
+.color{
+
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:.25s;
+
+}
+
+.color.activo{
+
+    border-color:#111;
+
+}
+
+.negro{
+
+    background:#111;
+
+}
+
+.transparente{
+
+    background:#ddd;
+
+}
+
+.azul{
+
+    background:#3357d8;
+
+}
+
+/* ---------- BOTÓN ---------- */
+
+button{
+
+    height:58px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#111;
+
+    color:white;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+button:hover{
+
+    background:#222;
+
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media(max-width:900px){
+
+    .producto{
+
+        grid-template-columns:1fr;
+        gap:40px;
+        padding:100px 25px;
+
+    }
+
+    h1{
+
+        font-size:38px;
+
+    }
+
+    .descripcion{
+
+        font-size:16px;
+
+    }
 
 }
 
@@ -105,18 +208,73 @@ body{
 
 <body>
 
-<section class="por-que">
+<section class="producto">
 
-<h2>¿Por qué comprar en Vesira?</h2>
+    <div class="galeria">
 
-<p>Podríamos intentar convencerte.</p>
+        <img
+        id="imagen"
+        src="https://dummyimage.com/700x700/f3f3f3/000&text=Funda"
+        alt="Producto">
 
-<p>Si necesitáramos hacerlo,<br>
-significaría que aún nos queda mucho por mejorar.</p>
+    </div>
 
-<a href="#">Descúbrelo →</a>
+    <div class="info">
+
+        <p class="categoria">
+            FUNDAS MAGSAFE
+        </p>
+
+        <h1>
+            Funda MagSafe para iPhone 17 Pro
+        </h1>
+
+        <p class="descripcion">
+            Diseñada para proteger tu dispositivo sin renunciar
+            a un acabado limpio, ligero y elegante.
+        </p>
+
+        <div class="precio">
+            19,99 €
+        </div>
+
+        <div class="colores">
+
+            <div class="color negro activo"></div>
+
+            <div class="color transparente"></div>
+
+            <div class="color azul"></div>
+
+        </div>
+
+        <button>
+
+            Añadir al carrito
+
+        </button>
+
+    </div>
 
 </section>
+
+<script>
+
+const colores=document.querySelectorAll(".color");
+
+colores.forEach(color=>{
+
+    color.addEventListener("click",()=>{
+
+        colores.forEach(c=>c.classList.remove("activo"));
+
+        color.classList.add("activo");
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>
