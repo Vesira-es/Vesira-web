@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar dispositivo | Vesira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Outfit', sans-serif;
+        background: #fafafa;
+        color: #111;
+    }
+
+    .selector-dispositivo {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;   /* centra horizontalmente */
+        align-items: center;
+        padding: 40px;
+    }
+
+    .selector {
+        width: 100%;
+        max-width: 620px;
+        text-align: center;
+    }
+
+    .selector small {
+        display: block;
+        font-size: 12px;
+        letter-spacing: .22em;
+        text-transform: uppercase;
+        color: #9b9b9b;
+        margin-bottom: 15px;
+    }
+
+    .selector h1 {
+        font-size: 46px;
+        font-weight: 500;
+        line-height: 1.15;
+        margin-bottom: 16px;
+    }
+
+    .selector p {
+        max-width: 460px;
+        margin: 0 auto 55px;
+        color: #666;
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .dispositivos {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .dispositivo {
+        background: white;
+        border: 1px solid #ececec;
+        border-radius: 24px;
+        padding: 35px 20px;
+        text-decoration: none;
+        color: #111;
+        transition: .25s;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dispositivo:hover {
+        border-color: #111;
+        transform: translateY(-4px);
+    }
+
+    .dispositivo h3 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .dispositivo img {
+        width: 34px;
+        height: 34px;
+        margin-bottom: 18px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .logo-samsung {
+        width: 65px !important;
+        height: 65px !important;
+    }
+
+    @media (max-width: 768px) {
+        .dispositivos {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        .selector h1 {
+            font-size: 35px;
+        }
+    }
+
+</style>
+
+</head>
+<body>
+    <section class = "selector-dispositivo">
+        <div class = "selector">
+            <small>Vesira</small>
+            <h1>¿Qué móvil tienes?</h1>
+            <p>Selecciona la marca de tu dispositivo para mostrar únicamente fundas compatibles.</p>
+
+            <div class = "dispositivos">
+                <a href = "seleccionar-modelo.html" class = "dispositivo">
+                    <img src="https://cdn.simpleicons.org/apple/111111" alt="Apple">
+                    <h3>Apple</h3>
+                </a>
+
+                <a href = "seleccionar-modelo.html" class = "dispositivo">
+                    <img src="https://cdn.simpleicons.org/samsung/111111" alt="Samsung" class = "logo-samsung">
+                    <h3>Samsung</h3>
+                </a>
+
+                <a href = "seleccionar-modelo.html" class = "dispositivo">
+                    <img src="https://cdn.simpleicons.org/xiaomi/111111" alt="Xiaomi">
+                    <h3>Xiaomi</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>

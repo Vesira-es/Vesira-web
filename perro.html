@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seleccionar dispositivo | Vesira</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+    background:#fafafa;
+    color:#111;
+
+}
+
+.device-selector{
+
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+
+}
+
+.selector{
+
+    width:100%;
+    max-width:620px;
+    text-align:center;
+
+}
+
+.selector small{
+
+    display:block;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#9b9b9b;
+    margin-bottom:18px;
+
+}
+
+.selector h1{
+
+    font-size:46px;
+    font-weight:500;
+    line-height:1.15;
+    margin-bottom:16px;
+
+}
+
+.selector p{
+
+    max-width:460px;
+    margin:auto;
+    color:#666;
+    font-size:17px;
+    line-height:1.7;
+    margin-bottom:55px;
+
+}
+
+.devices{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+
+}
+
+.device{
+
+    background:white;
+    border:1px solid #ececec;
+    border-radius:24px;
+    padding:35px 20px;
+    text-decoration:none;
+    color:#111;
+    transition:.25s;
+
+}
+
+.device:hover{
+
+    border-color:#111;
+    transform:translateY(-4px);
+
+}
+
+.device img{
+
+    width:34px;
+    margin-bottom:18px;
+
+}
+
+.device h3{
+
+    font-size:18px;
+    font-weight:500;
+    margin-bottom:6px;
+
+}
+
+.device span{
+
+    font-size:14px;
+    color:#888;
+
+}
+
+.skip{
+
+    display:inline-block;
+    margin-top:40px;
+    color:#888;
+    text-decoration:none;
+    font-size:14px;
+
+}
+
+.skip:hover{
+
+    color:#111;
+
+}
+
+@media(max-width:750px){
+
+.devices{
+
+grid-template-columns:1fr;
+
+}
+
+.device{
+
+padding:24px;
+display:flex;
+align-items:center;
+gap:20px;
+text-align:left;
+
+}
+
+.device img{
+
+margin:0;
+
+}
+
+.device .text{
+
+display:flex;
+flex-direction:column;
+
+}
+
+.selector h1{
+
+font-size:34px;
+
+}
+
+.selector p{
+
+font-size:16px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<section class="device-selector">
+
+<div class="selector">
+
+<small>VESIRA</small>
+
+<h1>¿Qué dispositivo tienes?</h1>
+
+<p>
+Selecciona la marca de tu dispositivo para mostrar únicamente fundas y accesorios compatibles.
+</p>
+
+<div class="devices">
+
+<a href="/apple" class="device">
+
+<img src="https://cdn.simpleicons.org/apple/111111">
+
+<div class="text">
+<h3>Apple</h3>
+<span>iPhone</span>
+</div>
+
+</a>
+
+<a href="/samsung" class="device">
+
+<img src="https://cdn.simpleicons.org/samsung/111111">
+
+<div class="text">
+<h3>Samsung</h3>
+<span>Galaxy</span>
+</div>
+
+</a>
+
+<a href="/xiaomi" class="device">
+
+<img src="https://cdn.simpleicons.org/xiaomi/111111">
+
+<div class="text">
+<h3>Xiaomi</h3>
+<span>Xiaomi & Redmi</span>
+</div>
+
+</a>
+
+</div>
+
+<a href="/" class="skip">
+Continuar sin seleccionar →
+</a>
+
+</div>
+
+</section>
+
+</body>
+</html>

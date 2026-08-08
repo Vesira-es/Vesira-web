@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Seleccionar modelo | Vesira</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fafafa;
+            color: #111;
+        }
+
+        .selector-modelo {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 80px 40px;
+        }
+
+        .selector {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* CABECERA */
+
+        .cabecera {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .cabecera small {
+            display: block;
+            font-size: 11px;
+            letter-spacing: .25em;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .cabecera h1 {
+            font-size: 44px;
+            font-weight: 500;
+            letter-spacing: -.02em;
+            margin-bottom: 15px;
+        }
+
+        .cabecera p {
+            color: #777;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* SECCIONES */
+
+        .serie {
+            margin-bottom: 55px;
+        }
+
+        .serie-titulo {
+            font-size: 11px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 10px;
+        }
+
+        /* MODELOS */
+
+        .modelos {
+            border-top: 1px solid #dedede;
+        }
+
+        .modelo {
+            width: 100%;
+            min-height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border-bottom: 1px solid #dedede;
+
+            text-decoration: none;
+            color: #111;
+
+            padding: 0 8px;
+
+            transition: .25s;
+        }
+
+        .modelo h2 {
+            font-size: 19px;
+            font-weight: 400;
+        }
+
+        .flecha {
+            font-size: 20px;
+            color: #999;
+            transform: translateX(0);
+
+            transition: .25s;
+        }
+
+        .modelo:hover {
+            padding-left: 16px;
+        }
+
+        .modelo:hover .flecha {
+            color: #111;
+            transform: translateX(6px);
+        }
+
+        /* VOLVER */
+
+        .volver {
+            display: block;
+            margin-top: 60px;
+
+            text-align: center;
+
+            color: #888;
+            font-size: 13px;
+
+            text-decoration: none;
+
+            transition: .2s;
+        }
+
+        .volver:hover {
+            color: #111;
+        }
+
+        /* MÓVIL */
+
+        @media (max-width: 600px) {
+
+            .selector-modelo {
+                padding: 60px 22px;
+            }
+
+            .cabecera {
+                margin-bottom: 50px;
+            }
+
+            .cabecera h1 {
+                font-size: 34px;
+            }
+
+            .cabecera p {
+                font-size: 15px;
+            }
+
+            .serie {
+                margin-bottom: 42px;
+            }
+
+            .modelo {
+                min-height: 65px;
+            }
+
+            .modelo h2 {
+                font-size: 17px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <section class="selector-modelo">
+
+        <div class="selector">
+
+            <div class="cabecera">
+
+                <small>VESIRA · APPLE</small>
+
+                <h1>¿Qué iPhone tienes?</h1>
+
+                <p>
+                    Selecciona tu modelo para mostrarte únicamente
+                    productos compatibles.
+                </p>
+
+            </div>
+
+
+            <!-- SERIE 17 -->
+
+            <div class="serie">
+
+                <div class="serie-titulo">
+                    Serie 17
+                </div>
+
+                <div class="modelos">
+
+                    <a href="/iphone-17" class="modelo">
+
+                        <h2>iPhone 17</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-17-pro" class="modelo">
+
+                        <h2>iPhone 17 Pro</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-17-pro-max" class="modelo">
+
+                        <h2>iPhone 17 Pro Max</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERIE 16 -->
+
+            <div class="serie">
+
+                <div class="serie-titulo">
+                    Serie 16
+                </div>
+
+                <div class="modelos">
+
+                    <a href="/iphone-16" class="modelo">
+
+                        <h2>iPhone 16</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-16-pro" class="modelo">
+
+                        <h2>iPhone 16 Pro</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-16-pro-max" class="modelo">
+
+                        <h2>iPhone 16 Pro Max</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERIE 15 -->
+
+            <div class="serie">
+
+                <div class="serie-titulo">
+                    Serie 15
+                </div>
+
+                <div class="modelos">
+
+                    <a href="/iphone-15" class="modelo">
+
+                        <h2>iPhone 15</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-15-pro" class="modelo">
+
+                        <h2>iPhone 15 Pro</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-15-pro-max" class="modelo">
+
+                        <h2>iPhone 15 Pro Max</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERIE 14 -->
+
+            <div class="serie">
+
+                <div class="serie-titulo">
+                    Serie 14
+                </div>
+
+                <div class="modelos">
+
+                    <a href="/iphone-14" class="modelo">
+
+                        <h2>iPhone 14</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-14-pro" class="modelo">
+
+                        <h2>iPhone 14 Pro</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-14-pro-max" class="modelo">
+
+                        <h2>iPhone 14 Pro Max</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SERIE 13 -->
+
+            <div class="serie">
+
+                <div class="serie-titulo">
+                    Serie 13
+                </div>
+
+                <div class="modelos">
+
+                    <a href="/iphone-13" class="modelo">
+
+                        <h2>iPhone 13</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-13-pro" class="modelo">
+
+                        <h2>iPhone 13 Pro</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+
+                    <a href="/iphone-13-pro-max" class="modelo">
+
+                        <h2>iPhone 13 Pro Max</h2>
+
+                        <span class="flecha">→</span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <a href="buscar-dispositivo.html" class="volver">
+                ← Cambiar dispositivo
+            </a>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
