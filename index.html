@@ -1498,6 +1498,22 @@ document.addEventListener("click",(e)=>{
 });
 </script>
 
+<!-- SELECTOR DISPOSITIVO -->
+<script>
+
+const marcaGuardada = localStorage.getItem("marca");
+const modeloGuardado = localStorage.getItem("modelo");
+
+if (marcaGuardada) {
+    textoMarca.textContent = marcaGuardada;
+}
+
+if (modeloGuardado) {
+    textoModelo.textContent = modeloGuardado;
+}
+
+</script>
+
 </body>
 
 </html>

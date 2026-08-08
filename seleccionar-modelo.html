@@ -220,7 +220,7 @@
                     </a>
 
 
-                    <a href="/iphone-17-pro" class="modelo">
+                    <a href="/iphone-17-pro" class="modelo" onclick="guardarDispositivo('Apple', 'iPhone 17 Pro')">
 
                         <h2>iPhone 17 Pro</h2>
 
@@ -413,6 +413,18 @@
         </div>
 
     </section>
+
+
+<script>
+
+function guardarDispositivo(marca, modelo) {
+
+    localStorage.setItem("marca", marca);
+    localStorage.setItem("modelo", modelo);
+
+}
+
+</script>
 
 </body>
 
