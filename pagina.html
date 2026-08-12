@@ -8,6 +8,8 @@
 
     <title>Productos | Vesira</title>
 
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <style>
 
         * {
@@ -18,7 +20,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #fafafa;
+            background: #ffffff;
             color: #111;
         }
 
@@ -26,29 +28,12 @@
            HEADER
         ========================= */
 
-        .barra {
-            width: 100%;
-            height: 78px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 45px;
-
-            background: #fff;
-            border-bottom: 1px solid #ececec;
-        }
+        
 
         .logo {
             width: 105px;
         }
 
-        .acciones {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
 
         .icono {
             font-size: 21px;
@@ -62,11 +47,11 @@
 
         .pagina {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1400px;
 
             margin: 0 auto;
 
-            padding: 70px 40px 100px;
+            padding: 120px 10px 10px;
         }
 
 
@@ -113,42 +98,86 @@
         ========================= */
 
         .dispositivo-actual {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+    display: flex;
+    align-items: center;
 
-            padding: 12px 16px;
+    min-width: 250px;
 
-            border: 1px solid #dedede;
-            background: #fff;
+    padding: 14px 18px;
 
-            font-size: 13px;
-        }
+    background: #f7f7f7;
+    border: 1px solid #e8e8e8;
 
-        .dispositivo-actual small {
-            color: #999;
-            font-size: 10px;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
+    border-radius: 14px;
+}
 
-        .dispositivo-actual strong {
-            font-weight: 500;
-        }
+.dispositivo-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .cambiar-dispositivo {
-            margin-left: 8px;
+    width: 38px;
+    height: 38px;
 
-            color: #777;
-            text-decoration: none;
+    margin-right: 13px;
 
-            font-size: 12px;
-        }
+    border-radius: 10px;
 
-        .cambiar-dispositivo:hover {
-            color: #111;
-        }
+    background: #111;
+    color: white;
 
+    font-size: 20px;
+}
+
+.dispositivo-info {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.dispositivo-label {
+    font-size: 9px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+
+    color: #999;
+
+    margin-bottom: 4px;
+}
+
+.dispositivo-nombre {
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #111;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cambiar-dispositivo {
+    margin-left: 16px;
+
+    font-size: 11px;
+    color: #777;
+
+    text-decoration: none;
+
+    padding-bottom: 2px;
+
+    border-bottom: 1px solid #bbb;
+
+    transition: .2s;
+}
+
+.cambiar-dispositivo:hover {
+    color: #111;
+    border-color: #111;
+}
 
         /* =========================
            FILTROS
@@ -302,8 +331,11 @@
         ========================= */
 
         .contenido-producto {
-            padding: 20px;
-        }
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
 
         .tipo-producto {
             font-size: 10px;
@@ -320,16 +352,19 @@
             font-weight: 500;
 
             margin-bottom: 6px;
+            min-height: 42px;
         }
 
         .descripcion-producto {
-            font-size: 13px;
-            color: #777;
+    font-size: 13px;
+    color: #777;
 
-            margin-bottom: 18px;
+    line-height: 1.5;
 
-            line-height: 1.5;
-        }
+    margin-bottom: 18px;
+
+    min-height: 39px;
+}
 
 
         /* =========================
@@ -337,12 +372,14 @@
         ========================= */
 
         .fila-precio {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    margin-top: auto;
 
-            margin-bottom: 18px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
 
         .precio {
             font-size: 17px;
@@ -365,72 +402,24 @@
 
 
         /* =========================
-           SELECTOR DISPOSITIVO
-        ========================= */
-
-        .selector-producto {
-            width: 100%;
-
-            margin-bottom: 14px;
-        }
-
-        .selector-producto label {
-            display: block;
-
-            font-size: 10px;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-
-            color: #999;
-
-            margin-bottom: 7px;
-        }
-
-        .selector-producto select {
-            width: 100%;
-
-            height: 42px;
-
-            padding: 0 12px;
-
-            background: #fff;
-
-            border: 1px solid #dcdcdc;
-
-            color: #111;
-
-            font-size: 13px;
-
-            outline: none;
-
-            cursor: pointer;
-        }
-
-        .selector-producto select:focus {
-            border-color: #111;
-        }
-
-
-        /* =========================
            BOTÓN
         ========================= */
 
         .boton-carrito {
-            width: 100%;
-            height: 44px;
+    width: 100%;
+    height: 44px;
 
-            border: none;
+    border: none;
+    background: #111;
+    color: #fff;
 
-            background: #111;
-            color: #fff;
+    font-size: 12px;
+    letter-spacing: .04em;
 
-            font-size: 12px;
-            letter-spacing: .04em;
+    cursor: pointer;
 
-            cursor: pointer;
-
-            transition: .2s;
-        }
+    transition: .2s;
+}
 
         .boton-carrito:hover {
             background: #292929;
@@ -558,6 +547,238 @@
 
         }
 
+        .barra-navegacion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 30px;
+
+    background: white;
+    border-bottom: 1px solid #ececec;
+}
+
+/* ---------- LOGO + LUPA ---------- */
+
+.normal{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:35px;
+
+    padding:8px 25px 8px 25px;
+
+    background:#fffffd;
+
+    border:1px solid #8f8f8f;
+
+    border-radius:999px;
+
+}
+
+.logo{
+
+    width:115px;
+    height:auto;
+    margin-left: 0;
+
+
+}
+
+/* ---------- BUSCADOR ---------- */
+
+.buscar{
+
+    display:none;
+
+    flex:1;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:#FAFAFA;
+
+    border:1px solid #E6E6E6;
+
+    border-radius:999px;
+
+    padding:15px 25px;
+
+    margin:0 25px;
+
+}
+
+.buscar input{
+
+    flex: 1;
+
+    min-width: 0;
+
+    background:transparent;
+
+    border:none;
+
+    outline:none;
+
+    font-size:17px;
+
+    color:#222;
+
+}
+
+.buscar input::placeholder {
+    color:#9A9A9A;
+}
+
+.buscar:hover{
+
+    background:#F4F4F4;
+
+}
+
+.buscar:focus-within{
+
+    border:1px solid #222;
+
+}
+
+.buscar{
+
+    transition:.25s;
+
+}
+
+/* ---------- ICONOS ---------- */
+
+.iconos{
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+}
+
+.material-symbols-outlined{
+
+    font-size:32px;
+    cursor:pointer;
+
+}
+
+button{
+
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:22px;
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    body{
+        padding:80px 10px 10px;
+    }
+
+    .barra-navegacion{
+
+        padding:0 15px;
+
+    }
+
+    .material-symbols-outlined{
+
+        font-size:28px;
+
+    }
+
+    .buscar{
+
+        margin:0 10px;
+
+        padding:10px 15px;
+
+    }
+
+    .buscar input{
+
+        font-size:16px;
+
+    }
+    
+    .intro{
+
+        padding:0 40px;
+
+    }
+
+    .eslogan{
+
+        width:100%;
+        max-width:180px;
+        height:auto;
+
+    }
+
+}
+
+#abrirBusqueda {
+    animation: moverLupa 0.75s;
+}
+
+
+@keyframes moverLupa {
+
+    0%{
+        transform: translate(-60px, 0);
+        opacity: 0;
+    }
+
+    60%{
+        transform: translate(-10px, -8px);
+        opacity: 1;
+    }
+
+    100%{
+        transform: translate(0, 0);
+    }
+
+}
+
+#botonIA {
+    margin-left:12px;
+    margin-right: 25px;
+    cursor: pointer;
+
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+
+.IA-activa {
+    color:#F4B400;
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}
+
     </style>
 
 </head>
@@ -567,32 +788,55 @@
 
 
     <!-- HEADER -->
+     <nav class="barra-navegacion">
 
-    <header class="barra">
+    <div class="normal">
 
-        <img
-            src="img/logo.png"
-            alt="Vesira"
-            class="logo"
-        >
+        <img src="img/logo.png" class="logo">
 
-        <div class="acciones">
+        <span
+        class="material-symbols-outlined"
+        id="abrirBusqueda">
+            search
+        </span>
 
-            <span class="material-symbols-outlined icono">
-                search
-            </span>
+    </div>
 
-            <span class="material-symbols-outlined icono">
-                shopping_bag
-            </span>
+    <div class="buscar">
 
-            <span class="material-symbols-outlined icono">
-                person
-            </span>
+        <span class="material-symbols-outlined">
+            search
+        </span>
 
-        </div>
+        <input
+        type="text"
+        placeholder="¿Qué estás buscando?">
 
-    </header>
+        <span class="material-symbols-outlined" id = "botonIA">auto_awesome</span>
+
+        <button id="cerrarBusqueda">
+            ✕
+        </button>
+
+    </div>
+
+    <div class="iconos">
+
+        <span class="material-symbols-outlined">
+            shopping_bag
+        </span>
+
+        <span class="material-symbols-outlined">
+            person
+        </span>
+        
+        <span class="material-symbols-outlined">
+            menu
+        </span>
+
+    </div>  
+
+</nav>
 
 
 
@@ -607,12 +851,10 @@
 
             <div class="cabecera-izquierda">
 
-                <small>VESIRA · PRODUCTOS</small>
-
                 <h1>Lo que necesitas.</h1>
 
                 <p>
-                    Seleccionado para tu dispositivo.
+                    Seleccionado para tu dispositivo
                 </p>
 
             </div>
@@ -620,24 +862,27 @@
 
             <div class="dispositivo-actual">
 
-                <div>
+    <div class="dispositivo-info">
 
-                    <small>Tu dispositivo</small>
+        <span class="dispositivo-label">
+            Dispositivo seleccionado
+        </span>
 
-                    <strong id="dispositivoSeleccionado">
-                        iPhone 17 Pro
-                    </strong>
+        <strong
+            id="dispositivoSeleccionado"
+            class="dispositivo-nombre">
+            iPhone 17 Pro
+        </strong>
 
-                </div>
+    </div>
 
-                <a
-                    href="buscar-dispositivo.html"
-                    class="cambiar-dispositivo"
-                >
-                    Cambiar
-                </a>
+    <a
+        href="buscar-dispositivo.html"
+        class="cambiar-dispositivo">
+        Cambiar
+    </a>
 
-            </div>
+</div>
 
         </section>
 
@@ -714,7 +959,7 @@
                     </div>
 
                     <h2 class="nombre-producto">
-                        Funda MagSafe Transparente
+                        Transparente Vesira
                     </h2>
 
                     <p class="descripcion-producto">
@@ -734,29 +979,6 @@
 
                     </div>
 
-                    <div class="selector-producto">
-
-                        <label>
-                            Dispositivo
-                        </label>
-
-                        <select>
-
-                            <option>
-                                iPhone 17 Pro
-                            </option>
-
-                            <option>
-                                iPhone 17
-                            </option>
-
-                            <option>
-                                iPhone 17 Pro Max
-                            </option>
-
-                        </select>
-
-                    </div>
 
                     <button class="boton-carrito">
                         Añadir al carrito
@@ -812,29 +1034,7 @@
 
                     </div>
 
-                    <div class="selector-producto">
-
-                        <label>
-                            Dispositivo
-                        </label>
-
-                        <select>
-
-                            <option>
-                                iPhone 17 Pro
-                            </option>
-
-                            <option>
-                                iPhone 17
-                            </option>
-
-                            <option>
-                                iPhone 17 Pro Max
-                            </option>
-
-                        </select>
-
-                    </div>
+                
 
                     <button class="boton-carrito">
                         Añadir al carrito
@@ -890,30 +1090,7 @@
 
                     </div>
 
-                    <div class="selector-producto">
-
-                        <label>
-                            Dispositivo
-                        </label>
-
-                        <select>
-
-                            <option>
-                                iPhone 17 Pro
-                            </option>
-
-                            <option>
-                                iPhone 17
-                            </option>
-
-                            <option>
-                                iPhone 17 Pro Max
-                            </option>
-
-                        </select>
-
-                    </div>
-
+    
                     <button class="boton-carrito">
                         Añadir al carrito
                     </button>
@@ -977,29 +1154,8 @@
 
                     </div>
 
-                    <div class="selector-producto">
-
-                        <label>
-                            Dispositivo
-                        </label>
-
-                        <select>
-
-                            <option>
-                                iPhone 17 Pro
-                            </option>
-
-                            <option>
-                                iPhone 17
-                            </option>
-
-                            <option>
-                                iPhone 17 Pro Max
-                            </option>
-
-                        </select>
-
-                    </div>
+                    
+        
 
                     <button class="boton-carrito">
                         Añadir al carrito
@@ -1018,7 +1174,6 @@
 
         <div class="pie">
 
-            VESIRA · ACCESORIOS PARA TU DISPOSITIVO
 
         </div>
 
@@ -1140,6 +1295,55 @@
 
         });
 
+    </script>
+    <script>
+        const normal = document.querySelector(".normal");
+const buscar = document.querySelector(".buscar");
+const iconos = document.querySelector(".iconos");
+const IA = document.getElementById("botonIA");
+
+let iaActiva = false;
+
+
+document.getElementById("abrirBusqueda").addEventListener("click",()=>{
+
+    normal.style.display = "none";
+    iconos.style.display = "none";
+    buscar.style.display = "flex";
+
+    buscar.querySelector("input").focus();
+
+});
+
+
+document.getElementById("cerrarBusqueda").addEventListener("click",()=>{
+
+    buscar.style.display = "none";
+    normal.style.display = "flex";
+    iconos.style.display = "flex";
+
+});
+
+
+
+const input = document.querySelector(".buscar input");
+IA.addEventListener("click",()=>{
+
+    iaActiva = !iaActiva;
+
+    if(iaActiva){
+
+        IA.classList.add("IA-activa");
+        input.placeholder = "Pregúntale a la IA";
+
+    } else {
+
+        IA.classList.remove("IA-activa");
+        input.placeholder = "¿Qué estás buscando?";
+
+    }
+
+});
     </script>
 
 
