@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Productos | Vesira</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fafafa;
+            color: #111;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .barra {
+            width: 100%;
+            height: 78px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 45px;
+
+            background: #fff;
+            border-bottom: 1px solid #ececec;
+        }
+
+        .logo {
+            width: 105px;
+        }
+
+        .acciones {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .icono {
+            font-size: 21px;
+            color: #111;
+        }
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        .pagina {
+            width: 100%;
+            max-width: 1280px;
+
+            margin: 0 auto;
+
+            padding: 70px 40px 100px;
+        }
+
+
+        /* =========================
+           CABECERA PRODUCTOS
+        ========================= */
+
+        .cabecera-productos {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            margin-bottom: 45px;
+        }
+
+        .cabecera-izquierda small {
+            display: block;
+
+            font-size: 10px;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+
+            color: #999;
+
+            margin-bottom: 14px;
+        }
+
+        .cabecera-izquierda h1 {
+            font-size: 42px;
+            font-weight: 500;
+            letter-spacing: -.03em;
+
+            margin-bottom: 12px;
+        }
+
+        .cabecera-izquierda p {
+            color: #777;
+            font-size: 15px;
+        }
+
+
+        /* =========================
+           DISPOSITIVO
+        ========================= */
+
+        .dispositivo-actual {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            padding: 12px 16px;
+
+            border: 1px solid #dedede;
+            background: #fff;
+
+            font-size: 13px;
+        }
+
+        .dispositivo-actual small {
+            color: #999;
+            font-size: 10px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .dispositivo-actual strong {
+            font-weight: 500;
+        }
+
+        .cambiar-dispositivo {
+            margin-left: 8px;
+
+            color: #777;
+            text-decoration: none;
+
+            font-size: 12px;
+        }
+
+        .cambiar-dispositivo:hover {
+            color: #111;
+        }
+
+
+        /* =========================
+           FILTROS
+        ========================= */
+
+        .barra-filtros {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 28px;
+
+            border-bottom: 1px solid #dedede;
+        }
+
+        .filtros {
+            display: flex;
+            gap: 28px;
+        }
+
+        .filtro {
+            border: none;
+            background: none;
+
+            padding: 0 0 14px;
+
+            font-size: 13px;
+            color: #999;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+        .filtro.activo {
+            color: #111;
+        }
+
+        .filtro.activo::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -1px;
+
+            width: 100%;
+            height: 1px;
+
+            background: #111;
+        }
+
+        .numero-productos {
+            font-size: 12px;
+            color: #999;
+            padding-bottom: 14px;
+        }
+
+
+        /* =========================
+           GRID
+        ========================= */
+
+        .productos {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 22px;
+        }
+
+
+        /* =========================
+           TARJETA
+        ========================= */
+
+        .producto {
+            background: #fff;
+
+            border: 1px solid #e8e8e8;
+
+            transition: .25s ease;
+
+            position: relative;
+        }
+
+        .producto:hover {
+            transform: translateY(-3px);
+            border-color: #d8d8d8;
+        }
+
+
+        /* =========================
+           IMAGEN
+        ========================= */
+
+        .imagen-producto {
+            width: 100%;
+            height: 330px;
+
+            background: #f1f1f1;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .imagen-producto img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+        .imagen-placeholder {
+            width: 130px;
+            height: 245px;
+
+            border-radius: 28px;
+
+            background: #181818;
+
+            transform: rotate(-6deg);
+
+            box-shadow:
+                0 20px 45px rgba(0,0,0,.15);
+        }
+
+        .imagen-placeholder.claro {
+            background: #d8d8d8;
+        }
+
+        .imagen-placeholder.transparente {
+            background: linear-gradient(
+                135deg,
+                rgba(255,255,255,.85),
+                rgba(190,190,190,.5)
+            );
+
+            border: 1px solid #cfcfcf;
+        }
+
+
+        /* =========================
+           CONTENIDO TARJETA
+        ========================= */
+
+        .contenido-producto {
+            padding: 20px;
+        }
+
+        .tipo-producto {
+            font-size: 10px;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+
+            color: #999;
+
+            margin-bottom: 9px;
+        }
+
+        .nombre-producto {
+            font-size: 17px;
+            font-weight: 500;
+
+            margin-bottom: 6px;
+        }
+
+        .descripcion-producto {
+            font-size: 13px;
+            color: #777;
+
+            margin-bottom: 18px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           PRECIO
+        ========================= */
+
+        .fila-precio {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+        .precio {
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .disponibilidad {
+            font-size: 10px;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .en-stock {
+            color: #43825c;
+        }
+
+        .bajo-pedido {
+            color: #9b7b36;
+        }
+
+
+        /* =========================
+           SELECTOR DISPOSITIVO
+        ========================= */
+
+        .selector-producto {
+            width: 100%;
+
+            margin-bottom: 14px;
+        }
+
+        .selector-producto label {
+            display: block;
+
+            font-size: 10px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+
+            color: #999;
+
+            margin-bottom: 7px;
+        }
+
+        .selector-producto select {
+            width: 100%;
+
+            height: 42px;
+
+            padding: 0 12px;
+
+            background: #fff;
+
+            border: 1px solid #dcdcdc;
+
+            color: #111;
+
+            font-size: 13px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+        .selector-producto select:focus {
+            border-color: #111;
+        }
+
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        .boton-carrito {
+            width: 100%;
+            height: 44px;
+
+            border: none;
+
+            background: #111;
+            color: #fff;
+
+            font-size: 12px;
+            letter-spacing: .04em;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+        .boton-carrito:hover {
+            background: #292929;
+        }
+
+
+        /* =========================
+           ETIQUETA
+        ========================= */
+
+        .etiqueta {
+            position: absolute;
+
+            top: 14px;
+            left: 14px;
+
+            z-index: 2;
+
+            padding: 7px 9px;
+
+            background: #fff;
+
+            border: 1px solid #ddd;
+
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+        }
+
+
+        /* =========================
+           FOOTER SIMPLE
+        ========================= */
+
+        .pie {
+            margin-top: 100px;
+
+            padding-top: 30px;
+
+            border-top: 1px solid #e4e4e4;
+
+            text-align: center;
+
+            color: #999;
+
+            font-size: 11px;
+            letter-spacing: .1em;
+        }
+
+
+        /* =========================
+           MÓVIL
+        ========================= */
+
+        @media (max-width: 1000px) {
+
+            .productos {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            .barra {
+                padding: 0 22px;
+                height: 68px;
+            }
+
+            .pagina {
+                padding: 45px 20px 70px;
+            }
+
+            .cabecera-productos {
+                flex-direction: column;
+                align-items: flex-start;
+
+                gap: 25px;
+            }
+
+            .cabecera-izquierda h1 {
+                font-size: 34px;
+            }
+
+            .productos {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .imagen-producto {
+                height: 250px;
+            }
+
+            .contenido-producto {
+                padding: 15px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .productos {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .imagen-producto {
+                height: 220px;
+            }
+
+            .nombre-producto {
+                font-size: 15px;
+            }
+
+            .descripcion-producto {
+                font-size: 12px;
+            }
+
+            .selector-producto select {
+                font-size: 12px;
+            }
+
+            .boton-carrito {
+                font-size: 11px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="barra">
+
+        <img
+            src="img/logo.png"
+            alt="Vesira"
+            class="logo"
+        >
+
+        <div class="acciones">
+
+            <span class="material-symbols-outlined icono">
+                search
+            </span>
+
+            <span class="material-symbols-outlined icono">
+                shopping_bag
+            </span>
+
+            <span class="material-symbols-outlined icono">
+                person
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- PÁGINA -->
+
+    <main class="pagina">
+
+
+        <!-- CABECERA -->
+
+        <section class="cabecera-productos">
+
+            <div class="cabecera-izquierda">
+
+                <small>VESIRA · PRODUCTOS</small>
+
+                <h1>Lo que necesitas.</h1>
+
+                <p>
+                    Seleccionado para tu dispositivo.
+                </p>
+
+            </div>
+
+
+            <div class="dispositivo-actual">
+
+                <div>
+
+                    <small>Tu dispositivo</small>
+
+                    <strong id="dispositivoSeleccionado">
+                        iPhone 17 Pro
+                    </strong>
+
+                </div>
+
+                <a
+                    href="buscar-dispositivo.html"
+                    class="cambiar-dispositivo"
+                >
+                    Cambiar
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FILTROS -->
+
+        <section class="barra-filtros">
+
+            <div class="filtros">
+
+                <button
+                    class="filtro activo"
+                    data-filtro="todos"
+                >
+                    Todos
+                </button>
+
+                <button
+                    class="filtro"
+                    data-filtro="funda"
+                >
+                    Fundas
+                </button>
+
+                <button
+                    class="filtro"
+                    data-filtro="protector"
+                >
+                    Protectores
+                </button>
+
+            </div>
+
+            <div class="numero-productos">
+                <span id="numeroProductos">
+                    4 productos
+                </span>
+            </div>
+
+        </section>
+
+
+
+        <!-- PRODUCTOS -->
+
+        <section
+            class="productos"
+            id="productos"
+        >
+
+
+            <!-- PRODUCTO 1 -->
+
+            <article
+                class="producto"
+                data-tipo="funda"
+            >
+
+                <span class="etiqueta">
+                    En stock
+                </span>
+
+                <div class="imagen-producto">
+
+                    <div class="imagen-placeholder transparente"></div>
+
+                </div>
+
+                <div class="contenido-producto">
+
+                    <div class="tipo-producto">
+                        Funda
+                    </div>
+
+                    <h2 class="nombre-producto">
+                        Funda MagSafe Transparente
+                    </h2>
+
+                    <p class="descripcion-producto">
+                        Transparente, fina y con protección
+                        antigolpes.
+                    </p>
+
+                    <div class="fila-precio">
+
+                        <span class="precio">
+                            14,99 €
+                        </span>
+
+                        <span class="disponibilidad en-stock">
+                            En stock
+                        </span>
+
+                    </div>
+
+                    <div class="selector-producto">
+
+                        <label>
+                            Dispositivo
+                        </label>
+
+                        <select>
+
+                            <option>
+                                iPhone 17 Pro
+                            </option>
+
+                            <option>
+                                iPhone 17
+                            </option>
+
+                            <option>
+                                iPhone 17 Pro Max
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button class="boton-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCTO 2 -->
+
+            <article
+                class="producto"
+                data-tipo="funda"
+            >
+
+                <span class="etiqueta">
+                    En stock
+                </span>
+
+                <div class="imagen-producto">
+
+                    <div class="imagen-placeholder claro"></div>
+
+                </div>
+
+                <div class="contenido-producto">
+
+                    <div class="tipo-producto">
+                        Funda
+                    </div>
+
+                    <h2 class="nombre-producto">
+                        Funda Mate Translúcida
+                    </h2>
+
+                    <p class="descripcion-producto">
+                        Acabado suave, discreto y
+                        resistente a golpes.
+                    </p>
+
+                    <div class="fila-precio">
+
+                        <span class="precio">
+                            13,99 €
+                        </span>
+
+                        <span class="disponibilidad en-stock">
+                            En stock
+                        </span>
+
+                    </div>
+
+                    <div class="selector-producto">
+
+                        <label>
+                            Dispositivo
+                        </label>
+
+                        <select>
+
+                            <option>
+                                iPhone 17 Pro
+                            </option>
+
+                            <option>
+                                iPhone 17
+                            </option>
+
+                            <option>
+                                iPhone 17 Pro Max
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button class="boton-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCTO 3 -->
+
+            <article
+                class="producto"
+                data-tipo="funda"
+            >
+
+                <span class="etiqueta">
+                    Bajo pedido
+                </span>
+
+                <div class="imagen-producto">
+
+                    <div class="imagen-placeholder"></div>
+
+                </div>
+
+                <div class="contenido-producto">
+
+                    <div class="tipo-producto">
+                        Funda
+                    </div>
+
+                    <h2 class="nombre-producto">
+                        Funda Negra Mate
+                    </h2>
+
+                    <p class="descripcion-producto">
+                        Diseño minimalista con
+                        acabado mate.
+                    </p>
+
+                    <div class="fila-precio">
+
+                        <span class="precio">
+                            14,99 €
+                        </span>
+
+                        <span class="disponibilidad bajo-pedido">
+                            Bajo pedido
+                        </span>
+
+                    </div>
+
+                    <div class="selector-producto">
+
+                        <label>
+                            Dispositivo
+                        </label>
+
+                        <select>
+
+                            <option>
+                                iPhone 17 Pro
+                            </option>
+
+                            <option>
+                                iPhone 17
+                            </option>
+
+                            <option>
+                                iPhone 17 Pro Max
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button class="boton-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCTO 4 -->
+
+            <article
+                class="producto"
+                data-tipo="protector"
+            >
+
+                <span class="etiqueta">
+                    En stock
+                </span>
+
+                <div class="imagen-producto">
+
+                    <div
+                        class="imagen-placeholder"
+                        style="
+                            width: 155px;
+                            height: 275px;
+                            border-radius: 16px;
+                            background: rgba(255,255,255,.5);
+                            border: 1px solid #ccc;
+                        "
+                    ></div>
+
+                </div>
+
+                <div class="contenido-producto">
+
+                    <div class="tipo-producto">
+                        Protector
+                    </div>
+
+                    <h2 class="nombre-producto">
+                        Cristal Templado 9H
+                    </h2>
+
+                    <p class="descripcion-producto">
+                        Alta transparencia y protección
+                        frente a arañazos y golpes.
+                    </p>
+
+                    <div class="fila-precio">
+
+                        <span class="precio">
+                            7,99 €
+                        </span>
+
+                        <span class="disponibilidad en-stock">
+                            En stock
+                        </span>
+
+                    </div>
+
+                    <div class="selector-producto">
+
+                        <label>
+                            Dispositivo
+                        </label>
+
+                        <select>
+
+                            <option>
+                                iPhone 17 Pro
+                            </option>
+
+                            <option>
+                                iPhone 17
+                            </option>
+
+                            <option>
+                                iPhone 17 Pro Max
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button class="boton-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <div class="pie">
+
+            VESIRA · ACCESORIOS PARA TU DISPOSITIVO
+
+        </div>
+
+
+    </main>
+
+
+
+    <script>
+
+        /* =========================
+           DISPOSITIVO DESDE LOCALSTORAGE
+        ========================= */
+
+        const marca = localStorage.getItem("marca");
+        const modelo = localStorage.getItem("modelo");
+
+        const dispositivoSeleccionado =
+            document.getElementById("dispositivoSeleccionado");
+
+        if (marca && modelo) {
+
+            dispositivoSeleccionado.textContent =
+                `${modelo}`;
+
+        }
+
+
+
+        /* =========================
+           FILTROS
+        ========================= */
+
+        const filtros =
+            document.querySelectorAll(".filtro");
+
+        const productos =
+            document.querySelectorAll(".producto");
+
+        const numeroProductos =
+            document.getElementById("numeroProductos");
+
+
+        filtros.forEach(filtro => {
+
+            filtro.addEventListener("click", () => {
+
+                filtros.forEach(item => {
+
+                    item.classList.remove("activo");
+
+                });
+
+                filtro.classList.add("activo");
+
+
+                const tipo =
+                    filtro.dataset.filtro;
+
+                let visibles = 0;
+
+
+                productos.forEach(producto => {
+
+                    const coincide =
+                        tipo === "todos" ||
+                        producto.dataset.tipo === tipo;
+
+
+                    if (coincide) {
+
+                        producto.style.display = "";
+
+                        visibles++;
+
+                    } else {
+
+                        producto.style.display = "none";
+
+                    }
+
+                });
+
+
+                numeroProductos.textContent =
+                    `${visibles} productos`;
+
+            });
+
+        });
+
+
+        /* =========================
+           BOTONES CARRITO
+        ========================= */
+
+        const botones =
+            document.querySelectorAll(".boton-carrito");
+
+
+        botones.forEach(boton => {
+
+            boton.addEventListener("click", () => {
+
+                const textoOriginal =
+                    boton.textContent;
+
+                boton.textContent =
+                    "Añadido ✓";
+
+                setTimeout(() => {
+
+                    boton.textContent =
+                        textoOriginal;
+
+                }, 1200);
+
+            });
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

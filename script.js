@@ -182,7 +182,7 @@ async function cargarMarcas() {
         .from("Marcas")
         .select("id, nombre")
         .eq("activo", true)
-        .order("nombre");
+        .order("orden", { ascending: true })
 
     if (error) {
 
@@ -239,7 +239,7 @@ async function cargarModelos(marcaId) {
         .select("id, nombre")
         .eq("marca_id", marcaId)
         .eq("activo", true)
-        .order("nombre");
+        .order("orden", { ascending: true })
 
     if (error) {
 
