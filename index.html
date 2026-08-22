@@ -17,7 +17,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     >
 
-
     <style>
 
         :root {
@@ -26,7 +25,6 @@
             --borde: #e6e6e6;
             --caja: #ffffff;
         }
-
 
         body.modo-oscuro {
             --fondo: #0c0c0c;
@@ -45,7 +43,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
 
         body {
             background: var(--fondo);
@@ -84,7 +81,6 @@
 
             transition: opacity .35s ease;
         }
-
 
         .eslogan {
             width: 410px;
@@ -146,7 +142,6 @@
             border-radius: 999px;
         }
 
-
         .logo {
             width: 115px;
             height: auto;
@@ -174,7 +169,6 @@
             height: 52px;
 
             align-items: center;
-
             gap: 12px;
 
             padding: 0 22px;
@@ -185,7 +179,6 @@
 
             border-radius: 999px;
         }
-
 
         .buscar input {
             width: 100%;
@@ -200,7 +193,6 @@
 
             font-size: 17px;
         }
-
 
         .buscar input::placeholder {
             color: #999;
@@ -225,7 +217,6 @@
             gap: 8px;
         }
 
-
         .iconos span,
         .tema-boton {
             width: 42px;
@@ -242,12 +233,10 @@
             cursor: pointer;
         }
 
-
         .iconos span:hover,
         .tema-boton:hover {
             background: var(--caja);
         }
-
 
         .tema-boton {
             border: none;
@@ -264,10 +253,8 @@
             cursor: pointer;
         }
 
-
         #cerrarBusqueda {
             border: none;
-
             background: transparent;
 
             color: var(--texto);
@@ -275,10 +262,8 @@
             cursor: pointer;
 
             font-size: 19px;
-
             padding: 0;
         }
-
 
         .IA-activa {
             color: #f4b400 !important;
@@ -296,11 +281,9 @@
                 height: 72px;
             }
 
-
             .eslogan {
                 width: 325px;
             }
-
 
             .normal {
                 left: 14px;
@@ -310,11 +293,9 @@
                 padding: 7px 18px;
             }
 
-
             .logo {
                 width: 103px;
             }
-
 
             .buscar {
                 width: 220px;
@@ -328,18 +309,15 @@
                 gap: 8px;
             }
 
-
             .buscar input {
                 font-size: 14px;
             }
-
 
             .iconos {
                 right: 14px;
 
                 gap: 2px;
             }
-
 
             .iconos span,
             .tema-boton {
@@ -348,6 +326,378 @@
             }
 
         }
+
+        /* =========================
+   IMAGEN PRINCIPAL
+========================= */
+
+.imagen-principal {
+    width: 100%;
+    margin-top: 130px;
+
+    overflow: hidden;
+
+    background: #111;
+    
+    display: flex;
+    justify-content: center;
+}
+
+.imagen-principal img {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+/* MÓVIL */
+
+@media (max-width: 700px) {
+
+    .imagen-principal {
+        margin-top: 72px;
+
+        height: 42vh;
+        min-height: 300px;
+    }
+
+}
+
+
+        
+/* =========================
+   PRODUCTOS
+========================= */
+
+.productos {
+    padding: 125px 5vw 110px;
+}
+
+.productos-cabecera {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 30px;
+
+    margin-bottom: 38px;
+}
+
+.productos-cabecera span {
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 9px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+
+    color: #999;
+}
+
+.productos-cabecera h2 {
+    font-family: "Bricolage Grotesque", sans-serif;
+
+    font-size: clamp(42px, 5vw, 68px);
+
+    font-weight: 400;
+
+    line-height: .88;
+
+    letter-spacing: -.065em;
+}
+
+.productos-cabecera p {
+    max-width: 230px;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    color: #888;
+
+    text-align: right;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.grid-productos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.producto-card {
+    position: relative;
+
+    display: block;
+
+    padding: 14px;
+
+    background: var(--caja);
+
+    border: 1px solid var(--borde);
+
+    border-radius: 22px;
+
+    color: var(--texto);
+
+    text-decoration: none;
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.producto-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(120,120,120,.35);
+
+    box-shadow:
+        0 16px 40px rgba(0,0,0,.07);
+}
+
+body.modo-oscuro .producto-card:hover {
+    box-shadow:
+        0 16px 40px rgba(0,0,0,.28);
+}
+
+
+/* =========================
+   IMAGEN
+========================= */
+
+.producto-imagen {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 1 / .83;
+
+    overflow: hidden;
+
+    border-radius: 16px;
+
+    background: var(--gris);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.producto-imagen img {
+    width: 88%;
+    height: 88%;
+
+    object-fit: contain;
+
+    display: block;
+
+    transition:
+        transform .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.producto-card:hover
+.producto-imagen img {
+    transform: scale(1.06);
+}
+
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.producto-info {
+    padding:
+        16px
+        4px
+        4px;
+}
+
+.producto-nombre-precio {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.producto-nombre {
+    font-family:
+        "Bricolage Grotesque",
+        sans-serif;
+
+    font-size: 19px;
+
+    font-weight: 400;
+
+    letter-spacing: -.025em;
+}
+
+.producto-precio {
+    flex-shrink: 0;
+
+    padding:
+        7px
+        10px;
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 999px;
+
+    font-size: 11px;
+
+    color: var(--texto);
+}
+
+.producto-descripcion {
+    margin-top: 8px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    color: #999;
+
+    max-width: 280px;
+}
+
+
+/* =========================
+   PEQUEÑO DETALLE
+========================= */
+
+
+/* =========================
+   MENSAJE
+========================= */
+
+.productos-mensaje {
+    grid-column: 1 / -1;
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    color: #999;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+    .grid-productos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 18px;
+    }
+
+}
+
+
+/* =========================
+   MÓVIL
+========================= */
+
+@media (max-width: 700px) {
+
+    .productos {
+        padding:
+            95px
+            14px
+            75px;
+    }
+
+    .productos-cabecera {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+
+        margin-bottom: 28px;
+    }
+
+    .productos-cabecera h2 {
+        font-size: 42px;
+    }
+
+    .productos-cabecera p {
+        text-align: left;
+
+        max-width: 240px;
+    }
+
+    .grid-productos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 12px;
+    }
+
+    .producto-card {
+        padding: 9px;
+
+        border-radius: 17px;
+    }
+
+    .producto-imagen {
+        aspect-ratio: 1 / .86;
+
+        border-radius: 12px;
+    }
+
+    .producto-imagen img {
+        width: 84%;
+        height: 84%;
+    }
+
+    .producto-info {
+        padding-top: 12px;
+    }
+
+    .producto-nombre {
+        font-size: 15px;
+    }
+
+    .producto-precio {
+        padding: 5px 8px;
+
+        font-size: 9px;
+    }
+
+    .producto-descripcion {
+        font-size: 9px;
+
+        margin-top: 6px;
+    }
+
+
+}
 
     </style>
 
@@ -361,7 +711,10 @@
          INTRO
     ========================= -->
 
-    <div class="intro" id="intro">
+    <div
+        class="intro"
+        id="intro"
+    >
 
         <img
             src="img/eslogan.png"
@@ -375,14 +728,13 @@
 
     <!-- =========================
          NAVBAR
+         NO TOCADA
     ========================= -->
 
     <nav
         class="barra-navegacion"
         id="navbar"
     >
-
-        <!-- LOGO + LUPA -->
 
         <div class="normal">
 
@@ -401,8 +753,6 @@
 
         </div>
 
-
-        <!-- BUSCADOR -->
 
         <div class="buscar">
 
@@ -431,8 +781,6 @@
         </div>
 
 
-        <!-- ICONOS -->
-
         <div class="iconos">
 
             <span class="material-symbols-outlined">
@@ -453,6 +801,83 @@
         </div>
 
     </nav>
+
+
+    <!-- IMAGEN PRINCIPAL -->
+     <!-- =========================
+     IMAGEN PRINCIPAL
+========================= -->
+
+<section class="imagen-principal">
+
+    <img
+        src="img/imagen-principal.png"
+        alt="Personas llevando gafas Vesira"
+    >
+
+</section>
+
+
+<!-- =========================
+     PRODUCTOS
+========================= -->
+
+<section class="productos">
+
+    <div class="productos-cabecera">
+
+        <div>
+
+            <span>
+                VESIRA · EYEWEAR
+            </span>
+
+            <h2>
+                Las gafas.
+            </h2>
+
+        </div>
+
+        <p>
+            Seis modelos.<br>
+            Filtro de luz azul.<br>
+            29,99 €.
+        </p>
+
+    </div>
+
+    <div
+        class="grid-productos"
+        id="gridProductos">
+    </div>
+
+</section>
+
+    <!-- =========================
+         PRODUCTOS
+    ========================= -->
+
+    <section class="productos">
+
+
+        <div
+            class="grid-productos"
+            id="gridProductos"
+        >
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         SUPABASE
+    ========================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
 
 
 
@@ -491,6 +916,9 @@
 
         const logoVesira =
             document.getElementById("logoVesira");
+
+        const gridProductos =
+            document.getElementById("gridProductos");
 
 
         /* =========================
@@ -576,7 +1004,8 @@
 
             setTimeout(() => {
 
-                intro.style.display = "none";
+                intro.style.display =
+                    "none";
 
             }, 350);
 
@@ -645,6 +1074,163 @@
 
             }
         );
+
+
+        /* =========================
+           CARGAR PRODUCTOS
+        ========================= */
+
+        async function cargarProductos() {
+
+            try {
+
+                const {
+    data,
+    error
+} = await supabaseClient
+    .from("Productos")
+
+                    .select(`
+                        id,
+                        nombre,
+                        descripcion,
+                        precio,
+                        imagen_url,
+                        categoria,
+                        activo,
+                        created_at
+                    `)
+
+                    .eq(
+                        "activo",
+                        true
+                    )
+
+                    .order(
+                        "created_at",
+                        {
+                            ascending: true
+                        }
+                    );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                if (
+                    !data ||
+                    data.length === 0
+                ) {
+
+                    gridProductos.innerHTML = `
+                        <div class="productos-mensaje">
+                            No hay gafas disponibles.
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                gridProductos.innerHTML = "";
+
+
+                data.forEach(producto => {
+
+                    const tarjeta =
+                        document.createElement("a");
+
+
+                    tarjeta.className =
+                        "producto-card";
+
+
+                    tarjeta.href =
+                        `producto.html?id=${producto.id}`;
+
+
+                    const precio =
+                        Number(producto.precio)
+                            .toFixed(2)
+                            .replace(
+                                ".",
+                                ","
+                            );
+
+
+                    tarjeta.innerHTML = `
+
+                        <div class="producto-imagen">
+
+                            <img
+                                src="${producto.imagen_url || ""}"
+                                alt="${producto.nombre}"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+
+                        <div class="producto-info">
+
+                            <div class="producto-nombre-precio">
+
+                                <h3 class="producto-nombre">
+                                    ${producto.nombre}
+                                </h3>
+
+                                <span class="producto-precio">
+                                    ${precio} €
+                                </span>
+
+                            </div>
+
+
+                            ${
+                                producto.descripcion
+                                    ? `
+                                        <p class="producto-descripcion">
+                                            ${producto.descripcion}
+                                        </p>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+
+                    `;
+
+
+                    gridProductos.appendChild(
+                        tarjeta
+                    );
+
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "Error cargando productos:",
+                    error
+                );
+
+                gridProductos.innerHTML = `
+                    <div class="productos-mensaje">
+                        No se ha podido cargar la colección.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        cargarProductos();
 
     </script>
 
