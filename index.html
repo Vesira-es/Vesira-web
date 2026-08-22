@@ -12,65 +12,37 @@
 
     <title>Vesira</title>
 
-
-    <!-- ICONOS -->
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     >
 
-
     <style>
 
-        /* =========================
-           VARIABLES
-        ========================= */
-
         :root {
-
             --fondo: #ffffff;
             --texto: #111111;
             --borde: #e6e6e6;
             --caja: #ffffff;
-
         }
 
-
         body.modo-oscuro {
-
             --fondo: #0c0c0c;
             --texto: #ffffff;
             --borde: #292929;
             --caja: #171717;
-
         }
-
-
-        /* =========================
-           GENERAL
-        ========================= */
 
         * {
-
             margin: 0;
             padding: 0;
-
             box-sizing: border-box;
-
         }
 
-
         body {
-
             background: var(--fondo);
             color: var(--texto);
-
-            transition:
-                background .3s ease,
-                color .3s ease;
-
             overflow-x: hidden;
-
         }
 
 
@@ -79,40 +51,30 @@
         ========================= */
 
         .barra-navegacion {
-
             position: fixed;
-
             top: 0;
             left: 0;
-
             z-index: 1000;
 
             width: 100%;
             height: 80px;
 
             background: var(--fondo);
-
-            border-bottom:
-                1px solid var(--borde);
-
+            border-bottom: 1px solid var(--borde);
         }
 
 
         /* =========================
-           IZQUIERDA
+           BLOQUE IZQUIERDO
         ========================= */
 
         .normal {
-
             position: absolute;
-
             left: 30px;
             top: 50%;
-
             transform: translateY(-50%);
 
             display: flex;
-
             align-items: center;
 
             gap: 35px;
@@ -120,23 +82,14 @@
             padding: 8px 25px;
 
             background: var(--caja);
-
-            border:
-                1px solid var(--borde);
-
+            border: 1px solid var(--borde);
             border-radius: 999px;
-
         }
 
-
         .logo {
-
             width: 115px;
-
             height: auto;
-
             display: block;
-
         }
 
 
@@ -145,91 +98,68 @@
         ========================= */
 
         .buscar {
-
             display: none;
 
             position: absolute;
-
             left: 50%;
             top: 50%;
+            transform: translate(-50%, -50%);
 
-            transform:
-                translate(-50%, -50%);
+            width: 620px;
+            max-width: 50vw;
 
-            width: min(620px, 50vw);
+            height: 52px;
 
             align-items: center;
-
             gap: 12px;
 
-            padding: 15px 25px;
+            padding: 0 22px;
 
             background: var(--caja);
-
-            border:
-                1px solid var(--borde);
-
+            border: 1px solid var(--borde);
             border-radius: 999px;
-
         }
 
-
         .buscar input {
-
-            flex: 1;
-
+            width: 100%;
             min-width: 0;
 
             border: none;
-
             outline: none;
 
             background: transparent;
-
             color: var(--texto);
 
             font-size: 17px;
-
         }
 
-
         .buscar input::placeholder {
-
             color: #999;
-
         }
 
 
         /* =========================
-           DERECHA
+           ICONOS DERECHA
         ========================= */
 
         .iconos {
-
             position: absolute;
-
             right: 30px;
             top: 50%;
-
             transform: translateY(-50%);
 
             display: flex;
-
             align-items: center;
 
             gap: 8px;
-
         }
-
 
         .iconos span,
         .tema-boton {
-
             width: 42px;
             height: 42px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -238,30 +168,16 @@
             color: var(--texto);
 
             cursor: pointer;
-
-            transition:
-                background .2s ease,
-                transform .2s ease;
-
         }
-
 
         .iconos span:hover,
         .tema-boton:hover {
-
             background: var(--caja);
-
-            transform: translateY(-2px);
-
         }
 
-
         .tema-boton {
-
             border: none;
-
             background: transparent;
-
         }
 
 
@@ -269,41 +185,27 @@
            BOTONES BUSCADOR
         ========================= */
 
-        #abrirBusqueda {
-
+        #abrirBusqueda,
+        #botonIA {
             cursor: pointer;
-
         }
 
-
         #cerrarBusqueda {
+            flex: 0 0 auto;
 
             border: none;
-
             background: transparent;
 
             color: var(--texto);
 
             cursor: pointer;
 
-            font-size: 20px;
-
+            font-size: 19px;
             padding: 0;
-
         }
-
-
-        #botonIA {
-
-            cursor: pointer;
-
-        }
-
 
         .IA-activa {
-
             color: #f4b400 !important;
-
         }
 
 
@@ -314,67 +216,71 @@
         @media (max-width: 700px) {
 
             .barra-navegacion {
-
                 height: 72px;
-
             }
 
-
+            /* BLOQUE IZQUIERDO */
             .normal {
-
                 left: 14px;
+
+                width: auto;
 
                 gap: 20px;
 
-                padding:
-                    7px
-                    18px;
-
+                padding: 7px 18px;
             }
-
 
             .logo {
-
                 width: 103px;
-
             }
 
 
+            /* BUSCADOR EN MÓVIL:
+               MISMA POSICIÓN Y MISMO TAMAÑO SIEMPRE */
+            .buscar {
+                left: 14px;
+                right: auto;
+
+                top: 50%;
+
+                transform: translateY(-50%);
+
+                width: 220px;
+                max-width: none;
+
+                height: 42px;
+
+                padding: 0 14px;
+
+                gap: 8px;
+            }
+
+            .buscar input {
+                width: 130px;
+                min-width: 0;
+
+                font-size: 14px;
+            }
+
+            .buscar .material-symbols-outlined {
+                font-size: 21px;
+            }
+
+            #cerrarBusqueda {
+                font-size: 17px;
+            }
+
+
+            /* ICONOS SIEMPRE A LA DERECHA */
             .iconos {
-
                 right: 14px;
-
                 gap: 2px;
-
             }
-
 
             .iconos span,
             .tema-boton {
-
                 width: 36px;
-
                 height: 36px;
-
-            }
-
-
-            .buscar {
-
-                width:
-                    calc(100vw - 155px);
-
-                padding:
-                    11px
-                    15px;
-
-            }
-
-
-            .buscar input {
-
-                font-size: 15px;
-
             }
 
         }
@@ -387,14 +293,10 @@
 <body>
 
 
-    <!-- =========================
-         NAVBAR
-    ========================= -->
-
     <nav class="barra-navegacion">
 
 
-        <!-- IZQUIERDA -->
+        <!-- LOGO + LUPA -->
 
         <div class="normal">
 
@@ -414,7 +316,7 @@
         </div>
 
 
-        <!-- CENTRO -->
+        <!-- BUSCADOR -->
 
         <div class="buscar">
 
@@ -443,7 +345,7 @@
         </div>
 
 
-        <!-- DERECHA -->
+        <!-- ICONOS -->
 
         <div class="iconos">
 
@@ -453,8 +355,7 @@
 
             <button
                 class="tema-boton material-symbols-outlined"
-                id="cambiarTema"
-                aria-label="Cambiar tema">
+                id="cambiarTema">
                 dark_mode
             </button>
 
@@ -467,12 +368,7 @@
     </nav>
 
 
-
     <script>
-
-        /* =========================
-           REFERENCIAS
-        ========================= */
 
         const normal =
             document.querySelector(".normal");
@@ -481,70 +377,48 @@
             document.querySelector(".buscar");
 
         const abrirBusqueda =
-            document.getElementById(
-                "abrirBusqueda"
-            );
+            document.getElementById("abrirBusqueda");
 
         const cerrarBusqueda =
-            document.getElementById(
-                "cerrarBusqueda"
-            );
+            document.getElementById("cerrarBusqueda");
 
         const inputBusqueda =
-            document.getElementById(
-                "inputBusqueda"
-            );
+            document.getElementById("inputBusqueda");
 
         const botonIA =
-            document.getElementById(
-                "botonIA"
-            );
+            document.getElementById("botonIA");
 
         const cambiarTema =
-            document.getElementById(
-                "cambiarTema"
-            );
+            document.getElementById("cambiarTema");
 
         const logoVesira =
-            document.getElementById(
-                "logoVesira"
-            );
+            document.getElementById("logoVesira");
 
 
         /* =========================
            BUSCADOR
         ========================= */
 
-        abrirBusqueda.addEventListener(
-            "click",
-            () => {
+        abrirBusqueda.addEventListener("click", () => {
 
-                normal.style.visibility =
-                    "hidden";
+            normal.style.visibility = "hidden";
 
-                buscar.style.display =
-                    "flex";
+            buscar.style.display = "flex";
 
-                inputBusqueda.focus();
+            inputBusqueda.focus();
 
-            }
-        );
+        });
 
 
-        cerrarBusqueda.addEventListener(
-            "click",
-            () => {
+        cerrarBusqueda.addEventListener("click", () => {
 
-                buscar.style.display =
-                    "none";
+            buscar.style.display = "none";
 
-                normal.style.visibility =
-                    "visible";
+            normal.style.visibility = "visible";
 
-                inputBusqueda.value = "";
+            inputBusqueda.value = "";
 
-            }
-        );
+        });
 
 
         /* =========================
@@ -553,32 +427,25 @@
 
         let iaActiva = false;
 
+        botonIA.addEventListener("click", () => {
 
-        botonIA.addEventListener(
-            "click",
-            () => {
+            iaActiva = !iaActiva;
 
-                iaActiva =
-                    !iaActiva;
+            botonIA.classList.toggle(
+                "IA-activa",
+                iaActiva
+            );
 
+            inputBusqueda.placeholder =
+                iaActiva
+                    ? "Pregúntale a la IA"
+                    : "¿Qué estás buscando?";
 
-                botonIA.classList.toggle(
-                    "IA-activa",
-                    iaActiva
-                );
-
-
-                inputBusqueda.placeholder =
-                    iaActiva
-                        ? "Pregúntale a la IA"
-                        : "¿Qué estás buscando?";
-
-            }
-        );
+        });
 
 
         /* =========================
-           TEMA + LOGO
+           TEMA
         ========================= */
 
         function aplicarTema(oscuro) {
@@ -613,10 +480,7 @@
 
 
         const temaGuardado =
-            localStorage.getItem(
-                "vesiraTema"
-            );
-
+            localStorage.getItem("vesiraTema");
 
         aplicarTema(
             temaGuardado === "oscuro"
@@ -632,14 +496,12 @@
                         "modo-oscuro"
                     );
 
-
                 localStorage.setItem(
                     "vesiraTema",
                     oscuro
                         ? "oscuro"
                         : "claro"
                 );
-
 
                 aplicarTema(oscuro);
 
