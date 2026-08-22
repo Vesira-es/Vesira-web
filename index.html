@@ -45,12 +45,18 @@
             transition: .3s ease;
         }
 
-        /* NAVBAR */
+
+        /* =========================
+           NAVBAR
+        ========================= */
 
         .barra-navegacion {
+
             position: fixed;
+
             top: 0;
             left: 0;
+
             z-index: 1000;
 
             width: 100%;
@@ -63,12 +69,16 @@
             padding: 0 30px;
 
             background: var(--fondo);
+
             border-bottom: 1px solid var(--borde);
+
         }
+
 
         /* LOGO + LUPA */
 
         .normal {
+
             display: flex;
             align-items: center;
 
@@ -77,62 +87,92 @@
             padding: 8px 25px;
 
             background: var(--caja);
+
             border: 1px solid var(--borde);
+
             border-radius: 999px;
+
         }
 
+
         .logo {
+
             width: 115px;
             height: auto;
+
         }
+
 
         /* BUSCADOR */
 
         .buscar {
+
             display: none;
+
             flex: 1;
+
             align-items: center;
+
             gap: 12px;
 
             margin: 0 25px;
+
             padding: 15px 25px;
 
             background: var(--caja);
+
             border: 1px solid var(--borde);
+
             border-radius: 999px;
+
         }
 
+
         .buscar input {
+
             flex: 1;
+
             min-width: 0;
 
             border: none;
+
             outline: none;
 
             background: transparent;
+
             color: var(--texto);
 
             font-size: 17px;
+
         }
+
 
         .buscar input::placeholder {
             color: #999;
         }
 
+
         /* ICONOS */
 
         .iconos {
+
             display: flex;
+
             align-items: center;
+
             gap: 8px;
+
         }
+
 
         .iconos span,
         .tema-boton {
+
             width: 42px;
             height: 42px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -141,85 +181,140 @@
             color: var(--texto);
 
             cursor: pointer;
+
         }
+
 
         .iconos span:hover,
         .tema-boton:hover {
+
             background: var(--caja);
+
         }
+
 
         .tema-boton {
+
             border: none;
+
             background: transparent;
+
         }
+
 
         #cerrarBusqueda {
+
             border: none;
+
             background: transparent;
+
             color: var(--texto);
+
             cursor: pointer;
+
             font-size: 20px;
+
         }
+
 
         #botonIA {
+
             cursor: pointer;
+
         }
+
 
         .IA-activa {
+
             color: #f4b400 !important;
+
         }
 
-        /* MÓVIL */
+
+        /* =========================
+           MÓVIL
+        ========================= */
 
         @media (max-width: 700px) {
 
             .barra-navegacion {
+
                 height: 72px;
+
                 padding: 0 14px;
+
             }
+
 
             .normal {
+
                 gap: 20px;
+
                 padding: 7px 18px;
+
             }
+
 
             .logo {
+
                 width: 103px;
+
             }
 
+
             .iconos {
+
                 gap: 2px;
+
             }
+
 
             .iconos span,
             .tema-boton {
+
                 width: 36px;
+
                 height: 36px;
+
             }
+
 
             .buscar {
+
                 margin: 0 10px;
+
                 padding: 11px 15px;
+
             }
 
+
             .buscar input {
+
                 font-size: 15px;
+
             }
+
         }
 
     </style>
 
 </head>
 
+
 <body>
 
+
     <nav class="barra-navegacion">
+
+
+        <!-- LOGO + LUPA -->
 
         <div class="normal">
 
             <img
                 src="img/logo.png"
                 class="logo"
+                id="logoVesira"
                 alt="Vesira"
             >
 
@@ -231,6 +326,8 @@
 
         </div>
 
+
+        <!-- BUSCADOR -->
 
         <div class="buscar">
 
@@ -257,14 +354,12 @@
         </div>
 
 
+        <!-- ICONOS -->
+
         <div class="iconos">
 
             <span class="material-symbols-outlined">
                 shopping_bag
-            </span>
-
-            <span class="material-symbols-outlined">
-                person
             </span>
 
             <button
@@ -284,11 +379,18 @@
 
     <script>
 
-        /* BUSCADOR */
+        /* =========================
+           REFERENCIAS
+        ========================= */
 
-        const normal = document.querySelector(".normal");
-        const buscar = document.querySelector(".buscar");
-        const iconos = document.querySelector(".iconos");
+        const normal =
+            document.querySelector(".normal");
+
+        const buscar =
+            document.querySelector(".buscar");
+
+        const iconos =
+            document.querySelector(".iconos");
 
         const abrirBusqueda =
             document.getElementById("abrirBusqueda");
@@ -299,6 +401,19 @@
         const inputBusqueda =
             document.getElementById("inputBusqueda");
 
+        const botonIA =
+            document.getElementById("botonIA");
+
+        const cambiarTema =
+            document.getElementById("cambiarTema");
+
+        const logoVesira =
+            document.getElementById("logoVesira");
+
+
+        /* =========================
+           BUSCADOR
+        ========================= */
 
         abrirBusqueda.addEventListener("click", () => {
 
@@ -322,13 +437,11 @@
         });
 
 
-        /* IA */
-
-        const botonIA =
-            document.getElementById("botonIA");
+        /* =========================
+           IA
+        ========================= */
 
         let iaActiva = false;
-
 
         botonIA.addEventListener("click", () => {
 
@@ -347,44 +460,73 @@
         });
 
 
-        /* MODO OSCURO */
+        /* =========================
+           TEMA + LOGO
+        ========================= */
 
-        const cambiarTema =
-            document.getElementById("cambiarTema");
+        function aplicarTema(oscuro) {
+
+            if (oscuro) {
+
+                document.body.classList.add(
+                    "modo-oscuro"
+                );
+
+                cambiarTema.textContent =
+                    "light_mode";
+
+                logoVesira.src =
+                    "img/logo2.png";
+
+            } else {
+
+                document.body.classList.remove(
+                    "modo-oscuro"
+                );
+
+                cambiarTema.textContent =
+                    "dark_mode";
+
+                logoVesira.src =
+                    "img/logo.png";
+
+            }
+
+        }
+
 
         const temaGuardado =
             localStorage.getItem("vesiraTema");
 
 
-        if (temaGuardado === "oscuro") {
-
-            document.body.classList.add("modo-oscuro");
-
-            cambiarTema.textContent = "light_mode";
-
-        }
+        aplicarTema(
+            temaGuardado === "oscuro"
+        );
 
 
-        cambiarTema.addEventListener("click", () => {
+        cambiarTema.addEventListener(
+            "click",
+            () => {
 
-            const oscuro =
-                document.body.classList.toggle(
-                    "modo-oscuro"
+                const oscuro =
+                    !document.body.classList.contains(
+                        "modo-oscuro"
+                    );
+
+                localStorage.setItem(
+                    "vesiraTema",
+                    oscuro
+                        ? "oscuro"
+                        : "claro"
                 );
 
-            localStorage.setItem(
-                "vesiraTema",
-                oscuro ? "oscuro" : "claro"
-            );
+                aplicarTema(oscuro);
 
-            cambiarTema.textContent =
-                oscuro
-                    ? "light_mode"
-                    : "dark_mode";
-
-        });
+            }
+        );
 
     </script>
+
 
 </body>
 
