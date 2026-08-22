@@ -10,75 +10,28 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Vesira | Eyewear</title>
+    <title>Vesira</title>
 
-    <!-- Fuentes -->
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- Material Symbols -->
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     >
 
-
     <style>
 
-        /* =====================================================
-           VARIABLES
-        ===================================================== */
-
         :root {
-
-            --fondo: #f7f7f5;
-            --superficie: #ffffff;
-            --superficie-2: #eeeeeb;
-
+            --fondo: #ffffff;
             --texto: #111111;
-            --secundario: #777773;
-
-            --borde: #e2e2de;
-
-            --negro: #111111;
-            --blanco: #ffffff;
-
+            --borde: #e6e6e6;
+            --caja: #ffffff;
         }
-
 
         body.modo-oscuro {
-
-            --fondo: #0b0b0b;
-            --superficie: #151515;
-            --superficie-2: #1d1d1d;
-
-            --texto: #f4f4f0;
-            --secundario: #959590;
-
+            --fondo: #0c0c0c;
+            --texto: #ffffff;
             --borde: #292929;
-
-            --negro: #ffffff;
-            --blanco: #0b0b0b;
-
+            --caja: #171717;
         }
-
-
-        /* =====================================================
-           RESET
-        ===================================================== */
 
         * {
             margin: 0;
@@ -86,201 +39,100 @@
             box-sizing: border-box;
         }
 
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
         body {
-
             background: var(--fondo);
-
             color: var(--texto);
-
-            font-family: "Outfit", sans-serif;
-
-            transition:
-                background .3s ease,
-                color .3s ease;
-
-            overflow-x: hidden;
-
+            transition: .3s ease;
         }
 
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-
-        button {
-            font-family: inherit;
-        }
-
-
-        img {
-            display: block;
-            max-width: 100%;
-        }
-
-
-        /* =====================================================
-           NAVBAR VESIRA
-        ===================================================== */
+        /* NAVBAR */
 
         .barra-navegacion {
-
             position: fixed;
-
             top: 0;
             left: 0;
-
-            z-index: 9999;
+            z-index: 1000;
 
             width: 100%;
             height: 80px;
 
             display: flex;
-
             align-items: center;
             justify-content: space-between;
 
             padding: 0 30px;
 
-            background: rgba(247, 247, 245, .92);
-
+            background: var(--fondo);
             border-bottom: 1px solid var(--borde);
-
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            transition:
-                background .3s ease,
-                border-color .3s ease;
-
         }
 
-
-        body.modo-oscuro .barra-navegacion {
-
-            background: rgba(11, 11, 11, .92);
-
-        }
-
-
-        /* Logo + lupa */
+        /* LOGO + LUPA */
 
         .normal {
-
             display: flex;
-
             align-items: center;
-
-            justify-content: center;
 
             gap: 35px;
 
             padding: 8px 25px;
 
-            background: var(--superficie);
-
+            background: var(--caja);
             border: 1px solid var(--borde);
-
             border-radius: 999px;
-
         }
-
 
         .logo {
-
             width: 115px;
-
             height: auto;
-
         }
 
-
-        /* Buscador */
+        /* BUSCADOR */
 
         .buscar {
-
             display: none;
-
             flex: 1;
-
             align-items: center;
-
             gap: 12px;
 
             margin: 0 25px;
-
             padding: 15px 25px;
 
-            background: var(--superficie);
-
+            background: var(--caja);
             border: 1px solid var(--borde);
-
             border-radius: 999px;
-
         }
 
-
         .buscar input {
-
             flex: 1;
-
             min-width: 0;
 
             border: none;
-
             outline: none;
 
             background: transparent;
-
             color: var(--texto);
 
             font-size: 17px;
-
         }
-
 
         .buscar input::placeholder {
-
-            color: var(--secundario);
-
+            color: #999;
         }
 
-
-        .buscar:focus-within {
-
-            border-color: var(--texto);
-
-        }
-
-
-        /* Iconos */
+        /* ICONOS */
 
         .iconos {
-
             display: flex;
-
             align-items: center;
-
             gap: 8px;
-
         }
 
-
-        .icono-nav,
+        .iconos span,
         .tema-boton {
-
             width: 42px;
             height: 42px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
@@ -289,732 +141,77 @@
             color: var(--texto);
 
             cursor: pointer;
-
-            transition:
-                background .2s ease,
-                transform .2s ease;
-
         }
 
-
-        .icono-nav:hover,
+        .iconos span:hover,
         .tema-boton:hover {
-
-            background: var(--superficie-2);
-
-            transform: translateY(-2px);
-
+            background: var(--caja);
         }
-
 
         .tema-boton {
-
             border: none;
-
             background: transparent;
-
         }
 
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .hero {
-
-            padding-top: 80px;
-
+        #cerrarBusqueda {
+            border: none;
+            background: transparent;
+            color: var(--texto);
+            cursor: pointer;
+            font-size: 20px;
         }
 
-
-        .hero-imagen {
-
-            position: relative;
-
-            width: 100%;
-
-            height: calc(100vh - 80px);
-
-            min-height: 560px;
-
-            overflow: hidden;
-
-            background: #dededb;
-
+        #botonIA {
+            cursor: pointer;
         }
 
-
-        .hero-imagen img {
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
+        .IA-activa {
+            color: #f4b400 !important;
         }
 
-
-        .hero-overlay {
-
-            position: absolute;
-
-            inset: 0;
-
-            background:
-                linear-gradient(
-                    to top,
-                    rgba(0,0,0,.58),
-                    rgba(0,0,0,.08) 60%,
-                    rgba(0,0,0,.08)
-                );
-
-        }
-
-
-        .hero-texto {
-
-            position: absolute;
-
-            left: 5vw;
-            bottom: 45px;
-
-            color: white;
-
-            z-index: 2;
-
-        }
-
-
-        .hero-texto small {
-
-            display: block;
-
-            margin-bottom: 14px;
-
-            font-size: 10px;
-
-            letter-spacing: .2em;
-
-            text-transform: uppercase;
-
-            opacity: .78;
-
-        }
-
-
-        .hero-texto h1 {
-
-            font-family:
-                "Bricolage Grotesque",
-                sans-serif;
-
-            font-size:
-                clamp(48px, 7vw, 100px);
-
-            font-weight: 400;
-
-            line-height: .86;
-
-            letter-spacing: -.07em;
-
-        }
-
-
-        .hero-texto p {
-
-            margin-top: 16px;
-
-            font-size: 13px;
-
-            color: rgba(255,255,255,.82);
-
-        }
-
-
-        /* =====================================================
-           MARQUEE
-        ===================================================== */
-
-        .marquee {
-
-            overflow: hidden;
-
-            background: var(--superficie);
-
-            border-bottom: 1px solid var(--borde);
-
-        }
-
-
-        .marquee-track {
-
-            width: max-content;
-
-            display: flex;
-
-            align-items: center;
-
-            animation: moverMarquee 28s linear infinite;
-
-        }
-
-
-        .marquee-item {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 28px;
-
-            padding: 17px 28px;
-
-            white-space: nowrap;
-
-            font-size: 12px;
-
-            letter-spacing: .08em;
-
-            text-transform: uppercase;
-
-        }
-
-
-        .marquee-punto {
-
-            width: 5px;
-            height: 5px;
-
-            border-radius: 50%;
-
-            background: var(--texto);
-
-        }
-
-
-        @keyframes moverMarquee {
-
-            from {
-                transform: translateX(0);
-            }
-
-            to {
-                transform: translateX(-50%);
-            }
-
-        }
-
-
-        /* =====================================================
-           CABECERA COLECCIÓN
-        ===================================================== */
-
-        .coleccion {
-
-            padding: 90px 4vw 105px;
-
-        }
-
-
-        .coleccion-cabecera {
-
-            display: flex;
-
-            align-items: end;
-
-            justify-content: space-between;
-
-            gap: 30px;
-
-            margin-bottom: 28px;
-
-        }
-
-
-        .coleccion-cabecera small {
-
-            display: block;
-
-            margin-bottom: 10px;
-
-            font-size: 10px;
-
-            letter-spacing: .2em;
-
-            text-transform: uppercase;
-
-            color: var(--secundario);
-
-        }
-
-
-        .coleccion-cabecera h2 {
-
-            font-family:
-                "Bricolage Grotesque",
-                sans-serif;
-
-            font-size:
-                clamp(38px, 5vw, 65px);
-
-            font-weight: 400;
-
-            line-height: .9;
-
-            letter-spacing: -.06em;
-
-        }
-
-
-        .coleccion-meta {
-
-            text-align: right;
-
-            font-size: 12px;
-
-            line-height: 1.6;
-
-            color: var(--secundario);
-
-        }
-
-
-        /* =====================================================
-           GRID GAFAS
-        ===================================================== */
-
-        .gafas {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(5, 1fr);
-
-            gap: 11px;
-
-        }
-
-
-        .gafa {
-
-            min-width: 0;
-
-        }
-
-
-        .gafa-imagen {
-
-            position: relative;
-
-            width: 100%;
-
-            aspect-ratio: 4 / 5;
-
-            overflow: hidden;
-
-            background: var(--superficie-2);
-
-        }
-
-
-        .gafa-imagen img {
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-
-            transition:
-                transform .45s ease;
-
-        }
-
-
-        .gafa:hover .gafa-imagen img {
-
-            transform: scale(1.04);
-
-        }
-
-
-        .gafa-info {
-
-            display: flex;
-
-            align-items: baseline;
-
-            justify-content: space-between;
-
-            gap: 10px;
-
-            padding-top: 11px;
-
-        }
-
-
-        .gafa-nombre {
-
-            font-family:
-                "Bricolage Grotesque",
-                sans-serif;
-
-            font-size: 17px;
-
-            font-weight: 400;
-
-        }
-
-
-        .gafa-precio {
-
-            font-size: 12px;
-
-            color: var(--secundario);
-
-            white-space: nowrap;
-
-        }
-
-
-        /* =====================================================
-           LANZAMIENTO 3x2
-        ===================================================== */
-
-        .lanzamiento {
-
-            margin:
-                0
-                4vw
-                100px;
-
-            padding:
-                65px
-                30px;
-
-            text-align: center;
-
-            background: var(--negro);
-
-            color: var(--blanco);
-
-        }
-
-
-        .lanzamiento small {
-
-            display: block;
-
-            margin-bottom: 16px;
-
-            font-size: 10px;
-
-            letter-spacing: .2em;
-
-            text-transform: uppercase;
-
-            color: var(--secundario);
-
-        }
-
-
-        .lanzamiento h2 {
-
-            font-family:
-                "Bricolage Grotesque",
-                sans-serif;
-
-            font-size:
-                clamp(70px, 10vw, 125px);
-
-            font-weight: 400;
-
-            line-height: .74;
-
-            letter-spacing: -.08em;
-
-        }
-
-
-        .lanzamiento p {
-
-            margin-top: 18px;
-
-            font-size: 13px;
-
-            color: var(--secundario);
-
-        }
-
-
-        .lanzamiento a {
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 7px;
-
-            margin-top: 25px;
-
-            padding:
-                13px
-                19px;
-
-            background: var(--blanco);
-
-            color: var(--negro);
-
-            border-radius: 999px;
-
-            font-size: 12px;
-
-        }
-
-
-        /* =====================================================
-           CIERRE SIMPLE
-        ===================================================== */
-
-        .cierre {
-
-            padding:
-                50px
-                20px
-                110px;
-
-            text-align: center;
-
-        }
-
-
-        .cierre small {
-
-            font-size: 10px;
-
-            letter-spacing: .2em;
-
-            text-transform: uppercase;
-
-            color: var(--secundario);
-
-        }
-
-
-        .cierre h2 {
-
-            margin-top: 18px;
-
-            font-family:
-                "Bricolage Grotesque",
-                sans-serif;
-
-            font-size:
-                clamp(70px, 13vw, 160px);
-
-            font-weight: 400;
-
-            line-height: .77;
-
-            letter-spacing: -.09em;
-
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-
-            border-top: 1px solid var(--borde);
-
-        }
-
-
-        .pie-pagina {
-
-            min-height: 80px;
-
-        }
-
-
-        /* =====================================================
-           TABLET
-        ===================================================== */
-
-        @media (max-width: 1000px) {
-
-            .gafas {
-
-                grid-template-columns:
-                    repeat(3, 1fr);
-
-            }
-
-        }
-
-
-        /* =====================================================
-           MÓVIL
-        ===================================================== */
+        /* MÓVIL */
 
         @media (max-width: 700px) {
 
             .barra-navegacion {
-
+                height: 72px;
                 padding: 0 14px;
-
             }
-
 
             .normal {
-
                 gap: 20px;
-
-                padding:
-                    7px
-                    18px;
-
+                padding: 7px 18px;
             }
-
 
             .logo {
-
                 width: 103px;
-
             }
-
 
             .iconos {
-
                 gap: 2px;
-
             }
 
-
-            .icono-nav,
+            .iconos span,
             .tema-boton {
-
                 width: 36px;
                 height: 36px;
-
             }
 
-
-            .hero-imagen {
-
-                height:
-                    calc(100svh - 80px);
-
+            .buscar {
+                margin: 0 10px;
+                padding: 11px 15px;
             }
 
-
-            .hero-texto {
-
-                left: 22px;
-
-                bottom: 30px;
-
-            }
-
-
-            .hero-texto h1 {
-
-                font-size: 56px;
-
-            }
-
-
-            .coleccion {
-
-                padding:
-                    70px
-                    14px
-                    80px;
-
-            }
-
-
-            .coleccion-cabecera {
-
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 12px;
-
-            }
-
-
-            .coleccion-meta {
-
-                text-align: left;
-
-            }
-
-
-            .gafas {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-                gap: 12px;
-
-            }
-
-
-            .gafa-nombre {
-
+            .buscar input {
                 font-size: 15px;
-
             }
-
-
-            .gafa-precio {
-
-                font-size: 11px;
-
-            }
-
-
-            .lanzamiento {
-
-                margin:
-                    0
-                    14px
-                    75px;
-
-                padding:
-                    55px
-                    20px;
-
-            }
-
-
-            .cierre {
-
-                padding:
-                    50px
-                    15px
-                    90px;
-
-            }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
-
-
-    <!-- =====================================================
-         NAVBAR VESIRA
-    ====================================================== -->
 
     <nav class="barra-navegacion">
 
@@ -1042,6 +239,7 @@
             </span>
 
             <input
+                id="inputBusqueda"
                 type="text"
                 placeholder="¿Qué estás buscando?"
             >
@@ -1061,22 +259,21 @@
 
         <div class="iconos">
 
-            <span class="material-symbols-outlined icono-nav">
+            <span class="material-symbols-outlined">
                 shopping_bag
             </span>
 
-            <span class="material-symbols-outlined icono-nav">
+            <span class="material-symbols-outlined">
                 person
             </span>
 
             <button
                 class="tema-boton material-symbols-outlined"
-                id="cambiarTema"
-                aria-label="Cambiar modo">
+                id="cambiarTema">
                 dark_mode
             </button>
 
-            <span class="material-symbols-outlined icono-nav">
+            <span class="material-symbols-outlined">
                 menu
             </span>
 
@@ -1085,366 +282,13 @@
     </nav>
 
 
-
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
-
-    <main class="hero">
-
-        <section class="hero-imagen">
-
-            <img
-                src="img/gafas/hero.jpg"
-                alt="Colección de gafas Vesira"
-            >
-
-            <div class="hero-overlay"></div>
-
-
-            <div class="hero-texto">
-
-                <small>
-                    VESIRA · EYEWEAR
-                </small>
-
-                <h1>
-                    The first drop.
-                </h1>
-
-                <p>
-                    Cinco modelos · 29,99 €
-                </p>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =====================================================
-         MARQUEE
-    ====================================================== -->
-
-    <section class="marquee">
-
-        <div class="marquee-track">
-
-            <div class="marquee-item">
-                <span>VESIRA</span>
-                <span class="marquee-punto"></span>
-                <span>EYEWEAR</span>
-                <span class="marquee-punto"></span>
-                <span>FIRST DROP</span>
-            </div>
-
-            <div class="marquee-item">
-                <span>VESIRA</span>
-                <span class="marquee-punto"></span>
-                <span>EYEWEAR</span>
-                <span class="marquee-punto"></span>
-                <span>FIRST DROP</span>
-            </div>
-
-            <div class="marquee-item">
-                <span>VESIRA</span>
-                <span class="marquee-punto"></span>
-                <span>EYEWEAR</span>
-                <span class="marquee-punto"></span>
-                <span>FIRST DROP</span>
-            </div>
-
-            <div class="marquee-item">
-                <span>VESIRA</span>
-                <span class="marquee-punto"></span>
-                <span>EYEWEAR</span>
-                <span class="marquee-punto"></span>
-                <span>FIRST DROP</span>
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         COLECCIÓN
-    ====================================================== -->
-
-    <section
-        class="coleccion"
-        id="coleccion">
-
-
-        <div class="coleccion-cabecera">
-
-            <div>
-
-                <small>
-                    COLLECTION 01
-                </small>
-
-                <h2>
-                    Five frames.
-                </h2>
-
-            </div>
-
-
-            <div class="coleccion-meta">
-
-                29,99 € cada una<br>
-                Envío gratis a Canarias
-
-            </div>
-
-        </div>
-
-
-        <div class="gafas">
-
-
-            <!-- 01 -->
-
-            <a
-                href="producto.html?id=clear-01"
-                class="gafa">
-
-                <div class="gafa-imagen">
-
-                    <img
-                        src="img/gafas/clear.jpg"
-                        alt="Vesira Clear"
-                    >
-
-                </div>
-
-                <div class="gafa-info">
-
-                    <h3 class="gafa-nombre">
-                        Clear
-                    </h3>
-
-                    <span class="gafa-precio">
-                        29,99 €
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- 02 -->
-
-            <a
-                href="producto.html?id=crystal-02"
-                class="gafa">
-
-                <div class="gafa-imagen">
-
-                    <img
-                        src="img/gafas/crystal.jpg"
-                        alt="Vesira Crystal"
-                    >
-
-                </div>
-
-                <div class="gafa-info">
-
-                    <h3 class="gafa-nombre">
-                        Crystal
-                    </h3>
-
-                    <span class="gafa-precio">
-                        29,99 €
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- 03 -->
-
-            <a
-                href="producto.html?id=smoke-03"
-                class="gafa">
-
-                <div class="gafa-imagen">
-
-                    <img
-                        src="img/gafas/smoke.jpg"
-                        alt="Vesira Smoke"
-                    >
-
-                </div>
-
-                <div class="gafa-info">
-
-                    <h3 class="gafa-nombre">
-                        Smoke
-                    </h3>
-
-                    <span class="gafa-precio">
-                        29,99 €
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- 04 -->
-
-            <a
-                href="producto.html?id=black-04"
-                class="gafa">
-
-                <div class="gafa-imagen">
-
-                    <img
-                        src="img/gafas/black.jpg"
-                        alt="Vesira Black"
-                    >
-
-                </div>
-
-                <div class="gafa-info">
-
-                    <h3 class="gafa-nombre">
-                        Black
-                    </h3>
-
-                    <span class="gafa-precio">
-                        29,99 €
-                    </span>
-
-                </div>
-
-            </a>
-
-
-            <!-- 05 -->
-
-            <a
-                href="producto.html?id=amber-05"
-                class="gafa">
-
-                <div class="gafa-imagen">
-
-                    <img
-                        src="img/gafas/amber.jpg"
-                        alt="Vesira Amber"
-                    >
-
-                </div>
-
-                <div class="gafa-info">
-
-                    <h3 class="gafa-nombre">
-                        Amber
-                    </h3>
-
-                    <span class="gafa-precio">
-                        29,99 €
-                    </span>
-
-                </div>
-
-            </a>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         LANZAMIENTO
-    ====================================================== -->
-
-    <section class="lanzamiento">
-
-        <small>
-            LANZAMIENTO
-        </small>
-
-        <h2>
-            3 × 2
-        </h2>
-
-        <p>
-            Elige tres modelos y paga dos.
-        </p>
-
-        <a href="#coleccion">
-
-            Elegir mis gafas
-
-            <span class="material-symbols-outlined">
-                arrow_forward
-            </span>
-
-        </a>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         CIERRE
-    ====================================================== -->
-
-    <section class="cierre">
-
-        <small>
-            VESIRA
-        </small>
-
-        <h2>
-            EYEWEAR.
-        </h2>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer>
-
-        <div class="pie-pagina"></div>
-
-    </footer>
-
-
-
     <script>
 
-        /* =====================================================
-           BUSCADOR NAVBAR
-        ===================================================== */
+        /* BUSCADOR */
 
-        const normal =
-            document.querySelector(".normal");
-
-        const buscar =
-            document.querySelector(".buscar");
-
-        const iconos =
-            document.querySelector(".iconos");
-
-        const botonIA =
-            document.getElementById("botonIA");
-
-        const inputBusqueda =
-            document.querySelector(".buscar input");
+        const normal = document.querySelector(".normal");
+        const buscar = document.querySelector(".buscar");
+        const iconos = document.querySelector(".iconos");
 
         const abrirBusqueda =
             document.getElementById("abrirBusqueda");
@@ -1452,16 +296,14 @@
         const cerrarBusqueda =
             document.getElementById("cerrarBusqueda");
 
-
-        let iaActiva = false;
+        const inputBusqueda =
+            document.getElementById("inputBusqueda");
 
 
         abrirBusqueda.addEventListener("click", () => {
 
             normal.style.display = "none";
-
             iconos.style.display = "none";
-
             buscar.style.display = "flex";
 
             inputBusqueda.focus();
@@ -1472,12 +314,20 @@
         cerrarBusqueda.addEventListener("click", () => {
 
             buscar.style.display = "none";
-
             normal.style.display = "flex";
-
             iconos.style.display = "flex";
 
+            inputBusqueda.value = "";
+
         });
+
+
+        /* IA */
+
+        const botonIA =
+            document.getElementById("botonIA");
+
+        let iaActiva = false;
 
 
         botonIA.addEventListener("click", () => {
@@ -1489,7 +339,6 @@
                 iaActiva
             );
 
-
             inputBusqueda.placeholder =
                 iaActiva
                     ? "Pregúntale a la IA"
@@ -1498,13 +347,10 @@
         });
 
 
-        /* =====================================================
-           MODO CLARO / OSCURO
-        ===================================================== */
+        /* MODO OSCURO */
 
         const cambiarTema =
             document.getElementById("cambiarTema");
-
 
         const temaGuardado =
             localStorage.getItem("vesiraTema");
@@ -1512,12 +358,9 @@
 
         if (temaGuardado === "oscuro") {
 
-            document.body.classList.add(
-                "modo-oscuro"
-            );
+            document.body.classList.add("modo-oscuro");
 
-            cambiarTema.textContent =
-                "light_mode";
+            cambiarTema.textContent = "light_mode";
 
         }
 
@@ -1529,14 +372,10 @@
                     "modo-oscuro"
                 );
 
-
             localStorage.setItem(
                 "vesiraTema",
-                oscuro
-                    ? "oscuro"
-                    : "claro"
+                oscuro ? "oscuro" : "claro"
             );
-
 
             cambiarTema.textContent =
                 oscuro
@@ -1546,7 +385,6 @@
         });
 
     </script>
-
 
 </body>
 
