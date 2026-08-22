@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     >
 
+
     <style>
 
         :root {
@@ -26,6 +27,7 @@
             --caja: #ffffff;
         }
 
+
         body.modo-oscuro {
             --fondo: #0c0c0c;
             --texto: #ffffff;
@@ -33,16 +35,61 @@
             --caja: #171717;
         }
 
+
+        /* =========================
+           GENERAL
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+
         body {
             background: var(--fondo);
             color: var(--texto);
+
             overflow-x: hidden;
+
+            transition: .3s ease;
+        }
+
+
+        /* =========================
+           INTRO EN ZONA NAVBAR
+        ========================= */
+
+        .intro {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            z-index: 2000;
+
+            width: 100%;
+            height: 80px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: var(--fondo);
+
+            border-bottom: 1px solid var(--borde);
+
+            opacity: 1;
+
+            transition: opacity .35s ease;
+        }
+
+
+        .eslogan {
+            width: 410px;
+            height: auto;
+            display: block;
         }
 
 
@@ -52,26 +99,37 @@
 
         .barra-navegacion {
             position: fixed;
+
             top: 0;
             left: 0;
+
             z-index: 1000;
 
             width: 100%;
             height: 80px;
 
             background: var(--fondo);
+
             border-bottom: 1px solid var(--borde);
+
+            opacity: 0;
+
+            transform: translateY(-20px);
+
+            transition: .8s ease;
         }
 
 
         /* =========================
-           BLOQUE IZQUIERDO
+           LOGO + LUPA
         ========================= */
 
         .normal {
             position: absolute;
+
             left: 30px;
             top: 50%;
+
             transform: translateY(-50%);
 
             display: flex;
@@ -82,9 +140,12 @@
             padding: 8px 25px;
 
             background: var(--caja);
+
             border: 1px solid var(--borde);
+
             border-radius: 999px;
         }
+
 
         .logo {
             width: 115px;
@@ -101,8 +162,10 @@
             display: none;
 
             position: absolute;
+
             left: 50%;
             top: 50%;
+
             transform: translate(-50%, -50%);
 
             width: 620px;
@@ -111,14 +174,18 @@
             height: 52px;
 
             align-items: center;
+
             gap: 12px;
 
             padding: 0 22px;
 
             background: var(--caja);
+
             border: 1px solid var(--borde);
+
             border-radius: 999px;
         }
+
 
         .buscar input {
             width: 100%;
@@ -128,10 +195,12 @@
             outline: none;
 
             background: transparent;
+
             color: var(--texto);
 
             font-size: 17px;
         }
+
 
         .buscar input::placeholder {
             color: #999;
@@ -144,8 +213,10 @@
 
         .iconos {
             position: absolute;
+
             right: 30px;
             top: 50%;
+
             transform: translateY(-50%);
 
             display: flex;
@@ -153,6 +224,7 @@
 
             gap: 8px;
         }
+
 
         .iconos span,
         .tema-boton {
@@ -170,10 +242,12 @@
             cursor: pointer;
         }
 
+
         .iconos span:hover,
         .tema-boton:hover {
             background: var(--caja);
         }
+
 
         .tema-boton {
             border: none;
@@ -182,7 +256,7 @@
 
 
         /* =========================
-           BOTONES BUSCADOR
+           BUSCADOR
         ========================= */
 
         #abrirBusqueda,
@@ -190,10 +264,10 @@
             cursor: pointer;
         }
 
-        #cerrarBusqueda {
-            flex: 0 0 auto;
 
+        #cerrarBusqueda {
             border: none;
+
             background: transparent;
 
             color: var(--texto);
@@ -201,8 +275,10 @@
             cursor: pointer;
 
             font-size: 19px;
+
             padding: 0;
         }
+
 
         .IA-activa {
             color: #f4b400 !important;
@@ -215,37 +291,34 @@
 
         @media (max-width: 700px) {
 
+            .intro,
             .barra-navegacion {
                 height: 72px;
             }
 
-            /* BLOQUE IZQUIERDO */
+
+            .eslogan {
+                width: 185px;
+            }
+
+
             .normal {
                 left: 14px;
-
-                width: auto;
 
                 gap: 20px;
 
                 padding: 7px 18px;
             }
 
+
             .logo {
                 width: 103px;
             }
 
 
-            /* BUSCADOR EN MÓVIL:
-               MISMA POSICIÓN Y MISMO TAMAÑO SIEMPRE */
             .buscar {
-                left: 14px;
-                right: auto;
-
-                top: 50%;
-
-                transform: translateY(-50%);
-
                 width: 220px;
+
                 max-width: none;
 
                 height: 42px;
@@ -255,27 +328,18 @@
                 gap: 8px;
             }
 
-            .buscar input {
-                width: 130px;
-                min-width: 0;
 
+            .buscar input {
                 font-size: 14px;
             }
 
-            .buscar .material-symbols-outlined {
-                font-size: 21px;
-            }
 
-            #cerrarBusqueda {
-                font-size: 17px;
-            }
-
-
-            /* ICONOS SIEMPRE A LA DERECHA */
             .iconos {
                 right: 14px;
+
                 gap: 2px;
             }
+
 
             .iconos span,
             .tema-boton {
@@ -293,8 +357,30 @@
 <body>
 
 
-    <nav class="barra-navegacion">
+    <!-- =========================
+         INTRO
+    ========================= -->
 
+    <div class="intro" id="intro">
+
+        <img
+            src="img/eslogan.png"
+            alt="Vesira"
+            class="eslogan"
+        >
+
+    </div>
+
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav
+        class="barra-navegacion"
+        id="navbar"
+    >
 
         <!-- LOGO + LUPA -->
 
@@ -355,7 +441,8 @@
 
             <button
                 class="tema-boton material-symbols-outlined"
-                id="cambiarTema">
+                id="cambiarTema"
+                aria-label="Cambiar tema">
                 dark_mode
             </button>
 
@@ -368,7 +455,18 @@
     </nav>
 
 
+
     <script>
+
+        /* =========================
+           REFERENCIAS
+        ========================= */
+
+        const intro =
+            document.getElementById("intro");
+
+        const navbar =
+            document.getElementById("navbar");
 
         const normal =
             document.querySelector(".normal");
@@ -396,56 +494,7 @@
 
 
         /* =========================
-           BUSCADOR
-        ========================= */
-
-        abrirBusqueda.addEventListener("click", () => {
-
-            normal.style.visibility = "hidden";
-
-            buscar.style.display = "flex";
-
-            inputBusqueda.focus();
-
-        });
-
-
-        cerrarBusqueda.addEventListener("click", () => {
-
-            buscar.style.display = "none";
-
-            normal.style.visibility = "visible";
-
-            inputBusqueda.value = "";
-
-        });
-
-
-        /* =========================
-           IA
-        ========================= */
-
-        let iaActiva = false;
-
-        botonIA.addEventListener("click", () => {
-
-            iaActiva = !iaActiva;
-
-            botonIA.classList.toggle(
-                "IA-activa",
-                iaActiva
-            );
-
-            inputBusqueda.placeholder =
-                iaActiva
-                    ? "Pregúntale a la IA"
-                    : "¿Qué estás buscando?";
-
-        });
-
-
-        /* =========================
-           TEMA
+           TEMA + LOGO
         ========================= */
 
         function aplicarTema(oscuro) {
@@ -480,7 +529,10 @@
 
 
         const temaGuardado =
-            localStorage.getItem("vesiraTema");
+            localStorage.getItem(
+                "vesiraTema"
+            );
+
 
         aplicarTema(
             temaGuardado === "oscuro"
@@ -504,6 +556,92 @@
                 );
 
                 aplicarTema(oscuro);
+
+            }
+        );
+
+
+        /* =========================
+           INTRO → NAVBAR
+        ========================= */
+
+        setTimeout(() => {
+
+            intro.style.opacity = "0";
+
+            navbar.style.opacity = "1";
+
+            navbar.style.transform =
+                "translateY(0)";
+
+            setTimeout(() => {
+
+                intro.style.display = "none";
+
+            }, 350);
+
+        }, 1500);
+
+
+        /* =========================
+           BUSCADOR
+        ========================= */
+
+        abrirBusqueda.addEventListener(
+            "click",
+            () => {
+
+                normal.style.visibility =
+                    "hidden";
+
+                buscar.style.display =
+                    "flex";
+
+                inputBusqueda.focus();
+
+            }
+        );
+
+
+        cerrarBusqueda.addEventListener(
+            "click",
+            () => {
+
+                buscar.style.display =
+                    "none";
+
+                normal.style.visibility =
+                    "visible";
+
+                inputBusqueda.value = "";
+
+            }
+        );
+
+
+        /* =========================
+           IA
+        ========================= */
+
+        let iaActiva = false;
+
+
+        botonIA.addEventListener(
+            "click",
+            () => {
+
+                iaActiva =
+                    !iaActiva;
+
+                botonIA.classList.toggle(
+                    "IA-activa",
+                    iaActiva
+                );
+
+                inputBusqueda.placeholder =
+                    iaActiva
+                        ? "Pregúntale a la IA"
+                        : "¿Qué estás buscando?";
 
             }
         );
