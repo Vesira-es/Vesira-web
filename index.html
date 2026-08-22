@@ -4,22 +4,37 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Vesira | Eyewear</title>
+
+    <!-- Fuentes -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&display=swap"
         rel="stylesheet"
     >
 
+    <!-- Material Symbols -->
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
     >
 
-    <link rel="stylesheet" href="style.css">
 
     <style>
 
@@ -28,38 +43,41 @@
         ===================================================== */
 
         :root {
-            --bg: #f5f5f2;
-            --surface: #ffffff;
-            --surface-2: #ededeb;
 
-            --text: #111111;
-            --muted: #7a7a76;
-            --line: #dfdfdc;
+            --fondo: #f7f7f5;
+            --superficie: #ffffff;
+            --superficie-2: #eeeeeb;
 
-            --dark-bg: #0c0c0c;
-            --dark-surface: #151515;
-            --dark-surface-2: #1d1d1d;
+            --texto: #111111;
+            --secundario: #777773;
 
-            --dark-text: #f4f4f0;
-            --dark-muted: #9b9b96;
-            --dark-line: #2a2a2a;
+            --borde: #e2e2de;
 
-            --radius: 22px;
+            --negro: #111111;
+            --blanco: #ffffff;
+
         }
 
-        body.dark {
-            --bg: var(--dark-bg);
-            --surface: var(--dark-surface);
-            --surface-2: var(--dark-surface-2);
 
-            --text: var(--dark-text);
-            --muted: var(--dark-muted);
-            --line: var(--dark-line);
+        body.modo-oscuro {
+
+            --fondo: #0b0b0b;
+            --superficie: #151515;
+            --superficie-2: #1d1d1d;
+
+            --texto: #f4f4f0;
+            --secundario: #959590;
+
+            --borde: #292929;
+
+            --negro: #ffffff;
+            --blanco: #0b0b0b;
+
         }
 
 
         /* =====================================================
-           BASE
+           RESET
         ===================================================== */
 
         * {
@@ -68,33 +86,43 @@
             box-sizing: border-box;
         }
 
+
         html {
             scroll-behavior: smooth;
         }
 
+
         body {
-            background: var(--bg);
-            color: var(--text);
+
+            background: var(--fondo);
+
+            color: var(--texto);
 
             font-family: "Outfit", sans-serif;
 
             transition:
-                background .35s ease,
-                color .35s ease;
+                background .3s ease,
+                color .3s ease;
+
+            overflow-x: hidden;
+
         }
 
-        img {
-            display: block;
-            max-width: 100%;
-        }
 
         a {
             color: inherit;
             text-decoration: none;
         }
 
+
         button {
-            font: inherit;
+            font-family: inherit;
+        }
+
+
+        img {
+            display: block;
+            max-width: 100%;
         }
 
 
@@ -103,54 +131,81 @@
         ===================================================== */
 
         .barra-navegacion {
+
             position: fixed;
-            inset: 0 0 auto 0;
+
+            top: 0;
+            left: 0;
+
+            z-index: 9999;
 
             width: 100%;
             height: 80px;
 
-            padding: 0 30px;
-
             display: flex;
+
             align-items: center;
             justify-content: space-between;
 
-            z-index: 1000;
+            padding: 0 30px;
 
-            background: color-mix(
-                in srgb,
-                var(--bg) 84%,
-                transparent
-            );
+            background: rgba(247, 247, 245, .92);
 
-            border-bottom: 1px solid var(--line);
+            border-bottom: 1px solid var(--borde);
 
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
+
+            transition:
+                background .3s ease,
+                border-color .3s ease;
+
         }
 
+
+        body.modo-oscuro .barra-navegacion {
+
+            background: rgba(11, 11, 11, .92);
+
+        }
+
+
+        /* Logo + lupa */
+
         .normal {
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             gap: 35px;
 
             padding: 8px 25px;
 
-            background: var(--surface);
+            background: var(--superficie);
 
-            border: 1px solid var(--line);
+            border: 1px solid var(--borde);
 
             border-radius: 999px;
+
         }
+
 
         .logo {
+
             width: 115px;
+
             height: auto;
+
         }
 
+
+        /* Buscador */
+
         .buscar {
+
             display: none;
 
             flex: 1;
@@ -159,70 +214,105 @@
 
             gap: 12px;
 
-            padding: 15px 25px;
-
             margin: 0 25px;
 
-            background: var(--surface);
+            padding: 15px 25px;
 
-            border: 1px solid var(--line);
+            background: var(--superficie);
+
+            border: 1px solid var(--borde);
 
             border-radius: 999px;
+
         }
 
+
         .buscar input {
+
             flex: 1;
+
             min-width: 0;
 
             border: none;
+
             outline: none;
 
             background: transparent;
 
-            color: var(--text);
+            color: var(--texto);
 
             font-size: 17px;
+
         }
+
 
         .buscar input::placeholder {
-            color: var(--muted);
+
+            color: var(--secundario);
+
         }
 
-        .iconos {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+
+        .buscar:focus-within {
+
+            border-color: var(--texto);
+
         }
+
+
+        /* Iconos */
+
+        .iconos {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+        }
+
 
         .icono-nav,
         .tema-boton {
+
             width: 42px;
             height: 42px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
             border-radius: 50%;
 
-            color: var(--text);
+            color: var(--texto);
 
             cursor: pointer;
 
             transition:
                 background .2s ease,
                 transform .2s ease;
+
         }
+
 
         .icono-nav:hover,
         .tema-boton:hover {
-            background: var(--surface-2);
+
+            background: var(--superficie-2);
+
             transform: translateY(-2px);
+
         }
 
+
         .tema-boton {
+
             border: none;
+
             background: transparent;
+
         }
 
 
@@ -231,137 +321,113 @@
         ===================================================== */
 
         .hero {
-            padding-top: 80px;
-            min-height: 100vh;
 
-            background: var(--bg);
+            padding-top: 80px;
+
         }
 
-        .hero-principal {
+
+        .hero-imagen {
+
             position: relative;
 
-            min-height: calc(100vh - 80px);
+            width: 100%;
+
+            height: calc(100vh - 80px);
+
+            min-height: 560px;
 
             overflow: hidden;
 
-            background: #111;
+            background: #dededb;
+
         }
 
-        .hero-principal img {
+
+        .hero-imagen img {
+
             width: 100%;
             height: 100%;
 
-            position: absolute;
-            inset: 0;
-
             object-fit: cover;
+
         }
 
+
         .hero-overlay {
+
             position: absolute;
+
             inset: 0;
 
             background:
                 linear-gradient(
-                    180deg,
-                    rgba(0,0,0,.16) 0%,
-                    rgba(0,0,0,.08) 40%,
-                    rgba(0,0,0,.55) 100%
+                    to top,
+                    rgba(0,0,0,.58),
+                    rgba(0,0,0,.08) 60%,
+                    rgba(0,0,0,.08)
                 );
+
         }
 
-        .hero-contenido {
-            position: relative;
+
+        .hero-texto {
+
+            position: absolute;
+
+            left: 5vw;
+            bottom: 45px;
+
+            color: white;
+
             z-index: 2;
 
-            min-height: calc(100vh - 80px);
-
-            padding:
-                55px
-                5vw
-                45px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            color: #fff;
         }
 
-        .hero-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
 
-            gap: 20px;
-        }
+        .hero-texto small {
 
-        .hero-top small {
+            display: block;
+
+            margin-bottom: 14px;
+
             font-size: 10px;
+
             letter-spacing: .2em;
+
             text-transform: uppercase;
 
-            opacity: .8;
+            opacity: .78;
+
         }
 
-        .hero-drop {
-            padding: 8px 12px;
 
-            border: 1px solid rgba(255,255,255,.4);
+        .hero-texto h1 {
 
-            border-radius: 999px;
+            font-family:
+                "Bricolage Grotesque",
+                sans-serif;
 
-            font-size: 10px;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-        }
-
-        .hero-bottom {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-
-            gap: 30px;
-        }
-
-        .hero-titulo {
-            font-family: "Bricolage Grotesque", sans-serif;
-
-            font-size: clamp(
-                58px,
-                10vw,
-                148px
-            );
-
-            line-height: .79;
-
-            letter-spacing: -.075em;
+            font-size:
+                clamp(48px, 7vw, 100px);
 
             font-weight: 400;
+
+            line-height: .86;
+
+            letter-spacing: -.07em;
+
         }
 
-        .hero-titulo span {
-            display: block;
-        }
 
-        .hero-titulo span:last-child {
-            color: rgba(255,255,255,.62);
-        }
+        .hero-texto p {
 
-        .hero-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
+            margin-top: 16px;
 
-            padding-bottom: 5px;
+            font-size: 13px;
 
-            border-bottom: 1px solid rgba(255,255,255,.9);
+            color: rgba(255,255,255,.82);
 
-            font-size: 12px;
-        }
-
-        .hero-link .material-symbols-outlined {
-            font-size: 18px;
         }
 
 
@@ -370,44 +436,63 @@
         ===================================================== */
 
         .marquee {
+
             overflow: hidden;
 
-            border-bottom: 1px solid var(--line);
+            background: var(--superficie);
 
-            background: var(--surface);
+            border-bottom: 1px solid var(--borde);
+
         }
 
+
         .marquee-track {
+
             width: max-content;
 
             display: flex;
+
             align-items: center;
 
-            animation: marquee 28s linear infinite;
+            animation: moverMarquee 28s linear infinite;
+
         }
+
 
         .marquee-item {
+
             display: flex;
+
             align-items: center;
 
-            gap: 34px;
+            gap: 28px;
 
-            padding: 18px 30px;
+            padding: 17px 28px;
 
-            font-size: 13px;
             white-space: nowrap;
+
+            font-size: 12px;
+
+            letter-spacing: .08em;
+
+            text-transform: uppercase;
+
         }
 
-        .marquee-dot {
+
+        .marquee-punto {
+
             width: 5px;
             height: 5px;
 
             border-radius: 50%;
 
-            background: var(--text);
+            background: var(--texto);
+
         }
 
-        @keyframes marquee {
+
+        @keyframes moverMarquee {
 
             from {
                 transform: translateX(0);
@@ -421,68 +506,33 @@
 
 
         /* =====================================================
-           FRASE
-        ===================================================== */
-
-        .introduccion {
-            padding: 105px 6vw 95px;
-
-            background: var(--bg);
-        }
-
-        .introduccion small {
-            display: block;
-
-            margin-bottom: 20px;
-
-            font-size: 10px;
-            letter-spacing: .2em;
-
-            text-transform: uppercase;
-
-            color: var(--muted);
-        }
-
-        .introduccion h2 {
-            max-width: 1050px;
-
-            font-family: "Bricolage Grotesque", sans-serif;
-
-            font-weight: 400;
-
-            font-size:
-                clamp(42px, 6vw, 82px);
-
-            line-height: .94;
-
-            letter-spacing: -.065em;
-        }
-
-        .introduccion h2 em {
-            color: var(--muted);
-            font-style: normal;
-        }
-
-
-        /* =====================================================
-           COLECCIÓN
+           CABECERA COLECCIÓN
         ===================================================== */
 
         .coleccion {
-            padding: 0 4vw 110px;
+
+            padding: 90px 4vw 105px;
+
         }
 
+
         .coleccion-cabecera {
+
             display: flex;
-            align-items: flex-end;
+
+            align-items: end;
+
             justify-content: space-between;
 
             gap: 30px;
 
-            margin-bottom: 25px;
+            margin-bottom: 28px;
+
         }
 
+
         .coleccion-cabecera small {
+
             display: block;
 
             margin-bottom: 10px;
@@ -493,11 +543,16 @@
 
             text-transform: uppercase;
 
-            color: var(--muted);
+            color: var(--secundario);
+
         }
 
+
         .coleccion-cabecera h2 {
-            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-family:
+                "Bricolage Grotesque",
+                sans-serif;
 
             font-size:
                 clamp(38px, 5vw, 65px);
@@ -507,63 +562,63 @@
             line-height: .9;
 
             letter-spacing: -.06em;
+
         }
 
-        .coleccion-meta {
-            text-align: right;
 
-            color: var(--muted);
+        .coleccion-meta {
+
+            text-align: right;
 
             font-size: 12px;
 
             line-height: 1.6;
+
+            color: var(--secundario);
+
         }
 
-        .gafas-grid {
+
+        /* =====================================================
+           GRID GAFAS
+        ===================================================== */
+
+        .gafas {
+
             display: grid;
 
             grid-template-columns:
                 repeat(5, 1fr);
 
-            gap: 12px;
+            gap: 11px;
+
         }
+
 
         .gafa {
+
             min-width: 0;
 
-            display: block;
         }
 
+
         .gafa-imagen {
+
             position: relative;
+
+            width: 100%;
 
             aspect-ratio: 4 / 5;
 
             overflow: hidden;
 
-            border-radius: 18px;
+            background: var(--superficie-2);
 
-            background: var(--surface-2);
         }
 
-        .gafa-imagen::after {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-            pointer-events: none;
-
-            box-shadow:
-                inset 0 0 0 1px rgba(0,0,0,.035);
-        }
-
-        body.dark .gafa-imagen::after {
-            box-shadow:
-                inset 0 0 0 1px rgba(255,255,255,.035);
-        }
 
         .gafa-imagen img {
+
             width: 100%;
             height: 100%;
 
@@ -571,79 +626,85 @@
 
             transition:
                 transform .45s ease;
+
         }
+
 
         .gafa:hover .gafa-imagen img {
-            transform: scale(1.045);
+
+            transform: scale(1.04);
+
         }
 
+
         .gafa-info {
-            padding-top: 12px;
 
-            display: grid;
-
-            grid-template-columns:
-                24px
-                1fr
-                auto;
+            display: flex;
 
             align-items: baseline;
 
-            gap: 7px;
+            justify-content: space-between;
+
+            gap: 10px;
+
+            padding-top: 11px;
+
         }
 
-        .gafa-numero {
-            font-size: 9px;
-            color: var(--muted);
-        }
 
         .gafa-nombre {
-            font-family: "Bricolage Grotesque", sans-serif;
 
-            font-size: 18px;
+            font-family:
+                "Bricolage Grotesque",
+                sans-serif;
+
+            font-size: 17px;
 
             font-weight: 400;
+
         }
 
+
         .gafa-precio {
+
             font-size: 12px;
-            color: var(--muted);
+
+            color: var(--secundario);
+
+            white-space: nowrap;
+
         }
 
 
         /* =====================================================
-           LANZAMIENTO
+           LANZAMIENTO 3x2
         ===================================================== */
 
         .lanzamiento {
+
             margin:
                 0
                 4vw
-                110px;
+                100px;
 
             padding:
-                70px
-                6vw;
+                65px
+                30px;
 
-            background: var(--text);
+            text-align: center;
 
-            color: var(--bg);
+            background: var(--negro);
 
-            border-radius: 24px;
+            color: var(--blanco);
 
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 30px;
         }
 
+
         .lanzamiento small {
+
             display: block;
 
-            margin-bottom: 12px;
+            margin-bottom: 16px;
 
             font-size: 10px;
 
@@ -651,161 +712,84 @@
 
             text-transform: uppercase;
 
-            color: var(--muted);
+            color: var(--secundario);
+
         }
 
+
         .lanzamiento h2 {
-            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-family:
+                "Bricolage Grotesque",
+                sans-serif;
 
             font-size:
-                clamp(65px, 10vw, 125px);
+                clamp(70px, 10vw, 125px);
 
             font-weight: 400;
 
-            line-height: .76;
+            line-height: .74;
 
             letter-spacing: -.08em;
+
         }
 
+
         .lanzamiento p {
-            max-width: 390px;
 
             margin-top: 18px;
 
             font-size: 13px;
 
-            line-height: 1.6;
+            color: var(--secundario);
 
-            color: var(--muted);
         }
 
-        .lanzamiento-boton {
+
+        .lanzamiento a {
+
             display: inline-flex;
+
             align-items: center;
-            gap: 6px;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 25px;
 
             padding:
-                14px
-                20px;
+                13px
+                19px;
+
+            background: var(--blanco);
+
+            color: var(--negro);
 
             border-radius: 999px;
 
-            background: var(--bg);
-            color: var(--text);
-
             font-size: 12px;
 
-            white-space: nowrap;
         }
 
 
         /* =====================================================
-           LOOKBOOK
-        ===================================================== */
-
-        .lookbook {
-            padding:
-                0
-                4vw
-                110px;
-
-            display: grid;
-
-            grid-template-columns:
-                1.2fr
-                .8fr;
-
-            gap: 12px;
-        }
-
-        .lookbook-img {
-            min-height: 620px;
-
-            overflow: hidden;
-
-            border-radius: 22px;
-
-            background: var(--surface-2);
-        }
-
-        .lookbook-img img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-        .lookbook-copy {
-            padding:
-                55px;
-
-            background: var(--surface);
-
-            border:
-                1px solid var(--line);
-
-            border-radius: 22px;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .lookbook-copy small {
-            font-size: 10px;
-
-            letter-spacing: .2em;
-
-            text-transform: uppercase;
-
-            color: var(--muted);
-        }
-
-        .lookbook-copy h2 {
-            max-width: 450px;
-
-            font-family: "Bricolage Grotesque", sans-serif;
-
-            font-size:
-                clamp(44px, 5vw, 75px);
-
-            line-height: .86;
-
-            font-weight: 400;
-
-            letter-spacing: -.065em;
-        }
-
-        .lookbook-copy p {
-            max-width: 390px;
-
-            margin-top: 22px;
-
-            color: var(--muted);
-
-            font-size: 14px;
-
-            line-height: 1.7;
-        }
-
-
-        /* =====================================================
-           CIERRE
+           CIERRE SIMPLE
         ===================================================== */
 
         .cierre {
+
             padding:
-                100px
+                50px
                 20px
-                125px;
+                110px;
 
             text-align: center;
+
         }
 
-        .cierre small {
-            display: block;
 
-            margin-bottom: 20px;
+        .cierre small {
 
             font-size: 10px;
 
@@ -813,213 +797,209 @@
 
             text-transform: uppercase;
 
-            color: var(--muted);
+            color: var(--secundario);
+
         }
 
+
         .cierre h2 {
-            font-family: "Bricolage Grotesque", sans-serif;
+
+            margin-top: 18px;
+
+            font-family:
+                "Bricolage Grotesque",
+                sans-serif;
+
+            font-size:
+                clamp(70px, 13vw, 160px);
 
             font-weight: 400;
 
-            font-size:
-                clamp(75px, 13vw, 180px);
+            line-height: .77;
 
-            line-height: .75;
+            letter-spacing: -.09em;
 
-            letter-spacing: -.095em;
-        }
-
-        .cierre p {
-            margin-top: 28px;
-
-            font-size: 13px;
-
-            color: var(--muted);
         }
 
 
         /* =====================================================
-           RESPONSIVE
+           FOOTER
         ===================================================== */
 
-        @media (max-width: 1050px) {
+        footer {
 
-            .gafas-grid {
+            border-top: 1px solid var(--borde);
+
+        }
+
+
+        .pie-pagina {
+
+            min-height: 80px;
+
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 1000px) {
+
+            .gafas {
+
                 grid-template-columns:
                     repeat(3, 1fr);
-            }
 
-            .lookbook {
-                grid-template-columns: 1fr;
-            }
-
-            .lookbook-img {
-                min-height: 500px;
             }
 
         }
 
+
+        /* =====================================================
+           MÓVIL
+        ===================================================== */
 
         @media (max-width: 700px) {
 
             .barra-navegacion {
+
                 padding: 0 14px;
+
             }
+
 
             .normal {
-                gap: 22px;
-                padding: 7px 18px;
+
+                gap: 20px;
+
+                padding:
+                    7px
+                    18px;
+
             }
+
 
             .logo {
-                width: 105px;
+
+                width: 103px;
+
             }
 
+
             .iconos {
-                gap: 4px;
+
+                gap: 2px;
+
             }
+
 
             .icono-nav,
             .tema-boton {
-                width: 37px;
-                height: 37px;
+
+                width: 36px;
+                height: 36px;
+
             }
 
-            .hero-contenido {
-                padding:
-                    35px
-                    22px
-                    28px;
-            }
 
-            .hero-titulo {
-                font-size: 58px;
-            }
+            .hero-imagen {
 
-            .hero-principal {
-                min-height:
+                height:
                     calc(100svh - 80px);
+
             }
 
-            .hero-contenido {
-                min-height:
-                    calc(100svh - 80px);
+
+            .hero-texto {
+
+                left: 22px;
+
+                bottom: 30px;
+
             }
 
-            .hero-bottom {
-                flex-direction: column;
-                align-items: flex-start;
+
+            .hero-texto h1 {
+
+                font-size: 56px;
+
             }
 
-            .hero-principal img {
-                object-position: center;
-            }
-
-            .introduccion {
-                padding:
-                    80px
-                    20px;
-            }
 
             .coleccion {
+
                 padding:
-                    0
+                    70px
                     14px
                     80px;
+
             }
+
 
             .coleccion-cabecera {
+
                 flex-direction: column;
+
                 align-items: flex-start;
+
+                gap: 12px;
+
             }
+
 
             .coleccion-meta {
+
                 text-align: left;
+
             }
 
-            .gafas-grid {
+
+            .gafas {
+
                 grid-template-columns:
                     repeat(2, 1fr);
 
-                gap: 10px;
+                gap: 12px;
+
             }
 
-            .gafa-imagen {
-                border-radius: 14px;
+
+            .gafa-nombre {
+
+                font-size: 15px;
+
             }
 
-            .gafa-info {
-                grid-template-columns:
-                    21px
-                    1fr;
-            }
 
             .gafa-precio {
-                grid-column: 2;
+
+                font-size: 11px;
+
             }
 
+
             .lanzamiento {
+
                 margin:
                     0
                     14px
-                    80px;
+                    75px;
 
                 padding:
-                    48px
-                    25px;
+                    55px
+                    20px;
 
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                border-radius: 20px;
             }
 
-            .lookbook {
-                padding:
-                    0
-                    14px
-                    80px;
-            }
-
-            .lookbook-img {
-                min-height: 430px;
-
-                border-radius: 18px;
-            }
-
-            .lookbook-copy {
-                min-height: 450px;
-
-                padding:
-                    40px
-                    25px;
-
-                border-radius: 18px;
-            }
 
             .cierre {
+
                 padding:
-                    85px
+                    50px
                     15px
-                    100px;
-            }
+                    90px;
 
-        }
-
-
-        @media (max-width: 450px) {
-
-            .hero-titulo {
-                font-size: 52px;
-            }
-
-            .gafa-nombre {
-                font-size: 15px;
-            }
-
-            .gafa-precio {
-                font-size: 11px;
             }
 
         }
@@ -1081,25 +1061,22 @@
 
         <div class="iconos">
 
-            <span
-                class="material-symbols-outlined icono-nav">
+            <span class="material-symbols-outlined icono-nav">
                 shopping_bag
             </span>
 
-            <span
-                class="material-symbols-outlined icono-nav">
+            <span class="material-symbols-outlined icono-nav">
                 person
             </span>
 
             <button
-                class="material-symbols-outlined tema-boton"
+                class="tema-boton material-symbols-outlined"
                 id="cambiarTema"
-                aria-label="Cambiar tema">
+                aria-label="Cambiar modo">
                 dark_mode
             </button>
 
-            <span
-                class="material-symbols-outlined icono-nav">
+            <span class="material-symbols-outlined icono-nav">
                 menu
             </span>
 
@@ -1115,53 +1092,29 @@
 
     <main class="hero">
 
-        <section class="hero-principal">
+        <section class="hero-imagen">
 
             <img
                 src="img/gafas/hero.jpg"
-                alt="Vesira Eyewear"
+                alt="Colección de gafas Vesira"
             >
 
             <div class="hero-overlay"></div>
 
 
-            <div class="hero-contenido">
+            <div class="hero-texto">
 
-                <div class="hero-top">
+                <small>
+                    VESIRA · EYEWEAR
+                </small>
 
-                    <small>
-                        VESIRA · EYEWEAR
-                    </small>
+                <h1>
+                    The first drop.
+                </h1>
 
-                    <span class="hero-drop">
-                        FIRST DROP
-                    </span>
-
-                </div>
-
-
-                <div class="hero-bottom">
-
-                    <h1 class="hero-titulo">
-                        <span>See it</span>
-                        <span>your</span>
-                        <span>way.</span>
-                    </h1>
-
-
-                    <a
-                        href="#coleccion"
-                        class="hero-link">
-
-                        Descubrir colección
-
-                        <span class="material-symbols-outlined">
-                            arrow_downward
-                        </span>
-
-                    </a>
-
-                </div>
+                <p>
+                    Cinco modelos · 29,99 €
+                </p>
 
             </div>
 
@@ -1180,49 +1133,38 @@
         <div class="marquee-track">
 
             <div class="marquee-item">
-                <span>VESIRA EYEWEAR</span>
-                <span class="marquee-dot"></span>
-                <span>BORN IN THE ATLANTIC</span>
+                <span>VESIRA</span>
+                <span class="marquee-punto"></span>
+                <span>EYEWEAR</span>
+                <span class="marquee-punto"></span>
+                <span>FIRST DROP</span>
             </div>
 
             <div class="marquee-item">
-                <span>VESIRA EYEWEAR</span>
-                <span class="marquee-dot"></span>
-                <span>BORN IN THE ATLANTIC</span>
+                <span>VESIRA</span>
+                <span class="marquee-punto"></span>
+                <span>EYEWEAR</span>
+                <span class="marquee-punto"></span>
+                <span>FIRST DROP</span>
             </div>
 
             <div class="marquee-item">
-                <span>VESIRA EYEWEAR</span>
-                <span class="marquee-dot"></span>
-                <span>BORN IN THE ATLANTIC</span>
+                <span>VESIRA</span>
+                <span class="marquee-punto"></span>
+                <span>EYEWEAR</span>
+                <span class="marquee-punto"></span>
+                <span>FIRST DROP</span>
             </div>
 
             <div class="marquee-item">
-                <span>VESIRA EYEWEAR</span>
-                <span class="marquee-dot"></span>
-                <span>BORN IN THE ATLANTIC</span>
+                <span>VESIRA</span>
+                <span class="marquee-punto"></span>
+                <span>EYEWEAR</span>
+                <span class="marquee-punto"></span>
+                <span>FIRST DROP</span>
             </div>
 
         </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         INTRO
-    ====================================================== -->
-
-    <section class="introduccion">
-
-        <small>
-            THE FIRST DROP
-        </small>
-
-        <h2>
-            Cinco modelos.
-            <em>Una misma actitud.</em>
-        </h2>
 
     </section>
 
@@ -1246,21 +1188,23 @@
                 </small>
 
                 <h2>
-                    The frames.
+                    Five frames.
                 </h2>
 
             </div>
 
 
             <div class="coleccion-meta">
+
                 29,99 € cada una<br>
                 Envío gratis a Canarias
+
             </div>
 
         </div>
 
 
-        <div class="gafas-grid">
+        <div class="gafas">
 
 
             <!-- 01 -->
@@ -1279,10 +1223,6 @@
                 </div>
 
                 <div class="gafa-info">
-
-                    <span class="gafa-numero">
-                        01
-                    </span>
 
                     <h3 class="gafa-nombre">
                         Clear
@@ -1314,10 +1254,6 @@
 
                 <div class="gafa-info">
 
-                    <span class="gafa-numero">
-                        02
-                    </span>
-
                     <h3 class="gafa-nombre">
                         Crystal
                     </h3>
@@ -1347,10 +1283,6 @@
                 </div>
 
                 <div class="gafa-info">
-
-                    <span class="gafa-numero">
-                        03
-                    </span>
 
                     <h3 class="gafa-nombre">
                         Smoke
@@ -1382,10 +1314,6 @@
 
                 <div class="gafa-info">
 
-                    <span class="gafa-numero">
-                        04
-                    </span>
-
                     <h3 class="gafa-nombre">
                         Black
                     </h3>
@@ -1416,10 +1344,6 @@
 
                 <div class="gafa-info">
 
-                    <span class="gafa-numero">
-                        05
-                    </span>
-
                     <h3 class="gafa-nombre">
                         Amber
                     </h3>
@@ -1445,28 +1369,19 @@
 
     <section class="lanzamiento">
 
-        <div>
+        <small>
+            LANZAMIENTO
+        </small>
 
-            <small>
-                LAUNCH OFFER
-            </small>
+        <h2>
+            3 × 2
+        </h2>
 
-            <h2>
-                3 × 2
-            </h2>
+        <p>
+            Elige tres modelos y paga dos.
+        </p>
 
-            <p>
-                Elige tres modelos de la primera colección
-                y paga solo dos.
-                Oferta válida durante el lanzamiento.
-            </p>
-
-        </div>
-
-
-        <a
-            href="#coleccion"
-            class="lanzamiento-boton">
+        <a href="#coleccion">
 
             Elegir mis gafas
 
@@ -1481,65 +1396,18 @@
 
 
     <!-- =====================================================
-         LOOKBOOK
-    ====================================================== -->
-
-    <section class="lookbook">
-
-        <div class="lookbook-img">
-
-            <img
-                src="img/gafas/editorial.jpg"
-                alt="Vesira"
-            >
-
-        </div>
-
-
-        <div class="lookbook-copy">
-
-            <small>
-                VESIRA · 001
-            </small>
-
-            <div>
-
-                <h2>
-                    Made for
-                    your everyday.
-                </h2>
-
-                <p>
-                    Una estética limpia.
-                    Una colección sencilla.
-                    Un punto diferente.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
          CIERRE
     ====================================================== -->
 
     <section class="cierre">
 
         <small>
-            BORN IN THE ATLANTIC
+            VESIRA
         </small>
 
         <h2>
-            VESIRA.
+            EYEWEAR.
         </h2>
-
-        <p>
-            Eyewear for everyday.
-        </p>
 
     </section>
 
@@ -1551,42 +1419,84 @@
 
     <footer>
 
-        <img
-            class="footer-img-tres"
-            src="img/footer/tres.png"
-            alt=""
-        >
-
-        <img
-            class="footer-img-uno"
-            src="img/footer/uno.png"
-            alt=""
-        >
-
-        <img
-            class="footer-img-dos"
-            src="img/footer/dos.png"
-            alt=""
-        >
-
         <div class="pie-pagina"></div>
 
     </footer>
 
 
 
-    <!-- =====================================================
-         SCRIPTS
-    ====================================================== -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script src="supabase.js"></script>
-
-    <script src="script.js"></script>
-
-
     <script>
+
+        /* =====================================================
+           BUSCADOR NAVBAR
+        ===================================================== */
+
+        const normal =
+            document.querySelector(".normal");
+
+        const buscar =
+            document.querySelector(".buscar");
+
+        const iconos =
+            document.querySelector(".iconos");
+
+        const botonIA =
+            document.getElementById("botonIA");
+
+        const inputBusqueda =
+            document.querySelector(".buscar input");
+
+        const abrirBusqueda =
+            document.getElementById("abrirBusqueda");
+
+        const cerrarBusqueda =
+            document.getElementById("cerrarBusqueda");
+
+
+        let iaActiva = false;
+
+
+        abrirBusqueda.addEventListener("click", () => {
+
+            normal.style.display = "none";
+
+            iconos.style.display = "none";
+
+            buscar.style.display = "flex";
+
+            inputBusqueda.focus();
+
+        });
+
+
+        cerrarBusqueda.addEventListener("click", () => {
+
+            buscar.style.display = "none";
+
+            normal.style.display = "flex";
+
+            iconos.style.display = "flex";
+
+        });
+
+
+        botonIA.addEventListener("click", () => {
+
+            iaActiva = !iaActiva;
+
+            botonIA.classList.toggle(
+                "IA-activa",
+                iaActiva
+            );
+
+
+            inputBusqueda.placeholder =
+                iaActiva
+                    ? "Pregúntale a la IA"
+                    : "¿Qué estás buscando?";
+
+        });
+
 
         /* =====================================================
            MODO CLARO / OSCURO
@@ -1602,7 +1512,9 @@
 
         if (temaGuardado === "oscuro") {
 
-            document.body.classList.add("dark");
+            document.body.classList.add(
+                "modo-oscuro"
+            );
 
             cambiarTema.textContent =
                 "light_mode";
@@ -1612,20 +1524,22 @@
 
         cambiarTema.addEventListener("click", () => {
 
-            const modoOscuro =
-                document.body.classList.toggle("dark");
+            const oscuro =
+                document.body.classList.toggle(
+                    "modo-oscuro"
+                );
 
 
             localStorage.setItem(
                 "vesiraTema",
-                modoOscuro
+                oscuro
                     ? "oscuro"
                     : "claro"
             );
 
 
             cambiarTema.textContent =
-                modoOscuro
+                oscuro
                     ? "light_mode"
                     : "dark_mode";
 
