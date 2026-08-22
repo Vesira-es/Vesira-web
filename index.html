@@ -962,14 +962,12 @@ body.modo-oscuro .producto-card:hover {
 
 
         const temaGuardado =
-            localStorage.getItem(
-                "vesiraTema"
-            );
+    localStorage.getItem("vesiraTema");
 
-
-        aplicarTema(
-            temaGuardado === "oscuro"
-        );
+aplicarTema(
+    temaGuardado === null ||
+    temaGuardado === "oscuro"
+);
 
 
         cambiarTema.addEventListener(
