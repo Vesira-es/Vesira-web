@@ -2,313 +2,1638 @@
 <html lang="es">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet"
-href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           VARIABLES
+        ===================================================== */
+
+        :root {
+            --bg: #f5f5f2;
+            --surface: #ffffff;
+            --surface-2: #ededeb;
+
+            --text: #111111;
+            --muted: #7a7a76;
+            --line: #dfdfdc;
+
+            --dark-bg: #0c0c0c;
+            --dark-surface: #151515;
+            --dark-surface-2: #1d1d1d;
+
+            --dark-text: #f4f4f0;
+            --dark-muted: #9b9b96;
+            --dark-line: #2a2a2a;
+
+            --radius: 22px;
+        }
+
+        body.dark {
+            --bg: var(--dark-bg);
+            --surface: var(--dark-surface);
+            --surface-2: var(--dark-surface-2);
+
+            --text: var(--dark-text);
+            --muted: var(--dark-muted);
+            --line: var(--dark-line);
+        }
+
+
+        /* =====================================================
+           BASE
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+
+            font-family: "Outfit", sans-serif;
+
+            transition:
+                background .35s ease,
+                color .35s ease;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+
+        /* =====================================================
+           NAVBAR VESIRA
+        ===================================================== */
+
+        .barra-navegacion {
+            position: fixed;
+            inset: 0 0 auto 0;
+
+            width: 100%;
+            height: 80px;
+
+            padding: 0 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            z-index: 1000;
+
+            background: color-mix(
+                in srgb,
+                var(--bg) 84%,
+                transparent
+            );
+
+            border-bottom: 1px solid var(--line);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .normal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 35px;
+
+            padding: 8px 25px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--line);
+
+            border-radius: 999px;
+        }
+
+        .logo {
+            width: 115px;
+            height: auto;
+        }
+
+        .buscar {
+            display: none;
+
+            flex: 1;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 15px 25px;
+
+            margin: 0 25px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--line);
+
+            border-radius: 999px;
+        }
+
+        .buscar input {
+            flex: 1;
+            min-width: 0;
+
+            border: none;
+            outline: none;
+
+            background: transparent;
+
+            color: var(--text);
+
+            font-size: 17px;
+        }
+
+        .buscar input::placeholder {
+            color: var(--muted);
+        }
+
+        .iconos {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icono-nav,
+        .tema-boton {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: var(--text);
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                transform .2s ease;
+        }
+
+        .icono-nav:hover,
+        .tema-boton:hover {
+            background: var(--surface-2);
+            transform: translateY(-2px);
+        }
+
+        .tema-boton {
+            border: none;
+            background: transparent;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            padding-top: 80px;
+            min-height: 100vh;
+
+            background: var(--bg);
+        }
+
+        .hero-principal {
+            position: relative;
+
+            min-height: calc(100vh - 80px);
+
+            overflow: hidden;
+
+            background: #111;
+        }
+
+        .hero-principal img {
+            width: 100%;
+            height: 100%;
+
+            position: absolute;
+            inset: 0;
+
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0,0,0,.16) 0%,
+                    rgba(0,0,0,.08) 40%,
+                    rgba(0,0,0,.55) 100%
+                );
+        }
+
+        .hero-contenido {
+            position: relative;
+            z-index: 2;
+
+            min-height: calc(100vh - 80px);
+
+            padding:
+                55px
+                5vw
+                45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            color: #fff;
+        }
+
+        .hero-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .hero-top small {
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+
+            opacity: .8;
+        }
+
+        .hero-drop {
+            padding: 8px 12px;
+
+            border: 1px solid rgba(255,255,255,.4);
+
+            border-radius: 999px;
+
+            font-size: 10px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .hero-bottom {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+        .hero-titulo {
+            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-size: clamp(
+                58px,
+                10vw,
+                148px
+            );
+
+            line-height: .79;
+
+            letter-spacing: -.075em;
+
+            font-weight: 400;
+        }
+
+        .hero-titulo span {
+            display: block;
+        }
+
+        .hero-titulo span:last-child {
+            color: rgba(255,255,255,.62);
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            padding-bottom: 5px;
+
+            border-bottom: 1px solid rgba(255,255,255,.9);
+
+            font-size: 12px;
+        }
+
+        .hero-link .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+
+        /* =====================================================
+           MARQUEE
+        ===================================================== */
+
+        .marquee {
+            overflow: hidden;
+
+            border-bottom: 1px solid var(--line);
+
+            background: var(--surface);
+        }
+
+        .marquee-track {
+            width: max-content;
+
+            display: flex;
+            align-items: center;
+
+            animation: marquee 28s linear infinite;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+
+            gap: 34px;
+
+            padding: 18px 30px;
+
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .marquee-dot {
+            width: 5px;
+            height: 5px;
+
+            border-radius: 50%;
+
+            background: var(--text);
+        }
+
+        @keyframes marquee {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+
+        }
+
+
+        /* =====================================================
+           FRASE
+        ===================================================== */
+
+        .introduccion {
+            padding: 105px 6vw 95px;
+
+            background: var(--bg);
+        }
+
+        .introduccion small {
+            display: block;
+
+            margin-bottom: 20px;
+
+            font-size: 10px;
+            letter-spacing: .2em;
+
+            text-transform: uppercase;
+
+            color: var(--muted);
+        }
+
+        .introduccion h2 {
+            max-width: 1050px;
+
+            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-weight: 400;
+
+            font-size:
+                clamp(42px, 6vw, 82px);
+
+            line-height: .94;
+
+            letter-spacing: -.065em;
+        }
+
+        .introduccion h2 em {
+            color: var(--muted);
+            font-style: normal;
+        }
+
+
+        /* =====================================================
+           COLECCIÓN
+        ===================================================== */
+
+        .coleccion {
+            padding: 0 4vw 110px;
+        }
+
+        .coleccion-cabecera {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 25px;
+        }
+
+        .coleccion-cabecera small {
+            display: block;
+
+            margin-bottom: 10px;
+
+            font-size: 10px;
+
+            letter-spacing: .2em;
+
+            text-transform: uppercase;
+
+            color: var(--muted);
+        }
+
+        .coleccion-cabecera h2 {
+            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-size:
+                clamp(38px, 5vw, 65px);
+
+            font-weight: 400;
+
+            line-height: .9;
+
+            letter-spacing: -.06em;
+        }
+
+        .coleccion-meta {
+            text-align: right;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        .gafas-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 12px;
+        }
+
+        .gafa {
+            min-width: 0;
+
+            display: block;
+        }
+
+        .gafa-imagen {
+            position: relative;
+
+            aspect-ratio: 4 / 5;
+
+            overflow: hidden;
+
+            border-radius: 18px;
+
+            background: var(--surface-2);
+        }
+
+        .gafa-imagen::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            pointer-events: none;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(0,0,0,.035);
+        }
+
+        body.dark .gafa-imagen::after {
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,.035);
+        }
+
+        .gafa-imagen img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            transition:
+                transform .45s ease;
+        }
+
+        .gafa:hover .gafa-imagen img {
+            transform: scale(1.045);
+        }
+
+        .gafa-info {
+            padding-top: 12px;
+
+            display: grid;
+
+            grid-template-columns:
+                24px
+                1fr
+                auto;
+
+            align-items: baseline;
+
+            gap: 7px;
+        }
+
+        .gafa-numero {
+            font-size: 9px;
+            color: var(--muted);
+        }
+
+        .gafa-nombre {
+            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-size: 18px;
+
+            font-weight: 400;
+        }
+
+        .gafa-precio {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           LANZAMIENTO
+        ===================================================== */
+
+        .lanzamiento {
+            margin:
+                0
+                4vw
+                110px;
+
+            padding:
+                70px
+                6vw;
+
+            background: var(--text);
+
+            color: var(--bg);
+
+            border-radius: 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 30px;
+        }
+
+        .lanzamiento small {
+            display: block;
+
+            margin-bottom: 12px;
+
+            font-size: 10px;
+
+            letter-spacing: .2em;
+
+            text-transform: uppercase;
+
+            color: var(--muted);
+        }
+
+        .lanzamiento h2 {
+            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-size:
+                clamp(65px, 10vw, 125px);
+
+            font-weight: 400;
+
+            line-height: .76;
+
+            letter-spacing: -.08em;
+        }
+
+        .lanzamiento p {
+            max-width: 390px;
+
+            margin-top: 18px;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            color: var(--muted);
+        }
+
+        .lanzamiento-boton {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            padding:
+                14px
+                20px;
+
+            border-radius: 999px;
+
+            background: var(--bg);
+            color: var(--text);
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           LOOKBOOK
+        ===================================================== */
+
+        .lookbook {
+            padding:
+                0
+                4vw
+                110px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.2fr
+                .8fr;
+
+            gap: 12px;
+        }
+
+        .lookbook-img {
+            min-height: 620px;
+
+            overflow: hidden;
+
+            border-radius: 22px;
+
+            background: var(--surface-2);
+        }
+
+        .lookbook-img img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        .lookbook-copy {
+            padding:
+                55px;
+
+            background: var(--surface);
+
+            border:
+                1px solid var(--line);
+
+            border-radius: 22px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .lookbook-copy small {
+            font-size: 10px;
+
+            letter-spacing: .2em;
+
+            text-transform: uppercase;
+
+            color: var(--muted);
+        }
+
+        .lookbook-copy h2 {
+            max-width: 450px;
+
+            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-size:
+                clamp(44px, 5vw, 75px);
+
+            line-height: .86;
+
+            font-weight: 400;
+
+            letter-spacing: -.065em;
+        }
+
+        .lookbook-copy p {
+            max-width: 390px;
+
+            margin-top: 22px;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           CIERRE
+        ===================================================== */
+
+        .cierre {
+            padding:
+                100px
+                20px
+                125px;
+
+            text-align: center;
+        }
+
+        .cierre small {
+            display: block;
+
+            margin-bottom: 20px;
+
+            font-size: 10px;
+
+            letter-spacing: .2em;
+
+            text-transform: uppercase;
+
+            color: var(--muted);
+        }
+
+        .cierre h2 {
+            font-family: "Bricolage Grotesque", sans-serif;
+
+            font-weight: 400;
+
+            font-size:
+                clamp(75px, 13vw, 180px);
+
+            line-height: .75;
+
+            letter-spacing: -.095em;
+        }
+
+        .cierre p {
+            margin-top: 28px;
+
+            font-size: 13px;
+
+            color: var(--muted);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1050px) {
+
+            .gafas-grid {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .lookbook {
+                grid-template-columns: 1fr;
+            }
+
+            .lookbook-img {
+                min-height: 500px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .barra-navegacion {
+                padding: 0 14px;
+            }
+
+            .normal {
+                gap: 22px;
+                padding: 7px 18px;
+            }
+
+            .logo {
+                width: 105px;
+            }
+
+            .iconos {
+                gap: 4px;
+            }
+
+            .icono-nav,
+            .tema-boton {
+                width: 37px;
+                height: 37px;
+            }
+
+            .hero-contenido {
+                padding:
+                    35px
+                    22px
+                    28px;
+            }
+
+            .hero-titulo {
+                font-size: 58px;
+            }
+
+            .hero-principal {
+                min-height:
+                    calc(100svh - 80px);
+            }
+
+            .hero-contenido {
+                min-height:
+                    calc(100svh - 80px);
+            }
+
+            .hero-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-principal img {
+                object-position: center;
+            }
+
+            .introduccion {
+                padding:
+                    80px
+                    20px;
+            }
+
+            .coleccion {
+                padding:
+                    0
+                    14px
+                    80px;
+            }
+
+            .coleccion-cabecera {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .coleccion-meta {
+                text-align: left;
+            }
+
+            .gafas-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+                gap: 10px;
+            }
+
+            .gafa-imagen {
+                border-radius: 14px;
+            }
+
+            .gafa-info {
+                grid-template-columns:
+                    21px
+                    1fr;
+            }
+
+            .gafa-precio {
+                grid-column: 2;
+            }
+
+            .lanzamiento {
+                margin:
+                    0
+                    14px
+                    80px;
+
+                padding:
+                    48px
+                    25px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                border-radius: 20px;
+            }
+
+            .lookbook {
+                padding:
+                    0
+                    14px
+                    80px;
+            }
+
+            .lookbook-img {
+                min-height: 430px;
+
+                border-radius: 18px;
+            }
+
+            .lookbook-copy {
+                min-height: 450px;
+
+                padding:
+                    40px
+                    25px;
+
+                border-radius: 18px;
+            }
+
+            .cierre {
+                padding:
+                    85px
+                    15px
+                    100px;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .hero-titulo {
+                font-size: 52px;
+            }
+
+            .gafa-nombre {
+                font-size: 15px;
+            }
+
+            .gafa-precio {
+                font-size: 11px;
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
 
-<div class="intro">
 
-    <img src="img/eslogan.png" alt="Born in the Atlantic" class="eslogan">
+    <!-- =====================================================
+         NAVBAR VESIRA
+    ====================================================== -->
 
-</div>
+    <nav class="barra-navegacion">
 
+        <div class="normal">
 
-<nav class="barra-navegacion">
+            <img
+                src="img/logo.png"
+                class="logo"
+                alt="Vesira"
+            >
 
-    <div class="normal">
-
-        <img src="img/logo.png" class="logo">
-
-        <span
-        class="material-symbols-outlined"
-        id="abrirBusqueda">
-            search
-        </span>
-
-    </div>
-
-    <div class="buscar">
-
-        <span class="material-symbols-outlined">
-            search
-        </span>
-
-        <input
-        type="text"
-        placeholder="¿Qué estás buscando?">
-
-        <span class="material-symbols-outlined" id = "botonIA">auto_awesome</span>
-
-        <button id="cerrarBusqueda">
-            ✕
-        </button>
-
-    </div>
-
-    <div class="iconos">
-
-        <span class="material-symbols-outlined">
-            shopping_bag
-        </span>
-
-        <span class="material-symbols-outlined">
-            person
-        </span>
-        
-        <span class="material-symbols-outlined">
-            menu
-        </span>
-
-    </div>  
-
-</nav>
-
-<section class = "best-sellers">
-    <p class = "subtitulo">TE ENCANTARÁ</p>
-    <h2>Más vendidos</h2>
-
-    <div class = "carrusel-productos">
-
-        <div class = "producto">
-            <div class = "imagen-producto">
-                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
-            </div>
-            <h3>Funda con Magsafe</h3>
-            <p class = "modelo">iPhone 17 Pro Max</p>
-            <span class = "precio">9,99 €</span>
-        </div>
-
-        <div class = "producto">
-            <div class = "imagen-producto">
-                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
-            </div>
-            <h3>Funda con Magsafe</h3>
-            <p class = "modelo">iPhone 17 Pro Max</p>
-            <span class = "precio">9,99 €</span>
-        </div>
-
-        <div class = "producto">
-            <div class = "imagen-producto">
-                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
-            </div>
-            <h3>Funda con Magsafe</h3>
-            <p class = "modelo">iPhone 17 Pro Max</p>
-            <span class = "precio">9,99 €</span>
-        </div>
-
-        <div class = "producto">
-            <div class = "imagen-producto">
-                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
-            </div>
-            <h3>Funda con Magsafe</h3>
-            <p class = "modelo">iPhone 17 Pro Max</p>
-            <span class = "precio">9,99 €</span>
-        </div>
-
-    </div>
-
-</section>
-
-
-
-
-
-
-
-<!-- SELECTOR DISPOSITIVO -->
-<section class="buscar-dispositivo">
-
-    <h2>Busca tu dispositivo</h2>
-
-    <div class="contenedor-selectores">
-
-        <div class="selector-marca" id="selectorMarca">
-
-            <div class="selector-marca-cabecera">
-
-                <span id="textoMarca">Marca</span>
-
-                <span class="material-symbols-outlined flecha-marca">
-                    keyboard_arrow_down
-                </span>
-
-            </div>
-
-            <div class="selector-marca-opciones">
-
-            </div>
+            <span
+                class="material-symbols-outlined"
+                id="abrirBusqueda">
+                search
+            </span>
 
         </div>
 
 
+        <div class="buscar">
 
-        <div class="selector-modelo desactivado" id="selectorModelo">
+            <span class="material-symbols-outlined">
+                search
+            </span>
 
-            <div class="selector-modelo-cabecera">
+            <input
+                type="text"
+                placeholder="¿Qué estás buscando?"
+            >
 
-                <span id="textoModelo">Modelo</span>
+            <span
+                class="material-symbols-outlined"
+                id="botonIA">
+                auto_awesome
+            </span>
 
-                <span class="material-symbols-outlined flecha-modelo">
-                    keyboard_arrow_down
-                </span>
-
-            </div>
-
-            <div class="selector-modelo-opciones">
-
-            </div>
+            <button id="cerrarBusqueda">
+                ✕
+            </button>
 
         </div>
 
-    </div>
 
-    <button class="ir">
+        <div class="iconos">
 
-        Buscar
+            <span
+                class="material-symbols-outlined icono-nav">
+                shopping_bag
+            </span>
 
-        <span class="material-symbols-outlined" id="flecha-ir">
-            keyboard_arrow_right
-        </span>
+            <span
+                class="material-symbols-outlined icono-nav">
+                person
+            </span>
 
-    </button>
+            <button
+                class="material-symbols-outlined tema-boton"
+                id="cambiarTema"
+                aria-label="Cambiar tema">
+                dark_mode
+            </button>
 
-</section>
-<!-- FIN SELECTOR DISPOSITIVO -->
+            <span
+                class="material-symbols-outlined icono-nav">
+                menu
+            </span>
+
+        </div>
+
+    </nav>
 
 
 
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <main class="hero">
+
+        <section class="hero-principal">
+
+            <img
+                src="img/gafas/hero.jpg"
+                alt="Vesira Eyewear"
+            >
+
+            <div class="hero-overlay"></div>
+
+
+            <div class="hero-contenido">
+
+                <div class="hero-top">
+
+                    <small>
+                        VESIRA · EYEWEAR
+                    </small>
+
+                    <span class="hero-drop">
+                        FIRST DROP
+                    </span>
+
+                </div>
+
+
+                <div class="hero-bottom">
+
+                    <h1 class="hero-titulo">
+                        <span>See it</span>
+                        <span>your</span>
+                        <span>way.</span>
+                    </h1>
+
+
+                    <a
+                        href="#coleccion"
+                        class="hero-link">
+
+                        Descubrir colección
+
+                        <span class="material-symbols-outlined">
+                            arrow_downward
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
 
 
 
+    <!-- =====================================================
+         MARQUEE
+    ====================================================== -->
 
+    <section class="marquee">
 
+        <div class="marquee-track">
 
-<!-- COLECCIONES -->
-<section class = "colecciones">
-    
-    <!-- Fundas -->
-    <button class="flecha flecha-izquierda">
-        <span class="material-symbols-outlined">
-            chevron_left
-        </span>
-    </button>
+            <div class="marquee-item">
+                <span>VESIRA EYEWEAR</span>
+                <span class="marquee-dot"></span>
+                <span>BORN IN THE ATLANTIC</span>
+            </div>
 
-    <button class="flecha flecha-derecha">
-        <span class="material-symbols-outlined">
-            chevron_right
-        </span>
-    </button>
+            <div class="marquee-item">
+                <span>VESIRA EYEWEAR</span>
+                <span class="marquee-dot"></span>
+                <span>BORN IN THE ATLANTIC</span>
+            </div>
 
-    <a href = "buscar-dispositivo.html" class = "slide activa">
-        
-        <div class = "contenido-slide">
-            
-            <h2>Fundas</h2>
-            
-            <div class = "accion-slide">
-                <p>Ver colección</p>
-                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            <div class="marquee-item">
+                <span>VESIRA EYEWEAR</span>
+                <span class="marquee-dot"></span>
+                <span>BORN IN THE ATLANTIC</span>
+            </div>
+
+            <div class="marquee-item">
+                <span>VESIRA EYEWEAR</span>
+                <span class="marquee-dot"></span>
+                <span>BORN IN THE ATLANTIC</span>
             </div>
 
         </div>
 
-        <div class = "imagen-slide">
-            <img src = "img/colecciones/fundas.png" alt = "Fundas" class = "fundas">
-        </div>
-    
-    </a>
+    </section>
 
-    <!-- Protectores -->
-     <a href = "buscar-dispositivo.html" class = "slide">
-        
-        <div class = "contenido-slide">
-            <h2>Protectores</h2>
-            
-            <div class = "accion-slide">
-                <p>Ver colección</p>
-                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <section class="introduccion">
+
+        <small>
+            THE FIRST DROP
+        </small>
+
+        <h2>
+            Cinco modelos.
+            <em>Una misma actitud.</em>
+        </h2>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COLECCIÓN
+    ====================================================== -->
+
+    <section
+        class="coleccion"
+        id="coleccion">
+
+
+        <div class="coleccion-cabecera">
+
+            <div>
+
+                <small>
+                    COLLECTION 01
+                </small>
+
+                <h2>
+                    The frames.
+                </h2>
+
+            </div>
+
+
+            <div class="coleccion-meta">
+                29,99 € cada una<br>
+                Envío gratis a Canarias
             </div>
 
         </div>
 
-        <div class = "imagen-slide">
-            <img src = "img/colecciones/protectores.png" class = "protectores" alt = "Protectores">
-        </div>
-    </a>
 
-    <!-- Cargadores -->
-     <a href = "buscar-dispositivo.html" class = "slide">
-        
-        <div class = "contenido-slide">
-            <h2>Cargadores</h2>
-            
-            <div class = "accion-slide">
-                <p>Ver colección</p>
-                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+        <div class="gafas-grid">
+
+
+            <!-- 01 -->
+
+            <a
+                href="producto.html?id=clear-01"
+                class="gafa">
+
+                <div class="gafa-imagen">
+
+                    <img
+                        src="img/gafas/clear.jpg"
+                        alt="Vesira Clear"
+                    >
+
+                </div>
+
+                <div class="gafa-info">
+
+                    <span class="gafa-numero">
+                        01
+                    </span>
+
+                    <h3 class="gafa-nombre">
+                        Clear
+                    </h3>
+
+                    <span class="gafa-precio">
+                        29,99 €
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- 02 -->
+
+            <a
+                href="producto.html?id=crystal-02"
+                class="gafa">
+
+                <div class="gafa-imagen">
+
+                    <img
+                        src="img/gafas/crystal.jpg"
+                        alt="Vesira Crystal"
+                    >
+
+                </div>
+
+                <div class="gafa-info">
+
+                    <span class="gafa-numero">
+                        02
+                    </span>
+
+                    <h3 class="gafa-nombre">
+                        Crystal
+                    </h3>
+
+                    <span class="gafa-precio">
+                        29,99 €
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- 03 -->
+
+            <a
+                href="producto.html?id=smoke-03"
+                class="gafa">
+
+                <div class="gafa-imagen">
+
+                    <img
+                        src="img/gafas/smoke.jpg"
+                        alt="Vesira Smoke"
+                    >
+
+                </div>
+
+                <div class="gafa-info">
+
+                    <span class="gafa-numero">
+                        03
+                    </span>
+
+                    <h3 class="gafa-nombre">
+                        Smoke
+                    </h3>
+
+                    <span class="gafa-precio">
+                        29,99 €
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- 04 -->
+
+            <a
+                href="producto.html?id=black-04"
+                class="gafa">
+
+                <div class="gafa-imagen">
+
+                    <img
+                        src="img/gafas/black.jpg"
+                        alt="Vesira Black"
+                    >
+
+                </div>
+
+                <div class="gafa-info">
+
+                    <span class="gafa-numero">
+                        04
+                    </span>
+
+                    <h3 class="gafa-nombre">
+                        Black
+                    </h3>
+
+                    <span class="gafa-precio">
+                        29,99 €
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- 05 -->
+
+            <a
+                href="producto.html?id=amber-05"
+                class="gafa">
+
+                <div class="gafa-imagen">
+
+                    <img
+                        src="img/gafas/amber.jpg"
+                        alt="Vesira Amber"
+                    >
+
+                </div>
+
+                <div class="gafa-info">
+
+                    <span class="gafa-numero">
+                        05
+                    </span>
+
+                    <h3 class="gafa-nombre">
+                        Amber
+                    </h3>
+
+                    <span class="gafa-precio">
+                        29,99 €
+                    </span>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LANZAMIENTO
+    ====================================================== -->
+
+    <section class="lanzamiento">
+
+        <div>
+
+            <small>
+                LAUNCH OFFER
+            </small>
+
+            <h2>
+                3 × 2
+            </h2>
+
+            <p>
+                Elige tres modelos de la primera colección
+                y paga solo dos.
+                Oferta válida durante el lanzamiento.
+            </p>
+
+        </div>
+
+
+        <a
+            href="#coleccion"
+            class="lanzamiento-boton">
+
+            Elegir mis gafas
+
+            <span class="material-symbols-outlined">
+                arrow_forward
+            </span>
+
+        </a>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LOOKBOOK
+    ====================================================== -->
+
+    <section class="lookbook">
+
+        <div class="lookbook-img">
+
+            <img
+                src="img/gafas/editorial.jpg"
+                alt="Vesira"
+            >
+
+        </div>
+
+
+        <div class="lookbook-copy">
+
+            <small>
+                VESIRA · 001
+            </small>
+
+            <div>
+
+                <h2>
+                    Made for
+                    your everyday.
+                </h2>
+
+                <p>
+                    Una estética limpia.
+                    Una colección sencilla.
+                    Un punto diferente.
+                </p>
+
             </div>
-        
-        </div>
-
-        <div class = "imagen-slide">
-            <img src = "img/colecciones/cargadores.png" class = "cargadores" alt = "Cargadores">
-        </div>
-    </a>
-
-    <!-- Accesorios -->
-     <a href = "buscar-dispositivo.html" class = "slide">
-        
-        <div class = "contenido-slide">
-            <h2>Accesorios</h2>
-            
-            <div class = "accion-slide">
-                <p>Ver colección</p>
-                <span class="material-symbols-outlined">keyboard_arrow_right</span>
-            </div>
 
         </div>
 
-        <div class = "imagen-slide">
-            <img src = "img/colecciones/accesorios.png" class = "accesorios" alt = "Accesorios">
-        </div>
-    </a>
+    </section>
 
-</section>
-<!-- FIN COLECCIONES -->
 
-<!-- COMIENZO MOTIVOS COMPRAR -->
 
-<!-- FIN MOTIVOS COMPRAR -->
+    <!-- =====================================================
+         CIERRE
+    ====================================================== -->
 
-<!-- COMIENZO FOOTER -->
- <footer>
-    <img class = "footer-img-tres" src = "img/footer/tres.png">
-    <img class = "footer-img-uno" src = "img/footer/uno.png">
-    <img class = "footer-img-dos" src = "img/footer/dos.png">
-    
-    <div class = "pie-pagina">
+    <section class="cierre">
 
-    </div>
-    
-</footer>
-<!-- FIN FOOTER -->
+        <small>
+            BORN IN THE ATLANTIC
+        </small>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <h2>
+            VESIRA.
+        </h2>
 
-<script src="supabase.js"></script>
+        <p>
+            Eyewear for everyday.
+        </p>
 
-<script src="script.js"></script>
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <img
+            class="footer-img-tres"
+            src="img/footer/tres.png"
+            alt=""
+        >
+
+        <img
+            class="footer-img-uno"
+            src="img/footer/uno.png"
+            alt=""
+        >
+
+        <img
+            class="footer-img-dos"
+            src="img/footer/dos.png"
+            alt=""
+        >
+
+        <div class="pie-pagina"></div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         SCRIPTS
+    ====================================================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="supabase.js"></script>
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        /* =====================================================
+           MODO CLARO / OSCURO
+        ===================================================== */
+
+        const cambiarTema =
+            document.getElementById("cambiarTema");
+
+
+        const temaGuardado =
+            localStorage.getItem("vesiraTema");
+
+
+        if (temaGuardado === "oscuro") {
+
+            document.body.classList.add("dark");
+
+            cambiarTema.textContent =
+                "light_mode";
+
+        }
+
+
+        cambiarTema.addEventListener("click", () => {
+
+            const modoOscuro =
+                document.body.classList.toggle("dark");
+
+
+            localStorage.setItem(
+                "vesiraTema",
+                modoOscuro
+                    ? "oscuro"
+                    : "claro"
+            );
+
+
+            cambiarTema.textContent =
+                modoOscuro
+                    ? "light_mode"
+                    : "dark_mode";
+
+        });
+
+    </script>
+
 
 </body>
+
 </html>

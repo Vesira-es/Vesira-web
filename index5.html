@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style2.css">
+
+</head>
+
+<body>
+
+<div class="intro">
+
+    <img src="img/eslogan.png" alt="Born in the Atlantic" class="eslogan">
+
+</div>
+
+
+<nav class="barra-navegacion">
+
+    <div class="normal">
+
+        <img src="img/logo.png" class="logo">
+
+        <span
+        class="material-symbols-outlined"
+        id="abrirBusqueda">
+            search
+        </span>
+
+    </div>
+
+    <div class="buscar">
+
+        <span class="material-symbols-outlined">
+            search
+        </span>
+
+        <input
+        type="text"
+        placeholder="¿Qué estás buscando?">
+
+        <span class="material-symbols-outlined" id = "botonIA">auto_awesome</span>
+
+        <button id="cerrarBusqueda">
+            ✕
+        </button>
+
+    </div>
+
+    <div class="iconos">
+
+        <span class="material-symbols-outlined">
+            shopping_bag
+        </span>
+
+        <span class="material-symbols-outlined">
+            person
+        </span>
+        
+        <span class="material-symbols-outlined">
+            menu
+        </span>
+
+    </div>  
+
+</nav>
+
+<section class = "best-sellers">
+    <p class = "subtitulo">TE ENCANTARÁ</p>
+    <h2>Más vendidos</h2>
+
+    <div class = "carrusel-productos">
+
+        <div class = "producto">
+            <div class = "imagen-producto">
+                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
+            </div>
+            <h3>Funda con Magsafe</h3>
+            <p class = "modelo">iPhone 17 Pro Max</p>
+            <span class = "precio">9,99 €</span>
+        </div>
+
+        <div class = "producto">
+            <div class = "imagen-producto">
+                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
+            </div>
+            <h3>Funda con Magsafe</h3>
+            <p class = "modelo">iPhone 17 Pro Max</p>
+            <span class = "precio">9,99 €</span>
+        </div>
+
+        <div class = "producto">
+            <div class = "imagen-producto">
+                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
+            </div>
+            <h3>Funda con Magsafe</h3>
+            <p class = "modelo">iPhone 17 Pro Max</p>
+            <span class = "precio">9,99 €</span>
+        </div>
+
+        <div class = "producto">
+            <div class = "imagen-producto">
+                <img src = "img/productos/funda.jpg" alt = "Funda magsafe">
+            </div>
+            <h3>Funda con Magsafe</h3>
+            <p class = "modelo">iPhone 17 Pro Max</p>
+            <span class = "precio">9,99 €</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+
+<!-- SELECTOR DISPOSITIVO -->
+<section class="buscar-dispositivo">
+
+    <h2>Busca tu dispositivo</h2>
+
+    <div class="contenedor-selectores">
+
+        <div class="selector-marca" id="selectorMarca">
+
+            <div class="selector-marca-cabecera">
+
+                <span id="textoMarca">Marca</span>
+
+                <span class="material-symbols-outlined flecha-marca">
+                    keyboard_arrow_down
+                </span>
+
+            </div>
+
+            <div class="selector-marca-opciones">
+
+            </div>
+
+        </div>
+
+
+
+        <div class="selector-modelo desactivado" id="selectorModelo">
+
+            <div class="selector-modelo-cabecera">
+
+                <span id="textoModelo">Modelo</span>
+
+                <span class="material-symbols-outlined flecha-modelo">
+                    keyboard_arrow_down
+                </span>
+
+            </div>
+
+            <div class="selector-modelo-opciones">
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <button class="ir">
+
+        Buscar
+
+        <span class="material-symbols-outlined" id="flecha-ir">
+            keyboard_arrow_right
+        </span>
+
+    </button>
+
+</section>
+<!-- FIN SELECTOR DISPOSITIVO -->
+
+
+
+
+
+
+
+
+
+<!-- COLECCIONES -->
+<section class = "colecciones">
+    
+    <!-- Fundas -->
+    <button class="flecha flecha-izquierda">
+        <span class="material-symbols-outlined">
+            chevron_left
+        </span>
+    </button>
+
+    <button class="flecha flecha-derecha">
+        <span class="material-symbols-outlined">
+            chevron_right
+        </span>
+    </button>
+
+    <a href = "buscar-dispositivo.html" class = "slide activa">
+        
+        <div class = "contenido-slide">
+            
+            <h2>Fundas</h2>
+            
+            <div class = "accion-slide">
+                <p>Ver colección</p>
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </div>
+
+        </div>
+
+        <div class = "imagen-slide">
+            <img src = "img/colecciones/fundas.png" alt = "Fundas" class = "fundas">
+        </div>
+    
+    </a>
+
+    <!-- Protectores -->
+     <a href = "buscar-dispositivo.html" class = "slide">
+        
+        <div class = "contenido-slide">
+            <h2>Protectores</h2>
+            
+            <div class = "accion-slide">
+                <p>Ver colección</p>
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </div>
+
+        </div>
+
+        <div class = "imagen-slide">
+            <img src = "img/colecciones/protectores.png" class = "protectores" alt = "Protectores">
+        </div>
+    </a>
+
+    <!-- Cargadores -->
+     <a href = "buscar-dispositivo.html" class = "slide">
+        
+        <div class = "contenido-slide">
+            <h2>Cargadores</h2>
+            
+            <div class = "accion-slide">
+                <p>Ver colección</p>
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </div>
+        
+        </div>
+
+        <div class = "imagen-slide">
+            <img src = "img/colecciones/cargadores.png" class = "cargadores" alt = "Cargadores">
+        </div>
+    </a>
+
+    <!-- Accesorios -->
+     <a href = "buscar-dispositivo.html" class = "slide">
+        
+        <div class = "contenido-slide">
+            <h2>Accesorios</h2>
+            
+            <div class = "accion-slide">
+                <p>Ver colección</p>
+                <span class="material-symbols-outlined">keyboard_arrow_right</span>
+            </div>
+
+        </div>
+
+        <div class = "imagen-slide">
+            <img src = "img/colecciones/accesorios.png" class = "accesorios" alt = "Accesorios">
+        </div>
+    </a>
+
+</section>
+<!-- FIN COLECCIONES -->
+
+<!-- COMIENZO MOTIVOS COMPRAR -->
+
+<!-- FIN MOTIVOS COMPRAR -->
+
+<!-- COMIENZO FOOTER -->
+ <footer>
+    <img class = "footer-img-tres" src = "img/footer/tres.png">
+    <img class = "footer-img-uno" src = "img/footer/uno.png">
+    <img class = "footer-img-dos" src = "img/footer/dos.png">
+    
+    <div class = "pie-pagina">
+
+    </div>
+    
+</footer>
+<!-- FIN FOOTER -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
