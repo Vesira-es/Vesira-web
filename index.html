@@ -469,59 +469,42 @@
         ========================= */
 
         .imagen-principal {
-            width:
-                100%;
+    width: 100%;
+    margin-top: -5px;
 
-            margin-top:
-                20px;
+    height: 600px;
+    overflow: hidden;
 
-            overflow:
-                hidden;
+    background: var(--fondo);
 
-            background:
-                var(--fondo);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
 
-            display:
-                flex;
+.imagen-principal img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
-            justify-content:
-                center;
-        }
 
-
-        .imagen-principal img {
-            width:
-                100%;
-
-            height:
-                auto;
-
-            display:
-                block;
-        }
-
+        
 
         @media (max-width: 700px) {
 
-            .imagen-principal {
-                margin-top:
-                    110px;
-            }
+    .imagen-principal {
+        margin-top: 72px;
+        height: auto;
+        overflow: visible;
+    }
 
+    .imagen-principal img {
+        width: 100%;
+        height: auto;
+    }
 
-            .imagen-principal img {
-                width:
-                    100%;
-
-                height:
-                    auto;
-
-                margin:
-                    0;
-            }
-
-        }
-
+}
 
         /* =========================
            PRODUCTOS
