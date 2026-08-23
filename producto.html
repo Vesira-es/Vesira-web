@@ -19,22 +19,17 @@
 
     <style>
 
-        /* =========================
-           TEMA GENERAL
-        ========================= */
+        /* =====================================================
+           GENERAL
+        ===================================================== */
 
         :root {
             --fondo: #0c0c0c;
             --texto: #ffffff;
             --borde: #292929;
             --caja: #171717;
-            --texto-suave: #8b8b8b;
+            --suave: #919191;
         }
-
-
-        /* =========================
-           GENERAL
-        ========================= */
 
         * {
             margin: 0;
@@ -42,59 +37,29 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: var(--fondo);
             color: var(--texto);
-
             overflow-x: hidden;
 
-            transition:
-                background .3s ease,
-                color .3s ease;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        button {
+            font-family: inherit;
         }
 
 
-        /* =========================
-           INTRO
-        ========================= */
-
-        .intro {
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            z-index: 2000;
-
-            width: 100%;
-            height: 80px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background: var(--fondo);
-
-            border-bottom:
-                1px solid var(--borde);
-
-            opacity: 1;
-
-            transition:
-                opacity .35s ease;
-        }
-
-
-        .eslogan {
-            width: 410px;
-            height: auto;
-            display: block;
-        }
-
-
-        /* =========================
+        /* =====================================================
            NAVBAR
-        ========================= */
+        ===================================================== */
 
         .barra-navegacion {
             position: fixed;
@@ -107,39 +72,26 @@
             width: 100%;
             height: 80px;
 
-            background: var(--fondo);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 30px;
+
+            background: rgba(12,12,12,.88);
 
             border-bottom:
                 1px solid var(--borde);
 
-            opacity: 0;
-
-            transform:
-                translateY(-20px);
-
-            transition:
-                .8s ease;
+            backdrop-filter:
+                blur(14px);
         }
 
-
-        /* =========================
-           LOGO + LUPA
-        ========================= */
-
         .normal {
-            position: absolute;
-
-            left: 30px;
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
             display: flex;
-
             align-items: center;
 
-            gap: 35px;
+            gap: 30px;
 
             padding:
                 8px 25px;
@@ -154,115 +106,36 @@
                 999px;
         }
 
-
         .logo {
             width: 115px;
             height: auto;
             display: block;
         }
 
-
-        /* =========================
-           BUSCADOR
-        ========================= */
-
-        .buscar {
-            display: none;
-
-            position: absolute;
-
-            left: 50%;
-            top: 50%;
-
-            transform:
-                translate(-50%, -50%);
-
-            width: 620px;
-            max-width: 50vw;
-
-            height: 52px;
-
-            align-items: center;
-
-            gap: 12px;
-
-            padding:
-                0 22px;
-
-            background:
-                var(--caja);
-
-            border:
-                1px solid var(--borde);
-
-            border-radius:
-                999px;
+        .normal > span {
+            cursor: pointer;
         }
-
-
-        .buscar input {
-            width: 100%;
-            min-width: 0;
-
-            border: none;
-            outline: none;
-
-            background:
-                transparent;
-
-            color:
-                var(--texto);
-
-            font-size:
-                17px;
-        }
-
-
-        .buscar input::placeholder {
-            color: #999;
-        }
-
-
-        /* =========================
-           ICONOS DERECHA
-        ========================= */
 
         .iconos {
-            position: absolute;
-
-            right: 30px;
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
             display: flex;
-
             align-items: center;
-
-            gap: 8px;
+            gap: 6px;
         }
-
 
         .iconos span {
             width: 42px;
             height: 42px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
-            border-radius:
-                50%;
+            border-radius: 50%;
 
-            color:
-                var(--texto);
+            cursor: pointer;
 
-            cursor:
-                pointer;
+            transition: .2s ease;
         }
-
 
         .iconos span:hover {
             background:
@@ -270,66 +143,984 @@
         }
 
 
-        /* =========================
-           BUSCADOR
-        ========================= */
+        /* =====================================================
+           PRODUCTO PRINCIPAL
+        ===================================================== */
 
-        #abrirBusqueda,
-        #botonIA {
-            cursor:
-                pointer;
+        .producto-principal {
+
+            padding:
+                125px
+                5vw
+                80px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.12fr)
+                minmax(360px, .78fr);
+
+            gap: 70px;
+
+            align-items: center;
         }
 
 
-        #cerrarBusqueda {
+        /* =====================================================
+           COMPARADOR DE IMÁGENES
+        ===================================================== */
+
+        .comparador-contenedor {
+            width: 100%;
+        }
+
+        .comparador {
+
+            position: relative;
+
+            width: 100%;
+
+            aspect-ratio:
+                1 / .92;
+
+            overflow: hidden;
+
+            background:
+                #171717;
+
+            border-radius:
+                26px;
+
+            user-select: none;
+
+            touch-action:
+                none;
+
+            cursor:
+                ew-resize;
+        }
+
+
+        .comparador-imagen {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .comparador-imagen img {
+
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            pointer-events: none;
+        }
+
+
+        /* IMAGEN DERECHA */
+
+        .comparador-derecha {
+            position: absolute;
+
+            inset: 0;
+
+            overflow: hidden;
+        }
+
+        .comparador-derecha img {
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* RECORTE DERECHO */
+
+        .comparador-capa {
+            position: absolute;
+
+            inset: 0 auto 0 0;
+
+            width: 50%;
+
+            overflow: hidden;
+
+            z-index: 2;
+        }
+
+
+        .comparador-capa img {
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100vw;
+            max-width: none;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        /* LÍNEA */
+
+        .comparador-linea {
+
+            position: absolute;
+
+            top: 0;
+            bottom: 0;
+
+            left: 50%;
+
+            width: 1px;
+
+            background:
+                rgba(255,255,255,.8);
+
+            z-index: 5;
+
+            transform:
+                translateX(-50%);
+
+            pointer-events: none;
+        }
+
+
+        /* BOTÓN CENTRAL */
+
+        .comparador-boton {
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            z-index: 6;
+
+            transform:
+                translate(-50%, -50%);
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.15);
+
+            border-radius: 50%;
+
+            background:
+                rgba(0,0,0,.65);
+
+            color: white;
+
+            backdrop-filter:
+                blur(10px);
+
+            pointer-events: none;
+        }
+
+
+        .comparador-boton span {
+            font-size: 20px;
+        }
+
+
+        /* MINI TEXTOS */
+
+        .comparador-etiqueta {
+
+            position: absolute;
+
+            bottom: 16px;
+
+            z-index: 7;
+
+            padding:
+                8px 11px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(0,0,0,.42);
+
+            backdrop-filter:
+                blur(10px);
+
+            font-size:
+                8px;
+
+            letter-spacing:
+                .16em;
+
+            text-transform:
+                uppercase;
+        }
+
+        .comparador-etiqueta.izquierda {
+            left: 16px;
+        }
+
+        .comparador-etiqueta.derecha {
+            right: 16px;
+        }
+
+
+        /* =====================================================
+           INFORMACIÓN
+        ===================================================== */
+
+        .producto-info {
+
+            max-width:
+                510px;
+        }
+
+
+        .producto-overline {
+
+            display: block;
+
+            margin-bottom:
+                18px;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                .22em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                var(--suave);
+        }
+
+
+        .producto-nombre {
+
+            font-family:
+                "Bricolage Grotesque",
+                Arial,
+                sans-serif;
+
+            font-size:
+                clamp(
+                    58px,
+                    7vw,
+                    100px
+                );
+
+            font-weight:
+                400;
+
+            line-height:
+                .78;
+
+            letter-spacing:
+                -.075em;
+
+            margin-bottom:
+                22px;
+        }
+
+
+        .producto-descripcion {
+
+            max-width:
+                430px;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.7;
+
+            color:
+                var(--suave);
+
+            margin-bottom:
+                24px;
+        }
+
+
+        .producto-precio {
+
+            font-size:
+                20px;
+
+            font-weight:
+                500;
+
+            margin-bottom:
+                26px;
+        }
+
+
+        /* =====================================================
+           OFERTA
+        ===================================================== */
+
+        .oferta-dos {
+
+            padding:
+                15px 17px;
+
+            margin-bottom:
+                25px;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius:
+                16px;
+
+            background:
+                var(--caja);
+        }
+
+        .oferta-dos strong {
+
+            display: block;
+
+            font-size:
+                13px;
+
+            margin-bottom:
+                4px;
+        }
+
+        .oferta-dos span {
+
+            font-size:
+                11px;
+
+            color:
+                var(--suave);
+        }
+
+
+        /* =====================================================
+           BOTONES
+        ===================================================== */
+
+        .acciones {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                25px;
+        }
+
+
+        .boton {
+
+            min-height:
+                56px;
+
             border:
                 none;
 
-            background:
-                transparent;
+            border-radius:
+                999px;
 
-            color:
-                var(--texto);
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                8px;
 
             cursor:
                 pointer;
 
             font-size:
-                19px;
+                12px;
+
+            transition:
+                transform .2s ease,
+                opacity .2s ease;
+        }
+
+
+        .boton:hover {
+            transform:
+                translateY(-2px);
+        }
+
+
+        .boton:active {
+            transform:
+                scale(.98);
+        }
+
+
+        .boton-carrito {
+
+            background:
+                var(--caja);
+
+            border:
+                1px solid
+                var(--borde);
+
+            color:
+                var(--texto);
+        }
+
+
+        .boton-comprar {
+
+            background:
+                var(--texto);
+
+            color:
+                var(--fondo);
+        }
+
+
+        /* =====================================================
+           BENEFICIOS
+        ===================================================== */
+
+        .beneficios {
+
+            border-top:
+                1px solid
+                var(--borde);
+        }
+
+
+        .beneficio {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                14px;
 
             padding:
-                0;
+                15px 0;
+
+            border-bottom:
+                1px solid
+                var(--borde);
         }
 
 
-        .IA-activa {
+        .beneficio-icono {
+
+            width:
+                36px;
+
+            height:
+                36px;
+
+            flex:
+                0 0 36px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius:
+                50%;
+        }
+
+
+        .beneficio-icono span {
+            font-size:
+                18px;
+        }
+
+
+        .beneficio-texto strong {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+
+            margin-bottom:
+                3px;
+        }
+
+
+        .beneficio-texto span {
+
+            display:
+                block;
+
+            font-size:
+                10px;
+
             color:
-                #f4b400 !important;
+                var(--suave);
         }
 
 
-        /* =========================
-           MÓVIL NAVBAR
-        ========================= */
+        /* =====================================================
+           SECCIÓN BENEFICIOS GRANDE
+        ===================================================== */
 
-        @media (max-width: 700px) {
+        .beneficios-extra {
 
-            .intro,
-            .barra-navegacion {
-                height:
-                    72px;
+            padding:
+                30px 5vw
+                100px;
+        }
+
+
+        .beneficios-extra-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                12px;
+        }
+
+
+        .beneficio-card {
+
+            padding:
+                28px;
+
+            min-height:
+                180px;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius:
+                22px;
+
+            background:
+                var(--caja);
+        }
+
+
+        .beneficio-card .material-symbols-outlined {
+
+            font-size:
+                25px;
+
+            margin-bottom:
+                35px;
+        }
+
+
+        .beneficio-card h3 {
+
+            font-family:
+                "Bricolage Grotesque",
+                Arial,
+                sans-serif;
+
+            font-size:
+                22px;
+
+            font-weight:
+                400;
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .beneficio-card p {
+
+            font-size:
+                11px;
+
+            line-height:
+                1.6;
+
+            color:
+                var(--suave);
+        }
+
+
+        /* =====================================================
+           SEGUIR COMPRANDO
+        ===================================================== */
+
+        .seguir-comprando {
+
+            padding:
+                40px 5vw
+                120px;
+        }
+
+
+        .seguir-cabecera {
+
+            display:
+                flex;
+
+            align-items:
+                end;
+
+            justify-content:
+                space-between;
+
+            margin-bottom:
+                28px;
+        }
+
+
+        .seguir-cabecera span {
+
+            display:
+                block;
+
+            font-size:
+                9px;
+
+            letter-spacing:
+                .2em;
+
+            text-transform:
+                uppercase;
+
+            color:
+                var(--suave);
+
+            margin-bottom:
+                9px;
+        }
+
+
+        .seguir-cabecera h2 {
+
+            font-family:
+                "Bricolage Grotesque",
+                Arial,
+                sans-serif;
+
+            font-size:
+                clamp(
+                    42px,
+                    5vw,
+                    65px
+                );
+
+            font-weight:
+                400;
+
+            line-height:
+                .85;
+
+            letter-spacing:
+                -.065em;
+        }
+
+
+        .productos-resto {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                18px;
+        }
+
+
+        .producto-resto {
+
+            text-decoration:
+                none;
+
+            color:
+                var(--texto);
+        }
+
+
+        .producto-resto-imagen {
+
+            width:
+                100%;
+
+            aspect-ratio:
+                1 / .85;
+
+            overflow:
+                hidden;
+
+            border-radius:
+                20px;
+
+            background:
+                #101010;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+        }
+
+
+        .producto-resto-imagen img {
+
+            width:
+                88%;
+
+            height:
+                88%;
+
+            object-fit:
+                contain;
+
+            transition:
+                transform .45s ease;
+        }
+
+
+        .producto-resto:hover
+        .producto-resto-imagen img {
+
+            transform:
+                scale(1.05);
+        }
+
+
+        .producto-resto-info {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                baseline;
+
+            gap:
+                10px;
+
+            padding:
+                12px 3px;
+        }
+
+
+        .producto-resto-info h3 {
+
+            font-family:
+                "Bricolage Grotesque",
+                Arial,
+                sans-serif;
+
+            font-size:
+                17px;
+
+            font-weight:
+                400;
+        }
+
+
+        .producto-resto-info span {
+
+            font-size:
+                11px;
+
+            color:
+                var(--suave);
+        }
+
+
+        /* =====================================================
+           TOAST
+        ===================================================== */
+
+        .toast {
+
+            position:
+                fixed;
+
+            left:
+                50%;
+
+            bottom:
+                25px;
+
+            z-index:
+                3000;
+
+            transform:
+                translate(-50%, 20px);
+
+            opacity:
+                0;
+
+            padding:
+                13px 18px;
+
+            border:
+                1px solid
+                var(--borde);
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(23,23,23,.95);
+
+            backdrop-filter:
+                blur(15px);
+
+            font-size:
+                11px;
+
+            pointer-events:
+                none;
+
+            transition:
+                .3s ease;
+        }
+
+
+        .toast.visible {
+
+            opacity:
+                1;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+
+        /* =====================================================
+           MÓVIL
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .producto-principal {
+
+                grid-template-columns:
+                    1fr;
+
+                gap:
+                    40px;
+
+                padding:
+                    110px
+                    14px
+                    55px;
             }
 
 
-            .eslogan {
-                width:
-                    325px;
+            .producto-info {
+
+                max-width:
+                    none;
+            }
+
+
+            .producto-nombre {
+
+                font-size:
+                    clamp(
+                        52px,
+                        16vw,
+                        80px
+                    );
+            }
+
+
+            .beneficios-extra-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .productos-resto {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .barra-navegacion {
+
+                height:
+                    72px;
+
+                padding:
+                    0 14px;
             }
 
 
             .normal {
-                left:
-                    14px;
 
                 gap:
                     20px;
@@ -345,40 +1136,8 @@
             }
 
 
-            .buscar {
-                width:
-                    220px;
-
-                max-width:
-                    none;
-
-                height:
-                    42px;
-
-                padding:
-                    0 14px;
-
-                gap:
-                    8px;
-            }
-
-
-            .buscar input {
-                font-size:
-                    14px;
-            }
-
-
-            .iconos {
-                right:
-                    14px;
-
-                gap:
-                    2px;
-            }
-
-
             .iconos span {
+
                 width:
                     36px;
 
@@ -386,624 +1145,102 @@
                     36px;
             }
 
-        }
 
+            .producto-principal {
 
-        /* =========================
-           IMAGEN PRINCIPAL
-        ========================= */
-
-        .imagen-principal {
-            width:
-                100%;
-
-            margin-top:
-                130px;
-
-            overflow:
-                hidden;
-
-            background:
-                var(--fondo);
-
-            display:
-                flex;
-
-            justify-content:
-                center;
-        }
-
-
-        .imagen-principal img {
-            width:
-                100%;
-
-            height:
-                auto;
-
-            display:
-                block;
-        }
-
-
-        @media (max-width: 700px) {
-
-            .imagen-principal {
-                margin-top:
-                    110px;
-            }
-
-
-            .imagen-principal img {
-                width:
-                    100%;
-
-                height:
-                    auto;
-
-                margin:
-                    0;
-            }
-
-        }
-
-
-        /* =========================
-           PRODUCTOS
-        ========================= */
-
-        .productos {
-            padding:
-                55px 5vw 110px;
-        }
-
-
-        /* CABECERA + INTERRUPTOR */
-
-        .productos-cabecera {
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                30px;
-
-            margin-bottom:
-                24px;
-        }
-
-
-        .productos-cabecera h2 {
-            font-family:
-                "Bricolage Grotesque",
-                sans-serif;
-
-            font-size:
-                clamp(42px, 5vw, 68px);
-
-            font-weight:
-                400;
-
-            line-height:
-                .88;
-
-            letter-spacing:
-                -.065em;
-        }
-
-
-        /* =========================
-           CONTROL GENERAL IMÁGENES
-        ========================= */
-
-        .control-imagenes {
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                flex-end;
-
-            margin:
-                0;
-
-        }
-
-
-        .control-imagenes-texto {
-            display: none;
-        }
-
-
-        .interruptor-imagenes {
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                4px;
-
-            padding:
-                4px;
-
-            border:
-                1px solid var(--borde);
-
-            border-radius:
-                999px;
-
-            background:
-                var(--caja);
-        }
-
-
-        .opcion-imagen {
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                5px;
-
-            min-width:
-                74px;
-
-            height:
-                30px;
-
-            padding:
-                0 10px;
-
-            border:
-                none;
-
-            border-radius:
-                999px;
-
-            background:
-                transparent;
-
-            color:
-                var(--texto-suave);
-
-            font-size:
-                9px;
-
-            cursor:
-                pointer;
-
-            transition:
-                .2s ease;
-        }
-
-
-        .opcion-imagen.activa {
-            background:
-                var(--texto);
-
-            color:
-                var(--fondo);
-        }
-
-
-        .opcion-imagen
-        .material-symbols-outlined {
-            font-size:
-                15px;
-        }
-
-
-        /* =========================
-           GRID
-        ========================= */
-
-        .grid-productos {
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
-
-            gap:
-                22px;
-        }
-
-
-        /* =========================
-           CARD
-        ========================= */
-
-        .producto-card {
-            position:
-                relative;
-
-            display:
-                block;
-
-            padding:
-                14px;
-
-            background:
-                var(--caja);
-
-            border:
-                1px solid var(--borde);
-
-            border-radius:
-                22px;
-
-            color:
-                var(--texto);
-
-            text-decoration:
-                none;
-
-            transition:
-                transform .3s ease,
-                border-color .3s ease,
-                box-shadow .3s ease;
-        }
-
-
-        .producto-card:hover {
-            transform:
-                translateY(-4px);
-
-            border-color:
-                rgba(255,255,255,.18);
-
-            box-shadow:
-                0 16px 40px
-                rgba(0,0,0,.28);
-        }
-
-
-        /* =========================
-           CUADRO IMAGEN
-        ========================= */
-
-        .producto-imagen {
-            position:
-                relative;
-
-            width:
-                100%;
-
-            aspect-ratio:
-                1 / .83;
-
-            overflow:
-                hidden;
-
-            border-radius:
-                16px;
-
-            background:
-                #101010;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            transition:
-                background .3s ease;
-        }
-
-
-        .producto-imagen.modo-claro {
-            background:
-                #f2f2ef;
-        }
-
-
-        .producto-imagen img {
-            width:
-                88%;
-
-            height:
-                88%;
-
-            object-fit:
-                contain;
-
-            display:
-                block;
-
-            transition:
-                transform .45s
-                cubic-bezier(.2,.8,.2,1);
-        }
-
-
-        .producto-card:hover
-        .producto-imagen img {
-            transform:
-                scale(1.06);
-        }
-
-
-        /* =========================
-           INFORMACIÓN PRODUCTO
-        ========================= */
-
-        .producto-info {
-            padding:
-                17px 3px 3px;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr auto;
-
-            grid-template-rows:
-                auto auto;
-
-            column-gap:
-                20px;
-
-            align-items:
-                start;
-        }
-
-
-        .producto-nombre {
-            grid-column:
-                1;
-
-            grid-row:
-                1;
-
-            font-family:
-                "Bricolage Grotesque",
-                sans-serif;
-
-            font-size:
-                20px;
-
-            font-weight:
-                400;
-
-            letter-spacing:
-                -.035em;
-
-            line-height:
-                1;
-
-            margin:
-                0;
-        }
-
-
-        .producto-descripcion {
-            grid-column:
-                1;
-
-            grid-row:
-                2;
-
-            font-size:
-                10px;
-
-            line-height:
-                1.55;
-
-            color:
-                var(--texto-suave);
-
-            max-width:
-                280px;
-
-            margin-top:
-                7px;
-        }
-
-
-        .producto-precio {
-            grid-column:
-                2;
-
-            grid-row:
-                1 / 3;
-
-            align-self:
-                center;
-
-            font-size:
-                14px;
-
-            font-weight:
-                500;
-
-            letter-spacing:
-                -.01em;
-
-            color:
-                var(--texto);
-
-            white-space:
-                nowrap;
-        }
-
-
-        /* =========================
-           MENSAJE
-        ========================= */
-
-        .productos-mensaje {
-            grid-column:
-                1 / -1;
-
-            padding:
-                80px 20px;
-
-            text-align:
-                center;
-
-            color:
-                #999;
-
-            font-size:
-                13px;
-        }
-
-
-        /* =========================
-           TABLET
-        ========================= */
-
-        @media (max-width: 1000px) {
-
-            .grid-productos {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
-                gap:
-                    18px;
-            }
-
-        }
-
-
-        /* =========================
-           MÓVIL
-        ========================= */
-
-        @media (max-width: 700px) {
-
-            .productos {
                 padding:
-                    55px
+                    95px
                     14px
-                    75px;
+                    50px;
             }
 
 
-            .productos-cabecera {
-                margin-bottom:
-                    18px;
+            .comparador {
+
+                border-radius:
+                    20px;
+
+                aspect-ratio:
+                    1 / 1.02;
             }
 
 
-            .productos-cabecera h2 {
-                font-size:
+            .comparador-boton {
+
+                width:
+                    42px;
+
+                height:
                     42px;
             }
 
 
-            .interruptor-imagenes {
+            .comparador-etiqueta {
+
+                font-size:
+                    7px;
+
+                bottom:
+                    10px;
+            }
+
+
+            .comparador-etiqueta.izquierda {
+                left:
+                    10px;
+            }
+
+
+            .comparador-etiqueta.derecha {
+                right:
+                    10px;
+            }
+
+
+            .acciones {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .beneficios-extra {
+
+                padding:
+                    25px 14px
+                    70px;
+            }
+
+
+            .seguir-comprando {
+
+                padding:
+                    35px 14px
+                    80px;
+            }
+
+
+            .productos-resto {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
                 gap:
-                    3px;
-
-                padding:
-                    3px;
+                    10px;
             }
 
 
-            .opcion-imagen {
-                min-width:
-                    58px;
+            .producto-resto-imagen {
 
-                height:
-                    28px;
-
-                padding:
-                    0 8px;
-
-                font-size:
-                    8px;
-            }
-
-
-            .opcion-imagen
-            .material-symbols-outlined {
-                font-size:
+                border-radius:
                     14px;
             }
 
 
-            .grid-productos {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
+            .producto-resto-info h3 {
 
-                gap:
-                    12px;
-            }
-
-
-            .producto-card {
-                padding:
-                    9px;
-
-                border-radius:
-                    17px;
-            }
-
-
-            .producto-imagen {
-                aspect-ratio:
-                    1 / .86;
-
-                border-radius:
-                    12px;
-            }
-
-
-            .producto-imagen img {
-                width:
-                    84%;
-
-                height:
-                    84%;
-            }
-
-
-            .producto-info {
-                padding:
-                    12px 2px 2px;
-
-                column-gap:
-                    8px;
-            }
-
-
-            .producto-nombre {
                 font-size:
-                    15px;
-            }
-
-
-            .producto-descripcion {
-                font-size:
-                    9px;
-
-                margin-top:
-                    5px;
-            }
-
-
-            .producto-precio {
-                font-size:
-                    11px;
+                    14px;
             }
 
         }
@@ -1016,88 +1253,36 @@
 <body>
 
 
-    <!-- =========================
-         INTRO
-    ========================= -->
-
-    <div
-        class="intro"
-        id="intro"
-    >
-
-        <img
-            src="img/eslogan.png"
-            alt="Vesira"
-            class="eslogan"
-        >
-
-    </div>
-
-
-    <!-- =========================
+    <!-- =====================================================
          NAVBAR
-    ========================= -->
+    ===================================================== -->
 
-    <nav
-        class="barra-navegacion"
-        id="navbar"
-    >
+    <nav class="barra-navegacion">
 
         <div class="normal">
 
             <img
                 src="img/logo2.png"
                 class="logo"
-                id="logoVesira"
                 alt="Vesira"
             >
 
             <span
                 class="material-symbols-outlined"
-                id="abrirBusqueda">
-                search
+                onclick="history.back()">
+                arrow_back
             </span>
-
-        </div>
-
-
-        <div class="buscar">
-
-            <span
-                class="material-symbols-outlined">
-                search
-            </span>
-
-            <input
-                id="inputBusqueda"
-                type="text"
-                placeholder="¿Qué estás buscando?"
-            >
-
-            <span
-                class="material-symbols-outlined"
-                id="botonIA">
-                auto_awesome
-            </span>
-
-            <button
-                id="cerrarBusqueda"
-                aria-label="Cerrar búsqueda">
-                ✕
-            </button>
 
         </div>
 
 
         <div class="iconos">
 
-            <span
-                class="material-symbols-outlined">
+            <span class="material-symbols-outlined">
                 shopping_bag
             </span>
 
-            <span
-                class="material-symbols-outlined">
+            <span class="material-symbols-outlined">
                 menu
             </span>
 
@@ -1106,70 +1291,374 @@
     </nav>
 
 
-    <!-- =========================
-         IMAGEN PRINCIPAL
-    ========================= -->
 
-    <section class="imagen-principal">
+    <!-- =====================================================
+         PRODUCTO
+    ===================================================== -->
 
-        <img
-            src="img/imagen-principal.png"
-            alt="Personas llevando gafas Vesira"
-        >
+    <main
+        class="producto-principal"
+        id="productoPrincipal"
+    >
+
+
+        <!-- COMPARADOR -->
+
+        <section class="comparador-contenedor">
+
+            <div
+                class="comparador"
+                id="comparador"
+            >
+
+                <!-- IMAGEN DERECHA -->
+
+                <div
+                    class="comparador-imagen comparador-derecha"
+                >
+
+                    <img
+                        id="imagenDerecha"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+
+                <!-- IMAGEN IZQUIERDA -->
+
+                <div
+                    class="comparador-capa"
+                    id="comparadorCapa"
+                >
+
+                    <img
+                        id="imagenIzquierda"
+                        src=""
+                        alt=""
+                    >
+
+                </div>
+
+
+                <!-- LÍNEA -->
+
+                <div
+                    class="comparador-linea"
+                    id="comparadorLinea"
+                ></div>
+
+
+                <!-- CONTROL -->
+
+                <div class="comparador-boton">
+
+                    <span class="material-symbols-outlined">
+                        swap_horiz
+                    </span>
+
+                </div>
+
+
+                <!-- ETIQUETAS -->
+
+                <div
+                    class="comparador-etiqueta izquierda"
+                >
+                    Vista 01
+                </div>
+
+                <div
+                    class="comparador-etiqueta derecha"
+                >
+                    Vista 02
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- INFORMACIÓN -->
+
+        <section class="producto-info">
+
+            <span
+                class="producto-overline"
+                id="productoCategoria"
+            >
+                VESIRA · COLLECTION 01
+            </span>
+
+
+            <h1
+                class="producto-nombre"
+                id="productoNombre"
+            >
+                Cargando...
+            </h1>
+
+
+            <p
+                class="producto-descripcion"
+                id="productoDescripcion"
+            >
+            </p>
+
+
+            <div
+                class="producto-precio"
+                id="productoPrecio"
+            >
+            </div>
+
+
+            <!-- OFERTA 2 -->
+
+            <div class="oferta-dos">
+
+                <strong>
+                    20% OFF AL COMPRAR 2
+                </strong>
+
+                <span>
+                    Llévate dos modelos y consigue un 20% de descuento.
+                </span>
+
+            </div>
+
+
+            <!-- BOTONES -->
+
+            <div class="acciones">
+
+                <button
+                    class="boton boton-carrito"
+                    id="botonCarrito"
+                >
+
+                    Añadir al carrito
+
+                    <span class="material-symbols-outlined">
+                        shopping_bag
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="boton boton-comprar"
+                    id="botonComprar"
+                >
+
+                    Comprar ahora
+
+                    <span class="material-symbols-outlined">
+                        arrow_forward
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- BENEFICIOS CORTOS -->
+
+            <div class="beneficios">
+
+                <div class="beneficio">
+
+                    <div class="beneficio-icono">
+
+                        <span class="material-symbols-outlined">
+                            local_shipping
+                        </span>
+
+                    </div>
+
+                    <div class="beneficio-texto">
+
+                        <strong>
+                            Envío gratis
+                        </strong>
+
+                        <span>
+                            Entrega en Canarias.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="beneficio">
+
+                    <div class="beneficio-icono">
+
+                        <span class="material-symbols-outlined">
+                            schedule
+                        </span>
+
+                    </div>
+
+                    <div class="beneficio-texto">
+
+                        <strong>
+                            Llega en hasta 5 días
+                        </strong>
+
+                        <span>
+                            Te avisamos cuando salga tu pedido.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="beneficio">
+
+                    <div class="beneficio-icono">
+
+                        <span class="material-symbols-outlined">
+                            location_on
+                        </span>
+
+                    </div>
+
+                    <div class="beneficio-texto">
+
+                        <strong>
+                            Seguimiento 24 h
+                        </strong>
+
+                        <span>
+                            Podrás seguir tu pedido en todo momento.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="beneficio">
+
+                    <div class="beneficio-icono">
+
+                        <span class="material-symbols-outlined">
+                            replay
+                        </span>
+
+                    </div>
+
+                    <div class="beneficio-texto">
+
+                        <strong>
+                            Devoluciones
+                        </strong>
+
+                        <span>
+                            Si hay cualquier problema, gestionamos la devolución.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         BENEFICIOS GRANDES
+    ===================================================== -->
+
+    <section class="beneficios-extra">
+
+        <div class="beneficios-extra-grid">
+
+            <article class="beneficio-card">
+
+                <span class="material-symbols-outlined">
+                    visibility
+                </span>
+
+                <h3>
+                    Hechas para tu día
+                </h3>
+
+                <p>
+                    Un diseño pensado para acompañarte
+                    durante tus horas de pantalla y tu día a día.
+                </p>
+
+            </article>
+
+
+            <article class="beneficio-card">
+
+                <span class="material-symbols-outlined">
+                    auto_awesome
+                </span>
+
+                <h3>
+                    Diseñadas en Canarias
+                </h3>
+
+                <p>
+                    Vesira nace aquí. Una colección creada
+                    para tener identidad propia.
+                </p>
+
+            </article>
+
+
+            <article class="beneficio-card">
+
+                <span class="material-symbols-outlined">
+                    favorite
+                </span>
+
+                <h3>
+                    Vesira contigo
+                </h3>
+
+                <p>
+                    Una montura que funciona con tu estilo,
+                    no al revés.
+                </p>
+
+            </article>
+
+        </div>
 
     </section>
 
 
-    <!-- =========================
-         PRODUCTOS
-    ========================= -->
 
-    <section class="productos">
+    <!-- =====================================================
+         SEGUIR COMPRANDO
+    ===================================================== -->
 
+    <section class="seguir-comprando">
 
-        <div class="productos-cabecera">
+        <div class="seguir-cabecera">
 
-            <h2>
-                Collection 01
-            </h2>
+            <div>
 
+                <span>
+                    COLLECTION 01
+                </span>
 
-            <div class="control-imagenes">
-
-                <div class="interruptor-imagenes">
-
-                    <button
-                        class="opcion-imagen activa"
-                        id="imagenOscura"
-                        type="button"
-                    >
-
-                        <span
-                            class="material-symbols-outlined">
-                            dark_mode
-                        </span>
-
-                        Oscuro
-
-                    </button>
-
-
-                    <button
-                        class="opcion-imagen"
-                        id="imagenClara"
-                        type="button"
-                    >
-
-                        <span
-                            class="material-symbols-outlined">
-                            light_mode
-                        </span>
-
-                        Claro
-
-                    </button>
-
-                </div>
+                <h2>
+                    Sigue comprando.
+                </h2>
 
             </div>
 
@@ -1177,406 +1666,652 @@
 
 
         <div
-            class="grid-productos"
-            id="gridProductos"
+            class="productos-resto"
+            id="productosResto"
         >
-
-            <div class="productos-mensaje">
-                Cargando colección...
-            </div>
 
         </div>
 
     </section>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
+         TOAST
+    ===================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+        Añadido al carrito
+    </div>
+
+
+
+    <!-- =====================================================
          SUPABASE
-    ========================= -->
+    ===================================================== -->
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="supabase.js"></script>
 
 
+
     <script>
 
-        /* =========================
+        /* =====================================================
            REFERENCIAS
-        ========================= */
+        ===================================================== */
 
-        const intro =
-            document.getElementById("intro");
+        const comparador =
+            document.getElementById(
+                "comparador"
+            );
 
-        const navbar =
-            document.getElementById("navbar");
+        const comparadorCapa =
+            document.getElementById(
+                "comparadorCapa"
+            );
 
-        const normal =
-            document.querySelector(".normal");
+        const comparadorLinea =
+            document.getElementById(
+                "comparadorLinea"
+            );
 
-        const buscar =
-            document.querySelector(".buscar");
+        const imagenIzquierda =
+            document.getElementById(
+                "imagenIzquierda"
+            );
 
-        const abrirBusqueda =
-            document.getElementById("abrirBusqueda");
+        const imagenDerecha =
+            document.getElementById(
+                "imagenDerecha"
+            );
 
-        const cerrarBusqueda =
-            document.getElementById("cerrarBusqueda");
+        const productoNombre =
+            document.getElementById(
+                "productoNombre"
+            );
 
-        const inputBusqueda =
-            document.getElementById("inputBusqueda");
+        const productoDescripcion =
+            document.getElementById(
+                "productoDescripcion"
+            );
 
-        const botonIA =
-            document.getElementById("botonIA");
+        const productoPrecio =
+            document.getElementById(
+                "productoPrecio"
+            );
 
-        const gridProductos =
-            document.getElementById("gridProductos");
+        const productoCategoria =
+            document.getElementById(
+                "productoCategoria"
+            );
 
-        const imagenOscura =
-            document.getElementById("imagenOscura");
+        const productosResto =
+            document.getElementById(
+                "productosResto"
+            );
 
-        const imagenClara =
-            document.getElementById("imagenClara");
+        const botonCarrito =
+            document.getElementById(
+                "botonCarrito"
+            );
 
+        const botonComprar =
+            document.getElementById(
+                "botonComprar"
+            );
 
-        /* =========================
-           INTRO → NAVBAR
-        ========================= */
-
-        setTimeout(() => {
-
-            intro.style.opacity =
-                "0";
-
-            navbar.style.opacity =
-                "1";
-
-            navbar.style.transform =
-                "translateY(0)";
-
-            setTimeout(() => {
-
-                intro.style.display =
-                    "none";
-
-            }, 350);
-
-        }, 1500);
-
-
-        /* =========================
-           BUSCADOR
-        ========================= */
-
-        abrirBusqueda.addEventListener(
-            "click",
-            () => {
-
-                normal.style.visibility =
-                    "hidden";
-
-                buscar.style.display =
-                    "flex";
-
-                inputBusqueda.focus();
-
-            }
-        );
+        const toast =
+            document.getElementById(
+                "toast"
+            );
 
 
-        cerrarBusqueda.addEventListener(
-            "click",
-            () => {
+        /* =====================================================
+           ID DEL PRODUCTO
+        ===================================================== */
 
-                buscar.style.display =
-                    "none";
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
 
-                normal.style.visibility =
-                    "visible";
-
-                inputBusqueda.value =
-                    "";
-
-            }
-        );
+        const productoId =
+            parametros.get("id");
 
 
-        /* =========================
-           IA
-        ========================= */
-
-        let iaActiva = false;
+        let productoActual = null;
 
 
-        botonIA.addEventListener(
-            "click",
-            () => {
+        /* =====================================================
+           COMPARADOR
+        ===================================================== */
 
-                iaActiva =
-                    !iaActiva;
+        let porcentaje =
+            50;
 
-                botonIA.classList.toggle(
-                    "IA-activa",
-                    iaActiva
-                );
-
-                inputBusqueda.placeholder =
-                    iaActiva
-                        ? "Pregúntale a la IA"
-                        : "¿Qué estás buscando?";
-
-            }
-        );
-
-
-        /* =========================
-           FONDO GENERAL DE FOTOS
-        ========================= */
-
-        let fondoClaro =
+        let arrastrando =
             false;
 
 
-        function aplicarFondoImagenes(
-            claro
+        function actualizarComparador(
+            valor
         ) {
 
-            fondoClaro =
-                claro;
-
-
-            document
-                .querySelectorAll(
-                    ".producto-imagen"
-                )
-                .forEach(
-                    (imagen) => {
-
-                        imagen.classList.toggle(
-                            "modo-claro",
-                            claro
-                        );
-
-                    }
+            porcentaje =
+                Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        valor
+                    )
                 );
 
 
-            imagenOscura.classList.toggle(
-                "activa",
-                !claro
-            );
+            comparadorCapa.style.width =
+                `${porcentaje}%`;
+
+            comparadorLinea.style.left =
+                `${porcentaje}%`;
+
+        }
 
 
-            imagenClara.classList.toggle(
-                "activa",
-                claro
+        function obtenerPorcentaje(
+            posicionX
+        ) {
+
+            const rect =
+                comparador.getBoundingClientRect();
+
+            const valor =
+                (
+                    (posicionX - rect.left)
+                    /
+                    rect.width
+                ) * 100;
+
+            return valor;
+
+        }
+
+
+        comparador.addEventListener(
+            "pointerdown",
+            (evento) => {
+
+                arrastrando =
+                    true;
+
+                comparador.setPointerCapture(
+                    evento.pointerId
+                );
+
+                actualizarComparador(
+                    obtenerPorcentaje(
+                        evento.clientX
+                    )
+                );
+
+            }
+        );
+
+
+        comparador.addEventListener(
+            "pointermove",
+            (evento) => {
+
+                if (!arrastrando)
+                    return;
+
+                actualizarComparador(
+                    obtenerPorcentaje(
+                        evento.clientX
+                    )
+                );
+
+            }
+        );
+
+
+        comparador.addEventListener(
+            "pointerup",
+            () => {
+
+                arrastrando =
+                    false;
+
+            }
+        );
+
+
+        comparador.addEventListener(
+            "pointercancel",
+            () => {
+
+                arrastrando =
+                    false;
+
+            }
+        );
+
+
+        /* =====================================================
+           CARGAR PRODUCTO
+        ===================================================== */
+
+        async function cargarProducto() {
+
+            if (!productoId) {
+
+                productoNombre.textContent =
+                    "Producto no encontrado";
+
+                return;
+
+            }
+
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+
+                .from("Productos")
+
+                .select(`
+                    id,
+                    nombre,
+                    descripcion,
+                    precio,
+                    imagen_url,
+                    imagen_url_2,
+                    categoria,
+                    activo
+                `)
+
+                .eq(
+                    "id",
+                    productoId
+                )
+
+                .single();
+
+
+            if (error) {
+
+                console.error(
+                    error
+                );
+
+                productoNombre.textContent =
+                    "No se ha podido cargar";
+
+                return;
+
+            }
+
+
+            if (
+                !data ||
+                !data.activo
+            ) {
+
+                productoNombre.textContent =
+                    "Producto no disponible";
+
+                return;
+
+            }
+
+
+            productoActual =
+                data;
+
+
+            productoNombre.textContent =
+                data.nombre;
+
+
+            productoDescripcion.textContent =
+                data.descripcion || "";
+
+
+            productoPrecio.textContent =
+                Number(
+                    data.precio
+                )
+                    .toFixed(2)
+                    .replace(
+                        ".",
+                        ","
+                    )
+                + " €";
+
+
+            productoCategoria.textContent =
+                `VESIRA · ${data.categoria || "EYewear"}`;
+
+
+            /* IMÁGENES */
+
+            imagenIzquierda.src =
+                data.imagen_url || "";
+
+            imagenIzquierda.alt =
+                data.nombre;
+
+
+            imagenDerecha.src =
+                data.imagen_url_2 ||
+                data.imagen_url ||
+                "";
+
+            imagenDerecha.alt =
+                data.nombre;
+
+
+            document.title =
+                `${data.nombre} · Vesira`;
+
+
+
+            /* =================================================
+               CARGAR RESTO DE PRODUCTOS
+            ================================================= */
+
+            cargarRestoProductos(
+                data.id
             );
 
         }
 
 
-        imagenOscura.addEventListener(
-            "click",
-            () => {
+        /* =====================================================
+           RESTO DE PRODUCTOS
+        ===================================================== */
 
-                aplicarFondoImagenes(
-                    false
-                );
+        async function cargarRestoProductos(
+            idActual
+        ) {
 
-            }
-        );
+            const {
+                data,
+                error
+            } = await supabaseClient
 
+                .from("Productos")
 
-        imagenClara.addEventListener(
-            "click",
-            () => {
+                .select(`
+                    id,
+                    nombre,
+                    precio,
+                    imagen_url,
+                    activo
+                `)
 
-                aplicarFondoImagenes(
+                .eq(
+                    "activo",
                     true
+                )
+
+                .neq(
+                    "id",
+                    idActual
+                )
+
+                .limit(6);
+
+
+            if (error) {
+
+                console.error(
+                    error
                 );
 
+                return;
+
             }
-        );
 
 
-        /* =========================
-           CARGAR PRODUCTOS
-        ========================= */
-
-        async function cargarProductos() {
-
-            try {
-
-                const {
-                    data,
-                    error
-                } = await supabaseClient
-
-                    .from("Productos")
-
-                    .select(`
-                        id,
-                        nombre,
-                        descripcion,
-                        precio,
-                        categoria,
-                        activo,
-                        created_at,
-                        imagen_url
-                    `)
-
-                    .eq(
-                        "activo",
-                        true
-                    )
-
-                    .order(
-                        "created_at",
-                        {
-                            ascending:
-                                true
-                        }
-                    );
+            productosResto.innerHTML =
+                "";
 
 
-                if (error) {
+            data.forEach(
+                (producto) => {
 
-                    throw error;
-
-                }
-
-
-                if (
-                    !data ||
-                    data.length === 0
-                ) {
-
-                    gridProductos.innerHTML = `
-                        <div class="productos-mensaje">
-                            No hay gafas disponibles.
-                        </div>
-                    `;
-
-                    return;
-
-                }
+                    const item =
+                        document.createElement(
+                            "a"
+                        );
 
 
-                gridProductos.innerHTML =
-                    "";
+                    item.className =
+                        "producto-resto";
 
 
-                data.forEach(
-                    (producto) => {
+                    item.href =
+                        `producto.html?id=${producto.id}`;
 
-                        const tarjeta =
-                            document.createElement(
-                                "a"
+
+                    const precio =
+                        Number(
+                            producto.precio
+                        )
+                            .toFixed(2)
+                            .replace(
+                                ".",
+                                ","
                             );
 
 
-                        tarjeta.className =
-                            "producto-card";
+                    item.innerHTML = `
 
+                        <div
+                            class="producto-resto-imagen"
+                        >
 
-                        tarjeta.href =
-                            `producto.html?id=${producto.id}`;
-
-
-                        const precio =
-                            Number(
-                                producto.precio
-                            )
-                                .toFixed(2)
-                                .replace(
-                                    ".",
-                                    ","
-                                );
-
-
-                        tarjeta.innerHTML = `
-
-                            <div
-                                class="producto-imagen"
+                            <img
+                                src="${producto.imagen_url || ""}"
+                                alt="${producto.nombre}"
+                                loading="lazy"
                             >
 
-                                <img
-                                    src="${producto.imagen_url || ""}"
-                                    alt="${producto.nombre}"
-                                    loading="lazy"
-                                >
-
-                            </div>
+                        </div>
 
 
-                            <div
-                                class="producto-info"
-                            >
+                        <div
+                            class="producto-resto-info"
+                        >
 
-                                <h3
-                                    class="producto-nombre"
-                                >
-                                    ${producto.nombre}
-                                </h3>
+                            <h3>
+                                ${producto.nombre}
+                            </h3>
 
+                            <span>
+                                ${precio} €
+                            </span>
 
-                                ${
-                                    producto.descripcion
-                                        ? `
-                                            <p
-                                                class="producto-descripcion"
-                                            >
-                                                ${producto.descripcion}
-                                            </p>
-                                        `
-                                        : ""
-                                }
+                        </div>
+
+                    `;
 
 
-                                <span
-                                    class="producto-precio"
-                                >
-                                    ${precio} €
-                                </span>
+                    productosResto.appendChild(
+                        item
+                    );
 
-                            </div>
-
-                        `;
-
-
-                        gridProductos.appendChild(
-                            tarjeta
-                        );
-
-                    }
-                );
-
-
-                aplicarFondoImagenes(
-                    fondoClaro
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "Error cargando productos:",
-                    error
-                );
-
-
-                gridProductos.innerHTML = `
-                    <div class="productos-mensaje">
-                        No se ha podido cargar la colección.
-                    </div>
-                `;
-
-            }
+                }
+            );
 
         }
 
 
-        cargarProductos();
+        /* =====================================================
+           CARRITO
+        ===================================================== */
+
+        function obtenerCarrito() {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "vesiraCarrito"
+                ) || "[]"
+            );
+
+        }
+
+
+        function guardarCarrito(
+            carrito
+        ) {
+
+            localStorage.setItem(
+                "vesiraCarrito",
+                JSON.stringify(
+                    carrito
+                )
+            );
+
+        }
+
+
+        function mostrarToast(
+            mensaje
+        ) {
+
+            toast.textContent =
+                mensaje;
+
+            toast.classList.add(
+                "visible"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "visible"
+                    );
+
+                },
+                2200
+            );
+
+        }
+
+
+        botonCarrito.addEventListener(
+            "click",
+            () => {
+
+                if (!productoActual)
+                    return;
+
+
+                const carrito =
+                    obtenerCarrito();
+
+
+                carrito.push({
+                    id:
+                        productoActual.id,
+
+                    nombre:
+                        productoActual.nombre,
+
+                    precio:
+                        Number(
+                            productoActual.precio
+                        ),
+
+                    imagen:
+                        productoActual.imagen_url,
+
+                    cantidad:
+                        1
+                });
+
+
+                guardarCarrito(
+                    carrito
+                );
+
+
+                mostrarToast(
+                    "Añadido al carrito"
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           COMPRAR AHORA
+        ===================================================== */
+
+        botonComprar.addEventListener(
+            "click",
+            () => {
+
+                if (!productoActual)
+                    return;
+
+
+                const carrito = [
+                    {
+                        id:
+                            productoActual.id,
+
+                        nombre:
+                            productoActual.nombre,
+
+                        precio:
+                            Number(
+                                productoActual.precio
+                            ),
+
+                        imagen:
+                            productoActual.imagen_url,
+
+                        cantidad:
+                            1
+                    }
+                ];
+
+
+                guardarCarrito(
+                    carrito
+                );
+
+
+                /*
+                    Más adelante aquí podemos
+                    llevar directamente al checkout.
+                */
+
+                window.location.href =
+                    "carrito.html";
+
+            }
+        );
+
+
+        /* =====================================================
+           INICIO
+        ===================================================== */
+
+        actualizarComparador(
+            50
+        );
+
+        cargarProducto();
 
     </script>
 

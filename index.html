@@ -55,6 +55,81 @@
 
 
         /* =========================
+   MARQUEE VESIRA
+========================= */
+
+.marquee-vesira {
+    width: 100%;
+    overflow: hidden;
+
+    background: transparent;
+
+    padding: 45px 0;
+
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+}
+
+.marquee-vesira-track {
+    display: flex;
+
+    width: max-content;
+
+    animation:
+        vesiraLoop 16s linear infinite;
+}
+
+.marquee-vesira-group {
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+
+    gap: 90px;
+
+    padding-right: 90px;
+}
+
+.marquee-vesira-group img {
+    width: 165px;
+    height: auto;
+
+    display: block;
+
+    flex-shrink: 0;
+}
+
+@keyframes vesiraLoop {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .marquee-vesira {
+        padding: 32px 0;
+    }
+
+    .marquee-vesira-group {
+        gap: 55px;
+        padding-right: 55px;
+    }
+
+    .marquee-vesira-group img {
+        width: 120px;
+    }
+
+}
+        
+        /* =========================
            INTRO
         ========================= */
 
@@ -1189,7 +1264,87 @@
 
     </section>
 
+    <!-- BANNER -->
+     <!-- =========================
+     MARQUEE VESIRA
+========================= -->
 
+<section class="marquee-vesira">
+
+    <div class="marquee-vesira-track">
+
+        <div class="marquee-vesira-group">
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+        </div>
+
+
+        <div class="marquee-vesira-group">
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+            <img
+                src="img/logo2.png"
+                alt="Vesira"
+            >
+
+        </div>
+
+    </div>
+
+</section>
     <!-- =========================
          SUPABASE
     ========================= -->
