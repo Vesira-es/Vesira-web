@@ -14,22 +14,19 @@
 
     <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined"
     >
 
     <style>
 
-        /* =====================================================
-           GENERAL
-        ===================================================== */
-
         :root {
-            --fondo: #0c0c0c;
+            --fondo: #0b0b0b;
             --texto: #ffffff;
+            --caja: #161616;
             --borde: #292929;
-            --caja: #171717;
-            --suave: #919191;
+            --suave: #8b8b8b;
         }
+
 
         * {
             margin: 0;
@@ -37,20 +34,24 @@
             box-sizing: border-box;
         }
 
+
         html {
             scroll-behavior: smooth;
         }
 
+
         body {
             background: var(--fondo);
             color: var(--texto);
-            overflow-x: hidden;
 
             font-family:
+                "Outfit",
                 Arial,
-                Helvetica,
                 sans-serif;
+
+            overflow-x: hidden;
         }
+
 
         button {
             font-family: inherit;
@@ -62,6 +63,7 @@
         ===================================================== */
 
         .barra-navegacion {
+
             position: fixed;
 
             top: 0;
@@ -78,23 +80,27 @@
 
             padding: 0 30px;
 
-            background: rgba(12,12,12,.88);
+            background:
+                rgba(11,11,11,.88);
 
             border-bottom:
                 1px solid var(--borde);
 
             backdrop-filter:
-                blur(14px);
+                blur(15px);
         }
 
+
         .normal {
+
             display: flex;
+
             align-items: center;
 
-            gap: 30px;
+            gap: 28px;
 
             padding:
-                8px 25px;
+                8px 23px;
 
             background:
                 var(--caja);
@@ -105,6 +111,7 @@
             border-radius:
                 999px;
         }
+
 
         .logo {
             width: 115px;
@@ -112,21 +119,28 @@
             display: block;
         }
 
-        .normal > span {
+
+        .normal span {
             cursor: pointer;
         }
 
+
         .iconos {
             display: flex;
+
             align-items: center;
+
             gap: 6px;
         }
 
+
         .iconos span {
+
             width: 42px;
             height: 42px;
 
             display: flex;
+
             align-items: center;
             justify-content: center;
 
@@ -134,278 +148,177 @@
 
             cursor: pointer;
 
-            transition: .2s ease;
+            transition:
+                background .2s ease;
         }
 
+
         .iconos span:hover {
-            background:
-                var(--caja);
+            background: var(--caja);
         }
 
 
         /* =====================================================
-           PRODUCTO PRINCIPAL
+           PRODUCTO
         ===================================================== */
 
-        .producto-principal {
+        .producto {
+
+            max-width: 1400px;
+
+            margin: 0 auto;
 
             padding:
                 125px
                 5vw
-                80px;
+                90px;
 
             display: grid;
 
             grid-template-columns:
-                minmax(0, 1.12fr)
-                minmax(360px, .78fr);
+                minmax(0,1.1fr)
+                minmax(360px,.75fr);
 
-            gap: 70px;
+            gap: 75px;
 
             align-items: center;
         }
 
 
         /* =====================================================
-           COMPARADOR DE IMÁGENES
+           IMAGEN PRINCIPAL
         ===================================================== */
 
-        .comparador-contenedor {
-            width: 100%;
-        }
-
-        .comparador {
-
+        .producto-visual {
             position: relative;
 
-            width: 100%;
-
-            aspect-ratio:
-                1 / .92;
-
-            overflow: hidden;
-
-            background:
-                #171717;
-
-            border-radius:
-                26px;
-
-            user-select: none;
-
-            touch-action:
-                none;
-
-            cursor:
-                ew-resize;
-        }
-
-
-        .comparador-imagen {
-
-            position: absolute;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-        }
-
-
-        .comparador-imagen img {
-
-            width: 100%;
-            height: 100%;
-
-            display: block;
-
-            object-fit: cover;
-
-            pointer-events: none;
-        }
-
-
-        /* IMAGEN DERECHA */
-
-        .comparador-derecha {
-            position: absolute;
-
-            inset: 0;
-
-            overflow: hidden;
-        }
-
-        .comparador-derecha img {
-            position: absolute;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-
-        /* RECORTE DERECHO */
-
-        .comparador-capa {
-            position: absolute;
-
-            inset: 0 auto 0 0;
-
-            width: 50%;
-
-            overflow: hidden;
-
-            z-index: 2;
-        }
-
-
-        .comparador-capa img {
-            position: absolute;
-
-            top: 0;
-            left: 0;
-
-            width: 100vw;
-            max-width: none;
-
-            height: 100%;
-
-            object-fit: cover;
-        }
-
-
-        /* LÍNEA */
-
-        .comparador-linea {
-
-            position: absolute;
-
-            top: 0;
-            bottom: 0;
-
-            left: 50%;
-
-            width: 1px;
-
-            background:
-                rgba(255,255,255,.8);
-
-            z-index: 5;
-
-            transform:
-                translateX(-50%);
-
-            pointer-events: none;
-        }
-
-
-        /* BOTÓN CENTRAL */
-
-        .comparador-boton {
-
-            position: absolute;
-
-            left: 50%;
-            top: 50%;
-
-            z-index: 6;
-
-            transform:
-                translate(-50%, -50%);
-
-            width: 48px;
-            height: 48px;
+            min-height:
+                610px;
 
             display: flex;
 
             align-items: center;
             justify-content: center;
 
-            border:
-                1px solid
-                rgba(255,255,255,.15);
-
-            border-radius: 50%;
-
-            background:
-                rgba(0,0,0,.65);
-
-            color: white;
-
-            backdrop-filter:
-                blur(10px);
-
-            pointer-events: none;
+            overflow: hidden;
         }
 
 
-        .comparador-boton span {
-            font-size: 20px;
-        }
+        .producto-visual::before {
 
-
-        /* MINI TEXTOS */
-
-        .comparador-etiqueta {
+            content: "";
 
             position: absolute;
 
-            bottom: 16px;
+            width:
+                440px;
 
-            z-index: 7;
-
-            padding:
-                8px 11px;
-
-            border:
-                1px solid
-                rgba(255,255,255,.12);
+            height:
+                440px;
 
             border-radius:
-                999px;
+                50%;
 
             background:
-                rgba(0,0,0,.42);
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,.10),
+                    rgba(255,255,255,.03) 42%,
+                    transparent 70%
+                );
 
-            backdrop-filter:
-                blur(10px);
+            filter:
+                blur(18px);
 
-            font-size:
-                8px;
-
-            letter-spacing:
-                .16em;
-
-            text-transform:
-                uppercase;
+            animation:
+                halo 5s ease-in-out infinite;
         }
 
-        .comparador-etiqueta.izquierda {
-            left: 16px;
+
+        @keyframes halo {
+
+            0%,
+            100% {
+                transform:
+                    scale(1);
+
+                opacity:
+                    .7;
+            }
+
+            50% {
+                transform:
+                    scale(1.08);
+
+                opacity:
+                    1;
+            }
         }
 
-        .comparador-etiqueta.derecha {
-            right: 16px;
+
+        .producto-imagen-principal {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            width:
+                92%;
+
+            max-width:
+                700px;
+
+            height:
+                auto;
+
+            display:
+                block;
+
+            object-fit:
+                contain;
+
+            filter:
+                drop-shadow(
+                    0 35px 40px
+                    rgba(0,0,0,.45)
+                );
+
+            animation:
+                flotando 5s ease-in-out infinite;
+        }
+
+
+        @keyframes flotando {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-10px);
+            }
         }
 
 
         /* =====================================================
-           INFORMACIÓN
+           INFO
         ===================================================== */
 
         .producto-info {
-
             max-width:
-                510px;
+                520px;
         }
 
 
-        .producto-overline {
+        .overline {
 
-            display: block;
+            display:
+                block;
 
             margin-bottom:
                 18px;
@@ -414,7 +327,7 @@
                 9px;
 
             letter-spacing:
-                .22em;
+                .23em;
 
             text-transform:
                 uppercase;
@@ -433,9 +346,9 @@
 
             font-size:
                 clamp(
-                    58px,
+                    65px,
                     7vw,
-                    100px
+                    105px
                 );
 
             font-weight:
@@ -455,32 +368,55 @@
         .producto-descripcion {
 
             max-width:
-                430px;
+                440px;
 
             font-size:
                 14px;
 
             line-height:
-                1.7;
+                1.75;
 
             color:
                 var(--suave);
 
             margin-bottom:
-                24px;
+                25px;
         }
 
 
-        .producto-precio {
+        .precio-linea {
+
+            display:
+                flex;
+
+            align-items:
+                baseline;
+
+            gap:
+                12px;
+
+            margin-bottom:
+                22px;
+        }
+
+
+        .precio {
 
             font-size:
-                20px;
+                22px;
 
             font-weight:
                 500;
+        }
 
-            margin-bottom:
-                26px;
+
+        .envio {
+
+            font-size:
+                10px;
+
+            color:
+                var(--suave);
         }
 
 
@@ -488,43 +424,94 @@
            OFERTA
         ===================================================== */
 
-        .oferta-dos {
+        .oferta {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
 
             padding:
-                15px 17px;
+                16px 18px;
 
             margin-bottom:
-                25px;
-
-            border:
-                1px solid
-                var(--borde);
-
-            border-radius:
                 16px;
 
             background:
                 var(--caja);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                18px;
         }
 
-        .oferta-dos strong {
 
-            display: block;
+        .oferta strong {
+
+            display:
+                block;
 
             font-size:
-                13px;
+                12px;
 
             margin-bottom:
                 4px;
         }
 
-        .oferta-dos span {
+
+        .oferta span {
 
             font-size:
-                11px;
+                10px;
 
             color:
                 var(--suave);
+        }
+
+
+        .oferta-badge {
+
+            width:
+                45px;
+
+            height:
+                45px;
+
+            flex-shrink:
+                0;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            border-radius:
+                50%;
+
+            background:
+                var(--texto);
+
+            color:
+                var(--fondo);
+
+            font-size:
+                10px;
+
+            font-weight:
+                500;
         }
 
 
@@ -544,20 +531,14 @@
                 10px;
 
             margin-bottom:
-                25px;
+                20px;
         }
 
 
         .boton {
 
             min-height:
-                56px;
-
-            border:
-                none;
-
-            border-radius:
-                999px;
+                58px;
 
             display:
                 flex;
@@ -571,6 +552,9 @@
             gap:
                 8px;
 
+            border-radius:
+                999px;
+
             cursor:
                 pointer;
 
@@ -578,8 +562,7 @@
                 12px;
 
             transition:
-                transform .2s ease,
-                opacity .2s ease;
+                transform .2s ease;
         }
 
 
@@ -589,23 +572,16 @@
         }
 
 
-        .boton:active {
-            transform:
-                scale(.98);
-        }
-
-
         .boton-carrito {
 
             background:
                 var(--caja);
 
-            border:
-                1px solid
-                var(--borde);
-
             color:
                 var(--texto);
+
+            border:
+                1px solid var(--borde);
         }
 
 
@@ -616,90 +592,62 @@
 
             color:
                 var(--fondo);
+
+            border:
+                none;
         }
 
 
         /* =====================================================
-           BENEFICIOS
+           BENEFICIOS PEQUEÑOS
         ===================================================== */
 
         .beneficios {
 
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            border-left:
+                1px solid var(--borde);
+
             border-top:
-                1px solid
-                var(--borde);
+                1px solid var(--borde);
         }
 
 
         .beneficio {
 
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
+            padding:
                 14px;
 
-            padding:
-                15px 0;
+            min-height:
+                82px;
+
+            border-right:
+                1px solid var(--borde);
 
             border-bottom:
-                1px solid
-                var(--borde);
+                1px solid var(--borde);
         }
 
 
-        .beneficio-icono {
-
-            width:
-                36px;
-
-            height:
-                36px;
-
-            flex:
-                0 0 36px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border:
-                1px solid
-                var(--borde);
-
-            border-radius:
-                50%;
-        }
-
-
-        .beneficio-icono span {
-            font-size:
-                18px;
-        }
-
-
-        .beneficio-texto strong {
+        .beneficio span {
 
             display:
                 block;
 
             font-size:
-                12px;
+                18px;
 
             margin-bottom:
-                3px;
+                8px;
         }
 
 
-        .beneficio-texto span {
+        .beneficio strong {
 
             display:
                 block;
@@ -707,67 +655,144 @@
             font-size:
                 10px;
 
+            margin-bottom:
+                3px;
+        }
+
+
+        .beneficio p {
+
+            font-size:
+                9px;
+
             color:
                 var(--suave);
+
+            line-height:
+                1.4;
         }
 
 
         /* =====================================================
-           SECCIÓN BENEFICIOS GRANDE
+           GALERÍA
         ===================================================== */
 
-        .beneficios-extra {
+        .galeria {
 
             padding:
-                30px 5vw
-                100px;
+                10px
+                5vw
+                90px;
         }
 
 
-        .beneficios-extra-grid {
+        .galeria-grid {
+
+            max-width:
+                1400px;
+
+            margin:
+                0 auto;
 
             display:
                 grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                1.15fr .85fr;
+
+            grid-template-rows:
+                330px 240px;
 
             gap:
                 12px;
         }
 
 
-        .beneficio-card {
+        .galeria-item {
 
-            padding:
-                28px;
-
-            min-height:
-                180px;
-
-            border:
-                1px solid
-                var(--borde);
+            overflow:
+                hidden;
 
             border-radius:
                 22px;
 
             background:
-                var(--caja);
+                #151515;
         }
 
 
-        .beneficio-card .material-symbols-outlined {
-
-            font-size:
-                25px;
-
-            margin-bottom:
-                35px;
+        .galeria-item.grande {
+            grid-row:
+                1 / 3;
         }
 
 
-        .beneficio-card h3 {
+        .galeria-item img {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+
+            display:
+                block;
+
+            transition:
+                transform .5s ease;
+        }
+
+
+        .galeria-item:hover img {
+            transform:
+                scale(1.04);
+        }
+
+
+        /* =====================================================
+           LUZ AZUL
+        ===================================================== */
+
+        .luz-azul {
+
+            padding:
+                95px
+                5vw;
+
+            border-top:
+                1px solid var(--borde);
+
+            border-bottom:
+                1px solid var(--borde);
+        }
+
+
+        .luz-contenido {
+
+            max-width:
+                1000px;
+
+            margin:
+                0 auto;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                .85fr 1.15fr;
+
+            gap:
+                70px;
+
+            align-items:
+                center;
+        }
+
+
+        .luz-azul h2 {
 
             font-family:
                 "Bricolage Grotesque",
@@ -775,23 +800,115 @@
                 sans-serif;
 
             font-size:
-                22px;
+                clamp(
+                    45px,
+                    5vw,
+                    70px
+                );
 
             font-weight:
                 400;
 
+            line-height:
+                .86;
+
+            letter-spacing:
+                -.07em;
+
             margin-bottom:
-                8px;
+                18px;
         }
 
 
-        .beneficio-card p {
+        .luz-azul p {
+
+            max-width:
+                400px;
+
+            color:
+                var(--suave);
 
             font-size:
-                11px;
+                13px;
 
             line-height:
-                1.6;
+                1.75;
+        }
+
+
+        .luz-puntos {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                10px;
+        }
+
+
+        .luz-punto {
+
+            padding:
+                22px;
+
+            min-height:
+                145px;
+
+            background:
+                var(--caja);
+
+            border:
+                1px solid var(--borde);
+
+            border-radius:
+                20px;
+        }
+
+
+        .luz-punto span {
+
+            display:
+                block;
+
+            font-size:
+                22px;
+
+            margin-bottom:
+                24px;
+        }
+
+
+        .luz-punto strong {
+
+            display:
+                block;
+
+            margin-bottom:
+                6px;
+
+            font-family:
+                "Bricolage Grotesque",
+                Arial,
+                sans-serif;
+
+            font-size:
+                18px;
+
+            font-weight:
+                400;
+        }
+
+
+        .luz-punto p {
+
+            font-size:
+                9px;
+
+            line-height:
+                1.5;
 
             color:
                 var(--suave);
@@ -799,27 +916,71 @@
 
 
         /* =====================================================
-           SEGUIR COMPRANDO
+           FRASE
         ===================================================== */
 
-        .seguir-comprando {
+        .frase {
 
             padding:
-                40px 5vw
-                120px;
+                100px
+                5vw;
+
+            text-align:
+                center;
+        }
+
+
+        .frase h2 {
+
+            max-width:
+                900px;
+
+            margin:
+                0 auto;
+
+            font-family:
+                "Bricolage Grotesque",
+                Arial,
+                sans-serif;
+
+            font-size:
+                clamp(
+                    42px,
+                    5.5vw,
+                    78px
+                );
+
+            font-weight:
+                400;
+
+            line-height:
+                .9;
+
+            letter-spacing:
+                -.07em;
+        }
+
+
+        .frase span {
+            color:
+                #707070;
+        }
+
+
+        /* =====================================================
+           RESTO DE GAFAS
+        ===================================================== */
+
+        .seguir {
+
+            padding:
+                20px
+                5vw
+                110px;
         }
 
 
         .seguir-cabecera {
-
-            display:
-                flex;
-
-            align-items:
-                end;
-
-            justify-content:
-                space-between;
 
             margin-bottom:
                 28px;
@@ -857,9 +1018,9 @@
 
             font-size:
                 clamp(
-                    42px,
+                    45px,
                     5vw,
-                    65px
+                    68px
                 );
 
             font-weight:
@@ -869,7 +1030,7 @@
                 .85;
 
             letter-spacing:
-                -.065em;
+                -.07em;
         }
 
 
@@ -879,7 +1040,7 @@
                 grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(3,1fr);
 
             gap:
                 18px;
@@ -888,11 +1049,11 @@
 
         .producto-resto {
 
-            text-decoration:
-                none;
-
             color:
                 var(--texto);
+
+            text-decoration:
+                none;
         }
 
 
@@ -902,16 +1063,10 @@
                 100%;
 
             aspect-ratio:
-                1 / .85;
+                1/.82;
 
             overflow:
                 hidden;
-
-            border-radius:
-                20px;
-
-            background:
-                #101010;
 
             display:
                 flex;
@@ -921,6 +1076,12 @@
 
             justify-content:
                 center;
+
+            border-radius:
+                20px;
+
+            background:
+                #151515;
         }
 
 
@@ -959,9 +1120,6 @@
             align-items:
                 baseline;
 
-            gap:
-                10px;
-
             padding:
                 12px 3px;
         }
@@ -993,6 +1151,86 @@
 
 
         /* =====================================================
+           MARQUEE
+        ===================================================== */
+
+        .footer-marquee {
+
+            width:
+                100%;
+
+            overflow:
+                hidden;
+
+            border-top:
+                1px solid var(--borde);
+
+            padding:
+                30px 0;
+        }
+
+
+        .footer-track {
+
+            display:
+                flex;
+
+            width:
+                max-content;
+
+            animation:
+                marquee 18s
+                linear infinite;
+        }
+
+
+        .footer-group {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                70px;
+
+            padding-right:
+                70px;
+
+            flex-shrink:
+                0;
+        }
+
+
+        .footer-group img {
+
+            width:
+                150px;
+
+            height:
+                auto;
+
+            display:
+                block;
+        }
+
+
+        @keyframes marquee {
+
+            from {
+                transform:
+                    translateX(0);
+            }
+
+            to {
+                transform:
+                    translateX(-50%);
+            }
+        }
+
+
+        /* =====================================================
            TOAST
         ===================================================== */
 
@@ -1005,13 +1243,13 @@
                 50%;
 
             bottom:
-                25px;
+                24px;
 
             z-index:
                 3000;
 
             transform:
-                translate(-50%, 20px);
+                translate(-50%,20px);
 
             opacity:
                 0;
@@ -1019,18 +1257,17 @@
             padding:
                 13px 18px;
 
+            background:
+                rgba(20,20,20,.95);
+
             border:
-                1px solid
-                var(--borde);
+                1px solid var(--borde);
 
             border-radius:
                 999px;
 
-            background:
-                rgba(23,23,23,.95);
-
             backdrop-filter:
-                blur(15px);
+                blur(12px);
 
             font-size:
                 11px;
@@ -1049,7 +1286,7 @@
                 1;
 
             transform:
-                translate(-50%, 0);
+                translate(-50%,0);
         }
 
 
@@ -1059,7 +1296,7 @@
 
         @media (max-width: 900px) {
 
-            .producto-principal {
+            .producto {
 
                 grid-template-columns:
                     1fr;
@@ -1067,48 +1304,32 @@
                 gap:
                     40px;
 
-                padding:
-                    110px
-                    14px
-                    55px;
+                padding-top:
+                    110px;
+            }
+
+
+            .producto-visual {
+                min-height:
+                    450px;
             }
 
 
             .producto-info {
-
                 max-width:
-                    none;
+                    700px;
             }
 
 
-            .producto-nombre {
-
-                font-size:
-                    clamp(
-                        52px,
-                        16vw,
-                        80px
-                    );
-            }
-
-
-            .beneficios-extra-grid {
-
+            .luz-contenido {
                 grid-template-columns:
                     1fr;
-            }
-
-
-            .productos-resto {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
             }
 
         }
 
 
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
 
             .barra-navegacion {
 
@@ -1146,54 +1367,48 @@
             }
 
 
-            .producto-principal {
+            .producto {
 
                 padding:
                     95px
                     14px
-                    50px;
+                    55px;
             }
 
 
-            .comparador {
-
-                border-radius:
-                    20px;
-
-                aspect-ratio:
-                    1 / 1.02;
+            .producto-visual {
+                min-height:
+                    350px;
             }
 
 
-            .comparador-boton {
+            .producto-visual::before {
 
                 width:
-                    42px;
+                    300px;
 
                 height:
-                    42px;
+                    300px;
             }
 
 
-            .comparador-etiqueta {
+            .producto-imagen-principal {
+                width:
+                    100%;
+            }
+
+
+            .producto-nombre {
 
                 font-size:
-                    7px;
-
-                bottom:
-                    10px;
+                    62px;
             }
 
 
-            .comparador-etiqueta.izquierda {
-                left:
-                    10px;
-            }
+            .producto-descripcion {
 
-
-            .comparador-etiqueta.derecha {
-                right:
-                    10px;
+                font-size:
+                    13px;
             }
 
 
@@ -1204,18 +1419,80 @@
             }
 
 
-            .beneficios-extra {
+            .galeria {
 
                 padding:
-                    25px 14px
+                    10px
+                    14px
                     70px;
             }
 
 
-            .seguir-comprando {
+            .galeria-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                grid-template-rows:
+                    240px 175px;
+
+                gap:
+                    8px;
+            }
+
+
+            .galeria-item {
+
+                border-radius:
+                    15px;
+            }
+
+
+            .luz-azul {
 
                 padding:
-                    35px 14px
+                    75px
+                    14px;
+            }
+
+
+            .luz-contenido {
+
+                gap:
+                    35px;
+            }
+
+
+            .luz-puntos {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .luz-punto {
+
+                padding:
+                    17px;
+
+                min-height:
+                    140px;
+            }
+
+
+            .frase {
+
+                padding:
+                    80px
+                    14px;
+            }
+
+
+            .seguir {
+
+                padding:
+                    20px
+                    14px
                     80px;
             }
 
@@ -1223,7 +1500,7 @@
             .productos-resto {
 
                 grid-template-columns:
-                    repeat(2, 1fr);
+                    repeat(2,1fr);
 
                 gap:
                     10px;
@@ -1241,6 +1518,30 @@
 
                 font-size:
                     14px;
+            }
+
+
+            .footer-marquee {
+
+                padding:
+                    22px 0;
+            }
+
+
+            .footer-group {
+
+                gap:
+                    45px;
+
+                padding-right:
+                    45px;
+            }
+
+
+            .footer-group img {
+
+                width:
+                    115px;
             }
 
         }
@@ -1269,7 +1570,8 @@
 
             <span
                 class="material-symbols-outlined"
-                onclick="history.back()">
+                onclick="history.back()"
+            >
                 arrow_back
             </span>
 
@@ -1296,97 +1598,29 @@
          PRODUCTO
     ===================================================== -->
 
-    <main
-        class="producto-principal"
-        id="productoPrincipal"
-    >
+    <main class="producto">
 
 
-        <!-- COMPARADOR -->
+        <!-- IMAGEN -->
 
-        <section class="comparador-contenedor">
+        <section class="producto-visual">
 
-            <div
-                class="comparador"
-                id="comparador"
+            <img
+                id="imagenPrincipal"
+                class="producto-imagen-principal"
+                src=""
+                alt=""
             >
-
-                <!-- IMAGEN DERECHA -->
-
-                <div
-                    class="comparador-imagen comparador-derecha"
-                >
-
-                    <img
-                        id="imagenDerecha"
-                        src=""
-                        alt=""
-                    >
-
-                </div>
-
-
-                <!-- IMAGEN IZQUIERDA -->
-
-                <div
-                    class="comparador-capa"
-                    id="comparadorCapa"
-                >
-
-                    <img
-                        id="imagenIzquierda"
-                        src=""
-                        alt=""
-                    >
-
-                </div>
-
-
-                <!-- LÍNEA -->
-
-                <div
-                    class="comparador-linea"
-                    id="comparadorLinea"
-                ></div>
-
-
-                <!-- CONTROL -->
-
-                <div class="comparador-boton">
-
-                    <span class="material-symbols-outlined">
-                        swap_horiz
-                    </span>
-
-                </div>
-
-
-                <!-- ETIQUETAS -->
-
-                <div
-                    class="comparador-etiqueta izquierda"
-                >
-                    Vista 01
-                </div>
-
-                <div
-                    class="comparador-etiqueta derecha"
-                >
-                    Vista 02
-                </div>
-
-            </div>
 
         </section>
 
 
-
-        <!-- INFORMACIÓN -->
+        <!-- INFO -->
 
         <section class="producto-info">
 
             <span
-                class="producto-overline"
+                class="overline"
                 id="productoCategoria"
             >
                 VESIRA · COLLECTION 01
@@ -1408,29 +1642,42 @@
             </p>
 
 
-            <div
-                class="producto-precio"
-                id="productoPrecio"
-            >
-            </div>
+            <div class="precio-linea">
 
+                <span
+                    class="precio"
+                    id="productoPrecio"
+                >
+                </span>
 
-            <!-- OFERTA 2 -->
-
-            <div class="oferta-dos">
-
-                <strong>
-                    20% OFF AL COMPRAR 2
-                </strong>
-
-                <span>
-                    Llévate dos modelos y consigue un 20% de descuento.
+                <span class="envio">
+                    Envío gratis
                 </span>
 
             </div>
 
 
-            <!-- BOTONES -->
+            <div class="oferta">
+
+                <div>
+
+                    <strong>
+                        20% OFF AL COMPRAR 2
+                    </strong>
+
+                    <span>
+                        Combina dos modelos y ahorra.
+                    </span>
+
+                </div>
+
+
+                <div class="oferta-badge">
+                    -20%
+                </div>
+
+            </div>
+
 
             <div class="acciones">
 
@@ -1464,106 +1711,72 @@
             </div>
 
 
-            <!-- BENEFICIOS CORTOS -->
-
             <div class="beneficios">
 
                 <div class="beneficio">
 
-                    <div class="beneficio-icono">
+                    <span class="material-symbols-outlined">
+                        local_shipping
+                    </span>
 
-                        <span class="material-symbols-outlined">
-                            local_shipping
-                        </span>
+                    <strong>
+                        Envío gratis
+                    </strong>
 
-                    </div>
-
-                    <div class="beneficio-texto">
-
-                        <strong>
-                            Envío gratis
-                        </strong>
-
-                        <span>
-                            Entrega en Canarias.
-                        </span>
-
-                    </div>
+                    <p>
+                        En todos los pedidos.
+                    </p>
 
                 </div>
 
 
                 <div class="beneficio">
 
-                    <div class="beneficio-icono">
+                    <span class="material-symbols-outlined">
+                        schedule
+                    </span>
 
-                        <span class="material-symbols-outlined">
-                            schedule
-                        </span>
+                    <strong>
+                        Hasta 5 días
+                    </strong>
 
-                    </div>
-
-                    <div class="beneficio-texto">
-
-                        <strong>
-                            Llega en hasta 5 días
-                        </strong>
-
-                        <span>
-                            Te avisamos cuando salga tu pedido.
-                        </span>
-
-                    </div>
+                    <p>
+                        Recibe tu pedido rápidamente.
+                    </p>
 
                 </div>
 
 
                 <div class="beneficio">
 
-                    <div class="beneficio-icono">
+                    <span class="material-symbols-outlined">
+                        location_on
+                    </span>
 
-                        <span class="material-symbols-outlined">
-                            location_on
-                        </span>
+                    <strong>
+                        Seguimiento 24 h
+                    </strong>
 
-                    </div>
-
-                    <div class="beneficio-texto">
-
-                        <strong>
-                            Seguimiento 24 h
-                        </strong>
-
-                        <span>
-                            Podrás seguir tu pedido en todo momento.
-                        </span>
-
-                    </div>
+                    <p>
+                        Información de tu pedido.
+                    </p>
 
                 </div>
 
 
                 <div class="beneficio">
 
-                    <div class="beneficio-icono">
+                    <span class="material-symbols-outlined">
+                        replay
+                    </span>
 
-                        <span class="material-symbols-outlined">
-                            replay
-                        </span>
+                    <strong>
+                        Devolución
+                    </strong>
 
-                    </div>
-
-                    <div class="beneficio-texto">
-
-                        <strong>
-                            Devoluciones
-                        </strong>
-
-                        <span>
-                            Si hay cualquier problema, gestionamos la devolución.
-                        </span>
-
-                    </div>
+                    <p>
+                        Solución si existe un problema.
+                    </p>
 
                 </div>
 
@@ -1576,65 +1789,116 @@
 
 
     <!-- =====================================================
-         BENEFICIOS GRANDES
+         GALERÍA
     ===================================================== -->
 
-    <section class="beneficios-extra">
+    <section class="galeria">
 
-        <div class="beneficios-extra-grid">
+        <div
+            class="galeria-grid"
+            id="galeria"
+        >
+        </div>
 
-            <article class="beneficio-card">
-
-                <span class="material-symbols-outlined">
-                    visibility
-                </span>
-
-                <h3>
-                    Hechas para tu día
-                </h3>
-
-                <p>
-                    Un diseño pensado para acompañarte
-                    durante tus horas de pantalla y tu día a día.
-                </p>
-
-            </article>
+    </section>
 
 
-            <article class="beneficio-card">
 
-                <span class="material-symbols-outlined">
-                    auto_awesome
-                </span>
+    <!-- =====================================================
+         LUZ AZUL
+    ===================================================== -->
 
-                <h3>
-                    Diseñadas en Canarias
-                </h3>
+    <section class="luz-azul">
+
+        <div class="luz-contenido">
+
+            <div>
+
+                <h2>
+                    Tus pantallas.<br>
+                    Tus gafas.
+                </h2>
 
                 <p>
-                    Vesira nace aquí. Una colección creada
-                    para tener identidad propia.
+                    Las lentes incorporan un filtro de luz azul
+                    pensado para el uso diario frente a pantallas.
+                    Una función útil integrada en una montura
+                    que quieres llevar todos los días.
                 </p>
 
-            </article>
+            </div>
 
 
-            <article class="beneficio-card">
+            <div class="luz-puntos">
 
-                <span class="material-symbols-outlined">
-                    favorite
-                </span>
+                <div class="luz-punto">
 
-                <h3>
-                    Vesira contigo
-                </h3>
+                    <span class="material-symbols-outlined">
+                        laptop_mac
+                    </span>
 
-                <p>
-                    Una montura que funciona con tu estilo,
-                    no al revés.
-                </p>
+                    <strong>
+                        Para pantallas
+                    </strong>
 
-            </article>
+                    <p>
+                        Ordenador, móvil y tablet.
+                    </p>
+
+                </div>
+
+
+                <div class="luz-punto">
+
+                    <span class="material-symbols-outlined">
+                        filter_alt
+                    </span>
+
+                    <strong>
+                        Filtro azul
+                    </strong>
+
+                    <p>
+                        Incorporado en las lentes.
+                    </p>
+
+                </div>
+
+
+                <div class="luz-punto">
+
+                    <span class="material-symbols-outlined">
+                        schedule
+                    </span>
+
+                    <strong>
+                        Uso diario
+                    </strong>
+
+                    <p>
+                        Pensadas para acompañarte.
+                    </p>
+
+                </div>
+
+
+                <div class="luz-punto">
+
+                    <span class="material-symbols-outlined">
+                        auto_awesome
+                    </span>
+
+                    <strong>
+                        Funcional + estética
+                    </strong>
+
+                    <p>
+                        Tecnología sin perder estilo.
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -1643,24 +1907,35 @@
 
 
     <!-- =====================================================
-         SEGUIR COMPRANDO
+         FRASE
     ===================================================== -->
 
-    <section class="seguir-comprando">
+    <section class="frase">
+
+        <h2>
+            Diseñadas para
+            <span>mirar más allá.</span>
+        </h2>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RESTO DE COLECCIÓN
+    ===================================================== -->
+
+    <section class="seguir">
 
         <div class="seguir-cabecera">
 
-            <div>
+            <span>
+                COLLECTION 01
+            </span>
 
-                <span>
-                    COLLECTION 01
-                </span>
-
-                <h2>
-                    Sigue comprando.
-                </h2>
-
-            </div>
+            <h2>
+                Sigue mirando.
+            </h2>
 
         </div>
 
@@ -1669,10 +1944,82 @@
             class="productos-resto"
             id="productosResto"
         >
-
         </div>
 
     </section>
+
+
+
+    <!-- =====================================================
+         MARQUEE
+    ===================================================== -->
+
+    <footer class="footer-marquee">
+
+        <div class="footer-track">
+
+            <div class="footer-group">
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+            </div>
+
+
+            <div class="footer-group">
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+                <img
+                    src="img/logo2.png"
+                    alt="Vesira"
+                >
+
+            </div>
+
+        </div>
+
+    </footer>
 
 
 
@@ -1698,36 +2045,20 @@
     <script src="supabase.js"></script>
 
 
-
     <script>
 
         /* =====================================================
            REFERENCIAS
         ===================================================== */
 
-        const comparador =
+        const imagenPrincipal =
             document.getElementById(
-                "comparador"
+                "imagenPrincipal"
             );
 
-        const comparadorCapa =
+        const productoCategoria =
             document.getElementById(
-                "comparadorCapa"
-            );
-
-        const comparadorLinea =
-            document.getElementById(
-                "comparadorLinea"
-            );
-
-        const imagenIzquierda =
-            document.getElementById(
-                "imagenIzquierda"
-            );
-
-        const imagenDerecha =
-            document.getElementById(
-                "imagenDerecha"
+                "productoCategoria"
             );
 
         const productoNombre =
@@ -1745,9 +2076,9 @@
                 "productoPrecio"
             );
 
-        const productoCategoria =
+        const galeria =
             document.getElementById(
-                "productoCategoria"
+                "galeria"
             );
 
         const productosResto =
@@ -1772,132 +2103,281 @@
 
 
         /* =====================================================
-           ID DEL PRODUCTO
+           PRODUCTO ID
         ===================================================== */
 
-        const parametros =
+        const params =
             new URLSearchParams(
                 window.location.search
             );
 
         const productoId =
-            parametros.get("id");
+            params.get("id");
 
 
-        let productoActual = null;
+        let productoActual =
+            null;
 
 
         /* =====================================================
-           COMPARADOR
+           CARRITO
         ===================================================== */
 
-        let porcentaje =
-            50;
+        function obtenerCarrito() {
 
-        let arrastrando =
-            false;
-
-
-        function actualizarComparador(
-            valor
-        ) {
-
-            porcentaje =
-                Math.max(
-                    0,
-                    Math.min(
-                        100,
-                        valor
-                    )
-                );
-
-
-            comparadorCapa.style.width =
-                `${porcentaje}%`;
-
-            comparadorLinea.style.left =
-                `${porcentaje}%`;
+            return JSON.parse(
+                localStorage.getItem(
+                    "vesiraCarrito"
+                ) || "[]"
+            );
 
         }
 
 
-        function obtenerPorcentaje(
-            posicionX
+        function guardarCarrito(
+            carrito
         ) {
 
-            const rect =
-                comparador.getBoundingClientRect();
-
-            const valor =
-                (
-                    (posicionX - rect.left)
-                    /
-                    rect.width
-                ) * 100;
-
-            return valor;
+            localStorage.setItem(
+                "vesiraCarrito",
+                JSON.stringify(
+                    carrito
+                )
+            );
 
         }
 
 
-        comparador.addEventListener(
-            "pointerdown",
-            (evento) => {
+        function mostrarToast(
+            mensaje
+        ) {
 
-                arrastrando =
-                    true;
+            toast.textContent =
+                mensaje;
 
-                comparador.setPointerCapture(
-                    evento.pointerId
+            toast.classList.add(
+                "visible"
+            );
+
+
+            setTimeout(
+                () => {
+
+                    toast.classList.remove(
+                        "visible"
+                    );
+
+                },
+                2200
+            );
+
+        }
+
+
+        function agregarAlCarrito() {
+
+            if (!productoActual)
+                return;
+
+
+            const carrito =
+                obtenerCarrito();
+
+
+            const existente =
+                carrito.find(
+                    item =>
+                        item.id ===
+                        productoActual.id
                 );
 
-                actualizarComparador(
-                    obtenerPorcentaje(
-                        evento.clientX
-                    )
-                );
+
+            if (existente) {
+
+                existente.cantidad += 1;
+
+            } else {
+
+                carrito.push({
+
+                    id:
+                        productoActual.id,
+
+                    nombre:
+                        productoActual.nombre,
+
+                    precio:
+                        Number(
+                            productoActual.precio
+                        ),
+
+                    imagen:
+                        productoActual.imagen_url,
+
+                    cantidad:
+                        1
+
+                });
 
             }
+
+
+            guardarCarrito(
+                carrito
+            );
+
+
+            mostrarToast(
+                "Añadido al carrito"
+            );
+
+        }
+
+
+        botonCarrito.addEventListener(
+            "click",
+            agregarAlCarrito
         );
 
 
-        comparador.addEventListener(
-            "pointermove",
-            (evento) => {
+        /* =====================================================
+           COMPRAR
+        ===================================================== */
 
-                if (!arrastrando)
+        botonComprar.addEventListener(
+            "click",
+            () => {
+
+                if (!productoActual)
                     return;
 
-                actualizarComparador(
-                    obtenerPorcentaje(
-                        evento.clientX
-                    )
+
+                guardarCarrito([
+
+                    {
+
+                        id:
+                            productoActual.id,
+
+                        nombre:
+                            productoActual.nombre,
+
+                        precio:
+                            Number(
+                                productoActual.precio
+                            ),
+
+                        imagen:
+                            productoActual.imagen_url,
+
+                        cantidad:
+                            1
+
+                    }
+
+                ]);
+
+
+                window.location.href =
+                    "carrito.html";
+
+            }
+        );
+
+
+        /* =====================================================
+           GALERÍA
+        ===================================================== */
+
+        function crearGaleria(
+            imagenes
+        ) {
+
+            galeria.innerHTML =
+                "";
+
+
+            const limpias =
+                imagenes.filter(
+                    Boolean
+                );
+
+
+            if (!limpias.length)
+                return;
+
+
+            limpias.forEach(
+                (src, index) => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        `galeria-item${
+                            index === 0
+                                ? " grande"
+                                : ""
+                        }`;
+
+
+                    item.innerHTML = `
+
+                        <img
+                            src="${src}"
+                            alt="${productoActual.nombre}"
+                            loading="lazy"
+                        >
+
+                    `;
+
+
+                    galeria.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+
+            /* Si solo hay una foto,
+               mostramos la misma de apoyo */
+
+            while (
+                galeria.children.length < 3
+            ) {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "galeria-item";
+
+
+                item.innerHTML = `
+
+                    <img
+                        src="${limpias[0]}"
+                        alt="${productoActual.nombre}"
+                        loading="lazy"
+                    >
+
+                `;
+
+
+                galeria.appendChild(
+                    item
                 );
 
             }
-        );
 
-
-        comparador.addEventListener(
-            "pointerup",
-            () => {
-
-                arrastrando =
-                    false;
-
-            }
-        );
-
-
-        comparador.addEventListener(
-            "pointercancel",
-            () => {
-
-                arrastrando =
-                    false;
-
-            }
-        );
+        }
 
 
         /* =====================================================
@@ -1912,7 +2392,6 @@
                     "Producto no encontrado";
 
                 return;
-
             }
 
 
@@ -1930,6 +2409,7 @@
                     precio,
                     imagen_url,
                     imagen_url_2,
+                    imagen_url_3,
                     categoria,
                     activo
                 `)
@@ -1952,7 +2432,6 @@
                     "No se ha podido cargar";
 
                 return;
-
             }
 
 
@@ -1965,7 +2444,6 @@
                     "Producto no disponible";
 
                 return;
-
             }
 
 
@@ -1973,12 +2451,15 @@
                 data;
 
 
+            /* INFORMACIÓN */
+
             productoNombre.textContent =
                 data.nombre;
 
 
             productoDescripcion.textContent =
-                data.descripcion || "";
+                data.descripcion ||
+                "";
 
 
             productoPrecio.textContent =
@@ -1994,35 +2475,46 @@
 
 
             productoCategoria.textContent =
-                `VESIRA · ${data.categoria || "EYewear"}`;
-
-
-            /* IMÁGENES */
-
-            imagenIzquierda.src =
-                data.imagen_url || "";
-
-            imagenIzquierda.alt =
-                data.nombre;
-
-
-            imagenDerecha.src =
-                data.imagen_url_2 ||
-                data.imagen_url ||
-                "";
-
-            imagenDerecha.alt =
-                data.nombre;
+                `VESIRA · ${
+                    data.categoria ||
+                    "EYEWEAR"
+                }`;
 
 
             document.title =
                 `${data.nombre} · Vesira`;
 
 
+            /* IMÁGENES */
 
-            /* =================================================
-               CARGAR RESTO DE PRODUCTOS
-            ================================================= */
+            const imagenes = [
+
+                data.imagen_url,
+                data.imagen_url_2,
+                data.imagen_url_3
+
+            ].filter(
+                Boolean
+            );
+
+
+            if (
+                imagenes.length
+            ) {
+
+                imagenPrincipal.src =
+                    imagenes[0];
+
+                imagenPrincipal.alt =
+                    data.nombre;
+
+            }
+
+
+            crearGaleria(
+                imagenes
+            );
+
 
             cargarRestoProductos(
                 data.id
@@ -2032,7 +2524,7 @@
 
 
         /* =====================================================
-           RESTO DE PRODUCTOS
+           RESTO PRODUCTOS
         ===================================================== */
 
         async function cargarRestoProductos(
@@ -2074,7 +2566,6 @@
                 );
 
                 return;
-
             }
 
 
@@ -2083,7 +2574,7 @@
 
 
             data.forEach(
-                (producto) => {
+                producto => {
 
                     const item =
                         document.createElement(
@@ -2153,163 +2644,8 @@
 
 
         /* =====================================================
-           CARRITO
-        ===================================================== */
-
-        function obtenerCarrito() {
-
-            return JSON.parse(
-                localStorage.getItem(
-                    "vesiraCarrito"
-                ) || "[]"
-            );
-
-        }
-
-
-        function guardarCarrito(
-            carrito
-        ) {
-
-            localStorage.setItem(
-                "vesiraCarrito",
-                JSON.stringify(
-                    carrito
-                )
-            );
-
-        }
-
-
-        function mostrarToast(
-            mensaje
-        ) {
-
-            toast.textContent =
-                mensaje;
-
-            toast.classList.add(
-                "visible"
-            );
-
-
-            setTimeout(
-                () => {
-
-                    toast.classList.remove(
-                        "visible"
-                    );
-
-                },
-                2200
-            );
-
-        }
-
-
-        botonCarrito.addEventListener(
-            "click",
-            () => {
-
-                if (!productoActual)
-                    return;
-
-
-                const carrito =
-                    obtenerCarrito();
-
-
-                carrito.push({
-                    id:
-                        productoActual.id,
-
-                    nombre:
-                        productoActual.nombre,
-
-                    precio:
-                        Number(
-                            productoActual.precio
-                        ),
-
-                    imagen:
-                        productoActual.imagen_url,
-
-                    cantidad:
-                        1
-                });
-
-
-                guardarCarrito(
-                    carrito
-                );
-
-
-                mostrarToast(
-                    "Añadido al carrito"
-                );
-
-            }
-        );
-
-
-        /* =====================================================
-           COMPRAR AHORA
-        ===================================================== */
-
-        botonComprar.addEventListener(
-            "click",
-            () => {
-
-                if (!productoActual)
-                    return;
-
-
-                const carrito = [
-                    {
-                        id:
-                            productoActual.id,
-
-                        nombre:
-                            productoActual.nombre,
-
-                        precio:
-                            Number(
-                                productoActual.precio
-                            ),
-
-                        imagen:
-                            productoActual.imagen_url,
-
-                        cantidad:
-                            1
-                    }
-                ];
-
-
-                guardarCarrito(
-                    carrito
-                );
-
-
-                /*
-                    Más adelante aquí podemos
-                    llevar directamente al checkout.
-                */
-
-                window.location.href =
-                    "carrito.html";
-
-            }
-        );
-
-
-        /* =====================================================
            INICIO
         ===================================================== */
-
-        actualizarComparador(
-            50
-        );
 
         cargarProducto();
 
