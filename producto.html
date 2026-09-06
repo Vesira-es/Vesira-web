@@ -1,2657 +1,945 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Vesira</title>
-
-    <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined"
-    >
-
-    <style>
-
-        :root {
-            --fondo: #0b0b0b;
-            --texto: #ffffff;
-            --caja: #161616;
-            --borde: #292929;
-            --suave: #8b8b8b;
-        }
-
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-
-        body {
-            background: var(--fondo);
-            color: var(--texto);
-
-            font-family:
-                "Outfit",
-                Arial,
-                sans-serif;
-
-            overflow-x: hidden;
-        }
-
-
-        button {
-            font-family: inherit;
-        }
-
-
-        /* =====================================================
-           NAVBAR
-        ===================================================== */
-
-        .barra-navegacion {
-
-            position: fixed;
-
-            top: 0;
-            left: 0;
-
-            z-index: 1000;
-
-            width: 100%;
-            height: 80px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 30px;
-
-            background:
-                rgba(11,11,11,.88);
-
-            border-bottom:
-                1px solid var(--borde);
-
-            backdrop-filter:
-                blur(15px);
-        }
-
-
-        .normal {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 28px;
-
-            padding:
-                8px 23px;
-
-            background:
-                var(--caja);
-
-            border:
-                1px solid var(--borde);
-
-            border-radius:
-                999px;
-        }
-
-
-        .logo {
-            width: 115px;
-            height: auto;
-            display: block;
-        }
-
-
-        .normal span {
-            cursor: pointer;
-        }
-
-
-        .iconos {
-            display: flex;
-
-            align-items: center;
-
-            gap: 6px;
-        }
-
-
-        .iconos span {
-
-            width: 42px;
-            height: 42px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            cursor: pointer;
-
-            transition:
-                background .2s ease;
-        }
-
-
-        .iconos span:hover {
-            background: var(--caja);
-        }
-
-
-        /* =====================================================
-           PRODUCTO
-        ===================================================== */
-
-        .producto {
-
-            max-width: 1400px;
-
-            margin: 0 auto;
-
-            padding:
-                125px
-                5vw
-                90px;
-
-            display: grid;
-
-            grid-template-columns:
-                minmax(0,1.1fr)
-                minmax(360px,.75fr);
-
-            gap: 75px;
-
-            align-items: center;
-        }
-
-
-        /* =====================================================
-           IMAGEN PRINCIPAL
-        ===================================================== */
-
-        .producto-visual {
-            position: relative;
-
-            min-height:
-                610px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            overflow: hidden;
-        }
-
-
-        .producto-visual::before {
-
-            content: "";
-
-            position: absolute;
-
-            width:
-                440px;
-
-            height:
-                440px;
-
-            border-radius:
-                50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(255,255,255,.10),
-                    rgba(255,255,255,.03) 42%,
-                    transparent 70%
-                );
-
-            filter:
-                blur(18px);
-
-            animation:
-                halo 5s ease-in-out infinite;
-        }
-
-
-        @keyframes halo {
-
-            0%,
-            100% {
-                transform:
-                    scale(1);
-
-                opacity:
-                    .7;
-            }
-
-            50% {
-                transform:
-                    scale(1.08);
-
-                opacity:
-                    1;
-            }
-        }
-
-
-        .producto-imagen-principal {
-
-            position:
-                relative;
-
-            z-index:
-                2;
-
-            width:
-                92%;
-
-            max-width:
-                700px;
-
-            height:
-                auto;
-
-            display:
-                block;
-
-            object-fit:
-                contain;
-
-            filter:
-                drop-shadow(
-                    0 35px 40px
-                    rgba(0,0,0,.45)
-                );
-
-            animation:
-                flotando 5s ease-in-out infinite;
-        }
-
-
-        @keyframes flotando {
-
-            0%,
-            100% {
-                transform:
-                    translateY(0);
-            }
-
-            50% {
-                transform:
-                    translateY(-10px);
-            }
-        }
-
-
-        /* =====================================================
-           INFO
-        ===================================================== */
-
-        .producto-info {
-            max-width:
-                520px;
-        }
-
-
-        .overline {
-
-            display:
-                block;
-
-            margin-bottom:
-                18px;
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                .23em;
-
-            text-transform:
-                uppercase;
-
-            color:
-                var(--suave);
-        }
-
-
-        .producto-nombre {
-
-            font-family:
-                "Bricolage Grotesque",
-                Arial,
-                sans-serif;
-
-            font-size:
-                clamp(
-                    65px,
-                    7vw,
-                    105px
-                );
-
-            font-weight:
-                400;
-
-            line-height:
-                .78;
-
-            letter-spacing:
-                -.075em;
-
-            margin-bottom:
-                22px;
-        }
-
-
-        .producto-descripcion {
-
-            max-width:
-                440px;
-
-            font-size:
-                14px;
-
-            line-height:
-                1.75;
-
-            color:
-                var(--suave);
-
-            margin-bottom:
-                25px;
-        }
-
-
-        .precio-linea {
-
-            display:
-                flex;
-
-            align-items:
-                baseline;
-
-            gap:
-                12px;
-
-            margin-bottom:
-                22px;
-        }
-
-
-        .precio {
-
-            font-size:
-                22px;
-
-            font-weight:
-                500;
-        }
-
-
-        .envio {
-
-            font-size:
-                10px;
-
-            color:
-                var(--suave);
-        }
-
-
-        /* =====================================================
-           OFERTA
-        ===================================================== */
-
-        .oferta {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                15px;
-
-            padding:
-                16px 18px;
-
-            margin-bottom:
-                16px;
-
-            background:
-                var(--caja);
-
-            border:
-                1px solid var(--borde);
-
-            border-radius:
-                18px;
-        }
-
-
-        .oferta strong {
-
-            display:
-                block;
-
-            font-size:
-                12px;
-
-            margin-bottom:
-                4px;
-        }
-
-
-        .oferta span {
-
-            font-size:
-                10px;
-
-            color:
-                var(--suave);
-        }
-
-
-        .oferta-badge {
-
-            width:
-                45px;
-
-            height:
-                45px;
-
-            flex-shrink:
-                0;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                50%;
-
-            background:
-                var(--texto);
-
-            color:
-                var(--fondo);
-
-            font-size:
-                10px;
-
-            font-weight:
-                500;
-        }
-
-
-        /* =====================================================
-           BOTONES
-        ===================================================== */
-
-        .acciones {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:
-                10px;
-
-            margin-bottom:
-                20px;
-        }
-
-
-        .boton {
-
-            min-height:
-                58px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                8px;
-
-            border-radius:
-                999px;
-
-            cursor:
-                pointer;
-
-            font-size:
-                12px;
-
-            transition:
-                transform .2s ease;
-        }
-
-
-        .boton:hover {
-            transform:
-                translateY(-2px);
-        }
-
-
-        .boton-carrito {
-
-            background:
-                var(--caja);
-
-            color:
-                var(--texto);
-
-            border:
-                1px solid var(--borde);
-        }
-
-
-        .boton-comprar {
-
-            background:
-                var(--texto);
-
-            color:
-                var(--fondo);
-
-            border:
-                none;
-        }
-
-
-        /* =====================================================
-           BENEFICIOS PEQUEÑOS
-        ===================================================== */
-
-        .beneficios {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(2,1fr);
-
-            border-left:
-                1px solid var(--borde);
-
-            border-top:
-                1px solid var(--borde);
-        }
-
-
-        .beneficio {
-
-            padding:
-                14px;
-
-            min-height:
-                82px;
-
-            border-right:
-                1px solid var(--borde);
-
-            border-bottom:
-                1px solid var(--borde);
-        }
-
-
-        .beneficio span {
-
-            display:
-                block;
-
-            font-size:
-                18px;
-
-            margin-bottom:
-                8px;
-        }
-
-
-        .beneficio strong {
-
-            display:
-                block;
-
-            font-size:
-                10px;
-
-            margin-bottom:
-                3px;
-        }
-
-
-        .beneficio p {
-
-            font-size:
-                9px;
-
-            color:
-                var(--suave);
-
-            line-height:
-                1.4;
-        }
-
-
-        /* =====================================================
-           GALERÍA
-        ===================================================== */
-
-        .galeria {
-
-            padding:
-                10px
-                5vw
-                90px;
-        }
-
-
-        .galeria-grid {
-
-            max-width:
-                1400px;
-
-            margin:
-                0 auto;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1.15fr .85fr;
-
-            grid-template-rows:
-                330px 240px;
-
-            gap:
-                12px;
-        }
-
-
-        .galeria-item {
-
-            overflow:
-                hidden;
-
-            border-radius:
-                22px;
-
-            background:
-                #151515;
-        }
-
-
-        .galeria-item.grande {
-            grid-row:
-                1 / 3;
-        }
-
-
-        .galeria-item img {
-
-            width:
-                100%;
-
-            height:
-                100%;
-
-            object-fit:
-                cover;
-
-            display:
-                block;
-
-            transition:
-                transform .5s ease;
-        }
-
-
-        .galeria-item:hover img {
-            transform:
-                scale(1.04);
-        }
-
-
-        /* =====================================================
-           LUZ AZUL
-        ===================================================== */
-
-        .luz-azul {
-
-            padding:
-                95px
-                5vw;
-
-            border-top:
-                1px solid var(--borde);
-
-            border-bottom:
-                1px solid var(--borde);
-        }
-
-
-        .luz-contenido {
-
-            max-width:
-                1000px;
-
-            margin:
-                0 auto;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                .85fr 1.15fr;
-
-            gap:
-                70px;
-
-            align-items:
-                center;
-        }
-
-
-        .luz-azul h2 {
-
-            font-family:
-                "Bricolage Grotesque",
-                Arial,
-                sans-serif;
-
-            font-size:
-                clamp(
-                    45px,
-                    5vw,
-                    70px
-                );
-
-            font-weight:
-                400;
-
-            line-height:
-                .86;
-
-            letter-spacing:
-                -.07em;
-
-            margin-bottom:
-                18px;
-        }
-
-
-        .luz-azul p {
-
-            max-width:
-                400px;
-
-            color:
-                var(--suave);
-
-            font-size:
-                13px;
-
-            line-height:
-                1.75;
-        }
-
-
-        .luz-puntos {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:
-                10px;
-        }
-
-
-        .luz-punto {
-
-            padding:
-                22px;
-
-            min-height:
-                145px;
-
-            background:
-                var(--caja);
-
-            border:
-                1px solid var(--borde);
-
-            border-radius:
-                20px;
-        }
-
-
-        .luz-punto span {
-
-            display:
-                block;
-
-            font-size:
-                22px;
-
-            margin-bottom:
-                24px;
-        }
-
-
-        .luz-punto strong {
-
-            display:
-                block;
-
-            margin-bottom:
-                6px;
-
-            font-family:
-                "Bricolage Grotesque",
-                Arial,
-                sans-serif;
-
-            font-size:
-                18px;
-
-            font-weight:
-                400;
-        }
-
-
-        .luz-punto p {
-
-            font-size:
-                9px;
-
-            line-height:
-                1.5;
-
-            color:
-                var(--suave);
-        }
-
-
-        /* =====================================================
-           FRASE
-        ===================================================== */
-
-        .frase {
-
-            padding:
-                100px
-                5vw;
-
-            text-align:
-                center;
-        }
-
-
-        .frase h2 {
-
-            max-width:
-                900px;
-
-            margin:
-                0 auto;
-
-            font-family:
-                "Bricolage Grotesque",
-                Arial,
-                sans-serif;
-
-            font-size:
-                clamp(
-                    42px,
-                    5.5vw,
-                    78px
-                );
-
-            font-weight:
-                400;
-
-            line-height:
-                .9;
-
-            letter-spacing:
-                -.07em;
-        }
-
-
-        .frase span {
-            color:
-                #707070;
-        }
-
-
-        /* =====================================================
-           RESTO DE GAFAS
-        ===================================================== */
-
-        .seguir {
-
-            padding:
-                20px
-                5vw
-                110px;
-        }
-
-
-        .seguir-cabecera {
-
-            margin-bottom:
-                28px;
-        }
-
-
-        .seguir-cabecera span {
-
-            display:
-                block;
-
-            font-size:
-                9px;
-
-            letter-spacing:
-                .2em;
-
-            text-transform:
-                uppercase;
-
-            color:
-                var(--suave);
-
-            margin-bottom:
-                9px;
-        }
-
-
-        .seguir-cabecera h2 {
-
-            font-family:
-                "Bricolage Grotesque",
-                Arial,
-                sans-serif;
-
-            font-size:
-                clamp(
-                    45px,
-                    5vw,
-                    68px
-                );
-
-            font-weight:
-                400;
-
-            line-height:
-                .85;
-
-            letter-spacing:
-                -.07em;
-        }
-
-
-        .productos-resto {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(3,1fr);
-
-            gap:
-                18px;
-        }
-
-
-        .producto-resto {
-
-            color:
-                var(--texto);
-
-            text-decoration:
-                none;
-        }
-
-
-        .producto-resto-imagen {
-
-            width:
-                100%;
-
-            aspect-ratio:
-                1/.82;
-
-            overflow:
-                hidden;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                20px;
-
-            background:
-                #151515;
-        }
-
-
-        .producto-resto-imagen img {
-
-            width:
-                88%;
-
-            height:
-                88%;
-
-            object-fit:
-                contain;
-
-            transition:
-                transform .45s ease;
-        }
-
-
-        .producto-resto:hover
-        .producto-resto-imagen img {
-
-            transform:
-                scale(1.05);
-        }
-
-
-        .producto-resto-info {
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                baseline;
-
-            padding:
-                12px 3px;
-        }
-
-
-        .producto-resto-info h3 {
-
-            font-family:
-                "Bricolage Grotesque",
-                Arial,
-                sans-serif;
-
-            font-size:
-                17px;
-
-            font-weight:
-                400;
-        }
-
-
-        .producto-resto-info span {
-
-            font-size:
-                11px;
-
-            color:
-                var(--suave);
-        }
-
-
-        /* =====================================================
-           MARQUEE
-        ===================================================== */
-
-        .footer-marquee {
-
-            width:
-                100%;
-
-            overflow:
-                hidden;
-
-            border-top:
-                1px solid var(--borde);
-
-            padding:
-                30px 0;
-        }
-
-
-        .footer-track {
-
-            display:
-                flex;
-
-            width:
-                max-content;
-
-            animation:
-                marquee 18s
-                linear infinite;
-        }
-
-
-        .footer-group {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                70px;
-
-            padding-right:
-                70px;
-
-            flex-shrink:
-                0;
-        }
-
-
-        .footer-group img {
-
-            width:
-                150px;
-
-            height:
-                auto;
-
-            display:
-                block;
-        }
-
-
-        @keyframes marquee {
-
-            from {
-                transform:
-                    translateX(0);
-            }
-
-            to {
-                transform:
-                    translateX(-50%);
-            }
-        }
-
-
-        /* =====================================================
-           TOAST
-        ===================================================== */
-
-        .toast {
-
-            position:
-                fixed;
-
-            left:
-                50%;
-
-            bottom:
-                24px;
-
-            z-index:
-                3000;
-
-            transform:
-                translate(-50%,20px);
-
-            opacity:
-                0;
-
-            padding:
-                13px 18px;
-
-            background:
-                rgba(20,20,20,.95);
-
-            border:
-                1px solid var(--borde);
-
-            border-radius:
-                999px;
-
-            backdrop-filter:
-                blur(12px);
-
-            font-size:
-                11px;
-
-            pointer-events:
-                none;
-
-            transition:
-                .3s ease;
-        }
-
-
-        .toast.visible {
-
-            opacity:
-                1;
-
-            transform:
-                translate(-50%,0);
-        }
-
-
-        /* =====================================================
-           MÓVIL
-        ===================================================== */
-
-        @media (max-width: 900px) {
-
-            .producto {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    40px;
-
-                padding-top:
-                    110px;
-            }
-
-
-            .producto-visual {
-                min-height:
-                    450px;
-            }
-
-
-            .producto-info {
-                max-width:
-                    700px;
-            }
-
-
-            .luz-contenido {
-                grid-template-columns:
-                    1fr;
-            }
-
-        }
-
-
-        @media (max-width: 700px) {
-
-            .barra-navegacion {
-
-                height:
-                    72px;
-
-                padding:
-                    0 14px;
-            }
-
-
-            .normal {
-
-                gap:
-                    20px;
-
-                padding:
-                    7px 18px;
-            }
-
-
-            .logo {
-                width:
-                    103px;
-            }
-
-
-            .iconos span {
-
-                width:
-                    36px;
-
-                height:
-                    36px;
-            }
-
-
-            .producto {
-
-                padding:
-                    95px
-                    14px
-                    55px;
-            }
-
-
-            .producto-visual {
-                min-height:
-                    350px;
-            }
-
-
-            .producto-visual::before {
-
-                width:
-                    300px;
-
-                height:
-                    300px;
-            }
-
-
-            .producto-imagen-principal {
-                width:
-                    100%;
-            }
-
-
-            .producto-nombre {
-
-                font-size:
-                    62px;
-            }
-
-
-            .producto-descripcion {
-
-                font-size:
-                    13px;
-            }
-
-
-            .acciones {
-
-                grid-template-columns:
-                    1fr;
-            }
-
-
-            .galeria {
-
-                padding:
-                    10px
-                    14px
-                    70px;
-            }
-
-
-            .galeria-grid {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-                grid-template-rows:
-                    240px 175px;
-
-                gap:
-                    8px;
-            }
-
-
-            .galeria-item {
-
-                border-radius:
-                    15px;
-            }
-
-
-            .luz-azul {
-
-                padding:
-                    75px
-                    14px;
-            }
-
-
-            .luz-contenido {
-
-                gap:
-                    35px;
-            }
-
-
-            .luz-puntos {
-
-                grid-template-columns:
-                    1fr 1fr;
-            }
-
-
-            .luz-punto {
-
-                padding:
-                    17px;
-
-                min-height:
-                    140px;
-            }
-
-
-            .frase {
-
-                padding:
-                    80px
-                    14px;
-            }
-
-
-            .seguir {
-
-                padding:
-                    20px
-                    14px
-                    80px;
-            }
-
-
-            .productos-resto {
-
-                grid-template-columns:
-                    repeat(2,1fr);
-
-                gap:
-                    10px;
-            }
-
-
-            .producto-resto-imagen {
-
-                border-radius:
-                    14px;
-            }
-
-
-            .producto-resto-info h3 {
-
-                font-size:
-                    14px;
-            }
-
-
-            .footer-marquee {
-
-                padding:
-                    22px 0;
-            }
-
-
-            .footer-group {
-
-                gap:
-                    45px;
-
-                padding-right:
-                    45px;
-            }
-
-
-            .footer-group img {
-
-                width:
-                    115px;
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vesira</title>
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined">
+
+  <style>
+    :root{
+      --fondo:#0b0b0b;
+      --texto:#fff;
+      --caja:#151515;
+      --borde:#292929;
+      --suave:#8d8d8d;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      background:var(--fondo);
+      color:var(--texto);
+      font-family:"Outfit",Arial,sans-serif;
+      overflow-x:hidden;
+    }
+
+    button{font:inherit}
+
+    /* NAVBAR */
+    .barra-navegacion{
+      position:fixed;
+      inset:0 0 auto 0;
+      z-index:1000;
+      height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 28px;
+      background:rgba(11,11,11,.88);
+      border-bottom:1px solid var(--borde);
+      backdrop-filter:blur(16px);
+    }
+
+    .normal{
+      display:flex;
+      align-items:center;
+      gap:22px;
+    }
+
+    .logo{
+      width:112px;
+      display:block;
+    }
+
+    .nav-icon{
+      width:42px;
+      height:42px;
+      border:0;
+      background:transparent;
+      color:var(--texto);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:background .2s ease;
+    }
+
+    .nav-icon:hover{background:var(--caja)}
+
+    .iconos{
+      display:flex;
+      align-items:center;
+      gap:4px;
+    }
+
+    /* PRODUCTO */
+    .producto{
+      max-width:1320px;
+      margin:0 auto;
+      min-height:100vh;
+      padding:112px 5vw 70px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .producto-visual{
+      min-height:620px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .producto-visual::before{
+      content:"";
+      position:absolute;
+      width:430px;
+      height:430px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,255,255,.09),rgba(255,255,255,.025) 45%,transparent 72%);
+      filter:blur(20px);
+    }
+
+    .producto-imagen-principal{
+      position:relative;
+      z-index:2;
+      width:min(100%,700px);
+      max-height:650px;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 30px 40px rgba(0,0,0,.4));
+      animation:flotar 5s ease-in-out infinite;
+    }
+
+    @keyframes flotar{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
+    }
+
+    .producto-info{max-width:500px}
+
+    .overline{
+      display:block;
+      margin-bottom:15px;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.2em;
+      color:var(--suave);
+    }
+
+    .producto-nombre{
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:clamp(60px,7vw,100px);
+      font-weight:400;
+      line-height:.82;
+      letter-spacing:-.075em;
+      margin-bottom:22px;
+    }
+
+    .producto-descripcion{
+      max-width:440px;
+      color:var(--suave);
+      font-size:14px;
+      line-height:1.7;
+      margin-bottom:22px;
+    }
+
+    .precio-linea{
+      display:flex;
+      align-items:baseline;
+      gap:12px;
+      margin-bottom:22px;
+    }
+
+    .precio{
+      font-size:22px;
+      font-weight:500;
+    }
+
+    .envio{
+      font-size:11px;
+      color:var(--suave);
+    }
+
+    /* BOTONES */
+    .acciones{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-bottom:22px;
+    }
+
+    .boton{
+      min-height:56px;
+      border-radius:999px;
+      border:1px solid var(--borde);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      font-size:12px;
+      transition:transform .2s ease,background .2s ease;
+    }
+
+    .boton:hover{transform:translateY(-2px)}
+
+    .boton-carrito{
+      background:var(--caja);
+      color:var(--texto);
+    }
+
+    .boton-comprar{
+      border-color:var(--texto);
+      background:var(--texto);
+      color:var(--fondo);
+    }
+
+    /* BENEFICIOS */
+    .beneficios{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      border-top:1px solid var(--borde);
+      border-left:1px solid var(--borde);
+    }
+
+    .beneficio{
+      padding:16px;
+      border-right:1px solid var(--borde);
+      border-bottom:1px solid var(--borde);
+    }
+
+    .beneficio .material-symbols-outlined{
+      display:block;
+      font-size:18px;
+      margin-bottom:18px;
+    }
+
+    .beneficio strong{
+      display:block;
+      font-size:11px;
+      margin-bottom:4px;
+    }
+
+    .beneficio p{
+      color:var(--suave);
+      font-size:9px;
+      line-height:1.45;
+    }
+
+    /* GALERÍA */
+    .galeria{
+      max-width:1320px;
+      margin:0 auto;
+      padding:0 5vw 80px;
+    }
+
+    .galeria-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      grid-template-rows:340px 250px;
+      gap:12px;
+    }
+
+    .galeria-item{
+      overflow:hidden;
+      border-radius:20px;
+      background:#151515;
+    }
+
+    .galeria-item.grande{grid-row:1/3}
+
+    .galeria-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition:transform .5s ease;
+    }
+
+    .galeria-item:hover img{transform:scale(1.035)}
+
+    /* LUZ AZUL */
+    .luz-azul{
+      border-top:1px solid var(--borde);
+      border-bottom:1px solid var(--borde);
+      padding:85px 5vw;
+    }
+
+    .luz-contenido{
+      max-width:1050px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .luz-azul h2{
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:clamp(44px,5vw,70px);
+      font-weight:400;
+      line-height:.86;
+      letter-spacing:-.07em;
+      margin-bottom:18px;
+    }
+
+    .luz-azul > .luz-contenido > div > p{
+      max-width:410px;
+      color:var(--suave);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .luz-puntos{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .luz-punto{
+      padding:20px;
+      min-height:140px;
+      background:var(--caja);
+      border:1px solid var(--borde);
+      border-radius:18px;
+    }
+
+    .luz-punto .material-symbols-outlined{
+      display:block;
+      font-size:20px;
+      margin-bottom:22px;
+    }
+
+    .luz-punto strong{
+      display:block;
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:18px;
+      font-weight:400;
+      margin-bottom:5px;
+    }
+
+    .luz-punto p{
+      color:var(--suave);
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    /* FRASE */
+    .frase{
+      padding:105px 5vw;
+      text-align:center;
+    }
+
+    .frase h2{
+      max-width:900px;
+      margin:auto;
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:clamp(44px,5.5vw,78px);
+      font-weight:400;
+      line-height:.9;
+      letter-spacing:-.07em;
+    }
+
+    .frase span{color:#707070}
+
+    /* RESTO */
+    .seguir{
+      max-width:1320px;
+      margin:0 auto;
+      padding:20px 5vw 100px;
+    }
+
+    .seguir-cabecera{
+      margin-bottom:28px;
+    }
+
+    .seguir-cabecera span{
+      display:block;
+      margin-bottom:9px;
+      font-size:9px;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--suave);
+    }
+
+    .seguir-cabecera h2{
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:clamp(45px,5vw,68px);
+      font-weight:400;
+      line-height:.85;
+      letter-spacing:-.07em;
+    }
+
+    .productos-resto{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .producto-resto{
+      color:var(--texto);
+      text-decoration:none;
+    }
+
+    .producto-resto-imagen{
+      width:100%;
+      aspect-ratio:1/.82;
+      background:#151515;
+      border-radius:20px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .producto-resto-imagen img{
+      width:88%;
+      height:88%;
+      object-fit:contain;
+      transition:transform .45s ease;
+    }
+
+    .producto-resto:hover img{transform:scale(1.05)}
+
+    .producto-resto-info{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      padding:12px 3px;
+    }
+
+    .producto-resto-info h3{
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:17px;
+      font-weight:400;
+    }
+
+    .producto-resto-info span{
+      font-size:11px;
+      color:var(--suave);
+    }
+
+    /* MARQUEE */
+    .footer-marquee{
+      width:100%;
+      overflow:hidden;
+      border-top:1px solid var(--borde);
+      padding:28px 0;
+    }
+
+    .footer-track{
+      display:flex;
+      width:max-content;
+      animation:marquee 18s linear infinite;
+    }
+
+    .footer-group{
+      display:flex;
+      align-items:center;
+      gap:70px;
+      padding-right:70px;
+      flex-shrink:0;
+    }
+
+    .footer-group img{
+      width:150px;
+      height:auto;
+      display:block;
+    }
+
+    @keyframes marquee{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+
+    /* TOAST */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      z-index:3000;
+      transform:translate(-50%,20px);
+      opacity:0;
+      padding:13px 18px;
+      background:rgba(20,20,20,.95);
+      border:1px solid var(--borde);
+      border-radius:999px;
+      font-size:11px;
+      pointer-events:none;
+      transition:.3s ease;
+    }
+
+    .toast.visible{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    @media(max-width:900px){
+      .producto{
+        grid-template-columns:1fr;
+        gap:35px;
+        padding-top:105px;
+      }
+
+      .producto-visual{min-height:440px}
+      .producto-info{max-width:700px}
+      .luz-contenido{grid-template-columns:1fr;gap:35px}
+    }
+
+    @media(max-width:700px){
+      .barra-navegacion{
+        height:72px;
+        padding:0 14px;
+      }
+
+      .logo{width:103px}
+      .nav-icon{width:36px;height:36px}
+
+      .producto{
+        padding:95px 14px 50px;
+      }
+
+      .producto-visual{min-height:340px}
+
+      .producto-visual::before{
+        width:300px;
+        height:300px;
+      }
+
+      .producto-imagen-principal{width:100%}
+
+      .producto-nombre{font-size:58px}
+      .producto-descripcion{font-size:13px}
+
+      .acciones{grid-template-columns:1fr}
+      .beneficios{grid-template-columns:1fr 1fr}
+
+      .beneficio{padding:14px}
+
+      .galeria{
+        padding:0 14px 65px;
+      }
+
+      .galeria-grid{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:220px 160px;
+        gap:8px;
+      }
+
+      .galeria-item{border-radius:14px}
+
+      .luz-azul{padding:70px 14px}
+      .luz-puntos{grid-template-columns:1fr 1fr}
+      .luz-punto{padding:16px;min-height:135px}
+
+      .frase{padding:78px 14px}
+
+      .seguir{padding:20px 14px 75px}
+      .productos-resto{grid-template-columns:1fr 1fr;gap:10px}
+
+      .producto-resto-imagen{border-radius:14px}
+      .producto-resto-info h3{font-size:14px}
+
+      .footer-marquee{padding:22px 0}
+      .footer-group{gap:45px;padding-right:45px}
+      .footer-group img{width:115px}
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-    <!-- =====================================================
-         NAVBAR
-    ===================================================== -->
-
-    <nav class="barra-navegacion">
-
-        <div class="normal">
-
-            <img
-                src="img/logo2.png"
-                class="logo"
-                alt="Vesira"
-            >
-
-            <span
-                class="material-symbols-outlined"
-                onclick="history.back()"
-            >
-                arrow_back
-            </span>
-
-        </div>
-
-
-        <div class="iconos">
-
-            <span class="material-symbols-outlined">
-                shopping_bag
-            </span>
-
-            <span class="material-symbols-outlined">
-                menu
-            </span>
-
-        </div>
-
-    </nav>
-
-
-
-    <!-- =====================================================
-         PRODUCTO
-    ===================================================== -->
-
-    <main class="producto">
-
-
-        <!-- IMAGEN -->
-
-        <section class="producto-visual">
-
-            <img
-                id="imagenPrincipal"
-                class="producto-imagen-principal"
-                src=""
-                alt=""
-            >
-
-        </section>
-
-
-        <!-- INFO -->
-
-        <section class="producto-info">
-
-            <span
-                class="overline"
-                id="productoCategoria"
-            >
-                VESIRA · COLLECTION 01
-            </span>
-
-
-            <h1
-                class="producto-nombre"
-                id="productoNombre"
-            >
-                Cargando...
-            </h1>
-
-
-            <p
-                class="producto-descripcion"
-                id="productoDescripcion"
-            >
-            </p>
-
-
-            <div class="precio-linea">
-
-                <span
-                    class="precio"
-                    id="productoPrecio"
-                >
-                </span>
-
-                <span class="envio">
-                    Envío gratis
-                </span>
-
-            </div>
-
-
-            <div class="oferta">
-
-                <div>
-
-                    <strong>
-                        20% OFF AL COMPRAR 2
-                    </strong>
-
-                    <span>
-                        Combina dos modelos y ahorra.
-                    </span>
-
-                </div>
-
-
-                <div class="oferta-badge">
-                    -20%
-                </div>
-
-            </div>
-
-
-            <div class="acciones">
-
-                <button
-                    class="boton boton-carrito"
-                    id="botonCarrito"
-                >
-
-                    Añadir al carrito
-
-                    <span class="material-symbols-outlined">
-                        shopping_bag
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="boton boton-comprar"
-                    id="botonComprar"
-                >
-
-                    Comprar ahora
-
-                    <span class="material-symbols-outlined">
-                        arrow_forward
-                    </span>
-
-                </button>
-
-            </div>
-
-
-            <div class="beneficios">
-
-                <div class="beneficio">
-
-                    <span class="material-symbols-outlined">
-                        local_shipping
-                    </span>
-
-                    <strong>
-                        Envío gratis
-                    </strong>
-
-                    <p>
-                        En todos los pedidos.
-                    </p>
-
-                </div>
-
-
-                <div class="beneficio">
-
-                    <span class="material-symbols-outlined">
-                        schedule
-                    </span>
-
-                    <strong>
-                        Hasta 5 días
-                    </strong>
-
-                    <p>
-                        Recibe tu pedido rápidamente.
-                    </p>
-
-                </div>
-
-
-                <div class="beneficio">
-
-                    <span class="material-symbols-outlined">
-                        location_on
-                    </span>
-
-                    <strong>
-                        Seguimiento 24 h
-                    </strong>
-
-                    <p>
-                        Información de tu pedido.
-                    </p>
-
-                </div>
-
-
-                <div class="beneficio">
-
-                    <span class="material-symbols-outlined">
-                        replay
-                    </span>
-
-                    <strong>
-                        Devolución
-                    </strong>
-
-                    <p>
-                        Solución si existe un problema.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =====================================================
-         GALERÍA
-    ===================================================== -->
-
-    <section class="galeria">
-
-        <div
-            class="galeria-grid"
-            id="galeria"
-        >
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         LUZ AZUL
-    ===================================================== -->
-
-    <section class="luz-azul">
-
-        <div class="luz-contenido">
-
-            <div>
-
-                <h2>
-                    Tus pantallas.<br>
-                    Tus gafas.
-                </h2>
-
-                <p>
-                    Las lentes incorporan un filtro de luz azul
-                    pensado para el uso diario frente a pantallas.
-                    Una función útil integrada en una montura
-                    que quieres llevar todos los días.
-                </p>
-
-            </div>
-
-
-            <div class="luz-puntos">
-
-                <div class="luz-punto">
-
-                    <span class="material-symbols-outlined">
-                        laptop_mac
-                    </span>
-
-                    <strong>
-                        Para pantallas
-                    </strong>
-
-                    <p>
-                        Ordenador, móvil y tablet.
-                    </p>
-
-                </div>
-
-
-                <div class="luz-punto">
-
-                    <span class="material-symbols-outlined">
-                        filter_alt
-                    </span>
-
-                    <strong>
-                        Filtro azul
-                    </strong>
-
-                    <p>
-                        Incorporado en las lentes.
-                    </p>
-
-                </div>
-
-
-                <div class="luz-punto">
-
-                    <span class="material-symbols-outlined">
-                        schedule
-                    </span>
-
-                    <strong>
-                        Uso diario
-                    </strong>
-
-                    <p>
-                        Pensadas para acompañarte.
-                    </p>
-
-                </div>
-
-
-                <div class="luz-punto">
-
-                    <span class="material-symbols-outlined">
-                        auto_awesome
-                    </span>
-
-                    <strong>
-                        Funcional + estética
-                    </strong>
-
-                    <p>
-                        Tecnología sin perder estilo.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         FRASE
-    ===================================================== -->
-
-    <section class="frase">
-
-        <h2>
-            Diseñadas para
-            <span>mirar más allá.</span>
-        </h2>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         RESTO DE COLECCIÓN
-    ===================================================== -->
-
-    <section class="seguir">
-
-        <div class="seguir-cabecera">
-
-            <span>
-                COLLECTION 01
-            </span>
-
-            <h2>
-                Sigue mirando.
-            </h2>
-
-        </div>
-
-
-        <div
-            class="productos-resto"
-            id="productosResto"
-        >
-        </div>
-
-    </section>
-
-
-
-    <!-- =====================================================
-         MARQUEE
-    ===================================================== -->
-
-    <footer class="footer-marquee">
-
-        <div class="footer-track">
-
-            <div class="footer-group">
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-            </div>
-
-
-            <div class="footer-group">
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-                <img
-                    src="img/logo2.png"
-                    alt="Vesira"
-                >
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- =====================================================
-         TOAST
-    ===================================================== -->
-
-    <div
-        class="toast"
-        id="toast"
-    >
-        Añadido al carrito
+  <nav class="barra-navegacion">
+    <div class="normal">
+      <img src="img/logo2.png" class="logo" alt="Vesira">
+      <button class="nav-icon material-symbols-outlined" id="volver" aria-label="Volver">arrow_back</button>
     </div>
 
-
-
-    <!-- =====================================================
-         SUPABASE
-    ===================================================== -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <script src="supabase.js"></script>
-
-
-    <script>
-
-        /* =====================================================
-           REFERENCIAS
-        ===================================================== */
-
-        const imagenPrincipal =
-            document.getElementById(
-                "imagenPrincipal"
-            );
-
-        const productoCategoria =
-            document.getElementById(
-                "productoCategoria"
-            );
-
-        const productoNombre =
-            document.getElementById(
-                "productoNombre"
-            );
-
-        const productoDescripcion =
-            document.getElementById(
-                "productoDescripcion"
-            );
-
-        const productoPrecio =
-            document.getElementById(
-                "productoPrecio"
-            );
-
-        const galeria =
-            document.getElementById(
-                "galeria"
-            );
-
-        const productosResto =
-            document.getElementById(
-                "productosResto"
-            );
-
-        const botonCarrito =
-            document.getElementById(
-                "botonCarrito"
-            );
-
-        const botonComprar =
-            document.getElementById(
-                "botonComprar"
-            );
-
-        const toast =
-            document.getElementById(
-                "toast"
-            );
-
-
-        /* =====================================================
-           PRODUCTO ID
-        ===================================================== */
-
-        const params =
-            new URLSearchParams(
-                window.location.search
-            );
-
-        const productoId =
-            params.get("id");
-
-
-        let productoActual =
-            null;
-
-
-        /* =====================================================
-           CARRITO
-        ===================================================== */
-
-        function obtenerCarrito() {
-
-            return JSON.parse(
-                localStorage.getItem(
-                    "vesiraCarrito"
-                ) || "[]"
-            );
-
-        }
-
-
-        function guardarCarrito(
-            carrito
-        ) {
-
-            localStorage.setItem(
-                "vesiraCarrito",
-                JSON.stringify(
-                    carrito
-                )
-            );
-
-        }
-
-
-        function mostrarToast(
-            mensaje
-        ) {
-
-            toast.textContent =
-                mensaje;
-
-            toast.classList.add(
-                "visible"
-            );
-
-
-            setTimeout(
-                () => {
-
-                    toast.classList.remove(
-                        "visible"
-                    );
-
-                },
-                2200
-            );
-
-        }
-
-
-        function agregarAlCarrito() {
-
-            if (!productoActual)
-                return;
-
-
-            const carrito =
-                obtenerCarrito();
-
-
-            const existente =
-                carrito.find(
-                    item =>
-                        item.id ===
-                        productoActual.id
-                );
-
-
-            if (existente) {
-
-                existente.cantidad += 1;
-
-            } else {
-
-                carrito.push({
-
-                    id:
-                        productoActual.id,
-
-                    nombre:
-                        productoActual.nombre,
-
-                    precio:
-                        Number(
-                            productoActual.precio
-                        ),
-
-                    imagen:
-                        productoActual.imagen_url,
-
-                    cantidad:
-                        1
-
-                });
-
-            }
-
-
-            guardarCarrito(
-                carrito
-            );
-
-
-            mostrarToast(
-                "Añadido al carrito"
-            );
-
-        }
-
-
-        botonCarrito.addEventListener(
-            "click",
-            agregarAlCarrito
-        );
-
-
-        /* =====================================================
-           COMPRAR
-        ===================================================== */
-
-        botonComprar.addEventListener(
-            "click",
-            () => {
-
-                if (!productoActual)
-                    return;
-
-
-                guardarCarrito([
-
-                    {
-
-                        id:
-                            productoActual.id,
-
-                        nombre:
-                            productoActual.nombre,
-
-                        precio:
-                            Number(
-                                productoActual.precio
-                            ),
-
-                        imagen:
-                            productoActual.imagen_url,
-
-                        cantidad:
-                            1
-
-                    }
-
-                ]);
-
-
-                window.location.href =
-                    "carrito.html";
-
-            }
-        );
-
-
-        /* =====================================================
-           GALERÍA
-        ===================================================== */
-
-        function crearGaleria(
-            imagenes
-        ) {
-
-            galeria.innerHTML =
-                "";
-
-
-            const limpias =
-                imagenes.filter(
-                    Boolean
-                );
-
-
-            if (!limpias.length)
-                return;
-
-
-            limpias.forEach(
-                (src, index) => {
-
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    item.className =
-                        `galeria-item${
-                            index === 0
-                                ? " grande"
-                                : ""
-                        }`;
-
-
-                    item.innerHTML = `
-
-                        <img
-                            src="${src}"
-                            alt="${productoActual.nombre}"
-                            loading="lazy"
-                        >
-
-                    `;
-
-
-                    galeria.appendChild(
-                        item
-                    );
-
-                }
-            );
-
-
-            /* Si solo hay una foto,
-               mostramos la misma de apoyo */
-
-            while (
-                galeria.children.length < 3
-            ) {
-
-                const item =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                item.className =
-                    "galeria-item";
-
-
-                item.innerHTML = `
-
-                    <img
-                        src="${limpias[0]}"
-                        alt="${productoActual.nombre}"
-                        loading="lazy"
-                    >
-
-                `;
-
-
-                galeria.appendChild(
-                    item
-                );
-
-            }
-
-        }
-
-
-        /* =====================================================
-           CARGAR PRODUCTO
-        ===================================================== */
-
-        async function cargarProducto() {
-
-            if (!productoId) {
-
-                productoNombre.textContent =
-                    "Producto no encontrado";
-
-                return;
-            }
-
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-
-                .from("Productos")
-
-                .select(`
-                    id,
-                    nombre,
-                    descripcion,
-                    precio,
-                    imagen_url,
-                    imagen_url_2,
-                    imagen_url_3,
-                    categoria,
-                    activo
-                `)
-
-                .eq(
-                    "id",
-                    productoId
-                )
-
-                .single();
-
-
-            if (error) {
-
-                console.error(
-                    error
-                );
-
-                productoNombre.textContent =
-                    "No se ha podido cargar";
-
-                return;
-            }
-
-
-            if (
-                !data ||
-                !data.activo
-            ) {
-
-                productoNombre.textContent =
-                    "Producto no disponible";
-
-                return;
-            }
-
-
-            productoActual =
-                data;
-
-
-            /* INFORMACIÓN */
-
-            productoNombre.textContent =
-                data.nombre;
-
-
-            productoDescripcion.textContent =
-                data.descripcion ||
-                "";
-
-
-            productoPrecio.textContent =
-                Number(
-                    data.precio
-                )
-                    .toFixed(2)
-                    .replace(
-                        ".",
-                        ","
-                    )
-                + " €";
-
-
-            productoCategoria.textContent =
-                `VESIRA · ${
-                    data.categoria ||
-                    "EYEWEAR"
-                }`;
-
-
-            document.title =
-                `${data.nombre} · Vesira`;
-
-
-            /* IMÁGENES */
-
-            const imagenes = [
-
-                data.imagen_url,
-                data.imagen_url_2,
-                data.imagen_url_3
-
-            ].filter(
-                Boolean
-            );
-
-
-            if (
-                imagenes.length
-            ) {
-
-                imagenPrincipal.src =
-                    imagenes[0];
-
-                imagenPrincipal.alt =
-                    data.nombre;
-
-            }
-
-
-            crearGaleria(
-                imagenes
-            );
-
-
-            cargarRestoProductos(
-                data.id
-            );
-
-        }
-
-
-        /* =====================================================
-           RESTO PRODUCTOS
-        ===================================================== */
-
-        async function cargarRestoProductos(
-            idActual
-        ) {
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-
-                .from("Productos")
-
-                .select(`
-                    id,
-                    nombre,
-                    precio,
-                    imagen_url,
-                    activo
-                `)
-
-                .eq(
-                    "activo",
-                    true
-                )
-
-                .neq(
-                    "id",
-                    idActual
-                )
-
-                .limit(6);
-
-
-            if (error) {
-
-                console.error(
-                    error
-                );
-
-                return;
-            }
-
-
-            productosResto.innerHTML =
-                "";
-
-
-            data.forEach(
-                producto => {
-
-                    const item =
-                        document.createElement(
-                            "a"
-                        );
-
-
-                    item.className =
-                        "producto-resto";
-
-
-                    item.href =
-                        `producto.html?id=${producto.id}`;
-
-
-                    const precio =
-                        Number(
-                            producto.precio
-                        )
-                            .toFixed(2)
-                            .replace(
-                                ".",
-                                ","
-                            );
-
-
-                    item.innerHTML = `
-
-                        <div
-                            class="producto-resto-imagen"
-                        >
-
-                            <img
-                                src="${producto.imagen_url || ""}"
-                                alt="${producto.nombre}"
-                                loading="lazy"
-                            >
-
-                        </div>
-
-
-                        <div
-                            class="producto-resto-info"
-                        >
-
-                            <h3>
-                                ${producto.nombre}
-                            </h3>
-
-                            <span>
-                                ${precio} €
-                            </span>
-
-                        </div>
-
-                    `;
-
-
-                    productosResto.appendChild(
-                        item
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* =====================================================
-           INICIO
-        ===================================================== */
-
-        cargarProducto();
-
-    </script>
-
-
+    <div class="iconos">
+      <button class="nav-icon material-symbols-outlined" aria-label="Carrito"
+              id="abrirCarrito">shopping_bag</button>
+      <button class="nav-icon material-symbols-outlined" aria-label="Menú"
+              id="menu">menu</button>
+    </div>
+  </nav>
+
+  <main class="producto">
+    <section class="producto-visual">
+      <img id="imagenPrincipal" class="producto-imagen-principal" src="" alt="">
+    </section>
+
+    <section class="producto-info">
+      <span class="overline" id="productoCategoria">VESIRA · COLLECTION 01</span>
+
+      <h1 class="producto-nombre" id="productoNombre">Cargando...</h1>
+
+      <p class="producto-descripcion" id="productoDescripcion"></p>
+
+      <div class="precio-linea">
+        <span class="precio" id="productoPrecio"></span>
+        <span class="envio">Envío gratis</span>
+      </div>
+
+      <div class="acciones">
+        <button class="boton boton-carrito" id="botonCarrito">
+          Añadir al carrito
+          <span class="material-symbols-outlined">shopping_bag</span>
+        </button>
+
+        <button class="boton boton-comprar" id="botonComprar">
+          Comprar ahora
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+
+      <div class="beneficios">
+        <div class="beneficio">
+          <span class="material-symbols-outlined">local_shipping</span>
+          <strong>Envío gratis</strong>
+          <p>En todos los pedidos.</p>
+        </div>
+
+        <div class="beneficio">
+          <span class="material-symbols-outlined">schedule</span>
+          <strong>Hasta 5 días</strong>
+          <p>Recibe tu pedido rápidamente.</p>
+        </div>
+
+        <div class="beneficio">
+          <span class="material-symbols-outlined">location_on</span>
+          <strong>Seguimiento</strong>
+          <p>Información de tu pedido.</p>
+        </div>
+
+        <div class="beneficio">
+          <span class="material-symbols-outlined">replay</span>
+          <strong>Devolución</strong>
+          <p>Solución si existe un problema.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="galeria">
+    <div class="galeria-grid" id="galeria"></div>
+  </section>
+
+  <section class="luz-azul">
+    <div class="luz-contenido">
+      <div>
+        <h2>Tus pantallas.<br>Tus gafas.</h2>
+        <p>
+          Las lentes incorporan un filtro de luz azul pensado para el uso diario
+          frente a pantallas. Una función útil integrada en una montura que
+          quieres llevar todos los días.
+        </p>
+      </div>
+
+      <div class="luz-puntos">
+        <div class="luz-punto">
+          <span class="material-symbols-outlined">laptop_mac</span>
+          <strong>Para pantallas</strong>
+          <p>Ordenador, móvil y tablet.</p>
+        </div>
+
+        <div class="luz-punto">
+          <span class="material-symbols-outlined">filter_alt</span>
+          <strong>Filtro azul</strong>
+          <p>Incorporado en las lentes.</p>
+        </div>
+
+        <div class="luz-punto">
+          <span class="material-symbols-outlined">schedule</span>
+          <strong>Uso diario</strong>
+          <p>Pensadas para acompañarte.</p>
+        </div>
+
+        <div class="luz-punto">
+          <span class="material-symbols-outlined">auto_awesome</span>
+          <strong>Funcional + estética</strong>
+          <p>Tecnología sin perder estilo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="frase">
+    <h2>Diseñadas para <span>mirar más allá.</span></h2>
+  </section>
+
+  <section class="seguir">
+    <div class="seguir-cabecera">
+      <span>COLLECTION 01</span>
+      <h2>Sigue mirando.</h2>
+    </div>
+
+    <div class="productos-resto" id="productosResto"></div>
+  </section>
+
+  <footer class="footer-marquee">
+    <div class="footer-track">
+      <div class="footer-group">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+      </div>
+
+      <div class="footer-group">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo2.png" alt="Vesira">
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">Añadido al carrito</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+
+  <script>
+    const imagenPrincipal = document.getElementById("imagenPrincipal");
+    const productoCategoria = document.getElementById("productoCategoria");
+    const productoNombre = document.getElementById("productoNombre");
+    const productoDescripcion = document.getElementById("productoDescripcion");
+    const productoPrecio = document.getElementById("productoPrecio");
+    const galeria = document.getElementById("galeria");
+    const productosResto = document.getElementById("productosResto");
+    const botonCarrito = document.getElementById("botonCarrito");
+    const botonComprar = document.getElementById("botonComprar");
+    const toast = document.getElementById("toast");
+
+    const params = new URLSearchParams(window.location.search);
+    const productoId = params.get("id");
+    console.log("ID QUE ESTOY ENVIANDO A SUPABASE:", productoId);
+console.log("TIPO:", typeof productoId);
+
+    let productoActual = null;
+
+    function obtenerCarrito(){
+      return JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+    }
+
+    function guardarCarrito(carrito){
+      localStorage.setItem("vesiraCarrito", JSON.stringify(carrito));
+    }
+
+    function mostrarToast(mensaje){
+      toast.textContent = mensaje;
+      toast.classList.add("visible");
+
+      setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 2200);
+    }
+
+    function agregarAlCarrito(){
+      if(!productoActual) return;
+
+      const carrito = obtenerCarrito();
+      const existente = carrito.find(item => item.id === productoActual.id);
+
+      if(existente){
+        existente.cantidad += 1;
+      }else{
+        carrito.push({
+          id: productoActual.id,
+          nombre: productoActual.nombre,
+          precio: Number(productoActual.precio),
+          imagen: productoActual.imagen_url,
+          cantidad: 1
+        });
+      }
+
+      guardarCarrito(carrito);
+      mostrarToast("Añadido al carrito");
+    }
+
+    botonCarrito.addEventListener("click", agregarAlCarrito);
+
+    botonComprar.addEventListener("click", () => {
+      if(!productoActual) return;
+
+      guardarCarrito([{
+        id: productoActual.id,
+        nombre: productoActual.nombre,
+        precio: Number(productoActual.precio),
+        imagen: productoActual.imagen_url,
+        cantidad: 1
+      }]);
+
+      window.location.href = "carrito.html";
+    });
+
+    document.getElementById("volver").addEventListener("click", () => {
+      history.back();
+    });
+
+    document.getElementById("abrirCarrito").addEventListener("click", () => {
+      window.location.href = "carrito.html";
+    });
+
+    document.getElementById("menu").addEventListener("click", () => {
+      mostrarToast("Menú");
+    });
+
+    function crearGaleria(imagenes){
+      galeria.innerHTML = "";
+
+      const limpias = imagenes.filter(Boolean);
+      if(!limpias.length) return;
+
+      limpias.forEach((src, index) => {
+        const item = document.createElement("div");
+        item.className = "galeria-item" + (index === 0 ? " grande" : "");
+
+        item.innerHTML = `
+          <img
+            src="${src}"
+            alt="${productoActual?.nombre || "Vesira"}"
+            loading="lazy"
+          >
+        `;
+
+        galeria.appendChild(item);
+      });
+
+      while(galeria.children.length < 3){
+        const item = document.createElement("div");
+        item.className = "galeria-item";
+
+        item.innerHTML = `
+          <img
+            src="${limpias[0]}"
+            alt="${productoActual?.nombre || "Vesira"}"
+            loading="lazy"
+          >
+        `;
+
+        galeria.appendChild(item);
+      }
+    }
+
+    async function cargarProducto(){
+      if(!productoId){
+        productoNombre.textContent = "Producto no encontrado";
+        return;
+      }
+
+      const { data, error } = await supabaseClient
+        .from("Productos")
+        .select(`
+          id,
+          nombre,
+          descripcion,
+          precio,
+          imagen_url,
+          categoria,
+          activo
+        `)
+        .eq("id", productoId)
+        .single();
+
+      if(error){
+        console.error(error);
+        productoNombre.textContent = "No se ha podido cargar";
+        return;
+      }
+
+      if(!data || !data.activo){
+        productoNombre.textContent = "Producto no disponible";
+        return;
+      }
+
+      productoActual = data;
+
+      productoNombre.textContent = data.nombre;
+      productoDescripcion.textContent = data.descripcion || "";
+
+      productoPrecio.textContent =
+        Number(data.precio).toFixed(2).replace(".", ",") + " €";
+
+      productoCategoria.textContent =
+        `VESIRA · ${data.categoria || "COLLECTION 01"}`;
+
+      document.title = `${data.nombre} · Vesira`;
+
+      const imagenes = [
+        data.imagen_url
+      ].filter(Boolean);
+
+      if(imagenes.length){
+        imagenPrincipal.src = imagenes[0];
+        imagenPrincipal.alt = data.nombre;
+      }
+
+      crearGaleria(imagenes);
+      cargarRestoProductos(data.id);
+    }
+
+    async function cargarRestoProductos(idActual){
+      const { data, error } = await supabaseClient
+        .from("Productos")
+        .select(`
+          id,
+          nombre,
+          precio,
+          imagen_url,
+          activo
+        `)
+        .eq("activo", true)
+        .neq("id", idActual)
+        .limit(6);
+
+      if(error){
+        console.error(error);
+        return;
+      }
+
+      productosResto.innerHTML = "";
+
+      data.forEach(producto => {
+        const item = document.createElement("a");
+        item.className = "producto-resto";
+        item.href = `producto.html?id=${producto.id}`;
+
+        const precio = Number(producto.precio)
+          .toFixed(2)
+          .replace(".", ",");
+
+        item.innerHTML = `
+          <div class="producto-resto-imagen">
+            <img
+              src="${producto.imagen_url || ""}"
+              alt="${producto.nombre}"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="producto-resto-info">
+            <h3>${producto.nombre}</h3>
+            <span>${precio} €</span>
+          </div>
+        `;
+
+        productosResto.appendChild(item);
+      });
+    }
+
+    cargarProducto();
+  </script>
 </body>
-
 </html>
