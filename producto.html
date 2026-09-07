@@ -62,7 +62,7 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:0 22px;
+      padding:0 30px;
       background:rgba(10,10,10,.76);
       border-bottom:1px solid rgba(255,255,255,.08);
       backdrop-filter:blur(18px);
@@ -342,6 +342,9 @@
       overflow:hidden;
       background:#151515;
       isolation:isolate;
+      touch-action:none;
+      user-select:none;
+      -webkit-user-select:none;
     }
 
     .beneficio-media img{
@@ -353,6 +356,7 @@
       display:block;
       user-select:none;
       -webkit-user-drag:none;
+      pointer-events:none;
     }
 
     .beneficio-before{
@@ -367,12 +371,14 @@
     .beneficio-slider{
       position:absolute;
       inset:0;
+      z-index:6;
       width:100%;
       height:100%;
       opacity:0;
-      z-index:5;
       cursor:ew-resize;
       margin:0;
+      touch-action:none;
+      -webkit-tap-highlight-color:transparent;
       appearance:none;
       -webkit-appearance:none;
       background:transparent;
@@ -381,16 +387,18 @@
     .beneficio-slider::-webkit-slider-thumb{
       appearance:none;
       -webkit-appearance:none;
-      width:1px;
+      width:28px;
       height:100%;
       background:transparent;
+      cursor:ew-resize;
     }
 
     .beneficio-slider::-moz-range-thumb{
-      width:1px;
+      width:28px;
       height:100%;
       border:0;
       background:transparent;
+      cursor:ew-resize;
     }
 
     .beneficio-linea{
@@ -425,31 +433,7 @@
     .beneficio-control .material-symbols-outlined{
       font-size:18px;
     }
-
-    .foto-label{
-      position:absolute;
-      top:14px;
-      z-index:4;
-      padding:7px 10px;
-      border-radius:999px;
-      background:rgba(0,0,0,.58);
-      border:1px solid rgba(255,255,255,.14);
-      font-size:8px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      backdrop-filter:blur(8px);
-      pointer-events:none;
-    }
-
-    .foto-label.before{
-      left:14px;
-    }
-
-    .foto-label.after{
-      right:14px;
-    }
-
-    .beneficio-copy{
+.beneficio-copy{
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
@@ -687,7 +671,7 @@
     @media(max-width:700px){
       .navbar{
         height:68px;
-        padding:0 12px;
+        padding:0 18px;
       }
 
       .navbar-left{
@@ -825,22 +809,7 @@
         margin-top:13px;
         font-size:7px;
       }
-
-      .foto-label{
-        top:9px;
-        font-size:7px;
-        padding:6px 8px;
-      }
-
-      .foto-label.before{
-        left:9px;
-      }
-
-      .foto-label.after{
-        right:9px;
-      }
-
-      .beneficio-control{
+.beneficio-control{
         width:38px;
         height:38px;
       }
@@ -1030,19 +999,13 @@
         <div class="beneficio-media">
           <img
             class="beneficio-before"
-            src="img/beneficios/beneficio-1-sin.jpg"
-            alt="Persona sin gafas frente a una pantalla"
-          >
+            src="img/beneficios/beneficio-1-sin.jpg"          >
 
           <img
             class="beneficio-after"
             id="after1"
             src="img/beneficios/beneficio-1-con.jpg"
-            alt="Persona usando gafas frente a una pantalla"
           >
-
-          <span class="foto-label before">SIN GAFAS</span>
-          <span class="foto-label after">CON VESIRA</span>
 
           <div class="beneficio-linea" id="linea1"></div>
 
@@ -1080,18 +1043,13 @@
           <img
             class="beneficio-before"
             src="img/beneficios/beneficio-2-sin.jpg"
-            alt="Persona sin gafas usando una pantalla"
           >
 
           <img
             class="beneficio-after"
             id="after2"
             src="img/beneficios/beneficio-2-con.jpg"
-            alt="Persona usando gafas mientras usa una pantalla"
           >
-
-          <span class="foto-label before">SIN GAFAS</span>
-          <span class="foto-label after">CON VESIRA</span>
 
           <div class="beneficio-linea" id="linea2"></div>
 
@@ -1129,18 +1087,13 @@
           <img
             class="beneficio-before"
             src="img/beneficios/beneficio-3-sin.jpg"
-            alt="Persona sin gafas en una rutina nocturna"
           >
 
           <img
             class="beneficio-after"
             id="after3"
             src="img/beneficios/beneficio-3-con.jpg"
-            alt="Persona usando gafas en una rutina nocturna"
           >
-
-          <span class="foto-label before">SIN GAFAS</span>
-          <span class="foto-label after">CON VESIRA</span>
 
           <div class="beneficio-linea" id="linea3"></div>
 
@@ -1338,18 +1291,60 @@
       const slider = document.getElementById(`slider${numero}`);
       const after = document.getElementById(`after${numero}`);
       const linea = document.getElementById(`linea${numero}`);
-      const control = document.querySelector(`#slider${numero}`).parentElement.querySelector(".beneficio-control");
+      const control = slider.parentElement.querySelector(".beneficio-control");
+      const media = slider.parentElement;
 
-      function actualizar(){
-        const valor = Number(slider.value);
-
-        after.style.clipPath = `inset(0 ${100 - valor}% 0 0)`;
-        linea.style.left = `${valor}%`;
-        control.style.left = `${valor}%`;
+      function aplicar(valor){
+        const limitado = Math.max(0, Math.min(100, valor));
+        slider.value = limitado;
+        after.style.clipPath = `inset(0 ${100 - limitado}% 0 0)`;
+        linea.style.left = `${limitado}%`;
+        control.style.left = `${limitado}%`;
       }
 
-      slider.addEventListener("input", actualizar);
-      actualizar();
+      function desdePunto(clientX){
+        const rect = media.getBoundingClientRect();
+        const porcentaje = ((clientX - rect.left) / rect.width) * 100;
+        aplicar(porcentaje);
+      }
+
+      slider.addEventListener("input", () => {
+        aplicar(Number(slider.value));
+      });
+
+      media.addEventListener("pointerdown", (event) => {
+        if(event.target === slider){
+          return;
+        }
+
+        event.preventDefault();
+        desdePunto(event.clientX);
+
+        if(media.setPointerCapture){
+          try{
+            media.setPointerCapture(event.pointerId);
+          }catch{}
+        }
+      });
+
+      media.addEventListener("pointermove", (event) => {
+        if((event.buttons & 1) === 1){
+          event.preventDefault();
+          desdePunto(event.clientX);
+        }
+      }, {passive:false});
+
+      media.addEventListener("pointerup", (event) => {
+        if(media.releasePointerCapture){
+          try{
+            media.releasePointerCapture(event.pointerId);
+          }catch{}
+        }
+      });
+
+      media.addEventListener("pointercancel", () => {});
+
+      aplicar(50);
     }
 
     activarComparador(1);
