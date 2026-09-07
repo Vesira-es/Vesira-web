@@ -3,23 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a0a0a">
   <title>Vesira</title>
 
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
+    rel="stylesheet"
+  >
 
   <style>
     :root{
-      --fondo:#0b0b0b;
+      --fondo:#0a0a0a;
       --texto:#fff;
-      --caja:#151515;
-      --borde:#292929;
-      --suave:#8d8d8d;
+      --suave:#8c8c8c;
+      --borde:rgba(255,255,255,.10);
+      --caja:#141414;
+      --caja2:#181818;
     }
 
-    *{margin:0;padding:0;box-sizing:border-box}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-    html{scroll-behavior:smooth}
+    html{
+      scroll-behavior:smooth;
+    }
 
     body{
       background:var(--fondo);
@@ -28,65 +40,98 @@
       overflow-x:hidden;
     }
 
-    button{font:inherit}
+    button{
+      font:inherit;
+    }
 
-    /* NAVBAR */
-    .barra-navegacion{
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================= */
+    .navbar{
       position:fixed;
-      inset:0 0 auto 0;
+      top:0;
+      left:0;
+      width:100%;
+      height:74px;
       z-index:1000;
-      height:78px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:0 28px;
-      background:rgba(11,11,11,.88);
-      border-bottom:1px solid var(--borde);
-      backdrop-filter:blur(16px);
+      padding:0 22px;
+      background:rgba(10,10,10,.76);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
     }
 
-    .normal{
+    .navbar-left{
       display:flex;
       align-items:center;
-      gap:22px;
+      gap:12px;
+    }
+
+    .logo-link{
+      display:flex;
+      align-items:center;
+      min-width:0;
+      cursor:pointer;
     }
 
     .logo{
-      width:112px;
+      width:108px;
+      height:auto;
       display:block;
     }
 
-    .nav-icon{
-      width:42px;
-      height:42px;
-      border:0;
+    .nav-eyewear{
+      font-size:9px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--suave);
+      white-space:nowrap;
+    }
+
+    .navbar-actions{
+      display:flex;
+      align-items:center;
+      gap:3px;
+    }
+
+    .nav-button{
+      width:40px;
+      height:40px;
+      border:none;
+      border-radius:50%;
       background:transparent;
       color:var(--texto);
-      border-radius:50%;
       display:flex;
       align-items:center;
       justify-content:center;
       cursor:pointer;
-      transition:background .2s ease;
+      transition:background .2s ease, transform .2s ease;
     }
 
-    .nav-icon:hover{background:var(--caja)}
-
-    .iconos{
-      display:flex;
-      align-items:center;
-      gap:4px;
+    .nav-button:hover{
+      background:var(--caja);
+      transform:translateY(-1px);
     }
 
-    /* PRODUCTO */
+    /* =========================
+       PRODUCTO
+    ========================= */
     .producto{
-      max-width:1320px;
-      margin:0 auto;
+      width:min(1240px, calc(100% - 48px));
       min-height:100vh;
-      padding:112px 5vw 70px;
+      margin:0 auto;
+      padding:118px 0 82px;
       display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:70px;
+      grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);
+      gap:68px;
       align-items:center;
     }
 
@@ -96,26 +141,28 @@
       align-items:center;
       justify-content:center;
       position:relative;
+      border-radius:34px;
+      overflow:hidden;
     }
 
     .producto-visual::before{
       content:"";
       position:absolute;
-      width:430px;
-      height:430px;
+      width:490px;
+      height:490px;
       border-radius:50%;
-      background:radial-gradient(circle,rgba(255,255,255,.09),rgba(255,255,255,.025) 45%,transparent 72%);
+      background:radial-gradient(circle,rgba(255,255,255,.085),rgba(255,255,255,.02) 48%,transparent 72%);
       filter:blur(20px);
     }
 
     .producto-imagen-principal{
       position:relative;
       z-index:2;
-      width:min(100%,700px);
-      max-height:650px;
+      width:min(94%,720px);
+      max-height:620px;
       object-fit:contain;
       display:block;
-      filter:drop-shadow(0 30px 40px rgba(0,0,0,.4));
+      filter:drop-shadow(0 32px 42px rgba(0,0,0,.42));
       animation:flotar 5s ease-in-out infinite;
     }
 
@@ -124,277 +171,386 @@
       50%{transform:translateY(-8px)}
     }
 
-    .producto-info{max-width:500px}
-
-    .overline{
-      display:block;
-      margin-bottom:15px;
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.2em;
-      color:var(--suave);
+    .producto-info{
+      max-width:510px;
     }
 
     .producto-nombre{
       font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(60px,7vw,100px);
+      font-size:clamp(58px,7vw,98px);
       font-weight:400;
       line-height:.82;
       letter-spacing:-.075em;
-      margin-bottom:22px;
+      margin-bottom:20px;
     }
 
     .producto-descripcion{
-      max-width:440px;
       color:var(--suave);
       font-size:14px;
-      line-height:1.7;
-      margin-bottom:22px;
+      line-height:1.72;
+      max-width:430px;
+      margin-bottom:20px;
     }
 
     .precio-linea{
       display:flex;
       align-items:baseline;
       gap:12px;
-      margin-bottom:22px;
+      margin-bottom:24px;
     }
 
     .precio{
-      font-size:22px;
+      font-size:23px;
       font-weight:500;
     }
 
     .envio{
-      font-size:11px;
       color:var(--suave);
+      font-size:11px;
     }
 
-    /* BOTONES */
     .acciones{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:10px;
-      margin-bottom:22px;
+      margin-bottom:24px;
     }
 
     .boton{
       min-height:56px;
       border-radius:999px;
       border:1px solid var(--borde);
-      cursor:pointer;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:8px;
-      font-size:12px;
-      transition:transform .2s ease,background .2s ease;
+      color:var(--texto);
+      cursor:pointer;
+      transition:transform .2s ease, background .2s ease, border-color .2s ease;
     }
 
-    .boton:hover{transform:translateY(-2px)}
+    .boton:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,.25);
+    }
 
     .boton-carrito{
       background:var(--caja);
-      color:var(--texto);
     }
 
     .boton-comprar{
-      border-color:var(--texto);
-      background:var(--texto);
-      color:var(--fondo);
+      background:#fff;
+      color:#0a0a0a;
+      border-color:#fff;
     }
 
-    /* BENEFICIOS */
-    .beneficios{
+    .beneficios-mini{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       border-top:1px solid var(--borde);
       border-left:1px solid var(--borde);
     }
 
-    .beneficio{
-      padding:16px;
+    .mini{
+      min-height:88px;
+      padding:14px;
       border-right:1px solid var(--borde);
       border-bottom:1px solid var(--borde);
     }
 
-    .beneficio .material-symbols-outlined{
+    .mini span{
       display:block;
-      font-size:18px;
-      margin-bottom:18px;
+      font-size:17px;
+      margin-bottom:16px;
     }
 
-    .beneficio strong{
+    .mini strong{
       display:block;
-      font-size:11px;
-      margin-bottom:4px;
+      font-size:10px;
+      margin-bottom:3px;
     }
 
-    .beneficio p{
+    .mini p{
       color:var(--suave);
       font-size:9px;
-      line-height:1.45;
+      line-height:1.4;
     }
 
-    /* GALERÍA */
-    .galeria{
-      max-width:1320px;
+    /* =========================
+       BENEFICIOS
+    ========================= */
+    .beneficios-seccion{
+      width:min(1240px, calc(100% - 48px));
       margin:0 auto;
-      padding:0 5vw 80px;
+      padding:22px 0 96px;
     }
 
-    .galeria-grid{
+    .beneficios-cabecera{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:30px;
+      margin-bottom:26px;
+    }
+
+    .beneficios-eyebrow{
+      display:block;
+      color:var(--suave);
+      font-size:9px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
+    .beneficios-cabecera h2{
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:clamp(40px,5.1vw,72px);
+      font-weight:400;
+      line-height:.85;
+      letter-spacing:-.065em;
+    }
+
+    .beneficios-cabecera p{
+      max-width:360px;
+      color:var(--suave);
+      font-size:11px;
+      line-height:1.6;
+      text-align:right;
+    }
+
+    .beneficios-grid{
       display:grid;
-      grid-template-columns:1.15fr .85fr;
-      grid-template-rows:340px 250px;
-      gap:12px;
+      gap:16px;
     }
 
-    .galeria-item{
+    .beneficio{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      padding:14px;
+      border:1px solid var(--borde);
+      border-radius:26px;
+      background:linear-gradient(180deg,#111,#0d0d0d);
       overflow:hidden;
-      border-radius:20px;
-      background:#151515;
     }
 
-    .galeria-item.grande{grid-row:1/3}
+    .beneficio-media{
+      position:relative;
+      aspect-ratio:1.35/1;
+      min-height:360px;
+      border-radius:19px;
+      overflow:hidden;
+      background:#151515;
+      isolation:isolate;
+    }
 
-    .galeria-item img{
+    .beneficio-media img{
+      position:absolute;
+      inset:0;
       width:100%;
       height:100%;
       object-fit:cover;
       display:block;
-      transition:transform .5s ease;
+      user-select:none;
+      -webkit-user-drag:none;
     }
 
-    .galeria-item:hover img{transform:scale(1.035)}
-
-    /* LUZ AZUL */
-    .luz-azul{
-      border-top:1px solid var(--borde);
-      border-bottom:1px solid var(--borde);
-      padding:85px 5vw;
+    .beneficio-before{
+      z-index:1;
     }
 
-    .luz-contenido{
-      max-width:1050px;
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:.8fr 1.2fr;
-      gap:60px;
+    .beneficio-after{
+      z-index:2;
+      clip-path:inset(0 50% 0 0);
+    }
+
+    .beneficio-slider{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      opacity:0;
+      z-index:5;
+      cursor:ew-resize;
+      margin:0;
+      appearance:none;
+      -webkit-appearance:none;
+      background:transparent;
+    }
+
+    .beneficio-slider::-webkit-slider-thumb{
+      appearance:none;
+      -webkit-appearance:none;
+      width:1px;
+      height:100%;
+      background:transparent;
+    }
+
+    .beneficio-slider::-moz-range-thumb{
+      width:1px;
+      height:100%;
+      border:0;
+      background:transparent;
+    }
+
+    .beneficio-linea{
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:50%;
+      width:1px;
+      z-index:4;
+      background:rgba(255,255,255,.8);
+      pointer-events:none;
+    }
+
+    .beneficio-control{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      z-index:4;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.35);
+      background:rgba(10,10,10,.78);
+      display:flex;
       align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      backdrop-filter:blur(7px);
     }
 
-    .luz-azul h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(44px,5vw,70px);
-      font-weight:400;
-      line-height:.86;
-      letter-spacing:-.07em;
-      margin-bottom:18px;
-    }
-
-    .luz-azul > .luz-contenido > div > p{
-      max-width:410px;
-      color:var(--suave);
-      font-size:13px;
-      line-height:1.7;
-    }
-
-    .luz-puntos{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-    }
-
-    .luz-punto{
-      padding:20px;
-      min-height:140px;
-      background:var(--caja);
-      border:1px solid var(--borde);
-      border-radius:18px;
-    }
-
-    .luz-punto .material-symbols-outlined{
-      display:block;
-      font-size:20px;
-      margin-bottom:22px;
-    }
-
-    .luz-punto strong{
-      display:block;
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
+    .beneficio-control .material-symbols-outlined{
       font-size:18px;
+    }
+
+    .foto-label{
+      position:absolute;
+      top:14px;
+      z-index:4;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(0,0,0,.58);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:8px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      backdrop-filter:blur(8px);
+      pointer-events:none;
+    }
+
+    .foto-label.before{
+      left:14px;
+    }
+
+    .foto-label.after{
+      right:14px;
+    }
+
+    .beneficio-copy{
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:16px 12px 14px;
+    }
+
+    .beneficio-numero{
+      color:#626262;
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:13px;
+      letter-spacing:.08em;
+      margin-bottom:auto;
+    }
+
+    .beneficio-copy h3{
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:clamp(32px,3.4vw,52px);
       font-weight:400;
-      margin-bottom:5px;
+      line-height:.9;
+      letter-spacing:-.06em;
+      margin-bottom:12px;
     }
 
-    .luz-punto p{
+    .beneficio-copy p{
       color:var(--suave);
-      font-size:9px;
-      line-height:1.5;
+      font-size:12px;
+      line-height:1.7;
+      max-width:390px;
     }
 
-    /* FRASE */
+    .beneficio-tag{
+      display:inline-flex;
+      width:max-content;
+      padding:7px 10px;
+      margin-top:18px;
+      border:1px solid var(--borde);
+      border-radius:999px;
+      color:#bfbfbf;
+      font-size:8px;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+
+    /* =========================
+       FRASE
+    ========================= */
     .frase{
-      padding:105px 5vw;
+      width:min(1100px,calc(100% - 48px));
+      margin:0 auto;
+      padding:20px 0 98px;
       text-align:center;
     }
 
     .frase h2{
-      max-width:900px;
-      margin:auto;
       font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(44px,5.5vw,78px);
+      font-size:clamp(40px,5.8vw,78px);
       font-weight:400;
-      line-height:.9;
+      line-height:.88;
       letter-spacing:-.07em;
     }
 
-    .frase span{color:#707070}
+    .frase span{
+      color:#666;
+    }
 
-    /* RESTO */
+    /* =========================
+       OTROS PRODUCTOS
+    ========================= */
     .seguir{
-      max-width:1320px;
+      width:min(1240px,calc(100% - 48px));
       margin:0 auto;
-      padding:20px 5vw 100px;
+      padding:0 0 100px;
     }
 
     .seguir-cabecera{
-      margin-bottom:28px;
-    }
-
-    .seguir-cabecera span{
-      display:block;
-      margin-bottom:9px;
-      font-size:9px;
-      letter-spacing:.2em;
-      text-transform:uppercase;
-      color:var(--suave);
+      margin-bottom:24px;
     }
 
     .seguir-cabecera h2{
       font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(45px,5vw,68px);
+      font-size:clamp(42px,5.1vw,70px);
       font-weight:400;
       line-height:.85;
-      letter-spacing:-.07em;
+      letter-spacing:-.065em;
     }
 
     .productos-resto{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:18px;
+      gap:16px;
     }
 
     .producto-resto{
-      color:var(--texto);
-      text-decoration:none;
+      display:block;
+      min-width:0;
     }
 
     .producto-resto-imagen{
-      width:100%;
-      aspect-ratio:1/.82;
-      background:#151515;
-      border-radius:20px;
+      aspect-ratio:1/.9;
+      background:#f2f2ef;
+      border-radius:21px;
       overflow:hidden;
       display:flex;
       align-items:center;
@@ -402,58 +558,68 @@
     }
 
     .producto-resto-imagen img{
-      width:88%;
-      height:88%;
+      width:87%;
+      height:87%;
       object-fit:contain;
-      transition:transform .45s ease;
+      display:block;
+      transition:transform .45s cubic-bezier(.2,.8,.2,1);
     }
 
-    .producto-resto:hover img{transform:scale(1.05)}
+    .producto-resto:hover img{
+      transform:scale(1.05);
+    }
 
     .producto-resto-info{
       display:flex;
-      align-items:baseline;
       justify-content:space-between;
-      padding:12px 3px;
+      align-items:baseline;
+      gap:14px;
+      padding:13px 3px;
     }
 
     .producto-resto-info h3{
       font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:17px;
+      font-size:18px;
       font-weight:400;
+      letter-spacing:-.03em;
     }
 
     .producto-resto-info span{
-      font-size:11px;
       color:var(--suave);
+      font-size:11px;
+      white-space:nowrap;
     }
 
-    /* MARQUEE */
-    .footer-marquee{
+    /* =========================
+       MARQUEE
+    ========================= */
+    .marquee{
       width:100%;
       overflow:hidden;
       border-top:1px solid var(--borde);
       padding:28px 0;
     }
 
-    .footer-track{
+    .marquee-track{
       display:flex;
       width:max-content;
       animation:marquee 18s linear infinite;
     }
 
-    .footer-group{
+    .marquee-group{
       display:flex;
       align-items:center;
-      gap:70px;
-      padding-right:70px;
+      gap:72px;
+      padding-right:72px;
       flex-shrink:0;
     }
 
-    .footer-group img{
-      width:150px;
+    .marquee-group img{
+      width:148px;
       height:auto;
       display:block;
+      flex-shrink:0;
+      object-fit:contain;
     }
 
     @keyframes marquee{
@@ -461,21 +627,25 @@
       to{transform:translateX(-50%)}
     }
 
-    /* TOAST */
+    /* =========================
+       TOAST
+    ========================= */
     .toast{
       position:fixed;
       left:50%;
-      bottom:24px;
+      bottom:22px;
       z-index:3000;
-      transform:translate(-50%,20px);
+      transform:translate(-50%,18px);
       opacity:0;
-      padding:13px 18px;
-      background:rgba(20,20,20,.95);
-      border:1px solid var(--borde);
+      padding:12px 16px;
+      border:1px solid rgba(255,255,255,.13);
       border-radius:999px;
+      background:rgba(20,20,20,.94);
+      color:#fff;
       font-size:11px;
       pointer-events:none;
-      transition:.3s ease;
+      transition:.28s ease;
+      backdrop-filter:blur(10px);
     }
 
     .toast.visible{
@@ -483,103 +653,314 @@
       transform:translate(-50%,0);
     }
 
-    @media(max-width:900px){
+    /* =========================
+       RESPONSIVE
+    ========================= */
+    @media(max-width:950px){
       .producto{
         grid-template-columns:1fr;
-        gap:35px;
+        gap:28px;
         padding-top:105px;
       }
 
-      .producto-visual{min-height:440px}
-      .producto-info{max-width:700px}
-      .luz-contenido{grid-template-columns:1fr;gap:35px}
+      .producto-visual{
+        min-height:500px;
+      }
+
+      .producto-info{
+        max-width:760px;
+      }
+
+      .beneficio{
+        grid-template-columns:1fr;
+      }
+
+      .beneficio-media{
+        min-height:420px;
+      }
+
+      .beneficio-copy{
+        min-height:240px;
+      }
     }
 
     @media(max-width:700px){
-      .barra-navegacion{
-        height:72px;
-        padding:0 14px;
+      .navbar{
+        height:68px;
+        padding:0 12px;
       }
 
-      .logo{width:103px}
-      .nav-icon{width:36px;height:36px}
+      .navbar-left{
+        gap:9px;
+      }
+
+      .logo{
+        width:94px;
+      }
+
+      .nav-eyewear{
+        display:block;
+        font-size:8px;
+      }
+
+      .nav-button{
+        width:35px;
+        height:35px;
+      }
 
       .producto{
-        padding:95px 14px 50px;
+        width:calc(100% - 28px);
+        padding:88px 0 56px;
+        gap:16px;
       }
 
-      .producto-visual{min-height:340px}
+      .producto-visual{
+        min-height:310px;
+        border-radius:24px;
+      }
 
       .producto-visual::before{
-        width:300px;
-        height:300px;
+        width:290px;
+        height:290px;
       }
 
-      .producto-imagen-principal{width:100%}
-
-      .producto-nombre{font-size:58px}
-      .producto-descripcion{font-size:13px}
-
-      .acciones{grid-template-columns:1fr}
-      .beneficios{grid-template-columns:1fr 1fr}
-
-      .beneficio{padding:14px}
-
-      .galeria{
-        padding:0 14px 65px;
+      .producto-imagen-principal{
+        width:100%;
+        max-height:340px;
       }
 
-      .galeria-grid{
-        grid-template-columns:1fr 1fr;
-        grid-template-rows:220px 160px;
+      .producto-nombre{
+        font-size:58px;
+        margin-bottom:17px;
+      }
+
+      .producto-descripcion{
+        font-size:13px;
+        line-height:1.65;
+      }
+
+      .precio{
+        font-size:21px;
+      }
+
+      .envio{
+        font-size:10px;
+      }
+
+      .acciones{
+        grid-template-columns:1fr;
         gap:8px;
+        margin-bottom:17px;
       }
 
-      .galeria-item{border-radius:14px}
+      .boton{
+        min-height:53px;
+      }
 
-      .luz-azul{padding:70px 14px}
-      .luz-puntos{grid-template-columns:1fr 1fr}
-      .luz-punto{padding:16px;min-height:135px}
+      .beneficios-mini{
+        grid-template-columns:1fr 1fr;
+      }
 
-      .frase{padding:78px 14px}
+      .mini{
+        min-height:80px;
+      }
 
-      .seguir{padding:20px 14px 75px}
-      .productos-resto{grid-template-columns:1fr 1fr;gap:10px}
+      .mini span{
+        margin-bottom:12px;
+      }
 
-      .producto-resto-imagen{border-radius:14px}
-      .producto-resto-info h3{font-size:14px}
+      .beneficios-seccion{
+        width:calc(100% - 28px);
+        padding:8px 0 72px;
+      }
 
-      .footer-marquee{padding:22px 0}
-      .footer-group{gap:45px;padding-right:45px}
-      .footer-group img{width:115px}
+      .beneficios-cabecera{
+        display:block;
+        margin-bottom:18px;
+      }
+
+      .beneficios-cabecera h2{
+        font-size:43px;
+      }
+
+      .beneficios-cabecera p{
+        margin-top:13px;
+        text-align:left;
+        font-size:10px;
+      }
+
+      .beneficio{
+        padding:8px;
+        gap:8px;
+        border-radius:20px;
+      }
+
+      .beneficio-media{
+        min-height:255px;
+        aspect-ratio:1/1.07;
+        border-radius:14px;
+      }
+
+      .beneficio-copy{
+        min-height:205px;
+        padding:12px 9px 8px;
+      }
+
+      .beneficio-numero{
+        margin-bottom:40px;
+        font-size:11px;
+      }
+
+      .beneficio-copy h3{
+        font-size:35px;
+        margin-bottom:10px;
+      }
+
+      .beneficio-copy p{
+        font-size:10px;
+        line-height:1.6;
+      }
+
+      .beneficio-tag{
+        margin-top:13px;
+        font-size:7px;
+      }
+
+      .foto-label{
+        top:9px;
+        font-size:7px;
+        padding:6px 8px;
+      }
+
+      .foto-label.before{
+        left:9px;
+      }
+
+      .foto-label.after{
+        right:9px;
+      }
+
+      .beneficio-control{
+        width:38px;
+        height:38px;
+      }
+
+      .frase{
+        width:calc(100% - 28px);
+        padding:0 0 72px;
+      }
+
+      .frase h2{
+        font-size:47px;
+      }
+
+      .seguir{
+        width:calc(100% - 28px);
+        padding-bottom:72px;
+      }
+
+      .seguir-cabecera{
+        margin-bottom:18px;
+      }
+
+      .seguir-cabecera h2{
+        font-size:43px;
+      }
+
+      .productos-resto{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+      }
+
+      .producto-resto-imagen{
+        border-radius:14px;
+      }
+
+      .producto-resto-info{
+        padding:10px 2px;
+      }
+
+      .producto-resto-info h3{
+        font-size:14px;
+      }
+
+      .producto-resto-info span{
+        font-size:10px;
+      }
+
+      .marquee{
+        padding:22px 0;
+      }
+
+      .marquee-group{
+        gap:46px;
+        padding-right:46px;
+      }
+
+      .marquee-group img{
+        width:112px;
+      }
+    }
+
+    @media(max-width:380px){
+      .nav-eyewear{
+        font-size:7px;
+        letter-spacing:.13em;
+      }
+
+      .logo{
+        width:90px;
+      }
+
+      .producto-nombre{
+        font-size:53px;
+      }
+
+      .beneficios-cabecera h2,
+      .seguir-cabecera h2{
+        font-size:39px;
+      }
+
+      .frase h2{
+        font-size:43px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <nav class="barra-navegacion">
-    <div class="normal">
-      <img src="img/logo2.png" class="logo" alt="Vesira">
-      <button class="nav-icon material-symbols-outlined" id="volver" aria-label="Volver">arrow_back</button>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a class="logo-link" href="#" id="logoBack" aria-label="Volver">
+        <img src="img/logo2.png" class="logo" alt="Vesira">
+      </a>
+      <span class="nav-eyewear">EYewear</span>
     </div>
 
-    <div class="iconos">
-      <button class="nav-icon material-symbols-outlined" aria-label="Carrito"
-              id="abrirCarrito">shopping_bag</button>
-      <button class="nav-icon material-symbols-outlined" aria-label="Menú"
-              id="menu">menu</button>
+    <div class="navbar-actions">
+      <button class="nav-button material-symbols-outlined" id="abrirCarrito" aria-label="Carrito">
+        shopping_bag
+      </button>
+      <button class="nav-button material-symbols-outlined" id="menu" aria-label="Menú">
+        menu
+      </button>
     </div>
   </nav>
 
+  <!-- PRODUCTO -->
   <main class="producto">
     <section class="producto-visual">
-      <img id="imagenPrincipal" class="producto-imagen-principal" src="" alt="">
+      <img
+        id="imagenPrincipal"
+        class="producto-imagen-principal"
+        src=""
+        alt=""
+      >
     </section>
 
     <section class="producto-info">
-      <span class="overline" id="productoCategoria">VESIRA · COLLECTION 01</span>
-
       <h1 class="producto-nombre" id="productoNombre">Cargando...</h1>
 
       <p class="producto-descripcion" id="productoDescripcion"></p>
@@ -601,26 +982,26 @@
         </button>
       </div>
 
-      <div class="beneficios">
-        <div class="beneficio">
+      <div class="beneficios-mini">
+        <div class="mini">
           <span class="material-symbols-outlined">local_shipping</span>
           <strong>Envío gratis</strong>
           <p>En todos los pedidos.</p>
         </div>
 
-        <div class="beneficio">
+        <div class="mini">
           <span class="material-symbols-outlined">schedule</span>
           <strong>Hasta 5 días</strong>
-          <p>Recibe tu pedido rápidamente.</p>
+          <p>Entrega rápida.</p>
         </div>
 
-        <div class="beneficio">
+        <div class="mini">
           <span class="material-symbols-outlined">location_on</span>
           <strong>Seguimiento</strong>
-          <p>Información de tu pedido.</p>
+          <p>Información del pedido.</p>
         </div>
 
-        <div class="beneficio">
+        <div class="mini">
           <span class="material-symbols-outlined">replay</span>
           <strong>Devolución</strong>
           <p>Solución si existe un problema.</p>
@@ -629,128 +1010,294 @@
     </section>
   </main>
 
-  <section class="galeria">
-    <div class="galeria-grid" id="galeria"></div>
-  </section>
-
-  <section class="luz-azul">
-    <div class="luz-contenido">
+  <!-- BENEFICIOS -->
+  <section class="beneficios-seccion">
+    <div class="beneficios-cabecera">
       <div>
-        <h2>Tus pantallas.<br>Tus gafas.</h2>
-        <p>
-          Las lentes incorporan un filtro de luz azul pensado para el uso diario
-          frente a pantallas. Una función útil integrada en una montura que
-          quieres llevar todos los días.
-        </p>
+        <span class="beneficios-eyebrow">GAFAS LUZ AZUL</span>
+        <h2>Un par.<br>Para tu rutina.</h2>
       </div>
 
-      <div class="luz-puntos">
-        <div class="luz-punto">
-          <span class="material-symbols-outlined">laptop_mac</span>
-          <strong>Para pantallas</strong>
-          <p>Ordenador, móvil y tablet.</p>
+      <p>
+        Desliza cada imagen para ver el antes y el después del mismo escenario.
+      </p>
+    </div>
+
+    <div class="beneficios-grid">
+
+      <!-- BENEFICIO 01 -->
+      <article class="beneficio">
+        <div class="beneficio-media">
+          <img
+            class="beneficio-before"
+            src="img/beneficios/beneficio-1-sin.jpg"
+            alt="Persona sin gafas frente a una pantalla"
+          >
+
+          <img
+            class="beneficio-after"
+            id="after1"
+            src="img/beneficios/beneficio-1-con.jpg"
+            alt="Persona usando gafas frente a una pantalla"
+          >
+
+          <span class="foto-label before">SIN GAFAS</span>
+          <span class="foto-label after">CON VESIRA</span>
+
+          <div class="beneficio-linea" id="linea1"></div>
+
+          <div class="beneficio-control">
+            <span class="material-symbols-outlined">chevron_left chevron_right</span>
+          </div>
+
+          <input
+            class="beneficio-slider"
+            id="slider1"
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            aria-label="Comparar imagen sin gafas y con gafas"
+          >
         </div>
 
-        <div class="luz-punto">
-          <span class="material-symbols-outlined">filter_alt</span>
-          <strong>Filtro azul</strong>
-          <p>Incorporado en las lentes.</p>
+        <div class="beneficio-copy">
+          <div class="beneficio-numero">01</div>
+          <div>
+            <h3>Para tus pantallas.</h3>
+            <p>
+              Pensadas para acompañarte mientras trabajas, estudias o pasas tiempo
+              con el móvil, ordenador o tablet.
+            </p>
+            <span class="beneficio-tag">Uso con pantallas</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- BENEFICIO 02 -->
+      <article class="beneficio">
+        <div class="beneficio-media">
+          <img
+            class="beneficio-before"
+            src="img/beneficios/beneficio-2-sin.jpg"
+            alt="Persona sin gafas usando una pantalla"
+          >
+
+          <img
+            class="beneficio-after"
+            id="after2"
+            src="img/beneficios/beneficio-2-con.jpg"
+            alt="Persona usando gafas mientras usa una pantalla"
+          >
+
+          <span class="foto-label before">SIN GAFAS</span>
+          <span class="foto-label after">CON VESIRA</span>
+
+          <div class="beneficio-linea" id="linea2"></div>
+
+          <div class="beneficio-control">
+            <span class="material-symbols-outlined">chevron_left chevron_right</span>
+          </div>
+
+          <input
+            class="beneficio-slider"
+            id="slider2"
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            aria-label="Comparar segunda imagen"
+          >
         </div>
 
-        <div class="luz-punto">
-          <span class="material-symbols-outlined">schedule</span>
-          <strong>Uso diario</strong>
-          <p>Pensadas para acompañarte.</p>
+        <div class="beneficio-copy">
+          <div class="beneficio-numero">02</div>
+          <div>
+            <h3>Filtro de luz azul.</h3>
+            <p>
+              Una función integrada en las lentes para tu día a día frente a
+              dispositivos digitales.
+            </p>
+            <span class="beneficio-tag">Filtro integrado</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- BENEFICIO 03 -->
+      <article class="beneficio">
+        <div class="beneficio-media">
+          <img
+            class="beneficio-before"
+            src="img/beneficios/beneficio-3-sin.jpg"
+            alt="Persona sin gafas en una rutina nocturna"
+          >
+
+          <img
+            class="beneficio-after"
+            id="after3"
+            src="img/beneficios/beneficio-3-con.jpg"
+            alt="Persona usando gafas en una rutina nocturna"
+          >
+
+          <span class="foto-label before">SIN GAFAS</span>
+          <span class="foto-label after">CON VESIRA</span>
+
+          <div class="beneficio-linea" id="linea3"></div>
+
+          <div class="beneficio-control">
+            <span class="material-symbols-outlined">chevron_left chevron_right</span>
+          </div>
+
+          <input
+            class="beneficio-slider"
+            id="slider3"
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            aria-label="Comparar tercera imagen"
+          >
         </div>
 
-        <div class="luz-punto">
-          <span class="material-symbols-outlined">auto_awesome</span>
-          <strong>Funcional + estética</strong>
-          <p>Tecnología sin perder estilo.</p>
+        <div class="beneficio-copy">
+          <div class="beneficio-numero">03</div>
+          <div>
+            <h3>Hechas para todos los días.</h3>
+            <p>
+              Ligeras, fáciles de llevar y pensadas para que el filtro forme parte
+              de tu estilo sin complicarlo.
+            </p>
+            <span class="beneficio-tag">Everyday eyewear</span>
+          </div>
         </div>
-      </div>
+      </article>
+
     </div>
   </section>
 
+  <!-- FRASE -->
   <section class="frase">
-    <h2>Diseñadas para <span>mirar más allá.</span></h2>
+    <h2>
+      Diseñadas para<br>
+      <span>mirar más allá.</span>
+    </h2>
   </section>
 
+  <!-- OTROS PRODUCTOS -->
   <section class="seguir">
     <div class="seguir-cabecera">
-      <span>COLLECTION 01</span>
       <h2>Sigue mirando.</h2>
     </div>
 
     <div class="productos-resto" id="productosResto"></div>
   </section>
 
-  <footer class="footer-marquee">
-    <div class="footer-track">
-      <div class="footer-group">
+  <!-- MARQUEE -->
+  <section class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-group">
         <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo15.png" alt="">
         <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo15.png" alt="">
         <img src="img/logo2.png" alt="Vesira">
-        <img src="img/logo2.png" alt="Vesira">
-        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo15.png" alt="">
       </div>
 
-      <div class="footer-group">
+      <div class="marquee-group">
         <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo15.png" alt="">
         <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo15.png" alt="">
         <img src="img/logo2.png" alt="Vesira">
-        <img src="img/logo2.png" alt="Vesira">
-        <img src="img/logo2.png" alt="Vesira">
+        <img src="img/logo15.png" alt="">
       </div>
     </div>
-  </footer>
+  </section>
 
   <div class="toast" id="toast">Añadido al carrito</div>
 
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
 
   <script>
     const imagenPrincipal = document.getElementById("imagenPrincipal");
-    const productoCategoria = document.getElementById("productoCategoria");
     const productoNombre = document.getElementById("productoNombre");
     const productoDescripcion = document.getElementById("productoDescripcion");
     const productoPrecio = document.getElementById("productoPrecio");
-    const galeria = document.getElementById("galeria");
     const productosResto = document.getElementById("productosResto");
+
     const botonCarrito = document.getElementById("botonCarrito");
     const botonComprar = document.getElementById("botonComprar");
+
+    const abrirCarrito = document.getElementById("abrirCarrito");
+    const menu = document.getElementById("menu");
+    const logoBack = document.getElementById("logoBack");
     const toast = document.getElementById("toast");
 
     const params = new URLSearchParams(window.location.search);
     const productoId = params.get("id");
-    console.log("ID QUE ESTOY ENVIANDO A SUPABASE:", productoId);
-console.log("TIPO:", typeof productoId);
 
     let productoActual = null;
 
+    /* =========================
+       TOAST
+    ========================= */
+    function mostrarToast(mensaje){
+      toast.textContent = mensaje;
+      toast.classList.add("visible");
+
+      clearTimeout(window._vesiraToast);
+      window._vesiraToast = setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 1800);
+    }
+
+    /* =========================
+       NAVEGACIÓN
+    ========================= */
+    logoBack.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if(history.length > 1){
+        history.back();
+      }else{
+        window.location.href = "index.html";
+      }
+    });
+
+    abrirCarrito.addEventListener("click", () => {
+      window.location.href = "carrito.html";
+    });
+
+    menu.addEventListener("click", () => {
+      mostrarToast("Menú");
+    });
+
+    /* =========================
+       CARRITO
+    ========================= */
     function obtenerCarrito(){
-      return JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+      try{
+        return JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+      }catch{
+        return [];
+      }
     }
 
     function guardarCarrito(carrito){
       localStorage.setItem("vesiraCarrito", JSON.stringify(carrito));
     }
 
-    function mostrarToast(mensaje){
-      toast.textContent = mensaje;
-      toast.classList.add("visible");
-
-      setTimeout(() => {
-        toast.classList.remove("visible");
-      }, 2200);
-    }
-
     function agregarAlCarrito(){
       if(!productoActual) return;
 
       const carrito = obtenerCarrito();
-      const existente = carrito.find(item => item.id === productoActual.id);
+
+      const existente = carrito.find(
+        item => String(item.id) === String(productoActual.id)
+      );
 
       if(existente){
         existente.cantidad += 1;
@@ -784,55 +1331,34 @@ console.log("TIPO:", typeof productoId);
       window.location.href = "carrito.html";
     });
 
-    document.getElementById("volver").addEventListener("click", () => {
-      history.back();
-    });
+    /* =========================
+       SLIDERS DE BENEFICIOS
+    ========================= */
+    function activarComparador(numero){
+      const slider = document.getElementById(`slider${numero}`);
+      const after = document.getElementById(`after${numero}`);
+      const linea = document.getElementById(`linea${numero}`);
+      const control = document.querySelector(`#slider${numero}`).parentElement.querySelector(".beneficio-control");
 
-    document.getElementById("abrirCarrito").addEventListener("click", () => {
-      window.location.href = "carrito.html";
-    });
+      function actualizar(){
+        const valor = Number(slider.value);
 
-    document.getElementById("menu").addEventListener("click", () => {
-      mostrarToast("Menú");
-    });
-
-    function crearGaleria(imagenes){
-      galeria.innerHTML = "";
-
-      const limpias = imagenes.filter(Boolean);
-      if(!limpias.length) return;
-
-      limpias.forEach((src, index) => {
-        const item = document.createElement("div");
-        item.className = "galeria-item" + (index === 0 ? " grande" : "");
-
-        item.innerHTML = `
-          <img
-            src="${src}"
-            alt="${productoActual?.nombre || "Vesira"}"
-            loading="lazy"
-          >
-        `;
-
-        galeria.appendChild(item);
-      });
-
-      while(galeria.children.length < 3){
-        const item = document.createElement("div");
-        item.className = "galeria-item";
-
-        item.innerHTML = `
-          <img
-            src="${limpias[0]}"
-            alt="${productoActual?.nombre || "Vesira"}"
-            loading="lazy"
-          >
-        `;
-
-        galeria.appendChild(item);
+        after.style.clipPath = `inset(0 ${100 - valor}% 0 0)`;
+        linea.style.left = `${valor}%`;
+        control.style.left = `${valor}%`;
       }
+
+      slider.addEventListener("input", actualizar);
+      actualizar();
     }
 
+    activarComparador(1);
+    activarComparador(2);
+    activarComparador(3);
+
+    /* =========================
+       CARGAR PRODUCTO
+    ========================= */
     async function cargarProducto(){
       if(!productoId){
         productoNombre.textContent = "Producto no encontrado";
@@ -854,7 +1380,7 @@ console.log("TIPO:", typeof productoId);
         .single();
 
       if(error){
-        console.error(error);
+        console.error("Error cargando producto:", error);
         productoNombre.textContent = "No se ha podido cargar";
         return;
       }
@@ -866,30 +1392,25 @@ console.log("TIPO:", typeof productoId);
 
       productoActual = data;
 
-      productoNombre.textContent = data.nombre;
+      productoNombre.textContent = data.nombre || "";
       productoDescripcion.textContent = data.descripcion || "";
 
       productoPrecio.textContent =
-        Number(data.precio).toFixed(2).replace(".", ",") + " €";
+        `${Number(data.precio).toFixed(2).replace(".", ",")} €`;
 
-      productoCategoria.textContent =
-        `VESIRA · ${data.categoria || "COLLECTION 01"}`;
+      document.title = `${data.nombre || "Producto"} · Vesira`;
 
-      document.title = `${data.nombre} · Vesira`;
-
-      const imagenes = [
-        data.imagen_url
-      ].filter(Boolean);
-
-      if(imagenes.length){
-        imagenPrincipal.src = imagenes[0];
-        imagenPrincipal.alt = data.nombre;
+      if(data.imagen_url){
+        imagenPrincipal.src = data.imagen_url;
+        imagenPrincipal.alt = data.nombre || "Vesira";
       }
 
-      crearGaleria(imagenes);
-      cargarRestoProductos(data.id);
+      await cargarRestoProductos(data.id);
     }
 
+    /* =========================
+       RESTO DE PRODUCTOS
+    ========================= */
     async function cargarRestoProductos(idActual){
       const { data, error } = await supabaseClient
         .from("Productos")
@@ -905,16 +1426,20 @@ console.log("TIPO:", typeof productoId);
         .limit(6);
 
       if(error){
-        console.error(error);
+        console.error("Error cargando productos relacionados:", error);
         return;
       }
 
       productosResto.innerHTML = "";
 
+      if(!data || !data.length){
+        return;
+      }
+
       data.forEach(producto => {
         const item = document.createElement("a");
         item.className = "producto-resto";
-        item.href = `producto.html?id=${producto.id}`;
+        item.href = `producto.html?id=${encodeURIComponent(producto.id)}`;
 
         const precio = Number(producto.precio)
           .toFixed(2)
@@ -924,13 +1449,13 @@ console.log("TIPO:", typeof productoId);
           <div class="producto-resto-imagen">
             <img
               src="${producto.imagen_url || ""}"
-              alt="${producto.nombre}"
+              alt="${producto.nombre || "Vesira"}"
               loading="lazy"
             >
           </div>
 
           <div class="producto-resto-info">
-            <h3>${producto.nombre}</h3>
+            <h3>${producto.nombre || ""}</h3>
             <span>${precio} €</span>
           </div>
         `;
