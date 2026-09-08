@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú · VESIRA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <style>
+    :root{
+      --fondo:#0c0c0c;
+      --texto:#fff;
+      --borde:#262626;
+      --caja:#151515;
+      --suave:#8d8d8d;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box}
+
+    html,body{
+      width:100%;
+      min-height:100%;
+      background:var(--fondo);
+      color:var(--texto);
+      font-family:"Outfit",Arial,sans-serif;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .barra-navegacion{
+      width:100%;
+      height:80px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 30px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(12,12,12,.92);
+      backdrop-filter:blur(18px);
+    }
+
+    .nav-left{
+      display:flex;
+      align-items:center;
+      min-width:0;
+    }
+
+    .normal{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:8px 16px 8px 14px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:999px;
+    }
+
+    .logo{
+      width:114px;
+      height:auto;
+      display:block;
+    }
+
+    .nav-divider{
+      width:1px;
+      height:18px;
+      background:rgba(255,255,255,.14);
+    }
+
+    .nav-word{
+      color:var(--suave);
+      font-size:9px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .cerrar{
+      width:42px;
+      height:42px;
+      border:0;
+      background:transparent;
+      color:var(--texto);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .cerrar:hover{
+      background:var(--caja);
+      transform:translateY(-1px);
+    }
+
+    .menu{
+      min-height:calc(100vh - 80px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:70px 30px 100px;
+    }
+
+    .menu-inner{
+      width:min(100%,900px);
+    }
+
+    .eyebrow{
+      color:var(--suave);
+      font-size:10px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      margin-bottom:35px;
+    }
+
+    .links{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+    }
+
+    .menu-link{
+      position:relative;
+      display:inline-block;
+      font-family:"Bricolage Grotesque",sans-serif;
+      font-size:clamp(58px,10vw,120px);
+      font-weight:800;
+      line-height:.88;
+      letter-spacing:-.055em;
+      text-transform:uppercase;
+      padding:8px 0;
+      transition:transform .25s ease, opacity .25s ease;
+    }
+
+    .menu-link::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:3px;
+      width:100%;
+      height:2px;
+      background:#fff;
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .25s ease;
+    }
+
+    .menu-link:hover{
+      transform:translateX(10px);
+    }
+
+    .menu-link:hover::after{
+      transform:scaleX(1);
+    }
+
+    .menu-link.hidden{
+      display:none;
+    }
+
+    @media(max-width:700px){
+      .barra-navegacion{
+        height:70px;
+        padding:0 12px;
+      }
+
+      .normal{
+        padding:7px 13px;
+        gap:10px;
+      }
+
+      .logo{
+        width:96px;
+      }
+
+      .nav-divider{
+        display:block;
+        width:1px;
+        height:16px;
+      }
+
+      .nav-word{
+        display:block;
+        font-size:8px;
+        letter-spacing:.14em;
+      }
+
+      .cerrar{
+        width:36px;
+        height:36px;
+      }
+
+      .menu{
+        min-height:calc(100vh - 70px);
+        padding:50px 20px 80px;
+      }
+
+      .eyebrow{
+        margin-bottom:28px;
+      }
+
+      .menu-link{
+        font-size:clamp(52px,16vw,82px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="barra-navegacion">
+    <div class="nav-left">
+      <div class="normal">
+        <a href="index.html" aria-label="VESIRA">
+          <img src="img/logo2.png" class="logo" alt="Vesira">
+        </a>
+        <span class="nav-divider"></span>
+        <span class="nav-word">Eyewear</span>
+      </div>
+    </div>
+
+    <button class="cerrar material-symbols-outlined" id="cerrarMenu" aria-label="Cerrar menú">
+      close
+    </button>
+  </nav>
+
+  <main class="menu">
+    <div class="menu-inner">
+      <div class="eyebrow">VESIRA · MENÚ</div>
+
+      <div class="links">
+        <a href="index.html" class="menu-link" id="inicioLink">Inicio</a>
+        <a href="contacto.html" class="menu-link">Contacto</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function esPaginaInicio(){
+      const rutaActual = window.location.pathname.split("/").pop().toLowerCase();
+
+      return (
+        rutaActual === "" ||
+        rutaActual === "index.html" ||
+        rutaActual === "index_v3.html"
+      );
+    }
+
+    // "Inicio" solo aparece cuando NO estamos en la página de inicio.
+    if(esPaginaInicio()){
+      document.getElementById("inicioLink").classList.add("hidden");
+    }
+
+    document.getElementById("cerrarMenu").addEventListener("click", () => {
+      if(document.referrer){
+        history.back();
+      }else{
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>

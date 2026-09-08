@@ -121,6 +121,65 @@
       transform:translateY(-1px);
     }
 
+
+    /* =========================
+       CARRITO / ANIMACIÓN
+    ========================= */
+    .nav-cart-button{
+      position:relative;
+      overflow:visible;
+    }
+
+    .cart-badge{
+      position:absolute;
+      top:1px;
+      right:-2px;
+      min-width:17px;
+      height:17px;
+      padding:0 5px;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background:#fff;
+      color:#0a0a0a;
+      font-family:"Outfit",Arial,sans-serif;
+      font-size:9px;
+      font-weight:700;
+      line-height:17px;
+      letter-spacing:0;
+      box-shadow:0 3px 12px rgba(0,0,0,.28);
+      transform:scale(.7);
+      animation:cartBadgeIn .22s ease forwards;
+      pointer-events:none;
+    }
+
+    @keyframes cartBadgeIn{
+      from{opacity:0;transform:scale(.45)}
+      to{opacity:1;transform:scale(1)}
+    }
+
+    .cart-badge.bump{
+      animation:cartBadgeBump .38s ease;
+    }
+
+    @keyframes cartBadgeBump{
+      0%{transform:scale(1)}
+      35%{transform:scale(1.35)}
+      65%{transform:scale(.92)}
+      100%{transform:scale(1)}
+    }
+
+    .cart-fly{
+      position:fixed;
+      z-index:5000;
+      pointer-events:none;
+      object-fit:contain;
+      filter:drop-shadow(0 18px 24px rgba(0,0,0,.35));
+      transform-origin:center;
+      will-change:transform,opacity;
+    }
+
     /* =========================
        PRODUCTO
     ========================= */
@@ -277,12 +336,12 @@
     }
 
     /* =========================
-       BENEFICIOS
+       BENEFICIOS / COMPARADORES
     ========================= */
     .beneficios-seccion{
       width:min(1240px, calc(100% - 48px));
       margin:0 auto;
-      padding:22px 0 96px;
+      padding:28px 0 96px;
     }
 
     .beneficios-cabecera{
@@ -290,7 +349,7 @@
       align-items:end;
       justify-content:space-between;
       gap:30px;
-      margin-bottom:26px;
+      margin-bottom:28px;
     }
 
     .beneficios-eyebrow{
@@ -304,14 +363,14 @@
 
     .beneficios-cabecera h2{
       font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(40px,5.1vw,72px);
+      font-size:clamp(42px,5.1vw,72px);
       font-weight:400;
-      line-height:.85;
+      line-height:.86;
       letter-spacing:-.065em;
     }
 
     .beneficios-cabecera p{
-      max-width:360px;
+      max-width:380px;
       color:var(--suave);
       font-size:11px;
       line-height:1.6;
@@ -320,28 +379,25 @@
 
     .beneficios-grid{
       display:grid;
-      gap:16px;
+      gap:18px;
     }
 
     .beneficio{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:18px;
-      padding:14px;
+      position:relative;
+      height:clamp(440px,54vw,700px);
       border:1px solid var(--borde);
-      border-radius:26px;
-      background:linear-gradient(180deg,#111,#0d0d0d);
+      border-radius:30px;
       overflow:hidden;
+      background:#050505;
+      isolation:isolate;
     }
 
     .beneficio-media{
-      position:relative;
-      aspect-ratio:1.35/1;
-      min-height:360px;
-      border-radius:19px;
+      position:absolute;
+      inset:0;
       overflow:hidden;
-      background:#151515;
-      isolation:isolate;
+      background:#050505;
+      border-radius:inherit;
       touch-action:none;
       user-select:none;
       -webkit-user-select:none;
@@ -366,12 +422,84 @@
     .beneficio-after{
       z-index:2;
       clip-path:inset(0 50% 0 0);
+      will-change:clip-path;
     }
 
+    /* Black divider that tracks the slider */
+    .beneficio-linea{
+      position:absolute;
+      top:0;
+      bottom:0;
+      left:50%;
+      width:4px;
+      z-index:6;
+      background:#000;
+      box-shadow:0 0 0 1px rgba(255,255,255,.08);
+      pointer-events:none;
+      will-change:left;
+    }
+
+    .beneficio-control{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      z-index:7;
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.35);
+      background:#000;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      box-shadow:0 10px 26px rgba(0,0,0,.40);
+      will-change:left;
+    }
+
+    .beneficio-control{
+      gap:1px;
+    }
+
+    .beneficio-control .material-symbols-outlined{
+      font-size:18px;
+      width:15px;
+      overflow:visible;
+    }
+
+    /* Centered feature name, never crossing the divider */
+    .beneficio-overlay{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:9;
+      display:flex;
+      justify-content:center;
+      align-items:flex-end;
+      padding:30px 24px 34px;
+      pointer-events:none;
+    }
+
+    .beneficio-overlay h3{
+      width:min(82%, 900px);
+      text-align:center;
+      font-family:"Impact",Arial,sans-serif;
+      font-size:clamp(42px,6vw,82px);
+      font-weight:800;
+      line-height:.88;
+      word-spacing:.035em;
+      text-transform:uppercase;
+      text-shadow:0 4px 18px rgba(0,0,0,.58);
+    }
+
+    /* Invisible input: the whole image is draggable */
     .beneficio-slider{
       position:absolute;
       inset:0;
-      z-index:6;
+      z-index:10;
       width:100%;
       height:100%;
       opacity:0;
@@ -387,94 +515,18 @@
     .beneficio-slider::-webkit-slider-thumb{
       appearance:none;
       -webkit-appearance:none;
-      width:28px;
+      width:36px;
       height:100%;
       background:transparent;
       cursor:ew-resize;
     }
 
     .beneficio-slider::-moz-range-thumb{
-      width:28px;
+      width:36px;
       height:100%;
       border:0;
       background:transparent;
       cursor:ew-resize;
-    }
-
-    .beneficio-linea{
-      position:absolute;
-      top:0;
-      bottom:0;
-      left:50%;
-      width:1px;
-      z-index:4;
-      background:rgba(255,255,255,.8);
-      pointer-events:none;
-    }
-
-    .beneficio-control{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      z-index:4;
-      width:42px;
-      height:42px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.35);
-      background:rgba(10,10,10,.78);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      pointer-events:none;
-      backdrop-filter:blur(7px);
-    }
-
-    .beneficio-control .material-symbols-outlined{
-      font-size:18px;
-    }
-.beneficio-copy{
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      padding:16px 12px 14px;
-    }
-
-    .beneficio-numero{
-      color:#626262;
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:13px;
-      letter-spacing:.08em;
-      margin-bottom:auto;
-    }
-
-    .beneficio-copy h3{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(32px,3.4vw,52px);
-      font-weight:400;
-      line-height:.9;
-      letter-spacing:-.06em;
-      margin-bottom:12px;
-    }
-
-    .beneficio-copy p{
-      color:var(--suave);
-      font-size:12px;
-      line-height:1.7;
-      max-width:390px;
-    }
-
-    .beneficio-tag{
-      display:inline-flex;
-      width:max-content;
-      padding:7px 10px;
-      margin-top:18px;
-      border:1px solid var(--borde);
-      border-radius:999px;
-      color:#bfbfbf;
-      font-size:8px;
-      letter-spacing:.13em;
-      text-transform:uppercase;
     }
 
     /* =========================
@@ -690,6 +742,15 @@
       .nav-button{
         width:35px;
         height:35px;
+      }
+
+      .cart-badge{
+        top:-1px;
+        right:-3px;
+        min-width:16px;
+        height:16px;
+        font-size:8px;
+        line-height:16px;
       }
 
       .producto{
@@ -909,8 +970,9 @@
     </div>
 
     <div class="navbar-actions">
-      <button class="nav-button material-symbols-outlined" id="abrirCarrito" aria-label="Carrito">
-        shopping_bag
+      <button class="nav-button nav-cart-button" id="abrirCarrito" aria-label="Carrito">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span class="cart-badge" id="cartBadge">0</span>
       </button>
       <button class="nav-button material-symbols-outlined" id="menu" aria-label="Menú">
         menu
@@ -986,142 +1048,55 @@
         <span class="beneficios-eyebrow">GAFAS LUZ AZUL</span>
         <h2>Un par.<br>Para tu rutina.</h2>
       </div>
-
-      <p>
-        Desliza cada imagen para ver el antes y el después del mismo escenario.
-      </p>
     </div>
 
     <div class="beneficios-grid">
 
-      <!-- BENEFICIO 01 -->
       <article class="beneficio">
         <div class="beneficio-media">
-          <img
-            class="beneficio-before"
-            src="img/beneficios/beneficio-1-sin.jpg"          >
-
-          <img
-            class="beneficio-after"
-            id="after1"
-            src="img/beneficios/beneficio-1-con.jpg"
-          >
-
+          <img class="beneficio-before" src="img/beneficios/beneficio-1-sin.jpg" alt="">
+          <img class="beneficio-after" id="after1" src="img/beneficios/beneficio-1-con.jpg" alt="">
           <div class="beneficio-linea" id="linea1"></div>
-
-          <div class="beneficio-control">
-            <span class="material-symbols-outlined">chevron_left chevron_right</span>
+          <div class="beneficio-control" aria-hidden="true">
+            <span class="material-symbols-outlined">chevron_left</span>
+            <span class="material-symbols-outlined">chevron_right</span>
           </div>
-
-          <input
-            class="beneficio-slider"
-            id="slider1"
-            type="range"
-            min="0"
-            max="100"
-            value="50"
-            aria-label="Comparar imagen sin gafas y con gafas"
-          >
+          <input class="beneficio-slider" id="slider1" type="range" min="0" max="100" value="50" aria-label="Comparar protección de la vista">
         </div>
-
-        <div class="beneficio-copy">
-          <div class="beneficio-numero">01</div>
-          <div>
-            <h3>Para tus pantallas.</h3>
-            <p>
-              Pensadas para acompañarte mientras trabajas, estudias o pasas tiempo
-              con el móvil, ordenador o tablet.
-            </p>
-            <span class="beneficio-tag">Uso con pantallas</span>
-          </div>
+        <div class="beneficio-overlay">
+          <h3>Cuida tu mirada</h3>
         </div>
       </article>
 
-      <!-- BENEFICIO 02 -->
       <article class="beneficio">
         <div class="beneficio-media">
-          <img
-            class="beneficio-before"
-            src="img/beneficios/beneficio-2-sin.jpg"
-          >
-
-          <img
-            class="beneficio-after"
-            id="after2"
-            src="img/beneficios/beneficio-2-con.jpg"
-          >
-
+          <img class="beneficio-before" src="img/beneficios/beneficio-2-sin.jpg" alt="">
+          <img class="beneficio-after" id="after2" src="img/beneficios/beneficio-2-con.jpg" alt="">
           <div class="beneficio-linea" id="linea2"></div>
-
-          <div class="beneficio-control">
-            <span class="material-symbols-outlined">chevron_left chevron_right</span>
+          <div class="beneficio-control" aria-hidden="true">
+            <span class="material-symbols-outlined">chevron_left</span>
+            <span class="material-symbols-outlined">chevron_right</span>
           </div>
-
-          <input
-            class="beneficio-slider"
-            id="slider2"
-            type="range"
-            min="0"
-            max="100"
-            value="50"
-            aria-label="Comparar segunda imagen"
-          >
+          <input class="beneficio-slider" id="slider2" type="range" min="0" max="100" value="50" aria-label="Comparar mantenimiento del foco">
         </div>
-
-        <div class="beneficio-copy">
-          <div class="beneficio-numero">02</div>
-          <div>
-            <h3>Filtro de luz azul.</h3>
-            <p>
-              Una función integrada en las lentes para tu día a día frente a
-              dispositivos digitales.
-            </p>
-            <span class="beneficio-tag">Filtro integrado</span>
-          </div>
+        <div class="beneficio-overlay">
+          <h3>Mantén el foco</h3>
         </div>
       </article>
 
-      <!-- BENEFICIO 03 -->
       <article class="beneficio">
         <div class="beneficio-media">
-          <img
-            class="beneficio-before"
-            src="img/beneficios/beneficio-3-sin.jpg"
-          >
-
-          <img
-            class="beneficio-after"
-            id="after3"
-            src="img/beneficios/beneficio-3-con.jpg"
-          >
-
+          <img class="beneficio-before" src="img/beneficios/beneficio-3-sin.jpg" alt="">
+          <img class="beneficio-after" id="after3" src="img/beneficios/beneficio-3-con.jpg" alt="">
           <div class="beneficio-linea" id="linea3"></div>
-
-          <div class="beneficio-control">
-            <span class="material-symbols-outlined">chevron_left chevron_right</span>
+          <div class="beneficio-control" aria-hidden="true">
+            <span class="material-symbols-outlined">chevron_left</span>
+            <span class="material-symbols-outlined">chevron_right</span>
           </div>
-
-          <input
-            class="beneficio-slider"
-            id="slider3"
-            type="range"
-            min="0"
-            max="100"
-            value="50"
-            aria-label="Comparar tercera imagen"
-          >
+          <input class="beneficio-slider" id="slider3" type="range" min="0" max="100" value="50" aria-label="Comparar descanso">
         </div>
-
-        <div class="beneficio-copy">
-          <div class="beneficio-numero">03</div>
-          <div>
-            <h3>Hechas para todos los días.</h3>
-            <p>
-              Ligeras, fáciles de llevar y pensadas para que el filtro forme parte
-              de tu estilo sin complicarlo.
-            </p>
-            <span class="beneficio-tag">Everyday eyewear</span>
-          </div>
+        <div class="beneficio-overlay">
+          <h3>Descansa mejor</h3>
         </div>
       </article>
 
@@ -1132,14 +1107,14 @@
   <section class="frase">
     <h2>
       Diseñadas para<br>
-      <span>mirar más allá.</span>
+      <span>mirar más allá</span>
     </h2>
   </section>
 
   <!-- OTROS PRODUCTOS -->
   <section class="seguir">
     <div class="seguir-cabecera">
-      <h2>Sigue mirando.</h2>
+      <h2>Sigue mirando</h2>
     </div>
 
     <div class="productos-resto" id="productosResto"></div>
@@ -1185,6 +1160,7 @@
     const botonComprar = document.getElementById("botonComprar");
 
     const abrirCarrito = document.getElementById("abrirCarrito");
+    const cartBadge = document.getElementById("cartBadge");
     const menu = document.getElementById("menu");
     const logoBack = document.getElementById("logoBack");
     const toast = document.getElementById("toast");
@@ -1241,6 +1217,121 @@
 
     function guardarCarrito(carrito){
       localStorage.setItem("vesiraCarrito", JSON.stringify(carrito));
+      actualizarContadorCarrito();
+    }
+
+    function totalProductosCarrito(){
+      return obtenerCarrito().reduce(
+        (total, item) => total + Math.max(0, Number(item.cantidad || 0)),
+        0
+      );
+    }
+
+    function actualizarContadorCarrito(){
+      const total = totalProductosCarrito();
+
+      if(total <= 0){
+        cartBadge.style.display = "none";
+        cartBadge.textContent = "0";
+        return;
+      }
+
+      cartBadge.textContent = total > 99 ? "99+" : String(total);
+      cartBadge.style.display = "flex";
+
+      cartBadge.classList.remove("bump");
+      void cartBadge.offsetWidth;
+      cartBadge.classList.add("bump");
+    }
+
+    function animarGafasAlCarrito(){
+      const origen = document.getElementById("imagenPrincipal");
+      const destino = abrirCarrito;
+
+      if(!origen || !destino || !origen.getBoundingClientRect().width) return;
+
+      const start = origen.getBoundingClientRect();
+      const end = destino.getBoundingClientRect();
+
+      const clon = origen.cloneNode(true);
+      clon.className = "cart-fly";
+      clon.removeAttribute("id");
+
+      const startSize = Math.min(Math.max(start.width * 0.34, 92), 175);
+
+      clon.style.width = startSize + "px";
+      clon.style.height = startSize + "px";
+      clon.style.left = (start.left + start.width / 2 - startSize / 2) + "px";
+      clon.style.top = (start.top + start.height / 2 - startSize / 2) + "px";
+      clon.style.opacity = "1";
+      clon.style.transform = "translate3d(0,0,0) scale(1) rotate(0deg)";
+
+      document.body.appendChild(clon);
+
+      const startX = start.left + start.width / 2;
+      const startY = start.top + start.height / 2;
+      const endX = end.left + end.width / 2;
+      const endY = end.top + end.height / 2;
+
+      const targetX = endX - startX;
+      const targetY = endY - startY;
+
+      const lift = Math.min(-145, targetY * 0.35 - 90);
+      const animation = clon.animate(
+        [
+          {
+            transform:"translate3d(0,0,0) scale(1) rotate(0deg)",
+            opacity:1,
+            offset:0
+          },
+          {
+            transform:`translate3d(${targetX * .26}px, ${targetY * .12 + lift}px, 0) scale(.90) rotate(-8deg)`,
+            opacity:1,
+            offset:.24
+          },
+          {
+            transform:`translate3d(${targetX * .62}px, ${targetY * .38 + lift * .70}px, 0) scale(.66) rotate(7deg)`,
+            opacity:1,
+            offset:.56
+          },
+          {
+            transform:`translate3d(${targetX * .88}px, ${targetY * .74}px, 0) scale(.36) rotate(-5deg)`,
+            opacity:.96,
+            offset:.82
+          },
+          {
+            transform:`translate3d(${targetX}px, ${targetY}px, 0) scale(.08) rotate(12deg)`,
+            opacity:0,
+            offset:1
+          }
+        ],
+        {
+          duration:1320,
+          easing:"cubic-bezier(.16,.78,.22,1)"
+        }
+      );
+
+      abrirCarrito.animate(
+        [
+          {transform:"scale(1)"},
+          {transform:"scale(1.05)", offset:.5},
+          {transform:"scale(1)"}
+        ],
+        {duration:1320, easing:"ease-out"}
+      );
+
+      animation.onfinish = () => {
+        clon.remove();
+
+        abrirCarrito.animate(
+          [
+            {transform:"scale(1)", background:"transparent"},
+            {transform:"scale(1.16)", background:"rgba(255,255,255,.11)"},
+            {transform:"scale(1)", background:"transparent"}
+          ],
+          {duration:380, easing:"ease-out"}
+        );
+      };
     }
 
     function agregarAlCarrito(){
@@ -1265,10 +1356,12 @@
       }
 
       guardarCarrito(carrito);
+      animarGafasAlCarrito();
       mostrarToast("Añadido al carrito");
     }
 
     botonCarrito.addEventListener("click", agregarAlCarrito);
+    actualizarContadorCarrito();
 
     botonComprar.addEventListener("click", () => {
       if(!productoActual) return;
@@ -1294,57 +1387,100 @@
       const control = slider.parentElement.querySelector(".beneficio-control");
       const media = slider.parentElement;
 
+      let target = 50;
+      let current = 50;
+      let velocity = 0;
+      let raf = null;
+      let dragging = false;
+      let interacted = false;
+
+      function loop(){
+        const delta = target - current;
+
+        // Smooth spring-like follow. Fast enough for dragging, soft enough to look fluid.
+        velocity += delta * 0.055;
+        velocity *= 0.72;
+        current += velocity;
+
+        if(Math.abs(delta) < 0.025 && Math.abs(velocity) < 0.025){
+          current = target;
+          velocity = 0;
+        }
+
+        after.style.clipPath = `inset(0 ${100 - current}% 0 0)`;
+        linea.style.left = `${current}%`;
+        control.style.left = `${current}%`;
+
+        if(Math.abs(target-current) > 0.025 || Math.abs(velocity) > 0.025){
+          raf = requestAnimationFrame(loop);
+        }else{
+          raf = null;
+        }
+      }
+
       function aplicar(valor){
-        const limitado = Math.max(0, Math.min(100, valor));
-        slider.value = limitado;
-        after.style.clipPath = `inset(0 ${100 - limitado}% 0 0)`;
-        linea.style.left = `${limitado}%`;
-        control.style.left = `${limitado}%`;
+        target = Math.max(0, Math.min(100, Number(valor)));
+        slider.value = target;
+
+        if(!raf){
+          raf = requestAnimationFrame(loop);
+        }
       }
 
       function desdePunto(clientX){
         const rect = media.getBoundingClientRect();
+        if(!rect.width) return;
         const porcentaje = ((clientX - rect.left) / rect.width) * 100;
         aplicar(porcentaje);
       }
 
       slider.addEventListener("input", () => {
+        interacted = true;
         aplicar(Number(slider.value));
       });
 
       media.addEventListener("pointerdown", (event) => {
-        if(event.target === slider){
-          return;
-        }
-
+        interacted = true;
+        dragging = true;
         event.preventDefault();
         desdePunto(event.clientX);
 
         if(media.setPointerCapture){
-          try{
-            media.setPointerCapture(event.pointerId);
-          }catch{}
+          try{ media.setPointerCapture(event.pointerId); }catch{}
         }
       });
 
       media.addEventListener("pointermove", (event) => {
-        if((event.buttons & 1) === 1){
-          event.preventDefault();
-          desdePunto(event.clientX);
-        }
+        if(!dragging) return;
+        event.preventDefault();
+        desdePunto(event.clientX);
       }, {passive:false});
 
       media.addEventListener("pointerup", (event) => {
+        dragging = false;
         if(media.releasePointerCapture){
-          try{
-            media.releasePointerCapture(event.pointerId);
-          }catch{}
+          try{ media.releasePointerCapture(event.pointerId); }catch{}
         }
       });
 
-      media.addEventListener("pointercancel", () => {});
+      media.addEventListener("pointercancel", () => {
+        dragging = false;
+      });
 
       aplicar(50);
+
+      // On load: all three show an obvious smooth movement and then stop at center.
+      setTimeout(() => {
+        if(!interacted) aplicar(42);
+      }, 700 + numero * 120);
+
+      setTimeout(() => {
+        if(!interacted) aplicar(60);
+      }, 1400 + numero * 120);
+
+      setTimeout(() => {
+        if(!interacted) aplicar(50);
+      }, 2200 + numero * 120);
     }
 
     activarComparador(1);

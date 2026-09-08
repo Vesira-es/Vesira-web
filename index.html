@@ -111,6 +111,56 @@ button{font:inherit}
 }
 .nav-icon:hover{background:var(--caja);transform:translateY(-1px)}
 
+
+
+
+
+
+  35%{transform:scale(1.32)}
+  65%{transform:scale(.94)}
+  100%{transform:scale(1)}
+}
+
+.producto-info{display:flex;flex-direction:column}
+.producto-texto{min-width:0}
+.producto-pie{
+  margin-top:11px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.producto-anadir{
+  width:36px;height:36px;padding:0;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;
+  background:#fff;color:#0c0c0c;
+  display:inline-flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:transform .22s ease,background .22s ease,box-shadow .22s ease;
+}
+.producto-anadir:hover{
+  transform:translateY(-2px) scale(1.04);
+  background:#e9e9e5;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+.producto-anadir .material-symbols-outlined{font-size:17px}
+
+
+
+
+
+@media(max-width:700px){
+  
+  .producto-pie{align-items:flex-end}
+  .productos-eyebrow{font-size:8px;letter-spacing:.24em;margin-bottom:12px}
+  .productos-cabecera h2{font-size:30px;white-space:nowrap;letter-spacing:-.04em}
+
+  .producto-anadir{min-height:32px;padding:0 10px;font-size:8px}
+  .producto-anadir .material-symbols-outlined{font-size:14px}
+  
+}
+
 /* HERO */
 .imagen-principal{
   position:relative;
@@ -176,6 +226,20 @@ button{font:inherit}
       transform-origin:
                 left center;
     }
+.productos-eyebrow{
+  margin-bottom:14px;
+  color:var(--suave);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.28em;
+  line-height:1;
+  text-transform:uppercase;
+}
+.productos-cabecera h2{
+  white-space:nowrap;
+  letter-spacing:-.045em;
+  word-spacing:.025em;
+}
 .grid-productos{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -337,7 +401,7 @@ button{font:inherit}
     padding:46px 14px 80px;
   }
   .productos-cabecera{margin-bottom:18px}
-  .productos-cabecera h2{font-size:30px}
+  .productos-cabecera h2{font-size:42px}
   .grid-productos{gap:10px}
   .producto-card{
     padding:8px;
@@ -356,6 +420,7 @@ button{font:inherit}
   .marquee-vesira-group{gap:45px;padding-right:45px}
   .marquee-vesira-group img{width:115px;height:48px}
 }
+.home-cart-fly{will-change:transform,opacity}
 </style>
 </head>
 
@@ -363,25 +428,8 @@ button{font:inherit}
   <div class="intro" id="intro">
     <img src="img/eslogan.png" alt="Vesira" class="eslogan">
   </div>
+  <div id="vesiraNavbar"></div>
 
-  <nav class="barra-navegacion" id="navbar">
-    <div class="nav-left">
-      <div class="normal">
-        <img src="img/logo2.png" class="logo" alt="Vesira">
-        <span class="nav-divider"></span>
-        <span class="nav-word">Eyewear</span>
-      </div>
-    </div>
-
-    <div class="iconos">
-      <button class="nav-icon material-symbols-outlined" id="abrirCarrito" aria-label="Carrito">
-        shopping_bag
-      </button>
-      <button class="nav-icon material-symbols-outlined" id="menu" aria-label="Menú">
-        menu
-      </button>
-    </div>
-  </nav>
 
   <main>
     <section class="imagen-principal">
@@ -392,8 +440,11 @@ button{font:inherit}
 
     <section class="productos">
       <div class="productos-cabecera">
-        <h2>El match perfecto</h2>
-      </div>
+          <div class="productos-titulo">
+            <span class="productos-eyebrow">GAFAS LUZ AZUL</span>
+            <h2>El match<br>perfecto.</h2>
+          </div>
+        </div>
 
       <div class="grid-productos" id="gridProductos">
         <div class="productos-mensaje">Cargando productos...</div>
@@ -422,10 +473,22 @@ button{font:inherit}
     </section>
   </main>
 
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+
+  <aside class="menu-drawer" id="menuDrawer" aria-hidden="true">
+    <button class="menu-close material-symbols-outlined" id="menuClose" aria-label="Cerrar menú">close</button>
+    <div class="menu-label">VESIRA · MENÚ</div>
+    <nav class="menu-links">
+      <a class="menu-link" href="index.html" id="menuInicio">Inicio</a>
+      <a class="menu-link" href="contacto.html">Contacto</a>
+    </nav>
+  </aside>
+
   <div class="toast" id="toast">Menú</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
+  <script src="vesira-navbar.js"></script>
 
   <script>
     const intro = document.getElementById("intro");
@@ -436,26 +499,93 @@ button{font:inherit}
     function mostrarToast(mensaje){
       toast.textContent = mensaje;
       toast.classList.add("visible");
-      setTimeout(() => toast.classList.remove("visible"), 1600);
+      clearTimeout(window._vesiraToast);
+      window._vesiraToast = setTimeout(() => toast.classList.remove("visible"), 1600);
     }
 
-    setTimeout(() => {
-      intro.style.opacity = "0";
-      navbar.style.opacity = "1";
-      navbar.style.transform = "translateY(0)";
+    function getHomeCart(){
+      try{
+        const cart = JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+        return Array.isArray(cart) ? cart : [];
+      }catch{
+        return [];
+      }
+    }
 
-      setTimeout(() => {
-        intro.style.display = "none";
-      }, 350);
-    }, 1500);
+    function saveHomeCart(cart){
+      localStorage.setItem("vesiraCarrito", JSON.stringify(cart));
+      window.dispatchEvent(new CustomEvent("vesiraCartUpdated",{detail:{bump:true}}));
+    }
 
-    document.getElementById("abrirCarrito").addEventListener("click", () => {
-      window.location.href = "carrito.html";
-    });
+    function animateHomeProductToCart(productImage){
+      const destination = document.getElementById("vesiraOpenCart");
+      if(!productImage || !destination) return;
 
-    document.getElementById("menu").addEventListener("click", () => {
-      mostrarToast("Menú");
-    });
+      const start=productImage.getBoundingClientRect();
+      const end=destination.getBoundingClientRect();
+      if(!start.width || !start.height) return;
+
+      const fly=productImage.cloneNode(true);
+      fly.className="home-cart-fly";
+      fly.removeAttribute("id");
+
+      const size=Math.min(Math.max(Math.min(start.width,start.height)*.36,76),145);
+      const startX=start.left+start.width/2, startY=start.top+start.height/2;
+      const endX=end.left+end.width/2, endY=end.top+end.height/2;
+      const dx=endX-startX, dy=endY-startY;
+
+      Object.assign(fly.style,{
+        position:"fixed",zIndex:"6000",pointerEvents:"none",objectFit:"contain",
+        filter:"drop-shadow(0 18px 24px rgba(0,0,0,.35))",
+        width:size+"px",height:size+"px",
+        left:(startX-size/2)+"px",top:(startY-size/2)+"px",opacity:"1"
+      });
+
+      document.body.appendChild(fly);
+
+      const animation=fly.animate([
+        {transform:"translate3d(0,0,0) scale(1) rotate(0deg)",opacity:1,offset:0},
+        {transform:`translate3d(${dx*.25}px,${dy*.10-75}px,0) scale(.92) rotate(-8deg)`,opacity:1,offset:.28},
+        {transform:`translate3d(${dx*.58}px,${dy*.40-40}px,0) scale(.64) rotate(8deg)`,opacity:1,offset:.60},
+        {transform:`translate3d(${dx*.86}px,${dy*.76}px,0) scale(.32) rotate(-6deg)`,opacity:.9,offset:.84},
+        {transform:`translate3d(${dx}px,${dy}px,0) scale(.06) rotate(12deg)`,opacity:0,offset:1}
+      ],{duration:1260,easing:"cubic-bezier(.16,.78,.22,1)"});
+
+      animation.onfinish=()=>{
+        fly.remove();
+        destination.animate(
+          [{transform:"scale(1)",background:"transparent"},
+           {transform:"scale(1.15)",background:"rgba(255,255,255,.10)"},
+           {transform:"scale(1)",background:"transparent"}],
+          {duration:360,easing:"ease-out"}
+        );
+      };
+    }
+
+    function addHomeProductToCart(product,imageElement){
+      const cart=getHomeCart();
+      const existing=cart.find(item=>String(item.id)===String(product.id));
+
+      if(existing) existing.cantidad=Number(existing.cantidad||0)+1;
+      else cart.push({
+        id:product.id,
+        nombre:product.nombre,
+        precio:Number(product.precio),
+        imagen:product.imagen_url,
+        cantidad:1
+      });
+
+      saveHomeCart(cart);
+      animateHomeProductToCart(imageElement);
+      mostrarToast("Añadido al carrito");
+    }
+
+    setTimeout(()=>{
+      intro.style.opacity="0";
+      navbar.style.opacity="1";
+      navbar.style.transform="translateY(0)";
+      setTimeout(()=>intro.style.display="none",350);
+    },1500);
 
     async function cargarProductos(){
       try{
@@ -506,17 +636,34 @@ button{font:inherit}
             </div>
 
             <div class="producto-info">
-              <h3 class="producto-nombre">${producto.nombre}</h3>
-              ${
-                producto.descripcion
-                ? `<p class="producto-descripcion">${producto.descripcion}</p>`
-                : ""
-              }
-              <span class="producto-precio">${precio} €</span>
+              <div class="producto-texto">
+                <h3 class="producto-nombre">${producto.nombre}</h3>
+                ${
+                  producto.descripcion
+                  ? `<p class="producto-descripcion">${producto.descripcion}</p>`
+                  : ""
+                }
+              </div>
+
+              <div class="producto-pie">
+                <span class="producto-precio">${precio} €</span>
+                <button class="producto-anadir" type="button" aria-label="Añadir ${producto.nombre} al carrito" title="Añadir al carrito">
+                  <span class="material-symbols-outlined">shopping_bag</span>
+                </button>
+              </div>
             </div>
           `;
 
           gridProductos.appendChild(tarjeta);
+
+          const addButton = tarjeta.querySelector(".producto-anadir");
+          const productImage = tarjeta.querySelector(".producto-imagen img");
+
+          addButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            addHomeProductToCart(producto, productImage);
+          });
         });
       }catch(error){
         console.error("Error cargando productos:", error);
