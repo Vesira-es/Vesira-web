@@ -26,139 +26,114 @@ body{
 }
 button{font:inherit}
 
-/* INTRO */
+/* INTRO / BANNER DE MARCA */
 .intro{
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  height:80px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--fondo);
-  border-bottom:1px solid var(--borde);
-  transition:opacity .35s ease;
-}
-.eslogan{width:410px;max-width:78vw;height:auto;display:block}
-
-/* NAVBAR */
-.barra-navegacion{
   position:fixed;
   top:0;
   left:0;
-  z-index:1000;
   width:100%;
-  height:80px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  background:rgba(12,12,12,.78);
-  border-bottom:1px solid rgba(255,255,255,.08);
-  backdrop-filter:blur(18px);
-  opacity:0;
-  transform:translateY(-18px);
-  transition:opacity .7s ease,transform .7s ease;
-}
-.nav-left{
-  display:flex;
-  align-items:center;
-  min-width:0;
-}
-.normal{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:8px 16px 8px 14px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:999px;
-}
-.logo{
-  width:114px;
-  height:auto;
-  display:block;
-}
-.nav-divider{
-  width:1px;
-  height:18px;
-  background:rgba(255,255,255,.14);
-}
-.nav-word{
-  color:var(--suave);
-  font-size:9px;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-.iconos{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.nav-icon{
-  width:42px;
-  height:42px;
-  border:0;
-  background:transparent;
-  color:var(--texto);
-  border-radius:50%;
+  height:74px;
+  z-index:10000;
   display:flex;
   align-items:center;
   justify-content:center;
-  cursor:pointer;
-  transition:background .2s ease,transform .2s ease;
+  padding:0 24px;
+  background:rgba(10,10,10,.92);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transition:opacity .55s cubic-bezier(.2,.8,.2,1),visibility .55s ease;
 }
-.nav-icon:hover{background:var(--caja);transform:translateY(-1px)}
+.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+.eslogan{
+  width:min(600px, 110vw);
+  max-height:100px;
+  height:auto;
+  object-fit:contain;
+  display:block;
+  transform:translateY(10px);
+  opacity:0;
+  animation:introSloganIn .8s cubic-bezier(.16,.78,.22,1) .08s forwards;
+}
+@keyframes introSloganIn{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
 
+/* La navbar se inyecta desde vesira-navbar.js */
+.vesira-global-nav{opacity:0;transform:translateY(-10px);transition:opacity .55s ease,transform .55s ease}
+.vesira-global-nav.vesira-intro-ready{opacity:1;transform:translateY(0)}
 
-
-
-
-
+@keyframes cartCountBump{
+  0%{transform:scale(1)}
   35%{transform:scale(1.32)}
   65%{transform:scale(.94)}
   100%{transform:scale(1)}
 }
 
-.producto-info{display:flex;flex-direction:column}
-.producto-texto{min-width:0}
-.producto-pie{
-  margin-top:11px;
-  display:flex;
+.producto-info{padding:15px 3px 4px}
+.producto-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
+  gap:13px;
+  width:100%;
+}
+.producto-texto{min-width:0}
+.producto-nombre{
+  display:block;
+  min-width:0;
+  font-family:"Bricolage Grotesque",sans-serif;
+  font-size:19px;
+  font-weight:400;
+  line-height:1;
+  letter-spacing:-.035em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.producto-precio{
+  justify-self:end;
+  flex:0 0 auto;
+  font-size:13px;
+  font-weight:500;
+  white-space:nowrap;
 }
 .producto-anadir{
-  width:36px;height:36px;padding:0;
+  flex:0 0 auto;
+  width:36px;
+  height:36px;
+  padding:0;
   border:1px solid rgba(255,255,255,.12);
   border-radius:50%;
-  background:#fff;color:#0c0c0c;
-  display:inline-flex;align-items:center;justify-content:center;
+  background:#fff;
+  color:#0c0c0c;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   cursor:pointer;
   transition:transform .22s ease,background .22s ease,box-shadow .22s ease;
 }
 .producto-anadir:hover{
-  transform:translateY(-2px) scale(1.04);
+  transform:translateY(-2px) scale(1.05);
   background:#e9e9e5;
   box-shadow:0 8px 20px rgba(0,0,0,.18);
 }
-.producto-anadir .material-symbols-outlined{font-size:17px}
-
-
-
-
-
+.producto-anadir:active{transform:scale(.94)}
+.producto-anadir .material-symbols-outlined{
+  font-size:20px;
+  line-height:1;
+  font-variation-settings:'FILL' 0,'wght' 450,'GRAD' 0,'opsz' 24;
+}
+.producto-descripcion{margin-top:6px;max-width:300px;color:var(--suave);font-size:10px;line-height:1.5}
 @media(max-width:700px){
-  
-  .producto-pie{align-items:flex-end}
-  .productos-eyebrow{font-size:8px;letter-spacing:.24em;margin-bottom:12px}
-  .productos-cabecera h2{font-size:30px;white-space:nowrap;letter-spacing:-.04em}
-
-  .producto-anadir{min-height:32px;padding:0 10px;font-size:8px}
-  .producto-anadir .material-symbols-outlined{font-size:14px}
-  
+  .producto-row{gap:6px}.producto-nombre{font-size:15px}.producto-precio{font-size:10px}
+  .producto-anadir{width:32px;height:32px}
+  .producto-anadir .material-symbols-outlined{font-size:18px}
+  .producto-descripcion{font-size:8.5px;margin-top:4px}
 }
 
 /* HERO */
@@ -231,7 +206,7 @@ button{font:inherit}
   color:var(--suave);
   font-size:10px;
   font-weight:500;
-  letter-spacing:.28em;
+  letter-spacing:.34em;
   line-height:1;
   text-transform:uppercase;
 }
@@ -278,39 +253,6 @@ button{font:inherit}
   transition:transform .5s cubic-bezier(.2,.8,.2,1);
 }
 .producto-card:hover .producto-imagen img{transform:scale(1.05)}
-.producto-info{
-  padding:15px 3px 4px;
-  display:grid;
-  grid-template-columns:1fr auto;
-  grid-template-rows:auto auto;
-  column-gap:14px;
-}
-.producto-nombre{
-  grid-column:1;
-  grid-row:1;
-  font-family:"Bricolage Grotesque",sans-serif;
-  font-size:19px;
-  font-weight:400;
-  line-height:1;
-  letter-spacing:-.035em;
-}
-.producto-descripcion{
-  grid-column:1;
-  grid-row:2;
-  margin-top:6px;
-  max-width:300px;
-  color:var(--suave);
-  font-size:10px;
-  line-height:1.5;
-}
-.producto-precio{
-  grid-column:2;
-  grid-row:1 / 3;
-  align-self:center;
-  font-size:13px;
-  font-weight:500;
-  white-space:nowrap;
-}
 .productos-mensaje{
   grid-column:1/-1;
   padding:70px 20px;
@@ -377,14 +319,8 @@ button{font:inherit}
   .grid-productos{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:700px){
-  .intro,.barra-navegacion{height:70px}
-  .eslogan{width:300px;max-width:80vw}
-  .barra-navegacion{padding:0 12px}
-  .normal{padding:7px 13px;gap:10px}
-  .logo{width:96px}
-  .nav-divider{display:block;width:1px;height:16px;background:rgba(255,255,255,.14)}
-  .nav-word{display:block;font-size:8px;letter-spacing:.14em;color:var(--suave)}
-  .nav-icon{width:36px;height:36px}
+  .intro{height:70px}
+  .eslogan{width:min(280px,78vw);max-height:38px}
   .imagen-principal{
     margin-top:70px;
     height:430px;
@@ -401,7 +337,7 @@ button{font:inherit}
     padding:46px 14px 80px;
   }
   .productos-cabecera{margin-bottom:18px}
-  .productos-cabecera h2{font-size:42px}
+  .productos-cabecera h2{font-size:36px;letter-spacing:-.055em}
   .grid-productos{gap:10px}
   .producto-card{
     padding:8px;
@@ -409,10 +345,7 @@ button{font:inherit}
   }
   .producto-imagen{border-radius:12px;aspect-ratio:1/.9}
   .producto-imagen img{width:84%;height:84%}
-  .producto-info{
-    padding:11px 2px 3px;
-    column-gap:7px;
-  }
+  .producto-info{padding:11px 2px 3px}
   .producto-nombre{font-size:15px}
   .producto-descripcion{font-size:8.5px;margin-top:4px}
   .producto-precio{font-size:10px}
@@ -428,7 +361,7 @@ button{font:inherit}
   <div class="intro" id="intro">
     <img src="img/eslogan.png" alt="Vesira" class="eslogan">
   </div>
-  <div id="vesiraNavbar"></div>
+  
 
 
   <main>
@@ -442,7 +375,7 @@ button{font:inherit}
       <div class="productos-cabecera">
           <div class="productos-titulo">
             <span class="productos-eyebrow">GAFAS LUZ AZUL</span>
-            <h2>El match<br>perfecto.</h2>
+            <h2>El match perfecto</h2>
           </div>
         </div>
 
@@ -472,27 +405,14 @@ button{font:inherit}
       </div>
     </section>
   </main>
-
-  <div class="menu-backdrop" id="menuBackdrop"></div>
-
-  <aside class="menu-drawer" id="menuDrawer" aria-hidden="true">
-    <button class="menu-close material-symbols-outlined" id="menuClose" aria-label="Cerrar menú">close</button>
-    <div class="menu-label">VESIRA · MENÚ</div>
-    <nav class="menu-links">
-      <a class="menu-link" href="index.html" id="menuInicio">Inicio</a>
-      <a class="menu-link" href="contacto.html">Contacto</a>
-    </nav>
-  </aside>
-
-  <div class="toast" id="toast">Menú</div>
+<div class="toast" id="toast">Menú</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
-  <script src="vesira-navbar.js"></script>
 
   <script>
     const intro = document.getElementById("intro");
-    const navbar = document.getElementById("navbar");
+    const navbar = document.querySelector(".vesira-global-nav");
     const gridProductos = document.getElementById("gridProductos");
     const toast = document.getElementById("toast");
 
@@ -518,7 +438,7 @@ button{font:inherit}
     }
 
     function animateHomeProductToCart(productImage){
-      const destination = document.getElementById("vesiraOpenCart");
+      const destination = document.getElementById("vesiraGlobalCart");
       if(!productImage || !destination) return;
 
       const start=productImage.getBoundingClientRect();
@@ -580,11 +500,31 @@ button{font:inherit}
       mostrarToast("Añadido al carrito");
     }
 
+    // La presentación ocupa solo la altura de la navbar.
+    // Después se retira y hacemos entrar la navbar global.
+    document.body.style.overflow = "hidden";
+
     setTimeout(()=>{
-      intro.style.opacity="0";
-      navbar.style.opacity="1";
-      navbar.style.transform="translateY(0)";
-      setTimeout(()=>intro.style.display="none",350);
+      intro.classList.add("hide");
+      document.body.style.overflow = "";
+
+      // La navbar se crea por vesira-navbar.js en DOMContentLoaded,
+      // así que la buscamos aquí y no antes.
+      const globalNavbar = document.querySelector(".vesira-global-nav");
+
+      if(globalNavbar){
+        globalNavbar.classList.add("vesira-intro-ready");
+      }else{
+        // Fallback por si el script de la navbar tarda en cargar.
+        const showNavbar = () => {
+          const nav = document.querySelector(".vesira-global-nav");
+          if(nav) nav.classList.add("vesira-intro-ready");
+        };
+        window.setTimeout(showNavbar, 100);
+        window.setTimeout(showNavbar, 500);
+      }
+
+      setTimeout(()=>intro.remove(),700);
     },1500);
 
     async function cargarProductos(){
@@ -636,21 +576,18 @@ button{font:inherit}
             </div>
 
             <div class="producto-info">
-              <div class="producto-texto">
+              <div class="producto-row">
                 <h3 class="producto-nombre">${producto.nombre}</h3>
-                ${
-                  producto.descripcion
-                  ? `<p class="producto-descripcion">${producto.descripcion}</p>`
-                  : ""
-                }
-              </div>
-
-              <div class="producto-pie">
                 <span class="producto-precio">${precio} €</span>
                 <button class="producto-anadir" type="button" aria-label="Añadir ${producto.nombre} al carrito" title="Añadir al carrito">
-                  <span class="material-symbols-outlined">shopping_bag</span>
+                  <span class="material-symbols-outlined" aria-hidden="true">add_shopping_cart</span>
                 </button>
               </div>
+              ${
+                producto.descripcion
+                ? `<p class="producto-descripcion">${producto.descripcion}</p>`
+                : ""
+              }
             </div>
           `;
 
@@ -677,6 +614,7 @@ button{font:inherit}
 
     cargarProductos();
   </script>
+  <script src="vesira-navbar.js"></script>
 </body>
 
 </html>
