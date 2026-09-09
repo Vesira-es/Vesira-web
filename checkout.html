@@ -210,238 +210,402 @@
 
   <div class="toast" id="toast"></div>
 
-  <script>
-    const app = document.getElementById("app");
-    const toast = document.getElementById("toast");
-    const success = document.getElementById("success");
+<script>
+  const app = document.getElementById("app");
+  const toast = document.getElementById("toast");
+  const success = document.getElementById("success");
 
-    function getCart(){
-      try{
-        return JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
-      }catch{
-        return [];
-      }
+  const CHECKOUT_FUNCTION_URL =
+    "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/crear-checkout";
+
+  function getCart(){
+    try{
+      return JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+    }catch{
+      return [];
     }
+  }
 
-    function euro(value){
-      return Number(value).toFixed(2).replace(".", ",") + " €";
-    }
+  function euro(value){
+    return Number(value).toFixed(2).replace(".", ",") + " €";
+  }
 
-    function totalCart(cart){
-      return cart.reduce(
-        (sum,item) => sum + Number(item.precio || 0) * Number(item.cantidad || 0),
-        0
-      );
-    }
+  function totalCart(cart){
+    return cart.reduce(
+      (sum, item) =>
+        sum +
+        Number(item.precio || 0) * Number(item.cantidad || 0),
+      0
+    );
+  }
 
-    function render(){
-      const cart = getCart();
+  function render(){
+    const cart = getCart();
 
-      if(!cart.length){
-        app.innerHTML = `
-          <section class="empty">
-            <h2>Tu carrito está vacío.</h2>
-            <p>Añade un par antes de continuar.</p>
-            <a href="index.html">Ver gafas</a>
-          </section>
-        `;
-        return;
-      }
-
-      const subtotal = totalCart(cart);
-
+    if(!cart.length){
       app.innerHTML = `
-        <section class="wrap">
-          <header class="head">
-            <div class="eyebrow">VESIRA</div>
-            <h1>Checkout.</h1>
-          </header>
-
-          <form id="checkoutForm" class="layout">
-
-            <div class="form">
-
-              <section class="section">
-                <div class="section-head">
-                  <h2>Contacto.</h2>
-                  <span class="section-number">01</span>
-                </div>
-
-                <div class="fields">
-                  <div class="field full">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email" autocomplete="email" required placeholder="tu@email.com">
-                  </div>
-                </div>
-              </section>
-
-              <section class="section">
-                <div class="section-head">
-                  <h2>Entrega.</h2>
-                  <span class="section-number">02</span>
-                </div>
-
-                <div class="fields">
-                  <div class="field">
-                    <label for="nombre">Nombre</label>
-                    <input id="nombre" name="nombre" autocomplete="given-name" required>
-                  </div>
-
-                  <div class="field">
-                    <label for="apellidos">Apellidos</label>
-                    <input id="apellidos" name="apellidos" autocomplete="family-name" required>
-                  </div>
-
-                  <div class="field full">
-                    <label for="direccion">Dirección</label>
-                    <input id="direccion" name="direccion" autocomplete="street-address" required>
-                  </div>
-
-                  <div class="field">
-                    <label for="ciudad">Ciudad</label>
-                    <input id="ciudad" name="ciudad" autocomplete="address-level2" required>
-                  </div>
-
-                  <div class="field">
-                    <label for="codigoPostal">Código postal</label>
-                    <input id="codigoPostal" name="codigoPostal" inputmode="numeric" autocomplete="postal-code" required>
-                  </div>
-
-                  <div class="field full">
-                    <label for="pais">País</label>
-                    <select id="pais" name="pais" autocomplete="country-name" required>
-                      <option value="España" selected>España</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="delivery-note">
-                  Envío gratis · entrega estimada en un máximo de 5 días.
-                  Recibirás la información de seguimiento del pedido.
-                </div>
-              </section>
-
-              <section class="section">
-                <div class="section-head">
-                  <h2>Pago.</h2>
-                  <span class="section-number">03</span>
-                </div>
-
-                <div class="payment-options">
-                  <label class="payment">
-                    <input type="radio" name="metodoPago" value="tarjeta" checked>
-                    <div>
-                      <strong>Tarjeta</strong>
-                      <span>Pago seguro con tarjeta</span>
-                    </div>
-                  </label>
-
-                  <label class="payment">
-                    <input type="radio" name="metodoPago" value="paypal">
-                    <div>
-                      <strong>PayPal</strong>
-                      <span>Pagar con tu cuenta de PayPal</span>
-                    </div>
-                  </label>
-                </div>
-
-                <div class="secure">
-                  <span class="material-symbols-outlined">lock</span>
-                  Tu información se envía de forma segura.
-                </div>
-              </section>
-
-              <section class="section">
-                <div class="section-head">
-                  <h2>Nota.</h2>
-                  <span class="section-number">04</span>
-                </div>
-
-                <div class="fields">
-                  <div class="field full">
-                    <label for="nota">Nota para el pedido · opcional</label>
-                    <textarea id="nota" name="nota" placeholder="Algo que debamos saber sobre la entrega..."></textarea>
-                  </div>
-                </div>
-              </section>
-
-              <div class="error" id="error"></div>
-            </div>
-
-            <aside class="summary">
-              <h2>Tu pedido.</h2>
-
-              <div class="summary-items">
-                ${cart.map(item => `
-                  <div class="summary-item">
-                    <div class="summary-img">
-                      <img src="${item.imagen || ""}" alt="${item.nombre || "Vesira"}">
-                    </div>
-
-                    <div>
-                      <div class="summary-name">${item.nombre || ""}</div>
-                      <div class="summary-qty">Cantidad · ${Number(item.cantidad || 1)}</div>
-                    </div>
-
-                    <div class="summary-price">
-                      ${euro(Number(item.precio) * Number(item.cantidad || 1))}
-                    </div>
-                  </div>
-                `).join("")}
-              </div>
-
-              <div class="row">
-                <span>Subtotal</span>
-                <strong>${euro(subtotal)}</strong>
-              </div>
-
-              <div class="row">
-                <span>Envío</span>
-                <strong>Gratis</strong>
-              </div>
-
-              <div class="row total">
-                <span>Total</span>
-                <strong>${euro(subtotal)}</strong>
-              </div>
-
-              <button class="buy" type="submit">
-                Realizar pedido
-                <span class="material-symbols-outlined" style="font-size:15px;vertical-align:middle">arrow_forward</span>
-              </button>
-
-              <a class="back" href="carrito.html">Volver al carrito</a>
-            </aside>
-
-          </form>
+        <section class="empty">
+          <h2>Tu carrito está vacío.</h2>
+          <p>Añade un par antes de continuar.</p>
+          <a href="index.html">Ver gafas</a>
         </section>
       `;
-
-      document.getElementById("checkoutForm").addEventListener("submit", (event) => {
-        event.preventDefault();
-
-        const form = event.currentTarget;
-        const data = Object.fromEntries(new FormData(form).entries());
-        const error = document.getElementById("error");
-
-        if(!data.email || !data.nombre || !data.apellidos || !data.direccion || !data.ciudad || !data.codigoPostal){
-          error.textContent = "Completa todos los campos obligatorios.";
-          error.style.display = "block";
-          return;
-        }
-
-        localStorage.setItem("vesiraCheckout", JSON.stringify({
-          cliente:data,
-          carrito:getCart(),
-          total:subtotal,
-          creadoEn:new Date().toISOString()
-        }));
-
-        success.style.display = "flex";
-      });
+      return;
     }
 
-    render();
-  </script>
+    const subtotal = totalCart(cart);
+
+    app.innerHTML = `
+      <section class="wrap">
+        <header class="head">
+          <div class="eyebrow">VESIRA</div>
+          <h1>Checkout.</h1>
+        </header>
+
+        <form id="checkoutForm" class="layout">
+          <div class="form">
+
+            <section class="section">
+              <div class="section-head">
+                <h2>Contacto.</h2>
+                <span class="section-number">01</span>
+              </div>
+
+              <div class="fields">
+                <div class="field full">
+                  <label for="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    placeholder="tu@email.com"
+                  >
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <h2>Entrega.</h2>
+                <span class="section-number">02</span>
+              </div>
+
+              <div class="fields">
+                <div class="field">
+                  <label for="nombre">Nombre</label>
+                  <input
+                    id="nombre"
+                    name="nombre"
+                    autocomplete="given-name"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="apellidos">Apellidos</label>
+                  <input
+                    id="apellidos"
+                    name="apellidos"
+                    autocomplete="family-name"
+                    required
+                  >
+                </div>
+
+                <div class="field full">
+                  <label for="direccion">Dirección</label>
+                  <input
+                    id="direccion"
+                    name="direccion"
+                    autocomplete="street-address"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="ciudad">Ciudad</label>
+                  <input
+                    id="ciudad"
+                    name="ciudad"
+                    autocomplete="address-level2"
+                    required
+                  >
+                </div>
+
+                <div class="field">
+                  <label for="codigoPostal">Código postal</label>
+                  <input
+                    id="codigoPostal"
+                    name="codigoPostal"
+                    inputmode="numeric"
+                    autocomplete="postal-code"
+                    required
+                  >
+                </div>
+
+                <div class="field full">
+                  <label for="pais">País</label>
+                  <select
+                    id="pais"
+                    name="pais"
+                    autocomplete="country-name"
+                    required
+                  >
+                    <option value="España" selected>España</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="delivery-note">
+                Envío gratis · entrega estimada en un máximo de 5 días.
+                Recibirás la información de seguimiento del pedido.
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <h2>Pago.</h2>
+                <span class="section-number">03</span>
+              </div>
+
+              <div class="payment-options">
+                <label class="payment">
+                  <input
+                    type="radio"
+                    name="metodoPago"
+                    value="tarjeta"
+                    checked
+                  >
+                  <div>
+                    <strong>Tarjeta</strong>
+                    <span>Pago seguro con tarjeta</span>
+                  </div>
+                </label>
+
+                <label class="payment">
+                  <input
+                    type="radio"
+                    name="metodoPago"
+                    value="paypal"
+                  >
+                  <div>
+                    <strong>PayPal</strong>
+                    <span>Pagar con tu cuenta de PayPal</span>
+                  </div>
+                </label>
+              </div>
+
+              <div class="secure">
+                <span class="material-symbols-outlined">lock</span>
+                Tu información se envía de forma segura.
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="section-head">
+                <h2>Nota.</h2>
+                <span class="section-number">04</span>
+              </div>
+
+              <div class="fields">
+                <div class="field full">
+                  <label for="nota">
+                    Nota para el pedido · opcional
+                  </label>
+
+                  <textarea
+                    id="nota"
+                    name="nota"
+                    placeholder="Algo que debamos saber sobre la entrega..."
+                  ></textarea>
+                </div>
+              </div>
+            </section>
+
+            <div class="error" id="error"></div>
+          </div>
+
+          <aside class="summary">
+            <h2>Tu pedido.</h2>
+
+            <div class="summary-items">
+              ${cart.map(item => `
+                <div class="summary-item">
+                  <div class="summary-img">
+                    <img
+                      src="${item.imagen || ""}"
+                      alt="${item.nombre || "Vesira"}"
+                    >
+                  </div>
+
+                  <div>
+                    <div class="summary-name">
+                      ${item.nombre || ""}
+                    </div>
+
+                    <div class="summary-qty">
+                      Cantidad · ${Number(item.cantidad || 1)}
+                    </div>
+                  </div>
+
+                  <div class="summary-price">
+                    ${euro(
+                      Number(item.precio) *
+                      Number(item.cantidad || 1)
+                    )}
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+
+            <div class="row">
+              <span>Subtotal</span>
+              <strong>${euro(subtotal)}</strong>
+            </div>
+
+            <div class="row">
+              <span>Envío</span>
+              <strong>Gratis</strong>
+            </div>
+
+            <div class="row total">
+              <span>Total</span>
+              <strong>${euro(subtotal)}</strong>
+            </div>
+
+            <button class="buy" type="submit" id="buyButton">
+              Realizar pedido
+              <span
+                class="material-symbols-outlined"
+                style="font-size:15px;vertical-align:middle"
+              >
+                arrow_forward
+              </span>
+            </button>
+
+            <a class="back" href="carrito.html">
+              Volver al carrito
+            </a>
+          </aside>
+        </form>
+      </section>
+    `;
+
+    document
+      .getElementById("checkoutForm")
+      .addEventListener("submit", handleCheckout);
+  }
+
+  async function handleCheckout(event){
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const error = document.getElementById("error");
+    const button = document.getElementById("buyButton");
+
+    error.textContent = "";
+    error.style.display = "none";
+
+    const data = Object.fromEntries(
+      new FormData(form).entries()
+    );
+
+    if(
+      !data.email ||
+      !data.nombre ||
+      !data.apellidos ||
+      !data.direccion ||
+      !data.ciudad ||
+      !data.codigoPostal
+    ){
+      error.textContent =
+        "Completa todos los campos obligatorios.";
+      error.style.display = "block";
+      return;
+    }
+
+    const cart = getCart();
+
+    if(!cart.length){
+      error.textContent = "El carrito está vacío.";
+      error.style.display = "block";
+      return;
+    }
+
+    button.disabled = true;
+    button.innerHTML = `
+      Creando pago...
+      <span
+        class="material-symbols-outlined"
+        style="font-size:15px;vertical-align:middle"
+      >
+        progress_activity
+      </span>
+    `;
+
+    try{
+      const response = await fetch(
+        CHECKOUT_FUNCTION_URL,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            items: cart.map(item => ({
+              id: item.id,
+              cantidad: Number(item.cantidad || 1)
+            })),
+            origin: window.location.origin,
+            cliente: data
+          })
+        }
+      );
+
+      const result = await response.json();
+
+      if(!response.ok){
+        throw new Error(
+          result?.error ||
+          "No se pudo crear el Checkout."
+        );
+      }
+
+      if(!result?.url){
+        throw new Error(
+          "Stripe no devolvió una URL de pago."
+        );
+      }
+
+      window.location.href = result.url;
+
+    }catch(error){
+      console.error(error);
+
+      error = document.getElementById("error");
+
+      error.textContent =
+        error?.message ||
+        "Ha ocurrido un error al iniciar el pago.";
+
+      error.style.display = "block";
+
+      button.disabled = false;
+      button.innerHTML = `
+        Realizar pedido
+        <span
+          class="material-symbols-outlined"
+          style="font-size:15px;vertical-align:middle"
+        >
+          arrow_forward
+        </span>
+      `;
+    }
+  }
+
+  render();
+</script>
+
 </body>
 </html>
