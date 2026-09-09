@@ -1,178 +1,585 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0"
+  >
   <meta name="theme-color" content="#0a0a0a">
+
   <title>Checkout · Vesira</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined" rel="stylesheet">
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
+    rel="stylesheet"
+  >
+
+  <script src="https://js.stripe.com/v3/"></script>
 
   <style>
     :root{
-      --f:#0a0a0a;--t:#fff;--s:#8c8c8c;--b:rgba(255,255,255,.10);
-      --c:#131313;--input:#101010;
+      --f:#0a0a0a;
+      --t:#fff;
+      --s:#8c8c8c;
+      --b:rgba(255,255,255,.10);
+      --c:#131313;
+      --input:#101010;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{background:var(--f);color:var(--t);font-family:"Outfit",Arial,sans-serif;overflow-x:hidden}
-    a{color:inherit;text-decoration:none}
-    button,input,select{font:inherit}
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      background:var(--f);
+      color:var(--t);
+      font-family:"Outfit",Arial,sans-serif;
+      overflow-x:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit;
+    }
 
     .nav{
-      position:fixed;top:0;left:0;width:100%;height:70px;padding:0 30px;
-      display:flex;align-items:center;justify-content:space-between;
-      background:rgba(10,10,10,.80);border-bottom:1px solid var(--b);
-      backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:10
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:70px;
+      padding:0 30px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background:rgba(10,10,10,.80);
+      border-bottom:1px solid var(--b);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      z-index:10;
     }
-    .nav-left{display:flex;align-items:center;gap:10px}
-    .logo{width:100px;height:auto;display:block}
-    .eyewear{color:var(--s);font-size:8px;letter-spacing:.18em;text-transform:uppercase}
+
+    .nav-left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .logo{
+      width:100px;
+      height:auto;
+      display:block;
+    }
+
+    .eyewear{
+      color:var(--s);
+      font-size:8px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
     .nav-btn{
-      width:38px;height:38px;border:0;border-radius:50%;background:transparent;color:#fff;
-      display:flex;align-items:center;justify-content:center;cursor:pointer
+      width:38px;
+      height:38px;
+      border:0;
+      border-radius:50%;
+      background:transparent;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
     }
-    .nav-btn:hover{background:var(--c)}
 
-    .wrap{width:min(1120px,calc(100% - 28px));margin:auto;padding:112px 0 80px}
-    .head{margin-bottom:30px}
-    .eyebrow{color:var(--s);font-size:9px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:10px}
+    .nav-btn:hover{
+      background:var(--c);
+    }
+
+    .wrap{
+      width:min(1120px,calc(100% - 28px));
+      margin:auto;
+      padding:112px 0 80px;
+    }
+
+    .head{
+      margin-bottom:30px;
+    }
+
+    .eyebrow{
+      color:var(--s);
+      font-size:9px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+
     h1{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:400;
-      font-size:clamp(50px,7vw,88px);line-height:.82;letter-spacing:-.075em
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-weight:400;
+      font-size:clamp(50px,7vw,88px);
+      line-height:.82;
+      letter-spacing:-.075em;
     }
 
-    .layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start}
-    .form{display:grid;gap:12px}
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 340px;
+      gap:22px;
+      align-items:start;
+    }
+
+    .form{
+      display:grid;
+      gap:12px;
+    }
+
     .section{
-      border:1px solid var(--b);background:#0f0f0f;border-radius:22px;padding:20px
+      border:1px solid var(--b);
+      background:#0f0f0f;
+      border-radius:22px;
+      padding:20px;
     }
+
     .section-head{
-      display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:18px
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:18px;
     }
+
     .section-head h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:28px;
-      font-weight:400;letter-spacing:-.05em
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:28px;
+      font-weight:400;
+      letter-spacing:-.05em;
     }
-    .section-number{color:#5e5e5e;font-size:9px;letter-spacing:.16em}
-    .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .field{display:grid;gap:7px}.field.full{grid-column:1/-1}
-    label{color:var(--s);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
-    input,select,textarea{
-      width:100%;border:1px solid var(--b);border-radius:13px;background:var(--input);
-      color:#fff;outline:none;font-size:12px
+
+    .section-number{
+      color:#5e5e5e;
+      font-size:9px;
+      letter-spacing:.16em;
     }
-    input,select{min-height:48px;padding:0 13px}
-    textarea{min-height:95px;resize:vertical;padding:13px;font-family:inherit}
-    input:focus,select:focus,textarea:focus{border-color:rgba(255,255,255,.28)}
+
+    .fields{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .field{
+      display:grid;
+      gap:7px;
+    }
+
+    .field.full{
+      grid-column:1/-1;
+    }
+
+    label{
+      color:var(--s);
+      font-size:9px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    input,
+    select,
+    textarea{
+      width:100%;
+      border:1px solid var(--b);
+      border-radius:13px;
+      background:var(--input);
+      color:#fff;
+      outline:none;
+      font-size:12px;
+    }
+
+    input,
+    select{
+      min-height:48px;
+      padding:0 13px;
+    }
+
+    textarea{
+      min-height:95px;
+      resize:vertical;
+      padding:13px;
+      font-family:inherit;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus{
+      border-color:rgba(255,255,255,.28);
+    }
 
     .delivery-note{
-      margin-top:12px;padding:12px 13px;border:1px solid var(--b);border-radius:13px;
-      color:var(--s);font-size:10px;line-height:1.5
+      margin-top:12px;
+      padding:12px 13px;
+      border:1px solid var(--b);
+      border-radius:13px;
+      color:var(--s);
+      font-size:10px;
+      line-height:1.5;
     }
 
-    .payment-options{display:grid;gap:8px}
-    .payment{
-      display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--b);
-      border-radius:13px;background:var(--input);cursor:pointer
+    .card-element{
+      width:100%;
+      min-height:50px;
+      padding:16px 14px;
+      border:1px solid var(--b);
+      border-radius:13px;
+      background:var(--input);
+      transition:border-color .2s ease;
     }
-    .payment input{width:15px;min-height:auto;height:15px;accent-color:#fff}
-    .payment strong{display:block;font-size:11px;margin-bottom:2px}
-    .payment span{color:var(--s);font-size:9px}
-    .secure{display:flex;align-items:center;gap:7px;color:var(--s);font-size:9px;margin-top:12px}
+
+    .card-element:focus-within{
+      border-color:rgba(255,255,255,.28);
+    }
+
+    .secure{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      color:var(--s);
+      font-size:9px;
+      margin-top:12px;
+    }
+
+    .payment-note{
+      color:var(--s);
+      font-size:10px;
+      line-height:1.5;
+      margin-bottom:12px;
+    }
 
     .summary{
-      position:sticky;top:88px;border:1px solid var(--b);border-radius:22px;
-      background:#0f0f0f;padding:19px
+      position:sticky;
+      top:88px;
+      border:1px solid var(--b);
+      border-radius:22px;
+      background:#0f0f0f;
+      padding:19px;
     }
+
     .summary h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:28px;
-      font-weight:400;letter-spacing:-.05em;margin-bottom:17px
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:28px;
+      font-weight:400;
+      letter-spacing:-.05em;
+      margin-bottom:17px;
     }
-    .summary-items{display:grid;gap:10px;padding-bottom:15px;border-bottom:1px solid var(--b)}
+
+    .summary-items{
+      display:grid;
+      gap:10px;
+      padding-bottom:15px;
+      border-bottom:1px solid var(--b);
+    }
+
     .summary-item{
-      display:grid;grid-template-columns:52px 1fr auto;gap:9px;align-items:center
+      display:grid;
+      grid-template-columns:52px 1fr auto;
+      gap:9px;
+      align-items:center;
     }
+
     .summary-img{
-      width:52px;height:47px;border-radius:10px;overflow:hidden;background:#f2f2ef;
-      display:flex;align-items:center;justify-content:center
+      width:52px;
+      height:47px;
+      border-radius:10px;
+      overflow:hidden;
+      background:#f2f2ef;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    .summary-img img{width:90%;height:90%;object-fit:contain}
+
+    .summary-img img{
+      width:90%;
+      height:90%;
+      object-fit:contain;
+    }
+
     .summary-name{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:15px;letter-spacing:-.04em
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:15px;
+      letter-spacing:-.04em;
     }
-    .summary-qty{color:var(--s);font-size:9px;margin-top:3px}
-    .summary-price{font-size:11px;white-space:nowrap}
-    .row{display:flex;justify-content:space-between;gap:20px;padding:8px 0;color:var(--s);font-size:10px}
-    .row.total{border-top:1px solid var(--b);margin-top:7px;padding-top:14px;color:#fff;font-size:14px;font-weight:500}
+
+    .summary-qty{
+      color:var(--s);
+      font-size:9px;
+      margin-top:3px;
+    }
+
+    .summary-price{
+      font-size:11px;
+      white-space:nowrap;
+    }
+
+    .row{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      padding:8px 0;
+      color:var(--s);
+      font-size:10px;
+    }
+
+    .row.total{
+      border-top:1px solid var(--b);
+      margin-top:7px;
+      padding-top:14px;
+      color:#fff;
+      font-size:14px;
+      font-weight:500;
+    }
+
     .buy{
-      width:100%;min-height:54px;border:0;border-radius:999px;background:#fff;color:#0a0a0a;
-      font-size:11px;cursor:pointer;margin-top:14px;transition:transform .2s ease
+      width:100%;
+      min-height:54px;
+      border:0;
+      border-radius:999px;
+      background:#fff;
+      color:#0a0a0a;
+      font-size:11px;
+      cursor:pointer;
+      margin-top:14px;
+      transition:transform .2s ease,opacity .2s ease;
     }
-    .buy:hover{transform:translateY(-2px)}
+
+    .buy:hover{
+      transform:translateY(-2px);
+    }
+
+    .buy:disabled{
+      cursor:wait;
+      opacity:.55;
+      transform:none;
+    }
+
     .back{
-      display:inline-flex;margin-top:12px;color:var(--s);font-size:9px;
-      text-decoration:underline;text-underline-offset:4px
+      display:inline-flex;
+      margin-top:12px;
+      color:var(--s);
+      font-size:9px;
+      text-decoration:underline;
+      text-underline-offset:4px;
     }
-    .error{display:none;color:#ddd;font-size:9px;padding:0 4px}
+
+    .error{
+      display:none;
+      color:#ddd;
+      font-size:9px;
+      padding:0 4px;
+      line-height:1.5;
+    }
+
+    .error.show{
+      display:block;
+    }
 
     .success{
-      display:none;position:fixed;inset:0;z-index:40;background:rgba(10,10,10,.92);
-      align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(14px)
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:40;
+      background:rgba(10,10,10,.92);
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      backdrop-filter:blur(14px);
     }
+
     .success-card{
-      width:min(520px,100%);padding:34px;border:1px solid var(--b);
-      border-radius:26px;background:#101010;text-align:center
+      width:min(520px,100%);
+      padding:34px;
+      border:1px solid var(--b);
+      border-radius:26px;
+      background:#101010;
+      text-align:center;
     }
+
     .success-icon{
-      width:58px;height:58px;border:1px solid var(--b);border-radius:50%;
-      margin:0 auto 20px;display:flex;align-items:center;justify-content:center
+      width:58px;
+      height:58px;
+      border:1px solid var(--b);
+      border-radius:50%;
+      margin:0 auto 20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
+
     .success-card h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:43px;
-      font-weight:400;letter-spacing:-.06em;margin-bottom:10px
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:43px;
+      font-weight:400;
+      letter-spacing:-.06em;
+      margin-bottom:10px;
     }
-    .success-card p{color:var(--s);font-size:11px;line-height:1.6;margin-bottom:22px}
+
+    .success-card p{
+      color:var(--s);
+      font-size:11px;
+      line-height:1.6;
+      margin-bottom:22px;
+    }
+
     .success-card a{
-      display:inline-flex;min-height:47px;padding:0 20px;border-radius:999px;
-      align-items:center;background:#fff;color:#0a0a0a;font-size:10px
+      display:inline-flex;
+      min-height:47px;
+      padding:0 20px;
+      border-radius:999px;
+      align-items:center;
+      background:#fff;
+      color:#0a0a0a;
+      font-size:10px;
     }
 
     .empty{
-      width:min(650px,calc(100% - 28px));margin:120px auto;border:1px solid var(--b);
-      border-radius:22px;padding:60px 20px;text-align:center
+      width:min(650px,calc(100% - 28px));
+      margin:120px auto;
+      border:1px solid var(--b);
+      border-radius:22px;
+      padding:60px 20px;
+      text-align:center;
     }
+
     .empty h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:40px;
-      font-weight:400;letter-spacing:-.06em;margin-bottom:10px
+      font-family:"Bricolage Grotesque",Arial,sans-serif;
+      font-size:40px;
+      font-weight:400;
+      letter-spacing:-.06em;
+      margin-bottom:10px;
     }
-    .empty p{color:var(--s);font-size:11px;margin-bottom:20px}
+
+    .empty p{
+      color:var(--s);
+      font-size:11px;
+      margin-bottom:20px;
+    }
+
     .empty a{
-      display:inline-flex;min-height:45px;padding:0 19px;align-items:center;
-      border-radius:999px;background:#fff;color:#0a0a0a;font-size:10px
+      display:inline-flex;
+      min-height:45px;
+      padding:0 19px;
+      align-items:center;
+      border-radius:999px;
+      background:#fff;
+      color:#0a0a0a;
+      font-size:10px;
     }
 
     .toast{
-      position:fixed;left:50%;bottom:20px;z-index:30;transform:translate(-50%,16px);
-      opacity:0;padding:11px 15px;background:#171717;border:1px solid var(--b);
-      border-radius:999px;color:#fff;font-size:10px;transition:.25s ease
+      position:fixed;
+      left:50%;
+      bottom:20px;
+      z-index:30;
+      transform:translate(-50%,16px);
+      opacity:0;
+      padding:11px 15px;
+      background:#171717;
+      border:1px solid var(--b);
+      border-radius:999px;
+      color:#fff;
+      font-size:10px;
+      transition:.25s ease;
     }
-    .toast.on{opacity:1;transform:translate(-50%,0)}
+
+    .toast.on{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
 
     @media(max-width:850px){
-      .layout{grid-template-columns:1fr}.summary{position:static}
+      .layout{
+        grid-template-columns:1fr;
+      }
+
+      .summary{
+        position:static;
+      }
     }
+
     @media(max-width:600px){
-      .nav{height:68px;padding:0 18px}.logo{width:94px}.eyewear{font-size:7px}
-      .wrap{width:calc(100% - 28px);padding:100px 0 65px}
-      h1{font-size:55px}
-      .section{padding:16px;border-radius:18px}
-      .section-head h2{font-size:25px}
-      .fields{grid-template-columns:1fr}.field.full{grid-column:auto}
-      input,select{min-height:47px}
-      .summary{padding:16px;border-radius:18px}
-      .success-card{padding:26px 18px}.success-card h2{font-size:37px}
+      .nav{
+        height:68px;
+        padding:0 18px;
+      }
+
+      .logo{
+        width:94px;
+      }
+
+      .eyewear{
+        font-size:7px;
+      }
+
+      .wrap{
+        width:calc(100% - 28px);
+        padding:100px 0 65px;
+      }
+
+      h1{
+        font-size:55px;
+      }
+
+      .section{
+        padding:16px;
+        border-radius:18px;
+      }
+
+      .section-head h2{
+        font-size:25px;
+      }
+
+      .fields{
+        grid-template-columns:1fr;
+      }
+
+      .field.full{
+        grid-column:auto;
+      }
+
+      input,
+      select{
+        min-height:47px;
+      }
+
+      .summary{
+        padding:16px;
+        border-radius:18px;
+      }
+
+      .success-card{
+        padding:26px 18px;
+      }
+
+      .success-card h2{
+        font-size:37px;
+      }
     }
   </style>
 </head>
@@ -182,12 +589,21 @@
   <nav class="nav">
     <div class="nav-left">
       <a href="index.html">
-        <img src="img/logo2.png" class="logo" alt="Vesira">
+        <img
+          src="img/logo2.png"
+          class="logo"
+          alt="Vesira"
+        >
       </a>
+
       <span class="eyewear">Eyewear</span>
     </div>
 
-    <a class="nav-btn material-symbols-outlined" href="carrito.html" aria-label="Carrito">
+    <a
+      class="nav-btn material-symbols-outlined"
+      href="carrito.html"
+      aria-label="Carrito"
+    >
       shopping_bag
     </a>
   </nav>
@@ -199,413 +615,791 @@
       <div class="success-icon">
         <span class="material-symbols-outlined">check</span>
       </div>
-      <h2>Pedido preparado.</h2>
+
+      <h2>Pago realizado.</h2>
+
       <p>
-        Hemos guardado los datos del pedido en este dispositivo.
-        El cobro real todavía necesita conectarse a una pasarela de pago.
+        Tu pago se ha procesado correctamente.
+        Estamos preparando tu pedido.
       </p>
-      <a href="index.html">Volver a Vesira</a>
+
+      <a href="index.html">
+        Volver a Vesira
+      </a>
     </div>
   </div>
 
   <div class="toast" id="toast"></div>
 
-<script>
-  const app = document.getElementById("app");
-  const toast = document.getElementById("toast");
-  const success = document.getElementById("success");
+  <script>
+    const app = document.getElementById("app");
+    const toast = document.getElementById("toast");
+    const success = document.getElementById("success");
 
-  const CHECKOUT_FUNCTION_URL =
-    "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/crear-checkout";
+    const CHECKOUT_FUNCTION_URL =
+      "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/crear-checkout";
 
-  function getCart(){
-    try{
-      return JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
-    }catch{
-      return [];
-    }
-  }
+    /*
+      IMPORTANTE:
+      Sustituye TU_PUBLISHABLE_KEY por tu clave pública de Stripe:
+      pk_test_... o pk_live_...
 
-  function euro(value){
-    return Number(value).toFixed(2).replace(".", ",") + " €";
-  }
+      NUNCA pongas aquí una sk_live_... o sk_test_...
+    */
+    const STRIPE_PUBLISHABLE_KEY =
+      "TU_PUBLISHABLE_KEY";
 
-  function totalCart(cart){
-    return cart.reduce(
-      (sum, item) =>
-        sum +
-        Number(item.precio || 0) * Number(item.cantidad || 0),
-      0
-    );
-  }
+    let stripe = null;
+    let cardElement = null;
 
-  function render(){
-    const cart = getCart();
-
-    if(!cart.length){
-      app.innerHTML = `
-        <section class="empty">
-          <h2>Tu carrito está vacío.</h2>
-          <p>Añade un par antes de continuar.</p>
-          <a href="index.html">Ver gafas</a>
-        </section>
-      `;
-      return;
+    function getCart(){
+      try{
+        return JSON.parse(
+          localStorage.getItem("vesiraCarrito") || "[]"
+        );
+      }catch{
+        return [];
+      }
     }
 
-    const subtotal = totalCart(cart);
-
-    app.innerHTML = `
-      <section class="wrap">
-        <header class="head">
-          <div class="eyebrow">VESIRA</div>
-          <h1>Checkout.</h1>
-        </header>
-
-        <form id="checkoutForm" class="layout">
-          <div class="form">
-
-            <section class="section">
-              <div class="section-head">
-                <h2>Contacto.</h2>
-                <span class="section-number">01</span>
-              </div>
-
-              <div class="fields">
-                <div class="field full">
-                  <label for="email">Email</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    required
-                    placeholder="tu@email.com"
-                  >
-                </div>
-              </div>
-            </section>
-
-            <section class="section">
-              <div class="section-head">
-                <h2>Entrega.</h2>
-                <span class="section-number">02</span>
-              </div>
-
-              <div class="fields">
-                <div class="field">
-                  <label for="nombre">Nombre</label>
-                  <input
-                    id="nombre"
-                    name="nombre"
-                    autocomplete="given-name"
-                    required
-                  >
-                </div>
-
-                <div class="field">
-                  <label for="apellidos">Apellidos</label>
-                  <input
-                    id="apellidos"
-                    name="apellidos"
-                    autocomplete="family-name"
-                    required
-                  >
-                </div>
-
-                <div class="field full">
-                  <label for="direccion">Dirección</label>
-                  <input
-                    id="direccion"
-                    name="direccion"
-                    autocomplete="street-address"
-                    required
-                  >
-                </div>
-
-                <div class="field">
-                  <label for="ciudad">Ciudad</label>
-                  <input
-                    id="ciudad"
-                    name="ciudad"
-                    autocomplete="address-level2"
-                    required
-                  >
-                </div>
-
-                <div class="field">
-                  <label for="codigoPostal">Código postal</label>
-                  <input
-                    id="codigoPostal"
-                    name="codigoPostal"
-                    inputmode="numeric"
-                    autocomplete="postal-code"
-                    required
-                  >
-                </div>
-
-                <div class="field full">
-                  <label for="pais">País</label>
-                  <select
-                    id="pais"
-                    name="pais"
-                    autocomplete="country-name"
-                    required
-                  >
-                    <option value="España" selected>España</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="delivery-note">
-                Envío gratis · entrega estimada en un máximo de 5 días.
-                Recibirás la información de seguimiento del pedido.
-              </div>
-            </section>
-
-            <section class="section">
-              <div class="section-head">
-                <h2>Pago.</h2>
-                <span class="section-number">03</span>
-              </div>
-
-              <div class="payment-options">
-                <label class="payment">
-                  <input
-                    type="radio"
-                    name="metodoPago"
-                    value="tarjeta"
-                    checked
-                  >
-                  <div>
-                    <strong>Tarjeta</strong>
-                    <span>Pago seguro con tarjeta</span>
-                  </div>
-                </label>
-
-                <label class="payment">
-                  <input
-                    type="radio"
-                    name="metodoPago"
-                    value="paypal"
-                  >
-                  <div>
-                    <strong>PayPal</strong>
-                    <span>Pagar con tu cuenta de PayPal</span>
-                  </div>
-                </label>
-              </div>
-
-              <div class="secure">
-                <span class="material-symbols-outlined">lock</span>
-                Tu información se envía de forma segura.
-              </div>
-            </section>
-
-            <section class="section">
-              <div class="section-head">
-                <h2>Nota.</h2>
-                <span class="section-number">04</span>
-              </div>
-
-              <div class="fields">
-                <div class="field full">
-                  <label for="nota">
-                    Nota para el pedido · opcional
-                  </label>
-
-                  <textarea
-                    id="nota"
-                    name="nota"
-                    placeholder="Algo que debamos saber sobre la entrega..."
-                  ></textarea>
-                </div>
-              </div>
-            </section>
-
-            <div class="error" id="error"></div>
-          </div>
-
-          <aside class="summary">
-            <h2>Tu pedido.</h2>
-
-            <div class="summary-items">
-              ${cart.map(item => `
-                <div class="summary-item">
-                  <div class="summary-img">
-                    <img
-                      src="${item.imagen || ""}"
-                      alt="${item.nombre || "Vesira"}"
-                    >
-                  </div>
-
-                  <div>
-                    <div class="summary-name">
-                      ${item.nombre || ""}
-                    </div>
-
-                    <div class="summary-qty">
-                      Cantidad · ${Number(item.cantidad || 1)}
-                    </div>
-                  </div>
-
-                  <div class="summary-price">
-                    ${euro(
-                      Number(item.precio) *
-                      Number(item.cantidad || 1)
-                    )}
-                  </div>
-                </div>
-              `).join("")}
-            </div>
-
-            <div class="row">
-              <span>Subtotal</span>
-              <strong>${euro(subtotal)}</strong>
-            </div>
-
-            <div class="row">
-              <span>Envío</span>
-              <strong>Gratis</strong>
-            </div>
-
-            <div class="row total">
-              <span>Total</span>
-              <strong>${euro(subtotal)}</strong>
-            </div>
-
-            <button class="buy" type="submit" id="buyButton">
-              Realizar pedido
-              <span
-                class="material-symbols-outlined"
-                style="font-size:15px;vertical-align:middle"
-              >
-                arrow_forward
-              </span>
-            </button>
-
-            <a class="back" href="carrito.html">
-              Volver al carrito
-            </a>
-          </aside>
-        </form>
-      </section>
-    `;
-
-    document
-      .getElementById("checkoutForm")
-      .addEventListener("submit", handleCheckout);
-  }
-
-  async function handleCheckout(event){
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    const error = document.getElementById("error");
-    const button = document.getElementById("buyButton");
-
-    error.textContent = "";
-    error.style.display = "none";
-
-    const data = Object.fromEntries(
-      new FormData(form).entries()
-    );
-
-    if(
-      !data.email ||
-      !data.nombre ||
-      !data.apellidos ||
-      !data.direccion ||
-      !data.ciudad ||
-      !data.codigoPostal
-    ){
-      error.textContent =
-        "Completa todos los campos obligatorios.";
-      error.style.display = "block";
-      return;
+    function euro(value){
+      return Number(value)
+        .toFixed(2)
+        .replace(".", ",") + " €";
     }
 
-    const cart = getCart();
-
-    if(!cart.length){
-      error.textContent = "El carrito está vacío.";
-      error.style.display = "block";
-      return;
+    function totalCart(cart){
+      return cart.reduce(
+        (sum, item) =>
+          sum +
+          Number(item.precio || 0) *
+          Number(item.cantidad || 0),
+        0
+      );
     }
 
-    button.disabled = true;
-    button.innerHTML = `
-      Creando pago...
-      <span
-        class="material-symbols-outlined"
-        style="font-size:15px;vertical-align:middle"
-      >
-        progress_activity
-      </span>
-    `;
+    function showError(message){
+      const errorBox =
+        document.getElementById("error");
 
-    try{
-      const response = await fetch(
-        CHECKOUT_FUNCTION_URL,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
+      if(!errorBox) return;
+
+      errorBox.textContent = message || "";
+      errorBox.classList.toggle(
+        "show",
+        Boolean(message)
+      );
+    }
+
+    function mountStripeCard(){
+
+      if(!window.Stripe){
+        showError(
+          "No se ha podido cargar Stripe. Recarga la página."
+        );
+        return;
+      }
+
+      if(
+        !STRIPE_PUBLISHABLE_KEY ||
+        STRIPE_PUBLISHABLE_KEY === "TU_PUBLISHABLE_KEY"
+      ){
+        showError(
+          "Falta configurar la Publishable Key de Stripe."
+        );
+        return;
+      }
+
+      stripe = window.Stripe(
+        STRIPE_PUBLISHABLE_KEY
+      );
+
+      const elements = stripe.elements({
+        locale: "es",
+        appearance: {
+          theme: "night",
+          variables: {
+            colorPrimary: "#ffffff",
+            colorBackground: "#101010",
+            colorText: "#ffffff",
+            colorTextSecondary: "#8c8c8c",
+            colorDanger: "#ff6b6b",
+            fontFamily:
+              "Outfit, Arial, sans-serif",
+            borderRadius: "13px",
+            spacingUnit: "4px"
           },
-          body: JSON.stringify({
-            items: cart.map(item => ({
-              id: item.id,
-              cantidad: Number(item.cantidad || 1)
-            })),
-            origin: window.location.origin,
-            cliente: data
-          })
+          rules: {
+            ".Input": {
+              border:
+                "1px solid rgba(255,255,255,.10)",
+              boxShadow: "none"
+            },
+            ".Input:focus": {
+              border:
+                "1px solid rgba(255,255,255,.28)",
+              boxShadow: "none"
+            },
+            ".Label": {
+              color: "#8c8c8c"
+            }
+          }
+        }
+      });
+
+      cardElement = elements.create(
+        "card",
+        {
+          hidePostalCode: true,
+          style: {
+            base: {
+              color: "#ffffff",
+              fontFamily:
+                "Outfit, Arial, sans-serif",
+              fontSize: "14px",
+              fontWeight: "400",
+              iconColor: "#ffffff",
+              "::placeholder": {
+                color: "#666666"
+              }
+            },
+            invalid: {
+              color: "#ff6b6b",
+              iconColor: "#ff6b6b"
+            }
+          }
         }
       );
 
-      const result = await response.json();
+      cardElement.mount("#card-element");
 
-      if(!response.ok){
-        throw new Error(
-          result?.error ||
-          "No se pudo crear el Checkout."
+      cardElement.on("change", (event) => {
+        const cardErrors =
+          document.getElementById("card-errors");
+
+        if(!cardErrors) return;
+
+        cardErrors.textContent =
+          event.error?.message || "";
+
+        cardErrors.classList.toggle(
+          "show",
+          Boolean(event.error)
         );
+      });
+    }
+
+    function render(){
+
+      const cart = getCart();
+
+      if(!cart.length){
+
+        app.innerHTML = `
+          <section class="empty">
+            <h2>Tu carrito está vacío.</h2>
+            <p>Añade un par antes de continuar.</p>
+            <a href="index.html">
+              Ver gafas
+            </a>
+          </section>
+        `;
+
+        return;
       }
 
-      if(!result?.url){
-        throw new Error(
-          "Stripe no devolvió una URL de pago."
+      const subtotal = totalCart(cart);
+
+      app.innerHTML = `
+        <section class="wrap">
+
+          <header class="head">
+            <div class="eyebrow">VESIRA</div>
+            <h1>Checkout.</h1>
+          </header>
+
+          <form
+            id="checkoutForm"
+            class="layout"
+          >
+
+            <div class="form">
+
+              <section class="section">
+
+                <div class="section-head">
+                  <h2>Contacto.</h2>
+                  <span class="section-number">
+                    01
+                  </span>
+                </div>
+
+                <div class="fields">
+
+                  <div class="field full">
+
+                    <label for="email">
+                      Email
+                    </label>
+
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      required
+                      placeholder="tu@email.com"
+                    >
+
+                  </div>
+
+                </div>
+
+              </section>
+
+
+              <section class="section">
+
+                <div class="section-head">
+                  <h2>Entrega.</h2>
+                  <span class="section-number">
+                    02
+                  </span>
+                </div>
+
+                <div class="fields">
+
+                  <div class="field">
+
+                    <label for="nombre">
+                      Nombre
+                    </label>
+
+                    <input
+                      id="nombre"
+                      name="nombre"
+                      autocomplete="given-name"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="apellidos">
+                      Apellidos
+                    </label>
+
+                    <input
+                      id="apellidos"
+                      name="apellidos"
+                      autocomplete="family-name"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field full">
+
+                    <label for="direccion">
+                      Dirección
+                    </label>
+
+                    <input
+                      id="direccion"
+                      name="direccion"
+                      autocomplete="street-address"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="ciudad">
+                      Ciudad
+                    </label>
+
+                    <input
+                      id="ciudad"
+                      name="ciudad"
+                      autocomplete="address-level2"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field">
+
+                    <label for="codigoPostal">
+                      Código postal
+                    </label>
+
+                    <input
+                      id="codigoPostal"
+                      name="codigoPostal"
+                      inputmode="numeric"
+                      autocomplete="postal-code"
+                      required
+                    >
+
+                  </div>
+
+
+                  <div class="field full">
+
+                    <label for="pais">
+                      País
+                    </label>
+
+                    <select
+                      id="pais"
+                      name="pais"
+                      autocomplete="country-name"
+                      required
+                    >
+                      <option
+                        value="España"
+                        selected
+                      >
+                        España
+                      </option>
+                    </select>
+
+                  </div>
+
+                </div>
+
+
+                <div class="delivery-note">
+                  Envío gratis · entrega estimada
+                  en un máximo de 5 días.
+                  Recibirás la información de
+                  seguimiento del pedido.
+                </div>
+
+              </section>
+
+
+              <section class="section">
+
+                <div class="section-head">
+                  <h2>Pago.</h2>
+                  <span class="section-number">
+                    03
+                  </span>
+                </div>
+
+                <div class="payment-note">
+                  Pago seguro con tarjeta.
+                  No introduzcas tus datos de
+                  tarjeta fuera de este formulario.
+                </div>
+
+                <div
+                  id="card-element"
+                  class="card-element"
+                ></div>
+
+                <div
+                  id="card-errors"
+                  class="error"
+                  style="margin-top:10px"
+                ></div>
+
+                <div class="secure">
+                  <span class="material-symbols-outlined">
+                    lock
+                  </span>
+                  Pago seguro con Stripe.
+                </div>
+
+              </section>
+
+
+              <section class="section">
+
+                <div class="section-head">
+                  <h2>Nota.</h2>
+                  <span class="section-number">
+                    04
+                  </span>
+                </div>
+
+                <div class="fields">
+
+                  <div class="field full">
+
+                    <label for="nota">
+                      Nota para el pedido · opcional
+                    </label>
+
+                    <textarea
+                      id="nota"
+                      name="nota"
+                      placeholder="Algo que debamos saber sobre la entrega..."
+                    ></textarea>
+
+                  </div>
+
+                </div>
+
+              </section>
+
+
+              <div
+                class="error"
+                id="error"
+              ></div>
+
+            </div>
+
+
+            <aside class="summary">
+
+              <h2>Tu pedido.</h2>
+
+              <div class="summary-items">
+
+                ${cart.map(item => `
+                  <div class="summary-item">
+
+                    <div class="summary-img">
+
+                      <img
+                        src="${item.imagen || ""}"
+                        alt="${item.nombre || "Vesira"}"
+                      >
+
+                    </div>
+
+
+                    <div>
+
+                      <div class="summary-name">
+                        ${item.nombre || ""}
+                      </div>
+
+                      <div class="summary-qty">
+                        Cantidad ·
+                        ${Number(item.cantidad || 1)}
+                      </div>
+
+                    </div>
+
+
+                    <div class="summary-price">
+
+                      ${euro(
+                        Number(item.precio) *
+                        Number(item.cantidad || 1)
+                      )}
+
+                    </div>
+
+                  </div>
+                `).join("")}
+
+              </div>
+
+
+              <div class="row">
+                <span>Subtotal</span>
+                <strong>
+                  ${euro(subtotal)}
+                </strong>
+              </div>
+
+
+              <div class="row">
+                <span>Envío</span>
+                <strong>Gratis</strong>
+              </div>
+
+
+              <div class="row total">
+                <span>Total</span>
+                <strong>
+                  ${euro(subtotal)}
+                </strong>
+              </div>
+
+
+              <button
+                class="buy"
+                type="submit"
+                id="buyButton"
+              >
+                Pagar ${euro(subtotal)}
+
+                <span
+                  class="material-symbols-outlined"
+                  style="font-size:15px;vertical-align:middle"
+                >
+                  arrow_forward
+                </span>
+              </button>
+
+
+              <a
+                class="back"
+                href="carrito.html"
+              >
+                Volver al carrito
+              </a>
+
+            </aside>
+
+          </form>
+
+        </section>
+      `;
+
+      mountStripeCard();
+
+      document
+        .getElementById("checkoutForm")
+        .addEventListener(
+          "submit",
+          handleCheckout
         );
+    }
+
+
+    async function handleCheckout(event){
+
+      event.preventDefault();
+
+      const form = event.currentTarget;
+
+      const button =
+        document.getElementById("buyButton");
+
+      const cardErrors =
+        document.getElementById("card-errors");
+
+      showError("");
+
+      if(cardErrors){
+        cardErrors.textContent = "";
+        cardErrors.classList.remove("show");
       }
 
-      window.location.href = result.url;
+      const data = Object.fromEntries(
+        new FormData(form).entries()
+      );
 
-    }catch(error){
-      console.error(error);
+      if(
+        !data.email ||
+        !data.nombre ||
+        !data.apellidos ||
+        !data.direccion ||
+        !data.ciudad ||
+        !data.codigoPostal
+      ){
+        showError(
+          "Completa todos los campos obligatorios."
+        );
+        return;
+      }
 
-      error = document.getElementById("error");
+      if(!stripe || !cardElement){
+        showError(
+          "El formulario de tarjeta todavía no está listo. Recarga la página."
+        );
+        return;
+      }
 
-      error.textContent =
-        error?.message ||
-        "Ha ocurrido un error al iniciar el pago.";
+      const cart = getCart();
 
-      error.style.display = "block";
+      if(!cart.length){
+        showError(
+          "El carrito está vacío."
+        );
+        return;
+      }
 
-      button.disabled = false;
+      button.disabled = true;
+
       button.innerHTML = `
-        Realizar pedido
+        Procesando pago...
         <span
           class="material-symbols-outlined"
           style="font-size:15px;vertical-align:middle"
         >
-          arrow_forward
+          progress_activity
         </span>
       `;
-    }
-  }
 
-  render();
-</script>
+      try{
+
+        const response = await fetch(
+          CHECKOUT_FUNCTION_URL,
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+
+              items:cart.map(item => ({
+                id:item.id,
+                cantidad:Number(
+                  item.cantidad || 1
+                )
+              })),
+
+              cliente:{
+                email:String(data.email),
+                nombre:String(data.nombre),
+                apellidos:String(data.apellidos),
+                direccion:String(data.direccion),
+                ciudad:String(data.ciudad),
+                codigoPostal:String(
+                  data.codigoPostal
+                ),
+                pais:String(
+                  data.pais || "España"
+                ),
+                nota:String(
+                  data.nota || ""
+                )
+              }
+
+            })
+          }
+        );
+
+
+        const result =
+          await response.json();
+
+
+        if(!response.ok){
+
+          throw new Error(
+            result?.error ||
+            "No se pudo iniciar el pago."
+          );
+
+        }
+
+
+        if(!result?.clientSecret){
+
+          throw new Error(
+            "Stripe no devolvió el client secret."
+          );
+
+        }
+
+
+        const paymentResult =
+          await stripe.confirmCardPayment(
+            result.clientSecret,
+            {
+              payment_method:{
+                card:cardElement,
+
+                billing_details:{
+                  name:
+                    `${data.nombre} ${data.apellidos}`
+                      .trim(),
+
+                  email:String(data.email),
+
+                  address:{
+                    line1:String(
+                      data.direccion
+                    ),
+                    city:String(
+                      data.ciudad
+                    ),
+                    postal_code:String(
+                      data.codigoPostal
+                    ),
+                    country:"ES"
+                  }
+                }
+              }
+            }
+          );
+
+
+        if(paymentResult.error){
+
+          throw new Error(
+            paymentResult.error.message ||
+            "No se pudo procesar el pago."
+          );
+
+        }
+
+
+        const paymentIntent =
+          paymentResult.paymentIntent;
+
+
+        if(
+          !paymentIntent ||
+          paymentIntent.status !== "succeeded"
+        ){
+
+          throw new Error(
+            "El pago no se ha completado todavía."
+          );
+
+        }
+
+
+        localStorage.removeItem(
+          "vesiraCarrito"
+        );
+
+
+        window.location.href =
+          "checkout-exito.html?payment_intent=" +
+          encodeURIComponent(
+            paymentIntent.id
+          );
+
+
+      }catch(err){
+
+        console.error(err);
+
+        showError(
+          err?.message ||
+          "Ha ocurrido un error al procesar el pago."
+        );
+
+        button.disabled = false;
+
+        button.innerHTML = `
+          Pagar ${euro(totalCart(cart))}
+
+          <span
+            class="material-symbols-outlined"
+            style="font-size:15px;vertical-align:middle"
+          >
+            arrow_forward
+          </span>
+        `;
+      }
+    }
+
+
+    render();
+
+  </script>
 
 </body>
 </html>
+```
