@@ -1,119 +1,418 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contacto · VESIRA</title>
-<meta name="description" content="Contacta con VESIRA.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined" rel="stylesheet">
-<style> :root{--fondo:#0c0c0c;--texto:#fff;--borde:#262626;--caja:#151515;--suave:#8d8d8d}
-*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
-body{min-height:100vh;background:var(--fondo);color:var(--texto);font-family:"Outfit",Arial,sans-serif;overflow-x:hidden}
-a{text-decoration:none;color:inherit}button,input,textarea{font:inherit}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto · VESIRA</title>
+  <meta name="description" content="Contacta con VESIRA.">
 
-.barra-navegacion{
-position:fixed;top:0;left:0;z-index:1000;width:100%;height:80px;
-display:flex;align-items:center;justify-content:space-between;padding:0 30px;
-background:rgba(12,12,12,.78);border-bottom:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(18px);
-}
-.nav-left{display:flex;align-items:center;min-width:0}
-.normal{display:flex;align-items:center;gap:14px;padding:8px 16px 8px 14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);border-radius:999px}
-.logo{width:114px;height:auto;display:block}
-.nav-divider{width:1px;height:18px;background:rgba(255,255,255,.14)}
-.nav-word{color:var(--suave);font-size:9px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
-.iconos{display:flex;align-items:center;gap:6px}
-.nav-icon{width:42px;height:42px;border:0;background:transparent;color:var(--texto);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease,transform .2s ease}
-.nav-icon:hover{background:var(--caja);transform:translateY(-1px)}
-.marquee-vesira{width:100%;overflow:hidden;background:transparent;padding:34px 0;border-top:1px solid var(--borde)}
-.marquee-vesira-track{display:flex;width:max-content;animation:vesiraLoop 18s linear infinite}
-.marquee-vesira-group{display:flex;align-items:center;gap:70px;padding-right:70px;flex-shrink:0}
-.marquee-vesira-group img{width:155px;height:60px;object-fit:contain;display:block;flex-shrink:0}
-@keyframes vesiraLoop{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined" rel="stylesheet">
 
-main{padding-top:80px}
-.contact-hero{padding:72px 7vw 52px;border-bottom:1px solid var(--borde)}
-.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--suave);margin-bottom:18px}
-h1{font-family:Impact,"Arial Black","Bricolage Grotesque",sans-serif;font-size:clamp(52px,7vw,94px);font-weight:900;line-height:.84;letter-spacing:-.05em;text-transform:uppercase;transform:skewX(-8deg);transform-origin:left center}
-.contact-wrap{display:flex;justify-content:center;padding:60px 7vw 100px}
-.contact-form{width:min(760px,100%)}.form-title{font-family:"Bricolage Grotesque",sans-serif;font-size:18px;font-weight:500;letter-spacing:-.02em;margin-bottom:28px}
-.field{margin-bottom:18px}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-label{display:block;color:var(--suave);font-size:9px;letter-spacing:.17em;text-transform:uppercase;margin:0 0 9px 2px}
-input,textarea{width:100%;border:1px solid var(--borde);background:var(--caja);color:var(--texto);border-radius:14px;outline:none;padding:16px 15px;transition:border-color .2s,background .2s}
-input{height:54px}textarea{min-height:190px;resize:vertical;line-height:1.55}
-input::placeholder,textarea::placeholder{color:#555}input:focus,textarea:focus{border-color:#666;background:#111}
-.submit-row{display:flex;align-items:center;gap:16px;margin-top:24px}
-.submit{border:1px solid #fff;background:#fff;color:#090909;height:52px;padding:0 26px;border-radius:999px;cursor:pointer;text-transform:uppercase;letter-spacing:.15em;font-size:10px;font-weight:600;transition:.2s}
-.submit:hover{background:transparent;color:#fff}.status{color:var(--suave);font-size:11px;min-height:16px}
-.toast{position:fixed;left:50%;bottom:24px;z-index:3000;transform:translate(-50%,20px);opacity:0;padding:12px 17px;border:1px solid var(--borde);border-radius:999px;background:rgba(20,20,20,.95);backdrop-filter:blur(12px);font-size:11px;pointer-events:none;transition:opacity .25s ease,transform .25s ease}
-.toast.visible{opacity:1;transform:translate(-50%,0)}
-@media(max-width:700px){
-.barra-navegacion{height:70px;padding:0 12px}
-.normal{padding:7px 13px;gap:10px}.logo{width:96px}.nav-divider{display:block;width:1px;height:16px;background:rgba(255,255,255,.14)}
-.nav-word{display:block;font-size:8px;letter-spacing:.14em;color:var(--suave)}.nav-icon{width:36px;height:36px}
-.marquee-vesira{padding:24px 0}.marquee-vesira-group{gap:45px;padding-right:45px}.marquee-vesira-group img{width:115px;height:48px}
-main{padding-top:70px}.contact-hero{padding:54px 14px 42px}h1{font-size:clamp(48px,16vw,78px)}
-.contact-wrap{padding:42px 14px 75px}.field-grid{grid-template-columns:1fr;gap:0}
-}</style>
+  <style>
+    :root {
+      --fondo: #0c0c0c;
+      --texto: #fff;
+      --borde: #262626;
+      --caja: #151515;
+      --suave: #8d8d8d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--fondo);
+      color: var(--texto);
+      font-family: "Outfit", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* La navbar se inyecta desde vesira-navbar.js */
+    .vesira-global-nav {
+      opacity: 1;
+    }
+
+    main {
+      padding-top: 80px;
+    }
+
+    /* HERO */
+    .contact-hero {
+      padding: 33px 7vw 10px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: Impact, "Arial Black", "Bricolage Grotesque", sans-serif;
+      font-size: clamp(52px, 7vw, 94px);
+      font-weight: 900;
+      line-height: 0.84;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      transform: skewX(-8deg);
+      transform-origin: center;
+    }
+
+    /* FORMULARIO */
+    .contact-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 60px 7vw 100px;
+    }
+
+    .contact-form {
+      width: min(760px, 100%);
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      color: var(--suave);
+      font-size: 9px;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+      margin: 0 0 9px 2px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--borde);
+      background: var(--caja);
+      color: var(--texto);
+      border-radius: 14px;
+      outline: none;
+      padding: 16px 15px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    input {
+      height: 54px;
+    }
+
+    textarea {
+      min-height: 190px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #555;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #666;
+      background: #111;
+    }
+
+    .submit-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .submit {
+      border: 1px solid #fff;
+      background: #fff;
+      color: #090909;
+      height: 52px;
+      padding: 0 26px;
+      border-radius: 999px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 10px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .submit:hover {
+      background: transparent;
+      color: #fff;
+    }
+
+    .status {
+      color: var(--suave);
+      font-size: 11px;
+      min-height: 16px;
+    }
+
+    /* MARQUEE */
+    .marquee-vesira {
+      width: 100%;
+      overflow: hidden;
+      background: transparent;
+      padding: 34px 0;
+      border-top: 1px solid var(--borde);
+    }
+
+    .marquee-vesira-track {
+      display: flex;
+      width: max-content;
+      animation: vesiraLoop 18s linear infinite;
+    }
+
+    .marquee-vesira-group {
+      display: flex;
+      align-items: center;
+      gap: 70px;
+      padding-right: 70px;
+      flex-shrink: 0;
+    }
+
+    .marquee-vesira-group img {
+      width: 155px;
+      height: 60px;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    @keyframes vesiraLoop {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      z-index: 3000;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      padding: 12px 17px;
+      border: 1px solid var(--borde);
+      border-radius: 999px;
+      background: rgba(20, 20, 20, 0.95);
+      backdrop-filter: blur(12px);
+      font-size: 11px;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 700px) {
+      main {
+        padding-top: 70px;
+      }
+
+      .contact-hero {
+        padding: 54px 14px 42px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 16vw, 78px);
+      }
+
+      .contact-wrap {
+        padding: 42px 14px 75px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .marquee-vesira {
+        padding: 24px 0;
+      }
+
+      .marquee-vesira-group {
+        gap: 45px;
+        padding-right: 45px;
+      }
+
+      .marquee-vesira-group img {
+        width: 115px;
+        height: 48px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav class="barra-navegacion" id="navbar">
-  <div class="nav-left">
-    <a href="index.html" class="normal" aria-label="VESIRA">
-      <img src="img/logo2.png" class="logo" alt="Vesira">
-      <span class="nav-divider"></span>
-      <span class="nav-word">Eyewear</span>
-    </a>
-  </div>
-  <div class="iconos">
-    <button class="nav-icon material-symbols-outlined" id="abrirCarrito" aria-label="Carrito">shopping_bag</button>
-    <button class="nav-icon material-symbols-outlined" id="menu" aria-label="Menú">menu</button>
-  </div>
-</nav>
-<main>
-<section class="contact-hero"><div class="eyebrow">VESIRA · CONTACTO</div><h1>Hablemos.</h1></section>
-<section class="contact-wrap">
-<div class="contact-form">
-<div class="form-title">Enviar mensaje</div>
-<form id="contactForm">
-<div class="field-grid">
-<div class="field"><label for="name">Nombre</label><input id="name" type="text" placeholder="Tu nombre" required></div>
-<div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="tu@email.com" required></div>
-</div>
-<div class="field"><label for="subject">Asunto</label><input id="subject" type="text" placeholder="¿En qué podemos ayudarte?" required></div>
-<div class="field"><label for="message">Mensaje</label><textarea id="message" placeholder="Cuéntanos..." required></textarea></div>
-<div class="submit-row"><button class="submit" type="submit">Enviar mensaje</button><div class="status" id="status" aria-live="polite"></div></div>
-</form>
-</div>
-</section>
-<section class="marquee-vesira">
-<div class="marquee-vesira-track">
-<div class="marquee-vesira-group">
-<img src="img/logo2.png" alt="Vesira"><img src="img/logo15.png" alt=""><img src="img/logo2.png" alt="Vesira"><img src="img/logo15.png" alt=""><img src="img/logo2.png" alt="Vesira"><img src="img/logo15.png" alt="">
-</div>
-<div class="marquee-vesira-group">
-<img src="img/logo2.png" alt="Vesira"><img src="img/logo15.png" alt=""><img src="img/logo2.png" alt="Vesira"><img src="img/logo15.png" alt=""><img src="img/logo2.png" alt="Vesira"><img src="img/logo15.png" alt="">
-</div>
-</div>
-</section>
-</main>
-<div class="toast" id="toast">Menú</div>
-<script>
-const toast=document.getElementById("toast");
-function mostrarToast(mensaje){toast.textContent=mensaje;toast.classList.add("visible");setTimeout(()=>toast.classList.remove("visible"),1600);}
-document.getElementById("abrirCarrito").addEventListener("click",()=>window.location.href="carrito.html");
-document.getElementById("menu").addEventListener("click",()=>mostrarToast("Menú"));
-document.getElementById("contactForm").addEventListener("submit",(e)=>{
-e.preventDefault();
-const name=document.getElementById("name").value.trim();
-const email=document.getElementById("email").value.trim();
-const subject=document.getElementById("subject").value.trim();
-const message=document.getElementById("message").value.trim();
-document.getElementById("status").textContent="Abriendo tu correo…";
-window.location.href="mailto:hola@vesira.co?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent("Nombre: "+name+"\nEmail: "+email+"\n\n"+message);
-});
-</script>
+
+  <main>
+    <section class="contact-hero">
+      <h1>Hablemos</h1>
+    </section>
+
+    <section class="contact-wrap">
+      <div class="contact-form">
+        <form id="contactForm">
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="name">Nombre</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Tu nombre"
+                required
+              >
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="tu@email.com"
+                required
+              >
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="subject">Asunto</label>
+            <input
+              id="subject"
+              type="text"
+              placeholder="¿En qué podemos ayudarte?"
+              required
+            >
+          </div>
+
+          <div class="field">
+            <label for="message">Mensaje</label>
+            <textarea
+              id="message"
+              placeholder="Cuéntanos..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="submit-row">
+            <button class="submit" type="submit">
+              Enviar mensaje
+            </button>
+
+            <div
+              class="status"
+              id="status"
+              aria-live="polite"
+            ></div>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <section class="marquee-vesira">
+      <div class="marquee-vesira-track">
+
+        <div class="marquee-vesira-group">
+          <img src="img/logo2.png" alt="Vesira">
+          <img src="img/logo15.png" alt="">
+          <img src="img/logo2.png" alt="Vesira">
+          <img src="img/logo15.png" alt="">
+          <img src="img/logo2.png" alt="Vesira">
+          <img src="img/logo15.png" alt="">
+        </div>
+
+        <div class="marquee-vesira-group">
+          <img src="img/logo2.png" alt="Vesira">
+          <img src="img/logo15.png" alt="">
+          <img src="img/logo2.png" alt="Vesira">
+          <img src="img/logo15.png" alt="">
+          <img src="img/logo2.png" alt="Vesira">
+          <img src="img/logo15.png" alt="">
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">Menú</div>
+
+  <script>
+    const toast = document.getElementById("toast");
+
+    function mostrarToast(mensaje) {
+      toast.textContent = mensaje;
+      toast.classList.add("visible");
+
+      clearTimeout(window._vesiraToast);
+      window._vesiraToast = setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 1600);
+    }
+
+    const contactForm = document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      document.getElementById("status").textContent = "Abriendo tu correo…";
+
+      window.location.href =
+        "mailto:hola@vesira.co" +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(
+          "Nombre: " +
+          name +
+          "\nEmail: " +
+          email +
+          "\n\n" +
+          message
+        );
+    });
+  </script>
+
+  <!-- Navbar global de VESIRA -->
+  <script src="vesira-navbar.js"></script>
+
 </body>
 </html>

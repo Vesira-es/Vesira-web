@@ -279,7 +279,7 @@
       .vesira-menu-links {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
 
         gap: 8px;
 
@@ -294,7 +294,7 @@
           Arial,
           sans-serif;
 
-        font-size: clamp(54px,7vw,82px);
+        font-size: clamp(30px,3vw,42px);
 
         font-weight: 400;
         line-height: .86;
@@ -358,12 +358,12 @@
         }
 
         .vesira-menu-drawer {
-          width: min(340px,88vw);
+          width: min(235px,52vw);
           padding: 100px 24px 30px;
         }
 
         .vesira-menu-link {
-          font-size: 58px;
+          font-size: 28px;
         }
       }
 

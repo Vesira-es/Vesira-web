@@ -49,8 +49,8 @@ button{font:inherit}
 }
 .intro.hide{opacity:0;visibility:hidden;pointer-events:none}
 .eslogan{
-  width:min(600px, 110vw);
-  max-height:100px;
+  width:min(360px,72vw);
+  max-height:42px;
   height:auto;
   object-fit:contain;
   display:block;
@@ -79,7 +79,7 @@ button{font:inherit}
   display:grid;
   grid-template-columns:minmax(0,1fr) auto auto;
   align-items:center;
-  gap:13px;
+  gap:12px;
   width:100%;
 }
 .producto-texto{min-width:0}
@@ -88,26 +88,34 @@ button{font:inherit}
   min-width:0;
   font-family:"Bricolage Grotesque",sans-serif;
   font-size:19px;
-  font-weight:400;
+  font-weight:500;
   line-height:1;
-  letter-spacing:-.035em;
+  letter-spacing:-.028em;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  text-shadow:0 1px 18px rgba(255,255,255,.05);
 }
+.producto-card:hover .producto-nombre{letter-spacing:-.018em}
 .producto-precio{
   justify-self:end;
-  flex:0 0 auto;
-  font-size:13px;
-  font-weight:500;
+  margin-left:8px;
+  padding:8px 11px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:999px;
+  background:rgba(255,255,255,.045);
+  font-size:12px;
+  font-weight:600;
+  line-height:1;
   white-space:nowrap;
+  letter-spacing:.01em;
 }
 .producto-anadir{
   flex:0 0 auto;
-  width:36px;
-  height:36px;
+  width:40px;
+  height:40px;
   padding:0;
-  border:1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.16);
   border-radius:50%;
   background:#fff;
   color:#0c0c0c;
@@ -115,23 +123,26 @@ button{font:inherit}
   align-items:center;
   justify-content:center;
   cursor:pointer;
-  transition:transform .22s ease,background .22s ease,box-shadow .22s ease;
+  box-shadow:0 6px 18px rgba(0,0,0,.20);
+  transition:transform .24s cubic-bezier(.16,.78,.22,1),background .22s ease,box-shadow .22s ease;
 }
 .producto-anadir:hover{
-  transform:translateY(-2px) scale(1.05);
-  background:#e9e9e5;
-  box-shadow:0 8px 20px rgba(0,0,0,.18);
+  transform:translateY(-2px) scale(1.07);
+  background:#f2f2ef;
+  box-shadow:0 10px 24px rgba(0,0,0,.28);
 }
-.producto-anadir:active{transform:scale(.94)}
+.producto-anadir:active{transform:scale(.93)}
 .producto-anadir .material-symbols-outlined{
   font-size:20px;
   line-height:1;
-  font-variation-settings:'FILL' 0,'wght' 450,'GRAD' 0,'opsz' 24;
+  font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
 }
 .producto-descripcion{margin-top:6px;max-width:300px;color:var(--suave);font-size:10px;line-height:1.5}
 @media(max-width:700px){
-  .producto-row{gap:6px}.producto-nombre{font-size:15px}.producto-precio{font-size:10px}
-  .producto-anadir{width:32px;height:32px}
+  .producto-row{gap:7px}
+  .producto-nombre{font-size:15px}
+  .producto-precio{font-size:10px;padding:7px 8px;margin-left:2px}
+  .producto-anadir{width:34px;height:34px}
   .producto-anadir .material-symbols-outlined{font-size:18px}
   .producto-descripcion{font-size:8.5px;margin-top:4px}
 }
@@ -179,7 +190,6 @@ button{font:inherit}
 }
 .productos-cabecera{
   margin-bottom:24px;
-  margin-left: 6px;
 }
 .productos-cabecera h2 {
       font-family:
@@ -203,8 +213,7 @@ button{font:inherit}
                 left center;
     }
 .productos-eyebrow{
-  display: block;
-  margin-bottom:8px;
+  margin-bottom:14px;
   color:var(--suave);
   font-size:10px;
   font-weight:500;
@@ -355,7 +364,7 @@ button{font:inherit}
   .marquee-vesira-group{gap:45px;padding-right:45px}
   .marquee-vesira-group img{width:115px;height:48px}
 }
-.home-cart-fly{will-change:transform,opacity}
+.home-cart-fly{will-change:transform,opacity;position:fixed;z-index:12000;pointer-events:none;object-fit:contain;transform-origin:center;filter:drop-shadow(0 18px 24px rgba(0,0,0,.38))}
 </style>
 </head>
 
@@ -440,47 +449,101 @@ button{font:inherit}
     }
 
     function animateHomeProductToCart(productImage){
-      const destination = document.getElementById("vesiraGlobalCart");
-      if(!productImage || !destination) return;
+      const origen = productImage;
+      const destino = document.getElementById("vesiraGlobalCart");
 
-      const start=productImage.getBoundingClientRect();
-      const end=destination.getBoundingClientRect();
-      if(!start.width || !start.height) return;
+      if(!origen || !destino || !origen.getBoundingClientRect().width) return;
 
-      const fly=productImage.cloneNode(true);
-      fly.className="home-cart-fly";
-      fly.removeAttribute("id");
+      const start = origen.getBoundingClientRect();
+      const end = destino.getBoundingClientRect();
+      if(!end.width || !end.height) return;
 
-      const size=Math.min(Math.max(Math.min(start.width,start.height)*.36,76),145);
-      const startX=start.left+start.width/2, startY=start.top+start.height/2;
-      const endX=end.left+end.width/2, endY=end.top+end.height/2;
-      const dx=endX-startX, dy=endY-startY;
+      const clon = origen.cloneNode(true);
+      clon.className = "home-cart-fly";
+      clon.removeAttribute("id");
 
-      Object.assign(fly.style,{
-        position:"fixed",zIndex:"6000",pointerEvents:"none",objectFit:"contain",
-        filter:"drop-shadow(0 18px 24px rgba(0,0,0,.35))",
-        width:size+"px",height:size+"px",
-        left:(startX-size/2)+"px",top:(startY-size/2)+"px",opacity:"1"
+      const startSize = Math.min(Math.max(start.width * 0.34, 92), 175);
+
+      clon.style.width = startSize + "px";
+      clon.style.height = startSize + "px";
+      clon.style.left = (start.left + start.width / 2 - startSize / 2) + "px";
+      clon.style.top = (start.top + start.height / 2 - startSize / 2) + "px";
+      clon.style.opacity = "1";
+      clon.style.transform = "translate3d(0,0,0) scale(1) rotate(0deg)";
+
+      document.body.appendChild(clon);
+
+      const startX = start.left + start.width / 2;
+      const startY = start.top + start.height / 2;
+      const endX = end.left + end.width / 2;
+      const endY = end.top + end.height / 2;
+      const targetX = endX - startX;
+      const targetY = endY - startY;
+      const lift = Math.min(-145, targetY * 0.35 - 90);
+
+      const animation = clon.animate([
+        {
+          transform:"translate3d(0,0,0) scale(1) rotate(0deg)",
+          opacity:1,
+          offset:0
+        },
+        {
+          transform:`translate3d(${targetX * .26}px, ${targetY * .12 + lift}px, 0) scale(.90) rotate(-8deg)`,
+          opacity:1,
+          offset:.24
+        },
+        {
+          transform:`translate3d(${targetX * .62}px, ${targetY * .38 + lift * .70}px, 0) scale(.66) rotate(7deg)`,
+          opacity:1,
+          offset:.56
+        },
+        {
+          transform:`translate3d(${targetX * .88}px, ${targetY * .74}px, 0) scale(.36) rotate(-5deg)`,
+          opacity:.96,
+          offset:.82
+        },
+        {
+          transform:`translate3d(${targetX}px, ${targetY}px, 0) scale(.08) rotate(12deg)`,
+          opacity:0,
+          offset:1
+        }
+      ],{
+        duration:1320,
+        easing:"cubic-bezier(.16,.78,.22,1)"
       });
 
-      document.body.appendChild(fly);
+      destino.animate(
+        [
+          {transform:"scale(1)"},
+          {transform:"scale(1.05)",offset:.5},
+          {transform:"scale(1)"}
+        ],
+        {duration:1320,easing:"ease-out"}
+      );
 
-      const animation=fly.animate([
-        {transform:"translate3d(0,0,0) scale(1) rotate(0deg)",opacity:1,offset:0},
-        {transform:`translate3d(${dx*.25}px,${dy*.10-75}px,0) scale(.92) rotate(-8deg)`,opacity:1,offset:.28},
-        {transform:`translate3d(${dx*.58}px,${dy*.40-40}px,0) scale(.64) rotate(8deg)`,opacity:1,offset:.60},
-        {transform:`translate3d(${dx*.86}px,${dy*.76}px,0) scale(.32) rotate(-6deg)`,opacity:.9,offset:.84},
-        {transform:`translate3d(${dx}px,${dy}px,0) scale(.06) rotate(12deg)`,opacity:0,offset:1}
-      ],{duration:1260,easing:"cubic-bezier(.16,.78,.22,1)"});
+      animation.onfinish = () => {
+        clon.remove();
 
-      animation.onfinish=()=>{
-        fly.remove();
-        destination.animate(
-          [{transform:"scale(1)",background:"transparent"},
-           {transform:"scale(1.15)",background:"rgba(255,255,255,.10)"},
-           {transform:"scale(1)",background:"transparent"}],
-          {duration:360,easing:"ease-out"}
+        destino.animate(
+          [
+            {transform:"scale(1)",background:"transparent"},
+            {transform:"scale(1.16)",background:"rgba(255,255,255,.11)"},
+            {transform:"scale(1)",background:"transparent"}
+          ],
+          {duration:380,easing:"ease-out"}
         );
+
+        const icon = destino.querySelector("svg");
+        if(icon){
+          icon.animate(
+            [
+              {transform:"scale(1)"},
+              {transform:"scale(1.22)"},
+              {transform:"scale(1)"}
+            ],
+            {duration:320,easing:"ease-out"}
+          );
+        }
       };
     }
 
