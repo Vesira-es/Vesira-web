@@ -75,7 +75,6 @@
         font-size: 9px;
         line-height: 1;
         letter-spacing: .18em;
-        text-transform: uppercase;
         white-space: nowrap;
         font-family: "Outfit", Arial, sans-serif;
       }
@@ -281,7 +280,7 @@
         flex-direction: column;
         align-items: center;
 
-        gap: 8px;
+        gap: 15px;
 
         margin-top: 8px;
       }
@@ -301,7 +300,6 @@
 
         letter-spacing: -.045em;
 
-        text-transform: uppercase;
         text-decoration: none;
 
         padding: 2px 0;
