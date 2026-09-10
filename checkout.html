@@ -582,19 +582,26 @@
 
     async function initGooglePlaces() {
       try {
-        if (
-          !GOOGLE_MAPS_BROWSER_KEY ||
-          GOOGLE_MAPS_BROWSER_KEY ===
-            "AIzaSyDgFV-cuVbMDLOBjrEREn1-75r0qc-vucM"
-        ) {
-          setAddressStatus(
-            "Introduce tu dirección manualmente.",
-            "error"
-          );
-          return;
+        if (!GOOGLE_MAPS_BROWSER_KEY) {
+          throw new Error("Falta la clave pública de Google Maps.");
         }
 
-        await google.maps.importLibrary("places");
+        // Esperamos a que el script async de Google termine de cargar.
+        if (window.vesiraGoogleReady) {
+          await window.vesiraGoogleReady;
+        }
+
+        if (!window.google?.maps?.importLibrary) {
+          throw new Error("Google Maps JavaScript API no está disponible.");
+        }
+
+        // PlaceAutocompleteElement viene exportado por la librería places.
+        const { PlaceAutocompleteElement } =
+          await google.maps.importLibrary("places");
+
+        if (!PlaceAutocompleteElement) {
+          throw new Error("PlaceAutocompleteElement no está disponible.");
+        }
 
         const container =
           document.getElementById("direccion-autocomplete");
@@ -603,7 +610,7 @@
           document.getElementById("direccion");
 
         if (!container || !hiddenInput) {
-          return;
+          throw new Error("No se encontró el campo de dirección.");
         }
 
         const autocomplete =
