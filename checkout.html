@@ -821,11 +821,7 @@ grid-column:auto;
 
       }
 
-      input,select{
-
-min-height:47px;
-
-      }
+      
 
 .summary{
 
@@ -835,6 +831,71 @@ border-radius:18px;
 
       }
 
+    }
+
+  
+    /* Evita el zoom automático de Safari/iPhone al enfocar campos.
+       16px es el umbral de iOS para no ampliar la página. */
+    input, select, textarea,
+    .address-wrap gmp-place-autocomplete {
+      font-size:16px !important;
+    }
+
+    /* Mantén las dimensiones y márgenes estables al enfocar. */
+    input, select {
+      height:48px !important;
+      min-height:48px !important;
+      max-height:48px !important;
+      padding-top:0 !important;
+      padding-bottom:0 !important;
+    }
+
+    textarea {
+      height:95px !important;
+      min-height:95px !important;
+      max-height:95px !important;
+      resize:none !important;
+    }
+
+    .address-wrap,
+    .address-wrap > #direccion-autocomplete,
+    .address-wrap gmp-place-autocomplete {
+      width:100% !important;
+      min-width:0 !important;
+      height:48px !important;
+      min-height:48px !important;
+      max-height:48px !important;
+      margin:0 !important;
+      padding:0 !important;
+    }
+
+    .address-wrap {
+      overflow:visible !important;
+    }
+
+    @media (max-width:600px) {
+      .wrap {
+        width:calc(100% - 32px) !important;
+        max-width:100% !important;
+        margin-left:auto !important;
+        margin-right:auto !important;
+      }
+
+      .section {
+        width:100% !important;
+        max-width:100% !important;
+      }
+
+      .fields {
+        width:100% !important;
+        min-width:0 !important;
+      }
+
+      .field,
+      .field.full {
+        min-width:0 !important;
+        width:100% !important;
+      }
     }
 
   </style>
