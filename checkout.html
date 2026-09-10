@@ -426,11 +426,22 @@ line-height:1.5;
     .google-address-wrap gmp-place-autocomplete{
       display:block;
       width:100%;
-      --gmpx-color-surface:#101010;
-      --gmpx-color-on-surface:#fff;
-      --gmpx-color-on-surface-variant:#8c8c8c;
-      --gmpx-color-primary:#fff;
-      --gmpx-color-outline:rgba(255,255,255,.10);
+    }
+
+    .address-manual{
+      width:100%;
+      min-height:48px;
+      padding:0 13px;
+      border:1px solid var(--b);
+      border-radius:13px;
+      background:var(--input);
+      color:#fff;
+      outline:none;
+      font-size:12px;
+    }
+
+    .address-manual:focus{
+      border-color:rgba(255,255,255,.28);
     }
 
     .address-hidden-input{
@@ -452,8 +463,7 @@ line-height:1.5;
     .address-status.valid{color:#7bdba5;}
     .address-status.invalid{color:#ff9c9c;}
 
-
-.summary{
+    .summary{
 
 position:sticky;
 
@@ -931,26 +941,40 @@ aria-label="Carrito"
     }
 
     async function initGoogleAddressAutocomplete() {
+      const container = document.getElementById("direccion-autocomplete");
+      const visibleInput = document.getElementById("direccion-visible");
+      const hiddenInput = document.getElementById("direccion");
+
+      if (!container || !visibleInput || !hiddenInput) return;
+
+      visibleInput.addEventListener("input", () => {
+        hiddenInput.value = visibleInput.value.trim();
+      });
+
       try {
         await loadGoogleMapsPlaces();
-        if (!window.google?.maps?.importLibrary) return;
+
+        if (!window.google?.maps?.importLibrary) {
+          throw new Error("Google Maps JS API no disponible");
+        }
 
         const { PlaceAutocompleteElement } =
           await google.maps.importLibrary("places");
 
-        const container = document.getElementById("direccion-autocomplete");
-        if (!container) return;
+        const autocomplete = new PlaceAutocompleteElement({
+          includedRegionCodes: ["es"]
+        });
 
-        const autocomplete = new PlaceAutocompleteElement();
         autocomplete.placeholder = "Empieza a escribir tu dirección...";
-        autocomplete.includedRegionCodes = ["es"];
-        autocomplete.style.width = "100%";
+        autocomplete.setAttribute("aria-label", "Dirección");
+
         container.replaceChildren(autocomplete);
+        container.hidden = false;
+        visibleInput.hidden = true;
 
         autocomplete.addEventListener("gmp-select", async ({ placePrediction }) => {
           try {
             const place = placePrediction.toPlace();
-
             await place.fetchFields({
               fields: ["addressComponents", "formattedAddress"]
             });
@@ -968,25 +992,18 @@ aria-label="Carrito"
 
               if (types.includes("route")) street = value;
               if (types.includes("street_number")) streetNumber = value;
-
-              if (
-                types.includes("locality") ||
-                types.includes("postal_town") ||
-                types.includes("sublocality")
-              ) {
+              if (types.includes("locality") || types.includes("postal_town") || types.includes("sublocality")) {
                 if (!city) city = value;
               }
-
               if (types.includes("postal_code")) postalCode = value;
               if (types.includes("country")) countryCode = shortValue || "ES";
             }
 
-            const direccion =
+            hiddenInput.value =
               [street, streetNumber].filter(Boolean).join(" ") ||
               place.formattedAddress ||
               "";
 
-            document.getElementById("direccion").value = direccion;
             document.getElementById("ciudad").value = city;
             document.getElementById("codigoPostal").value = postalCode;
 
@@ -994,21 +1011,28 @@ aria-label="Carrito"
             if (pais && countryCode === "ES") pais.value = "España";
 
             setAddressStatus(
-              "Dirección seleccionada. La comprobaremos antes de continuar.",
+              "Dirección seleccionada correctamente. La comprobaremos antes de continuar.",
               "valid"
             );
           } catch (error) {
             console.error("Google Places error:", error);
             setAddressStatus(
-              "No se pudieron completar los datos de la dirección.",
+              "No se pudieron completar los datos. Puedes escribir la dirección manualmente.",
               "invalid"
             );
           }
         });
+
+        setAddressStatus(
+          "Empieza a escribir y selecciona una dirección de Google.",
+          null
+        );
       } catch (error) {
         console.error("Google Places no disponible:", error);
+        container.hidden = true;
+        visibleInput.hidden = false;
         setAddressStatus(
-          "El autocompletado no está disponible. Puedes introducir la dirección manualmente.",
+          "Autocompletado no disponible. Puedes escribir la dirección manualmente.",
           "invalid"
         );
       }
@@ -1355,18 +1379,28 @@ Boolean(message)
 
 
                   <div class="field full address-field">
-                    <label for="direccion">Dirección</label>
+                    <label for="direccion-visible">Dirección</label>
 
                     <div
                       id="direccion-autocomplete"
                       class="google-address-wrap"
+                      hidden
                     ></div>
+
+                    <input
+                      id="direccion-visible"
+                      class="address-manual"
+                      type="text"
+                      autocomplete="street-address"
+                      placeholder="Calle y número"
+                      required
+                    >
 
                     <input
                       id="direccion"
                       name="direccion"
-                      autocomplete="street-address"
                       class="address-hidden-input"
+                      type="text"
                       tabindex="-1"
                       required
                     >
@@ -1375,7 +1409,7 @@ Boolean(message)
                       id="address-status"
                       class="address-status"
                       aria-live="polite"
-                    ></div>
+                    >Escribe tu dirección o selecciona una sugerencia de Google.</div>
                   </div>
 
 
