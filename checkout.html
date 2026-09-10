@@ -549,6 +549,15 @@
       );
     }
 
+    function getShippingCostByPostalCode(postalCode) {
+      const cp = String(postalCode || "").trim();
+      return /^(35|38)\d{3}$/.test(cp) ? 0 : 3.99;
+    }
+
+    function shippingLabel(cost) {
+      return cost === 0 ? "Gratis" : euro(cost);
+    }
+
     function setAddressStatus(message, state = "") {
       const element =
         document.getElementById("address-status");
@@ -989,7 +998,7 @@
                 </div>
 
                 <div class="delivery-note">
-                  Envío gratis · entrega estimada en un máximo de 5 días.
+                  Envío 3,99 € para península · Canarias gratis · entrega estimada en un máximo de 5 días.
                   Recibirás la información de seguimiento del pedido.
                 </div>
               </section>
@@ -1056,12 +1065,12 @@
 
               <div class="row">
                 <span>Envío</span>
-                <strong>Gratis</strong>
+                <strong id="shippingAmount">—</strong>
               </div>
 
               <div class="row total">
                 <span>Total</span>
-                <strong>${euro(subtotal)}</strong>
+                <strong id="orderTotal">${euro(subtotal)}</strong>
               </div>
 
               <button
@@ -1084,12 +1093,22 @@
         </section>
       `;
 
-      document
-        .getElementById("checkoutForm")
-        .addEventListener(
-          "submit",
-          handleSubmit
-        );
+      const checkoutForm = document.getElementById("checkoutForm");
+      checkoutForm.addEventListener("submit", handleSubmit);
+
+      const postalInput = document.getElementById("codigoPostal");
+      const shippingAmount = document.getElementById("shippingAmount");
+      const orderTotal = document.getElementById("orderTotal");
+
+      function refreshShippingPreview() {
+        const cost = getShippingCostByPostalCode(postalInput?.value);
+        if (shippingAmount) shippingAmount.textContent = shippingLabel(cost);
+        if (orderTotal) orderTotal.textContent = euro(subtotal + cost);
+      }
+
+      postalInput?.addEventListener("input", refreshShippingPreview);
+      postalInput?.addEventListener("change", refreshShippingPreview);
+      refreshShippingPreview();
 
       initGooglePlaces();
     }
@@ -1143,6 +1162,9 @@
         return;
       }
 
+      const shippingCost = getShippingCostByPostalCode(data.codigoPostal);
+      const orderTotal = totalCart(cart) + shippingCost;
+
       const originalButton =
         button.innerHTML;
 
@@ -1179,7 +1201,9 @@
               nota:
                 String(
                   data.nota || ""
-                ).trim()
+                ).trim(),
+              envio: shippingCost,
+              total: orderTotal
             },
             carrito: cart,
             creadoEn:
