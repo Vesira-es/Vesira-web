@@ -260,6 +260,14 @@
       width:100%;
     }
 
+    .address-wrap > #direccion-autocomplete{
+      width:100%;
+    }
+
+    .address-wrap > #direccion{
+      display:none;
+    }
+
     .address-wrap gmp-place-autocomplete{
       display:block;
       width:100%;
@@ -539,7 +547,7 @@
 
   <script>
     const GOOGLE_MAPS_BROWSER_KEY =
-      "PON_AQUI_TU_CLAVE_VESIRA_CHECKOUT";
+      "AIzaSyDgFV-cuVbMDLOBjrEREn1-75r0qc-vucM";
 
     const ADDRESS_VALIDATION_FUNCTION_URL =
       "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/validar-direccion";
@@ -615,7 +623,7 @@
         if (
           !GOOGLE_MAPS_BROWSER_KEY ||
           GOOGLE_MAPS_BROWSER_KEY ===
-            "PON_AQUI_TU_CLAVE_VESIRA_CHECKOUT"
+            "AIzaSyDgFV-cuVbMDLOBjrEREn1-75r0qc-vucM"
         ) {
           setAddressStatus(
             "Introduce tu dirección manualmente.",
@@ -960,20 +968,12 @@
                     <label for="direccion">Dirección</label>
 
                     <div class="address-wrap">
+                      <div id="direccion-autocomplete"></div>
                       <input
                         id="direccion"
                         name="direccion"
-                        autocomplete="street-address"
-                        required
-                        placeholder="Calle y número"
+                        type="hidden"
                       >
-
-                      <div
-                        id="address-suggestions"
-                        class="address-suggestions"
-                        role="listbox"
-                        aria-label="Sugerencias de dirección"
-                      ></div>
                     </div>
 
                     <div
