@@ -1050,12 +1050,12 @@
 
 
  expressCheckoutElement.on(
-  "availablepaymentmethodschange",
-  ({ paymentMethods }) => {
+  "ready",
+  ({ availablePaymentMethods }) => {
 
     console.log(
       "APPLE/GOOGLE DISPONIBLES:",
-      paymentMethods
+      availablePaymentMethods
     );
 
     const walletBox =
@@ -1064,7 +1064,7 @@
     if(!walletBox) return;
 
     walletBox.style.display =
-      paymentMethods
+      availablePaymentMethods
         ? "grid"
         : "none";
   }
