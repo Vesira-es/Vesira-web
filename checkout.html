@@ -4,15 +4,24 @@
 
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width,initial-scale=1.0"
   >
-  <meta name="theme-color" content="#0a0a0a">
+
+  <meta
+    name="theme-color"
+    content="#0a0a0a"
+  >
 
   <title>Checkout · Vesira</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
   <link
     rel="preconnect"
     href="https://fonts.gstatic.com"
@@ -24,9 +33,11 @@
     rel="stylesheet"
   >
 
+  <!-- Stripe.js -->
   <script src="https://js.stripe.com/v3/"></script>
 
   <style>
+
     :root{
       --f:#0a0a0a;
       --t:#fff;
@@ -243,6 +254,45 @@
       line-height:1.5;
     }
 
+    /* Express Checkout */
+    .wallets{
+      display:grid;
+      gap:10px;
+      margin-bottom:16px;
+    }
+
+    .wallets-title{
+      color:var(--s);
+      font-size:9px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:2px;
+    }
+
+    #express-checkout-element{
+      min-height:50px;
+    }
+
+    .wallet-divider{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#555;
+      font-size:9px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      margin:16px 0;
+    }
+
+    .wallet-divider::before,
+    .wallet-divider::after{
+      content:"";
+      height:1px;
+      background:var(--b);
+      flex:1;
+    }
+
+    /* Tarjeta */
     .card-element{
       width:100%;
       min-height:50px;
@@ -400,6 +450,10 @@
       display:block;
     }
 
+    .wallet-error{
+      margin-top:8px;
+    }
+
     .success{
       display:none;
       position:fixed;
@@ -514,6 +568,7 @@
     }
 
     @media(max-width:850px){
+
       .layout{
         grid-template-columns:1fr;
       }
@@ -524,6 +579,7 @@
     }
 
     @media(max-width:600px){
+
       .nav{
         height:68px;
         padding:0 18px;
@@ -581,22 +637,30 @@
         font-size:37px;
       }
     }
+
   </style>
 </head>
 
 <body>
 
   <nav class="nav">
+
     <div class="nav-left">
+
       <a href="index.html">
+
         <img
           src="img/logo2.png"
           class="logo"
           alt="Vesira"
         >
+
       </a>
 
-      <span class="eyewear">Eyewear</span>
+      <span class="eyewear">
+        Eyewear
+      </span>
+
     </div>
 
     <a
@@ -606,17 +670,31 @@
     >
       shopping_bag
     </a>
+
   </nav>
+
 
   <main id="app"></main>
 
-  <div class="success" id="success">
+
+  <div
+    class="success"
+    id="success"
+  >
+
     <div class="success-card">
+
       <div class="success-icon">
-        <span class="material-symbols-outlined">check</span>
+
+        <span class="material-symbols-outlined">
+          check
+        </span>
+
       </div>
 
-      <h2>Pago realizado.</h2>
+      <h2>
+        Pago realizado.
+      </h2>
 
       <p>
         Tu pago se ha procesado correctamente.
@@ -626,49 +704,85 @@
       <a href="index.html">
         Volver a Vesira
       </a>
+
     </div>
+
   </div>
 
-  <div class="toast" id="toast"></div>
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
 
   <script>
-    const app = document.getElementById("app");
-    const toast = document.getElementById("toast");
-    const success = document.getElementById("success");
+
+    const app =
+      document.getElementById("app");
+
+    const toast =
+      document.getElementById("toast");
+
+    const success =
+      document.getElementById("success");
+
 
     const CHECKOUT_FUNCTION_URL =
       "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/crear-checkout";
 
+
     /*
       IMPORTANTE:
-      Sustituye TU_PUBLISHABLE_KEY por tu clave pública de Stripe:
-      pk_test_... o pk_live_...
+      Pon aquí TU Publishable Key de Stripe.
 
-      NUNCA pongas aquí una sk_live_... o sk_test_...
+      Debe empezar por:
+      pk_live_
+      o
+      pk_test_
+
+      NUNCA pongas una sk_live_ o sk_test_ aquí.
     */
     const STRIPE_PUBLISHABLE_KEY =
-      "pk_live_51UDtwY1OfdcxS98rJb2cdPhIwfEafeCT97a13f4qlJugVdNvVFtmu1GIdclfNJgZuHa0EGkXRuP00jX2HqgiJ5pX00f7FxB9OQ";
+      "TU_PUBLISHABLE_KEY";
+
 
     let stripe = null;
+    let elements = null;
     let cardElement = null;
+    let expressCheckoutElement = null;
+
 
     function getCart(){
+
       try{
+
         return JSON.parse(
-          localStorage.getItem("vesiraCarrito") || "[]"
+          localStorage.getItem(
+            "vesiraCarrito"
+          ) || "[]"
         );
+
       }catch{
+
         return [];
+
       }
+
     }
 
+
     function euro(value){
+
       return Number(value)
         .toFixed(2)
         .replace(".", ",") + " €";
+
     }
 
+
     function totalCart(cart){
+
       return cart.reduce(
         (sum, item) =>
           sum +
@@ -676,144 +790,829 @@
           Number(item.cantidad || 0),
         0
       );
+
     }
 
+
     function showError(message){
+
       const errorBox =
         document.getElementById("error");
 
       if(!errorBox) return;
 
-      errorBox.textContent = message || "";
+      errorBox.textContent =
+        message || "";
+
       errorBox.classList.toggle(
         "show",
         Boolean(message)
       );
+
     }
 
-    function mountStripeCard(){
+
+    function showCardError(message){
+
+      const box =
+        document.getElementById(
+          "card-errors"
+        );
+
+      if(!box) return;
+
+      box.textContent =
+        message || "";
+
+      box.classList.toggle(
+        "show",
+        Boolean(message)
+      );
+
+    }
+
+
+    function setButtonLoading(loading){
+
+      const button =
+        document.getElementById(
+          "buyButton"
+        );
+
+      if(!button) return;
+
+      button.disabled = loading;
+
+      if(loading){
+
+        button.innerHTML = `
+          Procesando pago...
+          <span
+            class="material-symbols-outlined"
+            style="font-size:15px;vertical-align:middle"
+          >
+            progress_activity
+          </span>
+        `;
+
+      }else{
+
+        const cart = getCart();
+
+        button.innerHTML = `
+          Pagar ${euro(totalCart(cart))}
+          <span
+            class="material-symbols-outlined"
+            style="font-size:15px;vertical-align:middle"
+          >
+            arrow_forward
+          </span>
+        `;
+
+      }
+
+    }
+
+
+    function stripeAppearance(){
+
+      return {
+
+        theme: "night",
+
+        variables: {
+
+          colorPrimary: "#ffffff",
+
+          colorBackground: "#101010",
+
+          colorText: "#ffffff",
+
+          colorTextSecondary: "#8c8c8c",
+
+          colorDanger: "#ff6b6b",
+
+          fontFamily:
+            "Outfit, Arial, sans-serif",
+
+          borderRadius: "13px",
+
+          spacingUnit: "4px"
+
+        },
+
+        rules: {
+
+          ".Input": {
+            border:
+              "1px solid rgba(255,255,255,.10)",
+            boxShadow: "none"
+          },
+
+          ".Input:focus": {
+            border:
+              "1px solid rgba(255,255,255,.28)",
+            boxShadow: "none"
+          },
+
+          ".Label": {
+            color: "#8c8c8c"
+          }
+
+        }
+
+      };
+
+    }
+
+
+    function initStripe(cart){
 
       if(!window.Stripe){
+
         showError(
           "No se ha podido cargar Stripe. Recarga la página."
         );
-        return;
+
+        return false;
+
       }
+
 
       if(
         !STRIPE_PUBLISHABLE_KEY ||
-        STRIPE_PUBLISHABLE_KEY === "TU_PUBLISHABLE_KEY"
+        !STRIPE_PUBLISHABLE_KEY.startsWith("pk_")
       ){
+
         showError(
-          "Falta configurar la Publishable Key de Stripe."
+          "La Publishable Key de Stripe no está configurada."
         );
-        return;
+
+        return false;
+
       }
 
-      stripe = window.Stripe(
-        STRIPE_PUBLISHABLE_KEY
+
+      stripe =
+        window.Stripe(
+          STRIPE_PUBLISHABLE_KEY
+        );
+
+
+      /*
+        El amount aquí sirve para que Apple Pay
+        / Google Pay conozcan el importe que
+        mostrarán en su interfaz.
+
+        El importe definitivo SIEMPRE se calcula
+        de nuevo en crear-checkout en el servidor.
+      */
+      const amount =
+        Math.round(
+          totalCart(cart) * 100
+        );
+
+
+      elements =
+        stripe.elements({
+
+          mode: "payment",
+
+          amount: amount,
+
+          currency: "eur",
+
+          locale: "es",
+
+          appearance:
+            stripeAppearance()
+
+        });
+
+
+      /*
+        EXPRESS CHECKOUT
+
+        Solo:
+        - Apple Pay
+        - Google Pay
+
+        Link y PayPal están desactivados.
+      */
+      expressCheckoutElement =
+        elements.create(
+          "expressCheckout",
+          {
+
+            paymentMethods: {
+
+              applePay: "always",
+
+              googlePay: "always",
+
+              link: "never",
+
+              paypal: "never",
+
+              amazonPay: "never",
+
+              klarna: "never"
+
+            },
+
+            buttonType: {
+
+              applePay: "check-out",
+
+              googlePay: "checkout"
+
+            },
+
+            buttonHeight: 52,
+
+            layout: {
+
+              maxColumns: 2,
+
+              maxRows: 1,
+
+              overflow: "never"
+
+            }
+
+          }
+        );
+
+
+      expressCheckoutElement.mount(
+        "#express-checkout-element"
       );
 
-      const elements = stripe.elements({
-        locale: "es",
-        appearance: {
-          theme: "night",
-          variables: {
-            colorPrimary: "#ffffff",
-            colorBackground: "#101010",
-            colorText: "#ffffff",
-            colorTextSecondary: "#8c8c8c",
-            colorDanger: "#ff6b6b",
-            fontFamily:
-              "Outfit, Arial, sans-serif",
-            borderRadius: "13px",
-            spacingUnit: "4px"
-          },
-          rules: {
-            ".Input": {
-              border:
-                "1px solid rgba(255,255,255,.10)",
-              boxShadow: "none"
-            },
-            ".Input:focus": {
-              border:
-                "1px solid rgba(255,255,255,.28)",
-              boxShadow: "none"
-            },
-            ".Label": {
-              color: "#8c8c8c"
-            }
-          }
+
+      expressCheckoutElement.on(
+        "availablepaymentmethodschange",
+        ({paymentMethods}) => {
+
+          const walletBox =
+            document.getElementById(
+              "wallets"
+            );
+
+          if(!walletBox) return;
+
+          walletBox.style.display =
+            paymentMethods
+              ? "grid"
+              : "none";
+
         }
-      });
+      );
 
-      cardElement = elements.create("card", {
-  hidePostalCode: true,
-  disableLink: true,
-  style: {
-    base: {
-      color: "#ffffff",
-      fontFamily: "Outfit, Arial, sans-serif",
-      fontSize: "14px",
-      fontWeight: "400",
-      iconColor: "#ffffff",
-      "::placeholder": {
-        color: "#666666"
-      }
-    },
-    invalid: {
-      color: "#ff6b6b",
-      iconColor: "#ff6b6b"
-    }
-  }
-});
 
-      cardElement.mount("#card-element");
+      /*
+        Cuando el usuario confirma
+        Apple Pay / Google Pay.
+      */
+      expressCheckoutElement.on(
+        "confirm",
+        handleWalletPayment
+      );
 
-      cardElement.on("change", (event) => {
-        const cardErrors =
-          document.getElementById("card-errors");
 
-        if(!cardErrors) return;
+      /*
+        CARD ELEMENT
+      */
+      cardElement =
+        elements.create(
+          "card",
+          {
 
-        cardErrors.textContent =
-          event.error?.message || "";
+            hidePostalCode: true,
 
-        cardErrors.classList.toggle(
-          "show",
-          Boolean(event.error)
+            disableLink: true,
+
+            style: {
+
+              base: {
+
+                color: "#ffffff",
+
+                fontFamily:
+                  "Outfit, Arial, sans-serif",
+
+                fontSize: "14px",
+
+                fontWeight: "400",
+
+                iconColor: "#ffffff",
+
+                "::placeholder": {
+                  color: "#666666"
+                }
+
+              },
+
+              invalid: {
+
+                color: "#ff6b6b",
+
+                iconColor: "#ff6b6b"
+
+              }
+
+            }
+
+          }
         );
-      });
+
+
+      cardElement.mount(
+        "#card-element"
+      );
+
+
+      cardElement.on(
+        "change",
+        (event) => {
+
+          showCardError(
+            event.error?.message || ""
+          );
+
+        }
+      );
+
+
+      return true;
+
     }
+
+
+    async function createPaymentIntent(){
+
+      const cart =
+        getCart();
+
+      if(!cart.length){
+
+        throw new Error(
+          "El carrito está vacío."
+        );
+
+      }
+
+
+      const form =
+        document.getElementById(
+          "checkoutForm"
+        );
+
+
+      const data =
+        Object.fromEntries(
+          new FormData(form).entries()
+        );
+
+
+      const response =
+        await fetch(
+          CHECKOUT_FUNCTION_URL,
+          {
+
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+
+              items:
+
+                cart.map(item => ({
+                  id: item.id,
+                  cantidad:
+                    Number(
+                      item.cantidad || 1
+                    )
+                })),
+
+              cliente: {
+
+                email:
+                  String(data.email || ""),
+
+                nombre:
+                  String(data.nombre || ""),
+
+                apellidos:
+                  String(
+                    data.apellidos || ""
+                  ),
+
+                direccion:
+                  String(
+                    data.direccion || ""
+                  ),
+
+                ciudad:
+                  String(
+                    data.ciudad || ""
+                  ),
+
+                codigoPostal:
+                  String(
+                    data.codigoPostal || ""
+                  ),
+
+                pais:
+                  String(
+                    data.pais || "España"
+                  ),
+
+                nota:
+                  String(
+                    data.nota || ""
+                  )
+
+              }
+
+            })
+
+          }
+        );
+
+
+      const result =
+        await response.json();
+
+
+      if(!response.ok){
+
+        throw new Error(
+          result?.error ||
+          "No se pudo iniciar el pago."
+        );
+
+      }
+
+
+      if(!result?.clientSecret){
+
+        throw new Error(
+          "Stripe no devolvió el client secret."
+        );
+
+      }
+
+
+      return result;
+
+    }
+
+
+    async function handleWalletPayment(event){
+
+      showError("");
+      showCardError("");
+
+      const form =
+        document.getElementById(
+          "checkoutForm"
+        );
+
+      const data =
+        Object.fromEntries(
+          new FormData(form).entries()
+        );
+
+
+      if(
+        !data.email ||
+        !data.nombre ||
+        !data.apellidos ||
+        !data.direccion ||
+        !data.ciudad ||
+        !data.codigoPostal
+      ){
+
+        showError(
+          "Completa tus datos de contacto y entrega antes de pagar."
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        const {
+          error: submitError
+        } = await elements.submit();
+
+
+        if(submitError){
+
+          showError(
+            submitError.message
+          );
+
+          return;
+
+        }
+
+
+        const result =
+          await createPaymentIntent();
+
+
+        const paymentResult =
+          await stripe.confirmPayment({
+
+            elements: elements,
+
+            clientSecret:
+              result.clientSecret,
+
+            confirmParams: {
+
+              return_url:
+                window.location.origin +
+                "/checkout-exito.html"
+
+            }
+
+          });
+
+
+        if(paymentResult.error){
+
+          showError(
+            paymentResult.error.message ||
+            "No se pudo completar el pago."
+          );
+
+        }
+
+      }catch(error){
+
+        console.error(error);
+
+        showError(
+          error?.message ||
+          "Ha ocurrido un error al procesar el pago."
+        );
+
+      }
+
+    }
+
+
+    async function handleCheckout(event){
+
+      event.preventDefault();
+
+
+      showError("");
+      showCardError("");
+
+
+      const form =
+        event.currentTarget;
+
+      const data =
+        Object.fromEntries(
+          new FormData(form).entries()
+        );
+
+
+      if(
+        !data.email ||
+        !data.nombre ||
+        !data.apellidos ||
+        !data.direccion ||
+        !data.ciudad ||
+        !data.codigoPostal
+      ){
+
+        showError(
+          "Completa todos los campos obligatorios."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        !stripe ||
+        !cardElement
+      ){
+
+        showError(
+          "El formulario de tarjeta todavía no está listo."
+        );
+
+        return;
+
+      }
+
+
+      const cart =
+        getCart();
+
+
+      if(!cart.length){
+
+        showError(
+          "El carrito está vacío."
+        );
+
+        return;
+
+      }
+
+
+      setButtonLoading(true);
+
+
+      try{
+
+        /*
+          Creamos el PaymentIntent en servidor.
+          El servidor recalcula el precio.
+        */
+        const result =
+          await createPaymentIntent();
+
+
+        /*
+          Confirmación de tarjeta.
+        */
+        const paymentResult =
+          await stripe.confirmCardPayment(
+
+            result.clientSecret,
+
+            {
+
+              payment_method: {
+
+                card: cardElement,
+
+                billing_details: {
+
+                  name:
+                    `${data.nombre} ${data.apellidos}`
+                      .trim(),
+
+                  email:
+                    String(data.email),
+
+                  address: {
+
+                    line1:
+                      String(
+                        data.direccion
+                      ),
+
+                    city:
+                      String(
+                        data.ciudad
+                      ),
+
+                    postal_code:
+                      String(
+                        data.codigoPostal
+                      ),
+
+                    country:
+                      "ES"
+
+                  }
+
+                }
+
+              }
+
+            }
+
+          );
+
+
+        if(paymentResult.error){
+
+          throw new Error(
+            paymentResult.error.message ||
+            "No se pudo procesar el pago."
+          );
+
+        }
+
+
+        const paymentIntent =
+          paymentResult.paymentIntent;
+
+
+        if(
+          !paymentIntent ||
+          paymentIntent.status !== "succeeded"
+        ){
+
+          throw new Error(
+            "El pago no se ha completado."
+          );
+
+        }
+
+
+        /*
+          El webhook seguirá siendo la fuente
+          definitiva para crear el pedido.
+        */
+        localStorage.removeItem(
+          "vesiraCarrito"
+        );
+
+
+        window.location.href =
+          "checkout-exito.html?payment_intent=" +
+          encodeURIComponent(
+            paymentIntent.id
+          );
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showError(
+          error?.message ||
+          "Ha ocurrido un error al procesar el pago."
+        );
+
+        setButtonLoading(false);
+
+      }
+
+    }
+
 
     function render(){
 
-      const cart = getCart();
+      const cart =
+        getCart();
+
 
       if(!cart.length){
 
         app.innerHTML = `
+
           <section class="empty">
-            <h2>Tu carrito está vacío.</h2>
-            <p>Añade un par antes de continuar.</p>
+
+            <h2>
+              Tu carrito está vacío.
+            </h2>
+
+            <p>
+              Añade un par antes de continuar.
+            </p>
+
             <a href="index.html">
               Ver gafas
             </a>
+
           </section>
+
         `;
 
         return;
+
       }
 
-      const subtotal = totalCart(cart);
+
+      const subtotal =
+        totalCart(cart);
+
 
       app.innerHTML = `
+
         <section class="wrap">
 
           <header class="head">
-            <div class="eyebrow">VESIRA</div>
-            <h1>Checkout.</h1>
+
+            <div class="eyebrow">
+              VESIRA
+            </div>
+
+            <h1>
+              Checkout.
+            </h1>
+
           </header>
+
 
           <form
             id="checkoutForm"
@@ -822,14 +1621,23 @@
 
             <div class="form">
 
+
+              <!-- CONTACTO -->
+
               <section class="section">
 
                 <div class="section-head">
-                  <h2>Contacto.</h2>
+
+                  <h2>
+                    Contacto.
+                  </h2>
+
                   <span class="section-number">
                     01
                   </span>
+
                 </div>
+
 
                 <div class="fields">
 
@@ -855,14 +1663,22 @@
               </section>
 
 
+              <!-- ENTREGA -->
+
               <section class="section">
 
                 <div class="section-head">
-                  <h2>Entrega.</h2>
+
+                  <h2>
+                    Entrega.
+                  </h2>
+
                   <span class="section-number">
                     02
                   </span>
+
                 </div>
+
 
                 <div class="fields">
 
@@ -959,12 +1775,14 @@
                       autocomplete="country-name"
                       required
                     >
+
                       <option
                         value="España"
                         selected
                       >
                         España
                       </option>
+
                     </select>
 
                   </div>
@@ -973,59 +1791,100 @@
 
 
                 <div class="delivery-note">
+
                   Envío gratis · entrega estimada
                   en un máximo de 5 días.
                   Recibirás la información de
                   seguimiento del pedido.
+
                 </div>
 
               </section>
 
 
+              <!-- PAGO -->
+
               <section class="section">
 
                 <div class="section-head">
-                  <h2>Pago.</h2>
+
+                  <h2>
+                    Pago.
+                  </h2>
+
                   <span class="section-number">
                     03
                   </span>
+
                 </div>
 
-                <div class="payment-note">
-                  Pago seguro con tarjeta.
-                  No introduzcas tus datos de
-                  tarjeta fuera de este formulario.
+
+                <!-- APPLE PAY / GOOGLE PAY -->
+
+                <div
+                  class="wallets"
+                  id="wallets"
+                >
+
+                  <div class="wallets-title">
+                    Pago rápido
+                  </div>
+
+                  <div
+                    id="express-checkout-element"
+                  ></div>
+
                 </div>
+
+
+                <div class="wallet-divider">
+                  o tarjeta
+                </div>
+
+
+                <!-- TARJETA -->
 
                 <div
                   id="card-element"
                   class="card-element"
                 ></div>
 
+
                 <div
                   id="card-errors"
-                  class="error"
-                  style="margin-top:10px"
+                  class="error wallet-error"
                 ></div>
 
+
                 <div class="secure">
+
                   <span class="material-symbols-outlined">
                     lock
                   </span>
+
                   Pago seguro con Stripe.
+
                 </div>
 
               </section>
 
 
+              <!-- NOTA -->
+
               <section class="section">
 
                 <div class="section-head">
-                  <h2>Nota.</h2>
+
+                  <h2>
+                    Nota.
+                  </h2>
+
                   <span class="section-number">
                     04
                   </span>
+
                 </div>
+
 
                 <div class="fields">
 
@@ -1053,16 +1912,23 @@
                 id="error"
               ></div>
 
+
             </div>
 
 
+            <!-- RESUMEN -->
+
             <aside class="summary">
 
-              <h2>Tu pedido.</h2>
+              <h2>
+                Tu pedido.
+              </h2>
+
 
               <div class="summary-items">
 
                 ${cart.map(item => `
+
                   <div class="summary-item">
 
                     <div class="summary-img">
@@ -1083,7 +1949,9 @@
 
                       <div class="summary-qty">
                         Cantidad ·
-                        ${Number(item.cantidad || 1)}
+                        ${Number(
+                          item.cantidad || 1
+                        )}
                       </div>
 
                     </div>
@@ -1093,36 +1961,56 @@
 
                       ${euro(
                         Number(item.precio) *
-                        Number(item.cantidad || 1)
+                        Number(
+                          item.cantidad || 1
+                        )
                       )}
 
                     </div>
 
                   </div>
+
                 `).join("")}
 
               </div>
 
 
               <div class="row">
-                <span>Subtotal</span>
+
+                <span>
+                  Subtotal
+                </span>
+
                 <strong>
                   ${euro(subtotal)}
                 </strong>
+
               </div>
 
 
               <div class="row">
-                <span>Envío</span>
-                <strong>Gratis</strong>
+
+                <span>
+                  Envío
+                </span>
+
+                <strong>
+                  Gratis
+                </strong>
+
               </div>
 
 
               <div class="row total">
-                <span>Total</span>
+
+                <span>
+                  Total
+                </span>
+
                 <strong>
                   ${euro(subtotal)}
                 </strong>
+
               </div>
 
 
@@ -1131,6 +2019,7 @@
                 type="submit"
                 id="buyButton"
               >
+
                 Pagar ${euro(subtotal)}
 
                 <span
@@ -1139,6 +2028,7 @@
                 >
                   arrow_forward
                 </span>
+
               </button>
 
 
@@ -1151,245 +2041,32 @@
 
             </aside>
 
+
           </form>
 
         </section>
+
       `;
 
-      mountStripeCard();
+
+      const stripeReady =
+        initStripe(cart);
+
+
+      if(!stripeReady){
+        return;
+      }
+
 
       document
-        .getElementById("checkoutForm")
+        .getElementById(
+          "checkoutForm"
+        )
         .addEventListener(
           "submit",
           handleCheckout
         );
-    }
 
-
-    async function handleCheckout(event){
-
-      event.preventDefault();
-
-      const form = event.currentTarget;
-
-      const button =
-        document.getElementById("buyButton");
-
-      const cardErrors =
-        document.getElementById("card-errors");
-
-      showError("");
-
-      if(cardErrors){
-        cardErrors.textContent = "";
-        cardErrors.classList.remove("show");
-      }
-
-      const data = Object.fromEntries(
-        new FormData(form).entries()
-      );
-
-      if(
-        !data.email ||
-        !data.nombre ||
-        !data.apellidos ||
-        !data.direccion ||
-        !data.ciudad ||
-        !data.codigoPostal
-      ){
-        showError(
-          "Completa todos los campos obligatorios."
-        );
-        return;
-      }
-
-      if(!stripe || !cardElement){
-        showError(
-          "El formulario de tarjeta todavía no está listo. Recarga la página."
-        );
-        return;
-      }
-
-      const cart = getCart();
-
-      if(!cart.length){
-        showError(
-          "El carrito está vacío."
-        );
-        return;
-      }
-
-      button.disabled = true;
-
-      button.innerHTML = `
-        Procesando pago...
-        <span
-          class="material-symbols-outlined"
-          style="font-size:15px;vertical-align:middle"
-        >
-          progress_activity
-        </span>
-      `;
-
-      try{
-
-        const response = await fetch(
-          CHECKOUT_FUNCTION_URL,
-          {
-            method:"POST",
-
-            headers:{
-              "Content-Type":
-                "application/json"
-            },
-
-            body:JSON.stringify({
-
-              items:cart.map(item => ({
-                id:item.id,
-                cantidad:Number(
-                  item.cantidad || 1
-                )
-              })),
-
-              cliente:{
-                email:String(data.email),
-                nombre:String(data.nombre),
-                apellidos:String(data.apellidos),
-                direccion:String(data.direccion),
-                ciudad:String(data.ciudad),
-                codigoPostal:String(
-                  data.codigoPostal
-                ),
-                pais:String(
-                  data.pais || "España"
-                ),
-                nota:String(
-                  data.nota || ""
-                )
-              }
-
-            })
-          }
-        );
-
-
-        const result =
-          await response.json();
-
-
-        if(!response.ok){
-
-          throw new Error(
-            result?.error ||
-            "No se pudo iniciar el pago."
-          );
-
-        }
-
-
-        if(!result?.clientSecret){
-
-          throw new Error(
-            "Stripe no devolvió el client secret."
-          );
-
-        }
-
-
-        const paymentResult =
-          await stripe.confirmCardPayment(
-            result.clientSecret,
-            {
-              payment_method:{
-                card:cardElement,
-
-                billing_details:{
-                  name:
-                    `${data.nombre} ${data.apellidos}`
-                      .trim(),
-
-                  email:String(data.email),
-
-                  address:{
-                    line1:String(
-                      data.direccion
-                    ),
-                    city:String(
-                      data.ciudad
-                    ),
-                    postal_code:String(
-                      data.codigoPostal
-                    ),
-                    country:"ES"
-                  }
-                }
-              }
-            }
-          );
-
-
-        if(paymentResult.error){
-
-          throw new Error(
-            paymentResult.error.message ||
-            "No se pudo procesar el pago."
-          );
-
-        }
-
-
-        const paymentIntent =
-          paymentResult.paymentIntent;
-
-
-        if(
-          !paymentIntent ||
-          paymentIntent.status !== "succeeded"
-        ){
-
-          throw new Error(
-            "El pago no se ha completado todavía."
-          );
-
-        }
-
-
-        localStorage.removeItem(
-          "vesiraCarrito"
-        );
-
-
-        window.location.href =
-          "checkout-exito.html?payment_intent=" +
-          encodeURIComponent(
-            paymentIntent.id
-          );
-
-
-      }catch(err){
-
-        console.error(err);
-
-        showError(
-          err?.message ||
-          "Ha ocurrido un error al procesar el pago."
-        );
-
-        button.disabled = false;
-
-        button.innerHTML = `
-          Pagar ${euro(totalCart(cart))}
-
-          <span
-            class="material-symbols-outlined"
-            style="font-size:15px;vertical-align:middle"
-          >
-            arrow_forward
-          </span>
-        `;
-      }
     }
 
 
