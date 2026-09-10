@@ -1,684 +1,1265 @@
+```html
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Vesira</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600&family=Material+Symbols+Outlined" rel="stylesheet">
+
   <style>
-:root{
+
+*:root{
+
   --fondo:#0c0c0c;
+
   --texto:#fff;
+
   --borde:#262626;
+
   --caja:#151515;
+
   --suave:#8d8d8d;
+
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
+
 html{scroll-behavior:smooth}
+
 body{
+
   background:var(--fondo);
+
   color:var(--texto);
+
   font-family:"Outfit",Arial,sans-serif;
+
   overflow-x:hidden;
+
 }
+
 button{font:inherit}
 
 /* INTRO / BANNER DE MARCA */
+
 .intro{
+
   position:fixed;
+
   top:0;
+
   left:0;
+
   width:100%;
+
   height:74px;
+
   z-index:10000;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   padding:0 24px;
+
   background:rgba(10,10,10,.92);
+
   border-bottom:1px solid rgba(255,255,255,.08);
+
   backdrop-filter:blur(18px);
+
   -webkit-backdrop-filter:blur(18px);
+
   opacity:1;
+
   visibility:visible;
+
   pointer-events:auto;
+
   transition:opacity .55s cubic-bezier(.2,.8,.2,1),visibility .55s ease;
+
 }
+
 .intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+
 .eslogan{
+
   width:min(450px,82vw);
+
   max-height:100px;
+
   height:auto;
+
   object-fit:contain;
+
   display:block;
+
   transform:translateY(10px);
+
   opacity:0;
+
   animation:introSloganIn .8s cubic-bezier(.16,.78,.22,1) .08s forwards;
+
 }
+
 @keyframes introSloganIn{
+
   from{opacity:0;transform:translateY(10px)}
+
   to{opacity:1;transform:translateY(0)}
+
 }
 
 /* La navbar se inyecta desde vesira-navbar.js */
+
 .vesira-global-nav{opacity:0;transform:translateY(-10px);transition:opacity .55s ease,transform .55s ease}
+
 .vesira-global-nav.vesira-intro-ready{opacity:1;transform:translateY(0)}
 
 @keyframes cartCountBump{
+
   0%{transform:scale(1)}
+
   35%{transform:scale(1.32)}
+
   65%{transform:scale(.94)}
+
   100%{transform:scale(1)}
+
 }
 
 .producto-info{padding:15px 3px 4px}
+
 .producto-row{
+
   display:grid;
-  grid-template-columns:minmax(0,1fr) auto auto;
+
+  grid-template-columns:minmax(0,1fr) auto;
+
   align-items:center;
+
   gap:12px;
+
   width:100%;
+
 }
+
 .producto-texto{min-width:0}
+
 .producto-nombre{
+
   display:block;
+
   min-width:0;
+
   font-family:"Bricolage Grotesque",sans-serif;
+
   font-size:19px;
+
   font-weight:500;
+
   line-height:1;
+
   letter-spacing:-.028em;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
+
   text-shadow:0 1px 18px rgba(255,255,255,.05);
+
 }
+
 .producto-card:hover .producto-nombre{letter-spacing:-.018em}
+
 .producto-precio{
+
   justify-self:end;
+
   margin-left:8px;
-  padding:8px 11px;
-  border:1px solid rgba(255,255,255,.11);
-  border-radius:999px;
-  background:rgba(255,255,255,.045);
-  font-size:12px;
-  font-weight:600;
-  line-height:1;
-  white-space:nowrap;
-  letter-spacing:.01em;
-}
-.producto-anadir{
-  flex:0 0 auto;
-  width:40px;
-  height:40px;
+
   padding:0;
-  border:1px solid rgba(255,255,255,.16);
-  border-radius:50%;
-  background:#fff;
-  color:#0c0c0c;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 6px 18px rgba(0,0,0,.20);
-  transition:transform .24s cubic-bezier(.16,.78,.22,1),background .22s ease,box-shadow .22s ease;
-}
-.producto-anadir:hover{
-  transform:translateY(-2px) scale(1.07);
-  background:#f2f2ef;
-  box-shadow:0 10px 24px rgba(0,0,0,.28);
-}
-.producto-anadir:active{transform:scale(.93)}
-.producto-anadir .material-symbols-outlined{
-  font-size:20px;
+
+  border:0;
+
+  border-radius:0;
+
+  background:transparent;
+
+  font-size:12px;
+
+  font-weight:600;
+
   line-height:1;
-  font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
+
+  white-space:nowrap;
+
+  letter-spacing:.01em;
+
 }
+
+.producto-anadir{
+
+  position:absolute;
+
+  top:20px;
+
+  right:20px;
+
+  z-index:3;
+
+  width:40px;
+
+  height:40px;
+
+  padding:0;
+
+  border:1px solid rgba(255,255,255,.16);
+
+  border-radius:50%;
+
+  background:#fff;
+
+  color:#0c0c0c;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  cursor:pointer;
+
+  box-shadow:0 6px 18px rgba(0,0,0,.20);
+
+  transition:transform .24s cubic-bezier(.16,.78,.22,1),background .22s ease,box-shadow .22s ease;
+
+}
+
+.producto-anadir:hover{
+
+  transform:translateY(-2px) scale(1.07);
+
+  background:#f2f2ef;
+
+  box-shadow:0 10px 24px rgba(0,0,0,.28);
+
+}
+
+.producto-anadir:active{transform:scale(.93)}
+
+.producto-anadir .material-symbols-outlined{
+
+  font-size:20px;
+
+  line-height:1;
+
+  font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
+
+}
+
 .producto-descripcion{margin-top:6px;max-width:300px;color:var(--suave);font-size:10px;line-height:1.5}
+
 @media(max-width:700px){
+
   .producto-row{gap:7px}
+
   .producto-nombre{font-size:15px}
-  .producto-precio{font-size:10px;padding:7px 8px;margin-left:2px}
-  .producto-anadir{width:34px;height:34px}
+
+  .producto-precio{font-size:10px;padding:0;margin-left:2px}
+
+  .producto-anadir{width:34px;height:34px;top:14px;right:14px}
+
   .producto-anadir .material-symbols-outlined{font-size:18px}
+
   .producto-descripcion{font-size:8.5px;margin-top:4px}
+
 }
 
 /* HERO */
+
 .imagen-principal{
+
   position:relative;
+
   width:100%;
+
   margin-top:0;
+
   height:min(680px,56vw);
+
   min-height:440px;
+
   overflow:hidden;
+
   background:var(--fondo);
+
 }
+
 .imagen-principal img{
+
   width:100%;
+
   height:100%;
+
   display:block;
+
   object-fit:cover;
+
   object-position:center top;
+
 }
+
 .imagen-principal::before,
+
 .imagen-principal::after{
+
   content:"";
+
   position:absolute;
+
   left:0;
+
   width:100%;
+
   z-index:2;
+
   pointer-events:none;
+
 }
+
 .imagen-principal::before{
+
   top:0;
+
   height:120px;
+
   background:linear-gradient(to bottom,var(--fondo),rgba(12,12,12,.76),transparent);
+
 }
+
 .imagen-principal::after{
+
   bottom:0;
+
   height:150px;
+
   background:linear-gradient(to top,var(--fondo),rgba(12,12,12,.78),transparent);
+
 }
 
 /* PRODUCTOS */
+
 .productos{
+
   padding:54px 5vw 110px;
+
 }
+
 .productos-cabecera{
+
   margin-bottom:24px;
+
 }
+
 .productos-cabecera h2 {
-      font-family:
+
+  font-family:
+
                 "Impact",
+
                 "Arial Black",
+
                 "Bricolage Grotesque",
+
                 sans-serif;
-      font-size:
+
+  font-size:
+
                 clamp(46px, 5.4vw, 76px);
-      font-weight:
+
+  font-weight:
+
                 900;
-      line-height:
+
+  line-height:
+
                 .82;
-      letter-spacing:
+
+  letter-spacing:
+
                 -.055em;
 
-      transform:
+  transform:
+
                 skewX(-8deg);
-      transform-origin:
+
+  transform-origin:
+
                 left center;
-    }
+
+}
+
 .productos-eyebrow{
+
   margin-bottom:14px;
+
   color:var(--suave);
+
   font-size:10px;
+
   font-weight:500;
+
   letter-spacing:.34em;
+
   line-height:1;
+
 }
+
 .productos-cabecera h2{
+
   white-space:nowrap;
+
   letter-spacing:-.045em;
+
   word-spacing:.025em;
-  margin-top: 10px;
+
+  margin-top:10px;
+
 }
+
 .grid-productos{
+
   display:grid;
+
   grid-template-columns:repeat(3,minmax(0,1fr));
+
   gap:20px;
+
 }
+
 .producto-card{
+
+  position:relative;
+
   display:block;
+
   color:var(--texto);
+
   text-decoration:none;
+
   background:var(--caja);
+
   border:1px solid rgba(255,255,255,.07);
+
   border-radius:22px;
+
   padding:12px;
+
   transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+
 }
+
 .producto-card:hover{
+
   transform:translateY(-4px);
+
   border-color:rgba(255,255,255,.15);
+
   box-shadow:0 18px 45px rgba(0,0,0,.25);
+
 }
+
 .producto-imagen{
+
+  position:relative;
+
   width:100%;
+
   aspect-ratio:1/.86;
+
   overflow:hidden;
+
   border-radius:16px;
+
   background:#f2f2ef;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
 }
+
 .producto-imagen img{
+
   width:86%;
+
   height:86%;
+
   object-fit:contain;
+
   display:block;
+
   transition:transform .5s cubic-bezier(.2,.8,.2,1);
+
 }
+
 .producto-card:hover .producto-imagen img{transform:scale(1.05)}
+
 .productos-mensaje{
+
   grid-column:1/-1;
+
   padding:70px 20px;
+
   text-align:center;
+
   color:#999;
+
 }
 
 /* MARQUEE */
+
 .marquee-vesira{
+
   width:100%;
+
   overflow:hidden;
+
   background:transparent;
+
   padding:34px 0;
+
   border-top:1px solid var(--borde);
+
 }
+
 .marquee-vesira-track{
+
   display:flex;
+
   width:max-content;
+
   animation:vesiraLoop 18s linear infinite;
+
 }
+
 .marquee-vesira-group{
+
   display:flex;
+
   align-items:center;
+
   gap:70px;
+
   padding-right:70px;
+
   flex-shrink:0;
+
 }
+
 .marquee-vesira-group img{
+
   width:155px;
+
   height:60px;
+
   object-fit:contain;
+
   display:block;
+
   flex-shrink:0;
+
 }
+
 @keyframes vesiraLoop{
+
   from{transform:translateX(0)}
+
   to{transform:translateX(-50%)}
+
 }
 
 /* TOAST */
+
 .toast{
+
   position:fixed;
+
   left:50%;
+
   bottom:24px;
+
   z-index:3000;
+
   transform:translate(-50%,20px);
+
   opacity:0;
+
   padding:12px 17px;
+
   border:1px solid var(--borde);
+
   border-radius:999px;
+
   background:rgba(20,20,20,.95);
+
   backdrop-filter:blur(12px);
+
   font-size:11px;
+
   pointer-events:none;
+
   transition:opacity .25s ease,transform .25s ease;
+
 }
+
 .toast.visible{
+
   opacity:1;
+
   transform:translate(-50%,0);
+
 }
 
 /* RESPONSIVE */
+
 @media(max-width:1000px){
+
   .grid-productos{grid-template-columns:repeat(2,minmax(0,1fr))}
+
 }
+
 @media(max-width:700px){
+
   .intro{height:70px}
+
   .eslogan{width:min(450px,85vw);max-height:450px}
+
   .imagen-principal{
+
     margin-top:70px;
+
     height:430px;
+
     min-height:430px;
+
   }
+
   .imagen-principal img{
+
     height:100%;
+
     object-fit:cover;
+
     object-position:center top;
+
   }
+
   .imagen-principal::before{height:90px}
+
   .imagen-principal::after{height:120px}
+
   .productos{
+
     padding:46px 14px 80px;
+
   }
-  .productos-cabecera{margin-bottom:18px; margin-left: 6.5px}
+
+  .productos-cabecera{margin-bottom:18px; margin-left:6.5px}
+
   .productos-cabecera h2{font-size:36px;letter-spacing:-.055em}
+
   .grid-productos{gap:10px}
+
   .producto-card{
+
     padding:8px;
+
     border-radius:17px;
+
   }
+
   .producto-imagen{border-radius:12px;aspect-ratio:1/.9}
+
   .producto-imagen img{width:84%;height:84%}
+
   .producto-info{padding:11px 2px 3px}
+
   .producto-nombre{font-size:15px}
+
   .producto-descripcion{font-size:8.5px;margin-top:4px}
+
   .producto-precio{font-size:10px}
+
   .marquee-vesira{padding:24px 0}
+
   .marquee-vesira-group{gap:45px;padding-right:45px}
+
   .marquee-vesira-group img{width:115px;height:48px}
+
 }
+
 .home-cart-fly{will-change:transform,opacity;position:fixed;z-index:12000;pointer-events:none;object-fit:contain;transform-origin:center;filter:drop-shadow(0 18px 24px rgba(0,0,0,.38))}
-</style>
+
+  </style>
+
 </head>
 
 <body>
-  <div class="intro" id="intro">
-    <img src="img/eslogan.png" alt="Vesira" class="eslogan">
-  </div>
-  
 
+  <div class="intro" id="intro">
+
+    <img src="img/eslogan.png" alt="Vesira" class="eslogan">
+
+  </div>
 
   <main>
+
     <section class="imagen-principal">
+
       <picture>
+
         <img src="img/imagen-principal.png?v=21" alt="Personas llevando gafas Vesira">
+
       </picture>
+
     </section>
 
     <section class="productos">
+
       <div class="productos-cabecera">
+
           <div class="productos-titulo">
+
             <span class="productos-eyebrow">GAFAS LUZ AZUL</span>
+
             <h2>El match PERFECTO</h2>
+
           </div>
+
         </div>
 
       <div class="grid-productos" id="gridProductos">
+
         <div class="productos-mensaje">Cargando productos...</div>
+
       </div>
+
     </section>
 
     <section class="marquee-vesira">
+
       <div class="marquee-vesira-track">
+
         <div class="marquee-vesira-group">
+
           <img src="img/logo2.png" alt="Vesira">
+
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
+
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
+
           <img src="img/logo15.png" alt="">
+
         </div>
+
         <div class="marquee-vesira-group">
+
           <img src="img/logo2.png" alt="Vesira">
+
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
+
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
+
           <img src="img/logo15.png" alt="">
+
         </div>
+
       </div>
+
     </section>
+
   </main>
-<div class="toast" id="toast">Menú</div>
+
+  <div class="toast" id="toast">Menú</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="supabase.js"></script>
 
   <script>
+
     const intro = document.getElementById("intro");
+
     const navbar = document.querySelector(".vesira-global-nav");
+
     const gridProductos = document.getElementById("gridProductos");
+
     const toast = document.getElementById("toast");
 
     function mostrarToast(mensaje){
+
       toast.textContent = mensaje;
+
       toast.classList.add("visible");
+
       clearTimeout(window._vesiraToast);
+
       window._vesiraToast = setTimeout(() => toast.classList.remove("visible"), 1600);
+
     }
 
     function getHomeCart(){
+
       try{
+
         const cart = JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+
         return Array.isArray(cart) ? cart : [];
+
       }catch{
+
         return [];
+
       }
+
     }
 
     function saveHomeCart(cart){
+
       localStorage.setItem("vesiraCarrito", JSON.stringify(cart));
+
       window.dispatchEvent(new CustomEvent("vesiraCartUpdated",{detail:{bump:true}}));
+
     }
 
     function animateHomeProductToCart(productImage){
+
       const origen = productImage;
+
       const destino = document.getElementById("vesiraGlobalCart");
 
       if(!origen || !destino || !origen.getBoundingClientRect().width) return;
 
       const start = origen.getBoundingClientRect();
+
       const end = destino.getBoundingClientRect();
+
       if(!end.width || !end.height) return;
 
       const clon = origen.cloneNode(true);
+
       clon.className = "home-cart-fly";
+
       clon.removeAttribute("id");
 
       const startSize = Math.min(Math.max(start.width * 0.34, 92), 175);
 
       clon.style.width = startSize + "px";
+
       clon.style.height = startSize + "px";
+
       clon.style.left = (start.left + start.width / 2 - startSize / 2) + "px";
+
       clon.style.top = (start.top + start.height / 2 - startSize / 2) + "px";
+
       clon.style.opacity = "1";
+
       clon.style.transform = "translate3d(0,0,0) scale(1) rotate(0deg)";
 
       document.body.appendChild(clon);
 
       const startX = start.left + start.width / 2;
+
       const startY = start.top + start.height / 2;
+
       const endX = end.left + end.width / 2;
+
       const endY = end.top + end.height / 2;
+
       const targetX = endX - startX;
+
       const targetY = endY - startY;
+
       const lift = Math.min(-145, targetY * 0.35 - 90);
 
       const animation = clon.animate([
+
         {
+
           transform:"translate3d(0,0,0) scale(1) rotate(0deg)",
+
           opacity:1,
+
           offset:0
+
         },
+
         {
+
           transform:`translate3d(${targetX * .26}px, ${targetY * .12 + lift}px, 0) scale(.90) rotate(-8deg)`,
+
           opacity:1,
+
           offset:.24
+
         },
+
         {
+
           transform:`translate3d(${targetX * .62}px, ${targetY * .38 + lift * .70}px, 0) scale(.66) rotate(7deg)`,
+
           opacity:1,
+
           offset:.56
+
         },
+
         {
+
           transform:`translate3d(${targetX * .88}px, ${targetY * .74}px, 0) scale(.36) rotate(-5deg)`,
+
           opacity:.96,
+
           offset:.82
+
         },
+
         {
+
           transform:`translate3d(${targetX}px, ${targetY}px, 0) scale(.08) rotate(12deg)`,
+
           opacity:0,
+
           offset:1
+
         }
+
       ],{
+
         duration:1320,
+
         easing:"cubic-bezier(.16,.78,.22,1)"
+
       });
 
       destino.animate(
+
         [
+
           {transform:"scale(1)"},
+
           {transform:"scale(1.05)",offset:.5},
+
           {transform:"scale(1)"}
+
         ],
+
         {duration:1320,easing:"ease-out"}
+
       );
 
       animation.onfinish = () => {
+
         clon.remove();
 
         destino.animate(
+
           [
+
             {transform:"scale(1)",background:"transparent"},
+
             {transform:"scale(1.16)",background:"rgba(255,255,255,.11)"},
+
             {transform:"scale(1)",background:"transparent"}
+
           ],
+
           {duration:380,easing:"ease-out"}
+
         );
 
         const icon = destino.querySelector("svg");
+
         if(icon){
+
           icon.animate(
+
             [
+
               {transform:"scale(1)"},
+
               {transform:"scale(1.22)"},
+
               {transform:"scale(1)"}
+
             ],
+
             {duration:320,easing:"ease-out"}
+
           );
+
         }
+
       };
+
     }
 
     function addHomeProductToCart(product,imageElement){
+
       const cart=getHomeCart();
+
       const existing=cart.find(item=>String(item.id)===String(product.id));
 
       if(existing) existing.cantidad=Number(existing.cantidad||0)+1;
+
       else cart.push({
+
         id:product.id,
+
         nombre:product.nombre,
+
         precio:Number(product.precio),
+
         imagen:product.imagen_url,
+
         cantidad:1
+
       });
 
       saveHomeCart(cart);
+
       animateHomeProductToCart(imageElement);
+
       mostrarToast("Añadido al carrito");
+
     }
 
     // La presentación ocupa solo la altura de la navbar.
+
     // Después se retira y hacemos entrar la navbar global.
+
     document.body.style.overflow = "hidden";
 
     setTimeout(()=>{
+
       intro.classList.add("hide");
+
       document.body.style.overflow = "";
 
       // La navbar se crea por vesira-navbar.js en DOMContentLoaded,
+
       // así que la buscamos aquí y no antes.
+
       const globalNavbar = document.querySelector(".vesira-global-nav");
 
       if(globalNavbar){
+
         globalNavbar.classList.add("vesira-intro-ready");
+
       }else{
+
         // Fallback por si el script de la navbar tarda en cargar.
+
         const showNavbar = () => {
+
           const nav = document.querySelector(".vesira-global-nav");
+
           if(nav) nav.classList.add("vesira-intro-ready");
+
         };
+
         window.setTimeout(showNavbar, 100);
+
         window.setTimeout(showNavbar, 500);
+
       }
 
       setTimeout(()=>intro.remove(),700);
+
     },1500);
 
     async function cargarProductos(){
+
       try{
+
         const { data, error } = await supabaseClient
+
           .from("Productos")
+
           .select(`
+
             id,
+
             nombre,
+
             descripcion,
+
             precio,
+
             categoria,
+
             activo,
+
             created_at,
+
             imagen_url
+
           `)
+
           .eq("activo", true)
+
           .order("created_at", { ascending: true });
 
         if(error) throw error;
 
         if(!data || data.length === 0){
+
           gridProductos.innerHTML = `
+
             <div class="productos-mensaje">
+
               No hay gafas disponibles.
+
             </div>
+
           `;
+
           return;
+
         }
 
         gridProductos.innerHTML = "";
 
         data.forEach(producto => {
+
           const tarjeta = document.createElement("a");
+
           tarjeta.className = "producto-card";
+
           tarjeta.href = `producto.html?id=${producto.id}`;
 
           const precio = Number(producto.precio)
+
             .toFixed(2)
+
             .replace(".", ",");
 
           tarjeta.innerHTML = `
+
             <div class="producto-imagen">
+
               <img
+
                 src="${producto.imagen_url || ""}"
+
                 alt="${producto.nombre}"
+
                 loading="lazy"
+
               >
+
+              <button class="producto-anadir" type="button" aria-label="Añadir ${producto.nombre} al carrito" title="Añadir al carrito">
+
+                <span class="material-symbols-outlined" aria-hidden="true">add</span>
+
+              </button>
+
             </div>
 
             <div class="producto-info">
+
               <div class="producto-row">
+
                 <h3 class="producto-nombre">${producto.nombre}</h3>
+
                 <span class="producto-precio">${precio} €</span>
-                <button class="producto-anadir" type="button" aria-label="Añadir ${producto.nombre} al carrito" title="Añadir al carrito">
-                  <span class="material-symbols-outlined" aria-hidden="true">add_shopping_cart</span>
-                </button>
+
               </div>
+
               ${
+
                 producto.descripcion
-                ? `<p class="producto-descripcion">${producto.descripcion}</p>`
+
+                  ? `<p class="producto-descripcion">${producto.descripcion}</p>`
+
                 : ""
+
               }
+
             </div>
+
           `;
 
           gridProductos.appendChild(tarjeta);
 
           const addButton = tarjeta.querySelector(".producto-anadir");
+
           const productImage = tarjeta.querySelector(".producto-imagen img");
 
           addButton.addEventListener("click", (event) => {
+
             event.preventDefault();
+
             event.stopPropagation();
+
             addHomeProductToCart(producto, productImage);
+
           });
+
         });
+
       }catch(error){
+
         console.error("Error cargando productos:", error);
+
         gridProductos.innerHTML = `
+
           <div class="productos-mensaje">
+
             No se han podido cargar los productos.
+
           </div>
+
         `;
+
       }
+
     }
 
     cargarProductos();
+
   </script>
+
   <script src="vesira-navbar.js"></script>
+
 </body>
 
 </html>
+```
