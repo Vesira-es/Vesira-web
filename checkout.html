@@ -1918,6 +1918,17 @@ new FormData(form).entries()
 
         );
 
+      const direccionField = document.getElementById("direccion");
+      if (direccionField) {
+        data.direccion = String(direccionField.value || "").trim();
+      }
+
+      data.email = String(data.email || "").trim();
+      data.nombre = String(data.nombre || "").trim();
+      data.apellidos = String(data.apellidos || "").trim();
+      data.ciudad = String(data.ciudad || "").trim();
+      data.codigoPostal = String(data.codigoPostal || "").trim();
+
       if (
 
         !data.email ||
@@ -1930,9 +1941,7 @@ new FormData(form).entries()
 
         !data.ciudad ||
 
-        !data.codigoPostal ||
-
-        !data.pais
+        !data.codigoPostal
 
       ) {
 
