@@ -998,6 +998,21 @@
       expressCheckoutElement.mount(
         "#express-checkout-element"
       );
+      expressCheckoutElement.on(
+  "availablepaymentmethodschange",
+  ({ paymentMethods }) => {
+    console.log("WALLETS DETECTADOS:", paymentMethods);
+
+    const walletStatus =
+      document.getElementById("wallet-status");
+
+    walletStatus.style.display = "block";
+
+    walletStatus.textContent =
+      "Stripe detecta: " +
+      JSON.stringify(paymentMethods);
+  }
+);
 
       expressCheckoutElement.on(
         "availablepaymentmethodschange",
