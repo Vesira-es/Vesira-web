@@ -1049,24 +1049,26 @@
       );
 
 
-      expressCheckoutElement.on(
-        "availablepaymentmethodschange",
-        ({paymentMethods}) => {
+ expressCheckoutElement.on(
+  "availablepaymentmethodschange",
+  ({ paymentMethods }) => {
 
-          const walletBox =
-            document.getElementById(
-              "wallets"
-            );
+    console.log(
+      "APPLE/GOOGLE DISPONIBLES:",
+      paymentMethods
+    );
 
-          if(!walletBox) return;
+    const walletBox =
+      document.getElementById("wallets");
 
-          walletBox.style.display =
-            paymentMethods
-              ? "grid"
-              : "none";
+    if(!walletBox) return;
 
-        }
-      );
+    walletBox.style.display =
+      paymentMethods
+        ? "grid"
+        : "none";
+  }
+);
 
 
       /*
