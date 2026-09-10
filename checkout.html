@@ -17,10 +17,7 @@
 
   <title>Checkout · Vesira</title>
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <link
     rel="preconnect"
@@ -32,9 +29,6 @@
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
     rel="stylesheet"
   >
-
-  <!-- Stripe.js -->
-  <script src="https://js.stripe.com/v3/"></script>
 
   <style>
 
@@ -254,75 +248,6 @@
       line-height:1.5;
     }
 
-    /* Express Checkout */
-    .wallets{
-      display:grid;
-      gap:10px;
-      margin-bottom:16px;
-    }
-
-    .wallets-title{
-      color:var(--s);
-      font-size:9px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      margin-bottom:2px;
-    }
-
-    #express-checkout-element{
-      min-height:50px;
-    }
-
-    .wallet-divider{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      color:#555;
-      font-size:9px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      margin:16px 0;
-    }
-
-    .wallet-divider::before,
-    .wallet-divider::after{
-      content:"";
-      height:1px;
-      background:var(--b);
-      flex:1;
-    }
-
-    /* Tarjeta */
-    .card-element{
-      width:100%;
-      min-height:50px;
-      padding:16px 14px;
-      border:1px solid var(--b);
-      border-radius:13px;
-      background:var(--input);
-      transition:border-color .2s ease;
-    }
-
-    .card-element:focus-within{
-      border-color:rgba(255,255,255,.28);
-    }
-
-    .secure{
-      display:flex;
-      align-items:center;
-      gap:7px;
-      color:var(--s);
-      font-size:9px;
-      margin-top:12px;
-    }
-
-    .payment-note{
-      color:var(--s);
-      font-size:10px;
-      line-height:1.5;
-      margin-bottom:12px;
-    }
-
     .summary{
       position:sticky;
       top:88px;
@@ -424,7 +349,7 @@
     }
 
     .buy:disabled{
-      cursor:wait;
+      cursor:not-allowed;
       opacity:.55;
       transform:none;
     }
@@ -448,68 +373,6 @@
 
     .error.show{
       display:block;
-    }
-
-    .wallet-error{
-      margin-top:8px;
-    }
-
-    .success{
-      display:none;
-      position:fixed;
-      inset:0;
-      z-index:40;
-      background:rgba(10,10,10,.92);
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      backdrop-filter:blur(14px);
-    }
-
-    .success-card{
-      width:min(520px,100%);
-      padding:34px;
-      border:1px solid var(--b);
-      border-radius:26px;
-      background:#101010;
-      text-align:center;
-    }
-
-    .success-icon{
-      width:58px;
-      height:58px;
-      border:1px solid var(--b);
-      border-radius:50%;
-      margin:0 auto 20px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .success-card h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:43px;
-      font-weight:400;
-      letter-spacing:-.06em;
-      margin-bottom:10px;
-    }
-
-    .success-card p{
-      color:var(--s);
-      font-size:11px;
-      line-height:1.6;
-      margin-bottom:22px;
-    }
-
-    .success-card a{
-      display:inline-flex;
-      min-height:47px;
-      padding:0 20px;
-      border-radius:999px;
-      align-items:center;
-      background:#fff;
-      color:#0a0a0a;
-      font-size:10px;
     }
 
     .empty{
@@ -546,27 +409,6 @@
       font-size:10px;
     }
 
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:20px;
-      z-index:30;
-      transform:translate(-50%,16px);
-      opacity:0;
-      padding:11px 15px;
-      background:#171717;
-      border:1px solid var(--b);
-      border-radius:999px;
-      color:#fff;
-      font-size:10px;
-      transition:.25s ease;
-    }
-
-    .toast.on{
-      opacity:1;
-      transform:translate(-50%,0);
-    }
-
     @media(max-width:850px){
 
       .layout{
@@ -576,6 +418,7 @@
       .summary{
         position:static;
       }
+
     }
 
     @media(max-width:600px){
@@ -629,13 +472,6 @@
         border-radius:18px;
       }
 
-      .success-card{
-        padding:26px 18px;
-      }
-
-      .success-card h2{
-        font-size:37px;
-      }
     }
 
   </style>
@@ -677,80 +513,10 @@
   <main id="app"></main>
 
 
-  <div
-    class="success"
-    id="success"
-  >
-
-    <div class="success-card">
-
-      <div class="success-icon">
-
-        <span class="material-symbols-outlined">
-          check
-        </span>
-
-      </div>
-
-      <h2>
-        Pago realizado.
-      </h2>
-
-      <p>
-        Tu pago se ha procesado correctamente.
-        Estamos preparando tu pedido.
-      </p>
-
-      <a href="index.html">
-        Volver a Vesira
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="toast"
-    id="toast"
-  ></div>
-
-
   <script>
 
     const app =
       document.getElementById("app");
-
-    const toast =
-      document.getElementById("toast");
-
-    const success =
-      document.getElementById("success");
-
-
-    const CHECKOUT_FUNCTION_URL =
-      "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/crear-checkout";
-
-
-    /*
-      IMPORTANTE:
-      Pon aquí TU Publishable Key de Stripe.
-
-      Debe empezar por:
-      pk_live_
-      o
-      pk_test_
-
-      NUNCA pongas una sk_live_ o sk_test_ aquí.
-    */
-    const STRIPE_PUBLISHABLE_KEY =
-      "pk_live_51UDtwY1OfdcxS98rJb2cdPhIwfEafeCT97a13f4qlJugVdNvVFtmu1GIdclfNJgZuHa0EGkXRuP00jX2HqgiJ5pX00f7FxB9OQ";
-
-
-    let stripe = null;
-    let elements = null;
-    let cardElement = null;
-    let expressCheckoutElement = null;
 
 
     function getCart(){
@@ -808,752 +574,6 @@
         "show",
         Boolean(message)
       );
-
-    }
-
-
-    function showCardError(message){
-
-      const box =
-        document.getElementById(
-          "card-errors"
-        );
-
-      if(!box) return;
-
-      box.textContent =
-        message || "";
-
-      box.classList.toggle(
-        "show",
-        Boolean(message)
-      );
-
-    }
-
-
-    function setButtonLoading(loading){
-
-      const button =
-        document.getElementById(
-          "buyButton"
-        );
-
-      if(!button) return;
-
-      button.disabled = loading;
-
-      if(loading){
-
-        button.innerHTML = `
-          Procesando pago...
-          <span
-            class="material-symbols-outlined"
-            style="font-size:15px;vertical-align:middle"
-          >
-            progress_activity
-          </span>
-        `;
-
-      }else{
-
-        const cart = getCart();
-
-        button.innerHTML = `
-          Pagar ${euro(totalCart(cart))}
-          <span
-            class="material-symbols-outlined"
-            style="font-size:15px;vertical-align:middle"
-          >
-            arrow_forward
-          </span>
-        `;
-
-      }
-
-    }
-
-
-    function stripeAppearance(){
-
-      return {
-
-        theme: "night",
-
-        variables: {
-
-          colorPrimary: "#ffffff",
-
-          colorBackground: "#101010",
-
-          colorText: "#ffffff",
-
-          colorTextSecondary: "#8c8c8c",
-
-          colorDanger: "#ff6b6b",
-
-          fontFamily:
-            "Outfit, Arial, sans-serif",
-
-          borderRadius: "13px",
-
-          spacingUnit: "4px"
-
-        },
-
-        rules: {
-
-          ".Input": {
-            border:
-              "1px solid rgba(255,255,255,.10)",
-            boxShadow: "none"
-          },
-
-          ".Input:focus": {
-            border:
-              "1px solid rgba(255,255,255,.28)",
-            boxShadow: "none"
-          },
-
-          ".Label": {
-            color: "#8c8c8c"
-          }
-
-        }
-
-      };
-
-    }
-
-
-    function initStripe(cart){
-
-      if(!window.Stripe){
-
-        showError(
-          "No se ha podido cargar Stripe. Recarga la página."
-        );
-
-        return false;
-
-      }
-
-
-      if(
-        !STRIPE_PUBLISHABLE_KEY ||
-        !STRIPE_PUBLISHABLE_KEY.startsWith("pk_")
-      ){
-
-        showError(
-          "La Publishable Key de Stripe no está configurada."
-        );
-
-        return false;
-
-      }
-
-
-      stripe =
-        window.Stripe(
-          STRIPE_PUBLISHABLE_KEY
-        );
-
-
-      /*
-        El amount aquí sirve para que Apple Pay
-        / Google Pay conozcan el importe que
-        mostrarán en su interfaz.
-
-        El importe definitivo SIEMPRE se calcula
-        de nuevo en crear-checkout en el servidor.
-      */
-      const amount =
-        Math.round(
-          totalCart(cart) * 100
-        );
-
-
-      elements =
-        stripe.elements({
-
-          mode: "payment",
-
-          amount: amount,
-
-          currency: "eur",
-
-          locale: "es",
-
-          appearance:
-            stripeAppearance()
-
-        });
-
-
-      /*
-        EXPRESS CHECKOUT
-
-        Solo:
-        - Apple Pay
-        - Google Pay
-
-        Link y PayPal están desactivados.
-      */
-      expressCheckoutElement =
-        elements.create(
-          "expressCheckout",
-          {
-
-            paymentMethods: {
-
-              applePay: "always",
-
-              googlePay: "always",
-
-              link: "never",
-
-              paypal: "never",
-
-              amazonPay: "never",
-
-              klarna: "never"
-
-            },
-
-            buttonType: {
-
-              applePay: "check-out",
-
-              googlePay: "checkout"
-
-            },
-
-            buttonHeight: 52,
-
-            layout: {
-  maxColumns: 2,
-  maxRows: 1,
-  overflow: "auto"
-}
-
-          }
-        );
-
-
-      expressCheckoutElement.mount(
-        "#express-checkout-element"
-      );
-
-
- expressCheckoutElement.on(
-  "ready",
-  ({ availablePaymentMethods }) => {
-
-    console.log(
-      "APPLE/GOOGLE DISPONIBLES:",
-      availablePaymentMethods
-    );
-
-    const walletBox =
-      document.getElementById("wallets");
-
-    if(!walletBox) return;
-
-    walletBox.style.display =
-      availablePaymentMethods
-        ? "grid"
-        : "none";
-  }
-);
-
-
-      /*
-        Cuando el usuario confirma
-        Apple Pay / Google Pay.
-      */
-      expressCheckoutElement.on(
-        "confirm",
-        handleWalletPayment
-      );
-
-
-      /*
-        CARD ELEMENT
-      */
-      cardElement =
-        elements.create(
-          "card",
-          {
-
-            hidePostalCode: true,
-
-            disableLink: true,
-
-            style: {
-
-              base: {
-
-                color: "#ffffff",
-
-                fontFamily:
-                  "Outfit, Arial, sans-serif",
-
-                fontSize: "14px",
-
-                fontWeight: "400",
-
-                iconColor: "#ffffff",
-
-                "::placeholder": {
-                  color: "#666666"
-                }
-
-              },
-
-              invalid: {
-
-                color: "#ff6b6b",
-
-                iconColor: "#ff6b6b"
-
-              }
-
-            }
-
-          }
-        );
-
-
-      cardElement.mount(
-        "#card-element"
-      );
-
-
-      cardElement.on(
-        "change",
-        (event) => {
-
-          showCardError(
-            event.error?.message || ""
-          );
-
-        }
-      );
-
-
-      return true;
-
-    }
-
-
-    async function createPaymentIntent(){
-
-      const cart =
-        getCart();
-
-      if(!cart.length){
-
-        throw new Error(
-          "El carrito está vacío."
-        );
-
-      }
-
-
-      const form =
-        document.getElementById(
-          "checkoutForm"
-        );
-
-
-      const data =
-        Object.fromEntries(
-          new FormData(form).entries()
-        );
-
-
-      const response =
-        await fetch(
-          CHECKOUT_FUNCTION_URL,
-          {
-
-            method: "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            body: JSON.stringify({
-
-              items:
-
-                cart.map(item => ({
-                  id: item.id,
-                  cantidad:
-                    Number(
-                      item.cantidad || 1
-                    )
-                })),
-
-              cliente: {
-
-                email:
-                  String(data.email || ""),
-
-                nombre:
-                  String(data.nombre || ""),
-
-                apellidos:
-                  String(
-                    data.apellidos || ""
-                  ),
-
-                direccion:
-                  String(
-                    data.direccion || ""
-                  ),
-
-                ciudad:
-                  String(
-                    data.ciudad || ""
-                  ),
-
-                codigoPostal:
-                  String(
-                    data.codigoPostal || ""
-                  ),
-
-                pais:
-                  String(
-                    data.pais || "España"
-                  ),
-
-                nota:
-                  String(
-                    data.nota || ""
-                  )
-
-              }
-
-            })
-
-          }
-        );
-
-
-      const result =
-        await response.json();
-
-
-      if(!response.ok){
-
-        throw new Error(
-          result?.error ||
-          "No se pudo iniciar el pago."
-        );
-
-      }
-
-
-      if(!result?.clientSecret){
-
-        throw new Error(
-          "Stripe no devolvió el client secret."
-        );
-
-      }
-
-
-      return result;
-
-    }
-
-
-    async function handleWalletPayment(event){
-
-      showError("");
-      showCardError("");
-
-      const form =
-        document.getElementById(
-          "checkoutForm"
-        );
-
-      const data =
-        Object.fromEntries(
-          new FormData(form).entries()
-        );
-
-
-      if(
-        !data.email ||
-        !data.nombre ||
-        !data.apellidos ||
-        !data.direccion ||
-        !data.ciudad ||
-        !data.codigoPostal
-      ){
-
-        showError(
-          "Completa tus datos de contacto y entrega antes de pagar."
-        );
-
-        return;
-
-      }
-
-
-      try{
-
-        const {
-          error: submitError
-        } = await elements.submit();
-
-
-        if(submitError){
-
-          showError(
-            submitError.message
-          );
-
-          return;
-
-        }
-
-
-        const result =
-          await createPaymentIntent();
-
-
-        const paymentResult =
-          await stripe.confirmPayment({
-
-            elements: elements,
-
-            clientSecret:
-              result.clientSecret,
-
-            confirmParams: {
-
-              return_url:
-                window.location.origin +
-                "/checkout-exito.html"
-
-            }
-
-          });
-
-
-        if(paymentResult.error){
-
-          showError(
-            paymentResult.error.message ||
-            "No se pudo completar el pago."
-          );
-
-        }
-
-      }catch(error){
-
-        console.error(error);
-
-        showError(
-          error?.message ||
-          "Ha ocurrido un error al procesar el pago."
-        );
-
-      }
-
-    }
-
-
-    async function handleCheckout(event){
-
-      event.preventDefault();
-
-
-      showError("");
-      showCardError("");
-
-
-      const form =
-        event.currentTarget;
-
-      const data =
-        Object.fromEntries(
-          new FormData(form).entries()
-        );
-
-
-      if(
-        !data.email ||
-        !data.nombre ||
-        !data.apellidos ||
-        !data.direccion ||
-        !data.ciudad ||
-        !data.codigoPostal
-      ){
-
-        showError(
-          "Completa todos los campos obligatorios."
-        );
-
-        return;
-
-      }
-
-
-      if(
-        !stripe ||
-        !cardElement
-      ){
-
-        showError(
-          "El formulario de tarjeta todavía no está listo."
-        );
-
-        return;
-
-      }
-
-
-      const cart =
-        getCart();
-
-
-      if(!cart.length){
-
-        showError(
-          "El carrito está vacío."
-        );
-
-        return;
-
-      }
-
-
-      setButtonLoading(true);
-
-
-      try{
-
-        /*
-          Creamos el PaymentIntent en servidor.
-          El servidor recalcula el precio.
-        */
-        const result =
-          await createPaymentIntent();
-
-
-        /*
-          Confirmación de tarjeta.
-        */
-        const paymentResult =
-          await stripe.confirmCardPayment(
-
-            result.clientSecret,
-
-            {
-
-              payment_method: {
-
-                card: cardElement,
-
-                billing_details: {
-
-                  name:
-                    `${data.nombre} ${data.apellidos}`
-                      .trim(),
-
-                  email:
-                    String(data.email),
-
-                  address: {
-
-                    line1:
-                      String(
-                        data.direccion
-                      ),
-
-                    city:
-                      String(
-                        data.ciudad
-                      ),
-
-                    postal_code:
-                      String(
-                        data.codigoPostal
-                      ),
-
-                    country:
-                      "ES"
-
-                  }
-
-                }
-
-              }
-
-            }
-
-          );
-
-
-        if(paymentResult.error){
-
-          throw new Error(
-            paymentResult.error.message ||
-            "No se pudo procesar el pago."
-          );
-
-        }
-
-
-        const paymentIntent =
-          paymentResult.paymentIntent;
-
-
-        if(
-          !paymentIntent ||
-          paymentIntent.status !== "succeeded"
-        ){
-
-          throw new Error(
-            "El pago no se ha completado."
-          );
-
-        }
-
-
-        /*
-          El webhook seguirá siendo la fuente
-          definitiva para crear el pedido.
-        */
-        localStorage.removeItem(
-          "vesiraCarrito"
-        );
-
-
-        window.location.href =
-          "checkout-exito.html?payment_intent=" +
-          encodeURIComponent(
-            paymentIntent.id
-          );
-
-
-      }catch(error){
-
-        console.error(error);
-
-        showError(
-          error?.message ||
-          "Ha ocurrido un error al procesar el pago."
-        );
-
-        setButtonLoading(false);
-
-      }
 
     }
 
@@ -1800,73 +820,6 @@
               </section>
 
 
-              <!-- PAGO -->
-
-              <section class="section">
-
-                <div class="section-head">
-
-                  <h2>
-                    Pago.
-                  </h2>
-
-                  <span class="section-number">
-                    03
-                  </span>
-
-                </div>
-
-
-                <!-- APPLE PAY / GOOGLE PAY -->
-
-                <div
-                  class="wallets"
-                  id="wallets"
-                >
-
-                  <div class="wallets-title">
-                    Pago rápido
-                  </div>
-
-                  <div
-                    id="express-checkout-element"
-                  ></div>
-
-                </div>
-
-
-                <div class="wallet-divider">
-                  o tarjeta
-                </div>
-
-
-                <!-- TARJETA -->
-
-                <div
-                  id="card-element"
-                  class="card-element"
-                ></div>
-
-
-                <div
-                  id="card-errors"
-                  class="error wallet-error"
-                ></div>
-
-
-                <div class="secure">
-
-                  <span class="material-symbols-outlined">
-                    lock
-                  </span>
-
-                  Pago seguro con Stripe.
-
-                </div>
-
-              </section>
-
-
               <!-- NOTA -->
 
               <section class="section">
@@ -1878,7 +831,7 @@
                   </h2>
 
                   <span class="section-number">
-                    04
+                    03
                   </span>
 
                 </div>
@@ -2015,10 +968,10 @@
               <button
                 class="buy"
                 type="submit"
-                id="buyButton"
+                id="proceedButton"
               >
 
-                Pagar ${euro(subtotal)}
+                Proceder al pago
 
                 <span
                   class="material-symbols-outlined"
@@ -2039,21 +992,11 @@
 
             </aside>
 
-
           </form>
 
         </section>
 
       `;
-
-
-      const stripeReady =
-        initStripe(cart);
-
-
-      if(!stripeReady){
-        return;
-      }
 
 
       document
@@ -2062,8 +1005,142 @@
         )
         .addEventListener(
           "submit",
-          handleCheckout
+          handleSubmit
         );
+
+    }
+
+
+    function handleSubmit(event){
+
+      event.preventDefault();
+
+
+      const form =
+        event.currentTarget;
+
+
+      const button =
+        document.getElementById(
+          "proceedButton"
+        );
+
+
+      showError("");
+
+
+      const data =
+        Object.fromEntries(
+          new FormData(form).entries()
+        );
+
+
+      if(
+        !data.email ||
+        !data.nombre ||
+        !data.apellidos ||
+        !data.direccion ||
+        !data.ciudad ||
+        !data.codigoPostal ||
+        !data.pais
+      ){
+
+        showError(
+          "Completa todos los campos obligatorios."
+        );
+
+        return;
+
+      }
+
+
+      const cart =
+        getCart();
+
+
+      if(!cart.length){
+
+        showError(
+          "El carrito está vacío."
+        );
+
+        return;
+
+      }
+
+
+      /*
+        Guardamos temporalmente los datos
+        del checkout para que pago.html
+        pueda crear el PaymentIntent.
+
+        Esto NO marca el pedido como pagado.
+      */
+      localStorage.setItem(
+        "vesiraCheckout",
+        JSON.stringify({
+
+          cliente:{
+
+            email:
+              String(data.email).trim(),
+
+            nombre:
+              String(data.nombre).trim(),
+
+            apellidos:
+              String(data.apellidos).trim(),
+
+            direccion:
+              String(data.direccion).trim(),
+
+            ciudad:
+              String(data.ciudad).trim(),
+
+            codigoPostal:
+              String(
+                data.codigoPostal
+              ).trim(),
+
+            pais:
+              String(
+                data.pais || "España"
+              ).trim(),
+
+            nota:
+              String(
+                data.nota || ""
+              ).trim()
+
+          },
+
+          carrito:cart,
+
+          creadoEn:
+            new Date().toISOString()
+
+        })
+      );
+
+
+      button.disabled = true;
+
+      button.innerHTML = `
+        Preparando pago...
+        <span
+          class="material-symbols-outlined"
+          style="font-size:15px;vertical-align:middle"
+        >
+          progress_activity
+        </span>
+      `;
+
+
+      /*
+        Pasamos a la segunda página.
+      */
+      window.location.href =
+        "pago.html";
 
     }
 
