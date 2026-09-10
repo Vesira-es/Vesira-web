@@ -1,965 +1,1546 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="theme-color" content="#0a0a0a">
+
   <title>Vesira</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
-    rel="stylesheet"
+
+href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
+
+rel="stylesheet"
+
   >
 
   <style>
-    :root{
+
+:root{
+
       --fondo:#0a0a0a;
+
       --texto:#fff;
+
       --suave:#8c8c8c;
+
       --borde:rgba(255,255,255,.10);
+
       --caja:#141414;
+
       --caja2:#181818;
+
     }
 
     *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
     }
 
     html{
-      scroll-behavior:smooth;
+
+scroll-behavior:smooth;
+
     }
 
     body{
-      background:var(--fondo);
-      color:var(--texto);
-      font-family:"Outfit",Arial,sans-serif;
-      overflow-x:hidden;
+
+background:var(--fondo);
+
+color:var(--texto);
+
+font-family:"Outfit",Arial,sans-serif;
+
+overflow-x:hidden;
+
     }
 
     button{
-      font:inherit;
+
+font:inherit;
+
     }
 
     a{
-      color:inherit;
-      text-decoration:none;
+
+color:inherit;
+
+text-decoration:none;
+
     }
 
-    /* =========================
+/* =========================
        NAVBAR
-    ========================= */
-    .navbar{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      height:74px;
-      z-index:1000;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 30px;
-      background:rgba(10,10,10,.76);
-      border-bottom:1px solid rgba(255,255,255,.08);
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-    }
+       ========================= */
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:74px;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  background:rgba(10,10,10,.76);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+.navbar-left{display:flex;align-items:center;gap:12px;}
+.logo-link{display:flex;align-items:center;min-width:0;cursor:pointer;}
+.logo{width:108px;height:auto;display:block;}
+.nav-eyewear{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--suave);white-space:nowrap;}
+.navbar-actions{display:flex;align-items:center;gap:3px;}
+.nav-button{width:40px;height:40px;border:none;border-radius:50%;background:transparent;color:var(--texto);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease, transform .2s ease;}
+.nav-button:hover{background:var(--caja);transform:translateY(-1px);}
 
-    .navbar-left{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
+/* =========================
 
-    .logo-link{
-      display:flex;
-      align-items:center;
-      min-width:0;
-      cursor:pointer;
-    }
-
-    .logo{
-      width:108px;
-      height:auto;
-      display:block;
-    }
-
-    .nav-eyewear{
-      font-size:9px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:var(--suave);
-      white-space:nowrap;
-    }
-
-    .navbar-actions{
-      display:flex;
-      align-items:center;
-      gap:3px;
-    }
-
-    .nav-button{
-      width:40px;
-      height:40px;
-      border:none;
-      border-radius:50%;
-      background:transparent;
-      color:var(--texto);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      transition:background .2s ease, transform .2s ease;
-    }
-
-    .nav-button:hover{
-      background:var(--caja);
-      transform:translateY(-1px);
-    }
-
-
-    /* =========================
        CARRITO / ANIMACIÓN
+
     ========================= */
-    .nav-cart-button{
-      position:relative;
-      overflow:visible;
+
+.nav-cart-button{
+
+position:relative;
+
+overflow:visible;
+
     }
 
-    .cart-badge{
-      position:absolute;
-      top:1px;
-      right:-2px;
-      min-width:17px;
-      height:17px;
-      padding:0 5px;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      background:#fff;
-      color:#0a0a0a;
-      font-family:"Outfit",Arial,sans-serif;
-      font-size:9px;
-      font-weight:700;
-      line-height:17px;
-      letter-spacing:0;
-      box-shadow:0 3px 12px rgba(0,0,0,.28);
-      transform:scale(.7);
-      animation:cartBadgeIn .22s ease forwards;
-      pointer-events:none;
+.cart-badge{
+
+position:absolute;
+
+top:1px;
+
+right:-2px;
+
+min-width:17px;
+
+height:17px;
+
+padding:0 5px;
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:999px;
+
+background:#fff;
+
+color:#0a0a0a;
+
+font-family:"Outfit",Arial,sans-serif;
+
+font-size:9px;
+
+font-weight:700;
+
+line-height:17px;
+
+letter-spacing:0;
+
+box-shadow:0 3px 12px rgba(0,0,0,.28);
+
+transform:scale(.7);
+
+animation:cartBadgeIn .22s ease forwards;
+
+pointer-events:none;
+
     }
 
     @keyframes cartBadgeIn{
+
       from{opacity:0;transform:scale(.45)}
+
       to{opacity:1;transform:scale(1)}
+
     }
 
-    .cart-badge.bump{
-      animation:cartBadgeBump .38s ease;
+.cart-badge.bump{
+
+animation:cartBadgeBump .38s ease;
+
     }
 
     @keyframes cartBadgeBump{
+
       0%{transform:scale(1)}
+
       35%{transform:scale(1.35)}
+
       65%{transform:scale(.92)}
+
       100%{transform:scale(1)}
+
     }
 
-    .cart-fly{
-      position:fixed;
-      z-index:5000;
-      pointer-events:none;
-      object-fit:contain;
-      filter:drop-shadow(0 18px 24px rgba(0,0,0,.35));
-      transform-origin:center;
-      will-change:transform,opacity;
+.cart-fly{
+
+position:fixed;
+
+z-index:5000;
+
+pointer-events:none;
+
+object-fit:contain;
+
+filter:drop-shadow(0 18px 24px rgba(0,0,0,.35));
+
+transform-origin:center;
+
+will-change:transform,opacity;
+
     }
 
-    /* =========================
+/* =========================
+
        PRODUCTO
+
     ========================= */
-    .producto{
-      width:min(1240px, calc(100% - 48px));
-      min-height:100vh;
-      margin:0 auto;
-      padding:118px 0 82px;
-      display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);
-      gap:68px;
-      align-items:center;
+
+.producto{
+
+width:min(1240px, calc(100% - 48px));
+
+min-height:100vh;
+
+margin:0 auto;
+
+padding:118px 0 82px;
+
+display:grid;
+
+grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);
+
+gap:68px;
+
+align-items:center;
+
     }
 
-    .producto-visual{
-      min-height:620px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      border-radius:34px;
-      overflow:hidden;
+.producto-visual{
+
+min-height:620px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+position:relative;
+
+border-radius:34px;
+
+overflow:hidden;
+
     }
 
-    .producto-visual::before{
-      content:"";
-      position:absolute;
-      width:490px;
-      height:490px;
-      border-radius:50%;
-      background:radial-gradient(circle,rgba(255,255,255,.085),rgba(255,255,255,.02) 48%,transparent 72%);
-      filter:blur(20px);
+.producto-visual::before{
+
+content:"";
+
+position:absolute;
+
+width:490px;
+
+height:490px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,rgba(255,255,255,.085),rgba(255,255,255,.02) 48%,transparent 72%);
+
+filter:blur(20px);
+
     }
 
-    .producto-imagen-principal{
-      position:relative;
-      z-index:2;
-      width:min(94%,720px);
-      max-height:620px;
-      object-fit:contain;
-      display:block;
-      filter:drop-shadow(0 32px 42px rgba(0,0,0,.42));
-      animation:flotar 5s ease-in-out infinite;
+.producto-imagen-principal{
+
+position:relative;
+
+z-index:2;
+
+width:min(94%,720px);
+
+max-height:620px;
+
+object-fit:contain;
+
+display:block;
+
+filter:drop-shadow(0 32px 42px rgba(0,0,0,.42));
+
+animation:flotar 5s ease-in-out infinite;
+
     }
 
     @keyframes flotar{
+
       0%,100%{transform:translateY(0)}
+
       50%{transform:translateY(-8px)}
+
     }
 
-    .producto-info{
-      max-width:510px;
+.producto-info{
+
+max-width:510px;
+
     }
 
-    .producto-nombre{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(58px,7vw,98px);
-      font-weight:400;
-      line-height:.82;
-      letter-spacing:-.075em;
-      margin-bottom:20px;
+.producto-nombre{
+
+font-family:"Bricolage Grotesque",Arial,sans-serif;
+
+font-size:clamp(58px,7vw,98px);
+
+font-weight:400;
+
+line-height:.82;
+
+letter-spacing:-.075em;
+
+margin-bottom:20px;
+
     }
 
-    .producto-descripcion{
-      color:var(--suave);
-      font-size:14px;
-      line-height:1.72;
-      max-width:430px;
-      margin-bottom:20px;
+.producto-descripcion{
+
+color:var(--suave);
+
+font-size:14px;
+
+line-height:1.72;
+
+max-width:430px;
+
+margin-bottom:20px;
+
     }
 
-    .precio-linea{
-      display:flex;
-      align-items:baseline;
-      gap:12px;
-      margin-bottom:24px;
+.precio-linea{
+
+display:flex;
+
+align-items:baseline;
+
+gap:12px;
+
+margin-bottom:24px;
+
     }
 
-    .precio{
-      font-size:23px;
-      font-weight:500;
+.precio{
+
+font-size:23px;
+
+font-weight:500;
+
     }
 
-    .envio{
-      color:var(--suave);
-      font-size:11px;
+.envio{
+
+color:var(--suave);
+
+font-size:11px;
+
     }
 
-    .acciones{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-bottom:24px;
+.acciones{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:10px;
+
+margin-bottom:24px;
+
     }
 
-    .boton{
-      min-height:56px;
-      border-radius:999px;
-      border:1px solid var(--borde);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      color:var(--texto);
-      cursor:pointer;
-      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+.boton{
+
+min-height:56px;
+
+border-radius:999px;
+
+border:1px solid var(--borde);
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+color:var(--texto);
+
+cursor:pointer;
+
+transition:transform .2s ease, background .2s ease, border-color .2s ease;
+
     }
 
-    .boton:hover{
-      transform:translateY(-2px);
-      border-color:rgba(255,255,255,.25);
+.boton:hover{
+
+transform:translateY(-2px);
+
+border-color:rgba(255,255,255,.25);
+
     }
 
-    .boton-carrito{
-      background:var(--caja);
+.boton-carrito{
+
+background:var(--caja);
+
     }
 
-    .boton-comprar{
-      background:#fff;
-      color:#0a0a0a;
-      border-color:#fff;
+.boton-comprar{
+
+background:#fff;
+
+color:#0a0a0a;
+
+border-color:#fff;
+
     }
 
-    .beneficios-mini{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      border-top:1px solid var(--borde);
-      border-left:1px solid var(--borde);
+.beneficios-mini{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+border-top:1px solid var(--borde);
+
+border-left:1px solid var(--borde);
+
     }
 
-    .mini{
-      min-height:88px;
-      padding:14px;
-      border-right:1px solid var(--borde);
-      border-bottom:1px solid var(--borde);
+.mini{
+
+min-height:88px;
+
+padding:14px;
+
+border-right:1px solid var(--borde);
+
+border-bottom:1px solid var(--borde);
+
     }
 
-    .mini span{
-      display:block;
-      font-size:17px;
-      margin-bottom:16px;
+.mini span{
+
+display:block;
+
+font-size:17px;
+
+margin-bottom:16px;
+
     }
 
-    .mini strong{
-      display:block;
-      font-size:10px;
-      margin-bottom:3px;
+.mini strong{
+
+display:block;
+
+font-size:10px;
+
+margin-bottom:3px;
+
     }
 
-    .mini p{
-      color:var(--suave);
-      font-size:9px;
-      line-height:1.4;
+.mini p{
+
+color:var(--suave);
+
+font-size:9px;
+
+line-height:1.4;
+
     }
 
-    /* =========================
+/* =========================
+
        BENEFICIOS / COMPARADORES
+
     ========================= */
-    .beneficios-seccion{
-      width:min(1240px, calc(100% - 48px));
-      margin:0 auto;
-      padding:28px 0 96px;
+
+.beneficios-seccion{
+
+width:min(1240px, calc(100% - 48px));
+
+margin:0 auto;
+
+padding:28px 0 96px;
+
     }
 
-    .beneficios-cabecera{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:30px;
-      margin-bottom:28px;
+.beneficios-cabecera{
+
+display:flex;
+
+align-items:end;
+
+justify-content:space-between;
+
+gap:30px;
+
+margin-bottom:28px;
+
     }
 
-    .beneficios-eyebrow{
-      display:block;
-      color:var(--suave);
-      font-size:9px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      margin-bottom:10px;
+.beneficios-eyebrow{
+
+display:block;
+
+color:var(--suave);
+
+font-size:9px;
+
+letter-spacing:.22em;
+
+text-transform:uppercase;
+
+margin-bottom:10px;
+
     }
 
-    .beneficios-cabecera h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(42px,5.1vw,72px);
-      font-weight:400;
-      line-height:.86;
-      letter-spacing:-.065em;
+.beneficios-cabecera h2{
+
+font-family:"Bricolage Grotesque",Arial,sans-serif;
+
+font-size:clamp(42px,5.1vw,72px);
+
+font-weight:400;
+
+line-height:.86;
+
+letter-spacing:-.065em;
+
     }
 
-    .beneficios-cabecera p{
-      max-width:380px;
-      color:var(--suave);
-      font-size:11px;
-      line-height:1.6;
-      text-align:right;
+.beneficios-cabecera p{
+
+max-width:380px;
+
+color:var(--suave);
+
+font-size:11px;
+
+line-height:1.6;
+
+text-align:right;
+
     }
 
-    .beneficios-grid{
-      display:grid;
-      gap:18px;
+.beneficios-grid{
+
+display:grid;
+
+gap:18px;
+
     }
 
-    .beneficio{
-      position:relative;
-      height:clamp(440px,54vw,700px);
-      border:1px solid var(--borde);
-      border-radius:30px;
-      overflow:hidden;
-      background:#050505;
-      isolation:isolate;
+.beneficio{
+
+position:relative;
+
+height:clamp(440px,54vw,700px);
+
+border:1px solid var(--borde);
+
+border-radius:30px;
+
+overflow:hidden;
+
+background:#050505;
+
+isolation:isolate;
+
     }
 
-    .beneficio-media{
-      position:absolute;
-      inset:0;
-      overflow:hidden;
-      background:#050505;
-      border-radius:inherit;
-      touch-action:none;
-      user-select:none;
-      -webkit-user-select:none;
+.beneficio-media{
+
+position:absolute;
+
+inset:0;
+
+overflow:hidden;
+
+background:#050505;
+
+border-radius:inherit;
+
+touch-action:none;
+
+user-select:none;
+
+-webkit-user-select:none;
+
     }
 
-    .beneficio-media img{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      user-select:none;
-      -webkit-user-drag:none;
-      pointer-events:none;
+.beneficio-media img{
+
+position:absolute;
+
+inset:0;
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+user-select:none;
+
+-webkit-user-drag:none;
+
+pointer-events:none;
+
     }
 
-    .beneficio-before{
-      z-index:1;
+.beneficio-before{
+
+z-index:1;
+
     }
 
-    .beneficio-after{
-      z-index:2;
-      clip-path:inset(0 50% 0 0);
-      will-change:clip-path;
+.beneficio-after{
+
+z-index:2;
+
+clip-path:inset(0 50% 0 0);
+
+will-change:clip-path;
+
     }
 
-    /* Black divider that tracks the slider */
-    .beneficio-linea{
-      position:absolute;
-      top:0;
-      bottom:0;
-      left:50%;
-      width:4px;
-      z-index:6;
-      background:#000;
-      box-shadow:0 0 0 1px rgba(255,255,255,.08);
-      pointer-events:none;
-      will-change:left;
+/* Black divider that tracks the slider */
+
+.beneficio-linea{
+
+position:absolute;
+
+top:0;
+
+bottom:0;
+
+left:50%;
+
+width:4px;
+
+z-index:6;
+
+background:#000;
+
+box-shadow:0 0 0 1px rgba(255,255,255,.08);
+
+pointer-events:none;
+
+will-change:left;
+
     }
 
-    .beneficio-control{
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      z-index:7;
-      width:48px;
-      height:48px;
-      border-radius:50%;
-      border:1px solid rgba(255,255,255,.35);
-      background:#000;
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      pointer-events:none;
-      box-shadow:0 10px 26px rgba(0,0,0,.40);
-      will-change:left;
+.beneficio-control{
+
+position:absolute;
+
+left:50%;
+
+top:50%;
+
+transform:translate(-50%,-50%);
+
+z-index:7;
+
+width:48px;
+
+height:48px;
+
+border-radius:50%;
+
+border:1px solid rgba(255,255,255,.35);
+
+background:#000;
+
+color:#fff;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+pointer-events:none;
+
+box-shadow:0 10px 26px rgba(0,0,0,.40);
+
+will-change:left;
+
     }
 
-    .beneficio-control{
-      gap:1px;
+.beneficio-control{
+
+gap:1px;
+
     }
 
-    .beneficio-control .material-symbols-outlined{
-      font-size:18px;
-      width:15px;
-      overflow:visible;
+.beneficio-control .material-symbols-outlined{
+
+font-size:18px;
+
+width:15px;
+
+overflow:visible;
+
     }
 
-    /* Centered feature name, never crossing the divider */
-    .beneficio-overlay{
-      position:absolute;
-      left:0;
-      right:0;
-      bottom:0;
-      z-index:9;
-      display:flex;
-      justify-content:center;
-      align-items:flex-end;
-      padding:30px 24px 34px;
-      pointer-events:none;
+/* Centered feature name, never crossing the divider */
+
+.beneficio-overlay{
+
+position:absolute;
+
+left:0;
+
+right:0;
+
+bottom:0;
+
+z-index:9;
+
+display:flex;
+
+justify-content:center;
+
+align-items:flex-end;
+
+padding:30px 24px 34px;
+
+pointer-events:none;
+
     }
 
-    .beneficio-overlay h3{
-      width:min(82%, 900px);
-      text-align:center;
-      font-family:"Impact",Arial,sans-serif;
-      font-size:clamp(42px,6vw,82px);
-      font-weight:800;
-      line-height:.88;
-      word-spacing:.035em;
-      text-transform:uppercase;
-      text-shadow:0 4px 18px rgba(0,0,0,.58);
+.beneficio-overlay h3{
+
+width:min(82%, 900px);
+
+text-align:center;
+
+font-family:"Impact",Arial,sans-serif;
+
+font-size:clamp(42px,6vw,82px);
+
+font-weight:800;
+
+line-height:.88;
+
+word-spacing:.035em;
+
+text-transform:uppercase;
+
+text-shadow:0 4px 18px rgba(0,0,0,.58);
+
     }
 
-    /* Invisible input: the whole image is draggable */
-    .beneficio-slider{
-      position:absolute;
-      inset:0;
-      z-index:10;
-      width:100%;
-      height:100%;
-      opacity:0;
-      cursor:ew-resize;
-      margin:0;
-      touch-action:none;
-      -webkit-tap-highlight-color:transparent;
-      appearance:none;
-      -webkit-appearance:none;
-      background:transparent;
+/* Invisible input: the whole image is draggable */
+
+.beneficio-slider{
+
+position:absolute;
+
+inset:0;
+
+z-index:10;
+
+width:100%;
+
+height:100%;
+
+opacity:0;
+
+cursor:ew-resize;
+
+margin:0;
+
+touch-action:none;
+
+-webkit-tap-highlight-color:transparent;
+
+appearance:none;
+
+-webkit-appearance:none;
+
+background:transparent;
+
     }
 
-    .beneficio-slider::-webkit-slider-thumb{
-      appearance:none;
-      -webkit-appearance:none;
-      width:36px;
-      height:100%;
-      background:transparent;
-      cursor:ew-resize;
+.beneficio-slider::-webkit-slider-thumb{
+
+appearance:none;
+
+-webkit-appearance:none;
+
+width:36px;
+
+height:100%;
+
+background:transparent;
+
+cursor:ew-resize;
+
     }
 
-    .beneficio-slider::-moz-range-thumb{
-      width:36px;
-      height:100%;
-      border:0;
-      background:transparent;
-      cursor:ew-resize;
+.beneficio-slider::-moz-range-thumb{
+
+width:36px;
+
+height:100%;
+
+border:0;
+
+background:transparent;
+
+cursor:ew-resize;
+
     }
 
-    /* =========================
+/* =========================
+
        FRASE
+
     ========================= */
-    .frase{
-      width:min(1100px,calc(100% - 48px));
-      margin:0 auto;
-      padding:20px 0 98px;
-      text-align:center;
+
+.frase{
+
+width:min(1100px,calc(100% - 48px));
+
+margin:0 auto;
+
+padding:20px 0 98px;
+
+text-align:center;
+
     }
 
-    .frase h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(40px,5.8vw,78px);
-      font-weight:400;
-      line-height:.88;
-      letter-spacing:-.07em;
+.frase h2{
+
+font-family:"Bricolage Grotesque",Arial,sans-serif;
+
+font-size:clamp(40px,5.8vw,78px);
+
+font-weight:400;
+
+line-height:.88;
+
+letter-spacing:-.07em;
+
     }
 
-    .frase span{
-      color:#666;
+.frase span{
+
+color:#666;
+
     }
 
-    /* =========================
+/* =========================
+
        OTROS PRODUCTOS
+
     ========================= */
-    .seguir{
-      width:min(1240px,calc(100% - 48px));
-      margin:0 auto;
-      padding:0 0 100px;
+
+.seguir{
+
+width:min(1240px,calc(100% - 48px));
+
+margin:0 auto;
+
+padding:0 0 100px;
+
     }
 
-    .seguir-cabecera{
-      margin-bottom:24px;
+.seguir-cabecera{
+
+margin-bottom:24px;
+
     }
 
-    .seguir-cabecera h2{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:clamp(42px,5.1vw,70px);
-      font-weight:400;
-      line-height:.85;
-      letter-spacing:-.065em;
+.seguir-cabecera h2{
+
+font-family:"Bricolage Grotesque",Arial,sans-serif;
+
+font-size:clamp(42px,5.1vw,70px);
+
+font-weight:400;
+
+line-height:.85;
+
+letter-spacing:-.065em;
+
     }
 
-    .productos-resto{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
+.productos-resto{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:16px;
+
     }
 
-    .producto-resto{
-      display:block;
-      min-width:0;
+.producto-resto{
+
+display:block;
+
+min-width:0;
+
     }
 
-    .producto-resto-imagen{
-      aspect-ratio:1/.9;
-      background:#f2f2ef;
-      border-radius:21px;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+.producto-resto-imagen{
+
+aspect-ratio:1/.9;
+
+background:#f2f2ef;
+
+border-radius:21px;
+
+overflow:hidden;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
     }
 
-    .producto-resto-imagen img{
-      width:87%;
-      height:87%;
-      object-fit:contain;
-      display:block;
-      transition:transform .45s cubic-bezier(.2,.8,.2,1);
+.producto-resto-imagen img{
+
+width:87%;
+
+height:87%;
+
+object-fit:contain;
+
+display:block;
+
+transition:transform .45s cubic-bezier(.2,.8,.2,1);
+
     }
 
-    .producto-resto:hover img{
-      transform:scale(1.05);
+.producto-resto:hover img{
+
+transform:scale(1.05);
+
     }
 
-    .producto-resto-info{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      gap:14px;
-      padding:13px 3px;
+.producto-resto-info{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:baseline;
+
+gap:14px;
+
+padding:13px 3px;
+
     }
 
-    .producto-resto-info h3{
-      font-family:"Bricolage Grotesque",Arial,sans-serif;
-      font-size:18px;
-      font-weight:400;
-      letter-spacing:-.03em;
+.producto-resto-info h3{
+
+font-family:"Bricolage Grotesque",Arial,sans-serif;
+
+font-size:18px;
+
+font-weight:400;
+
+letter-spacing:-.03em;
+
     }
 
-    .producto-resto-info span{
-      color:var(--suave);
-      font-size:11px;
-      white-space:nowrap;
+.producto-resto-info span{
+
+color:var(--suave);
+
+font-size:11px;
+
+white-space:nowrap;
+
     }
 
-    /* =========================
+/* =========================
+
        MARQUEE
+
     ========================= */
-    .marquee{
-      width:100%;
-      overflow:hidden;
-      border-top:1px solid var(--borde);
-      padding:28px 0;
+
+.marquee{
+
+width:100%;
+
+overflow:hidden;
+
+border-top:1px solid var(--borde);
+
+padding:28px 0;
+
     }
 
-    .marquee-track{
-      display:flex;
-      width:max-content;
-      animation:marquee 18s linear infinite;
+.marquee-track{
+
+display:flex;
+
+width:max-content;
+
+animation:marquee 18s linear infinite;
+
     }
 
-    .marquee-group{
-      display:flex;
-      align-items:center;
-      gap:72px;
-      padding-right:72px;
-      flex-shrink:0;
+.marquee-group{
+
+display:flex;
+
+align-items:center;
+
+gap:72px;
+
+padding-right:72px;
+
+flex-shrink:0;
+
     }
 
-    .marquee-group img{
-      width:148px;
-      height:auto;
-      display:block;
-      flex-shrink:0;
-      object-fit:contain;
+.marquee-group img{
+
+width:148px;
+
+height:auto;
+
+display:block;
+
+flex-shrink:0;
+
+object-fit:contain;
+
     }
 
     @keyframes marquee{
+
       from{transform:translateX(0)}
+
       to{transform:translateX(-50%)}
+
     }
 
-    /* =========================
+/* =========================
+
        TOAST
+
     ========================= */
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:22px;
-      z-index:3000;
-      transform:translate(-50%,18px);
-      opacity:0;
-      padding:12px 16px;
-      border:1px solid rgba(255,255,255,.13);
-      border-radius:999px;
-      background:rgba(20,20,20,.94);
-      color:#fff;
-      font-size:11px;
-      pointer-events:none;
-      transition:.28s ease;
-      backdrop-filter:blur(10px);
+
+.toast{
+
+position:fixed;
+
+left:50%;
+
+bottom:22px;
+
+z-index:3000;
+
+transform:translate(-50%,18px);
+
+opacity:0;
+
+padding:12px 16px;
+
+border:1px solid rgba(255,255,255,.13);
+
+border-radius:999px;
+
+background:rgba(20,20,20,.94);
+
+color:#fff;
+
+font-size:11px;
+
+pointer-events:none;
+
+transition:.28s ease;
+
+backdrop-filter:blur(10px);
+
     }
 
-    .toast.visible{
-      opacity:1;
-      transform:translate(-50%,0);
+.toast.visible{
+
+opacity:1;
+
+transform:translate(-50%,0);
+
     }
 
-    /* =========================
+/* =========================
+
        RESPONSIVE
+
     ========================= */
+
     @media(max-width:950px){
-      .producto{
-        grid-template-columns:1fr;
-        gap:28px;
-        padding-top:105px;
+
+.producto{
+
+grid-template-columns:1fr;
+
+gap:28px;
+
+padding-top:105px;
+
       }
 
-      .producto-visual{
-        min-height:500px;
+.producto-visual{
+
+min-height:500px;
+
       }
 
-      .producto-info{
-        max-width:760px;
+.producto-info{
+
+max-width:760px;
+
       }
 
-      .beneficio{
-        grid-template-columns:1fr;
+.beneficio{
+
+grid-template-columns:1fr;
+
       }
 
-      .beneficio-media{
-        min-height:420px;
+.beneficio-media{
+
+min-height:420px;
+
       }
 
-      .beneficio-copy{
-        min-height:240px;
+.beneficio-copy{
+
+min-height:240px;
+
       }
+
     }
 
     @media(max-width:700px){
-      .navbar{
-        height:68px;
-        padding:0 18px;
+
+.navbar{
+
+height:68px;
+
+padding:0 18px;
+
       }
 
-      .navbar-left{
-        gap:9px;
+.navbar-left{
+
+gap:9px;
+
       }
 
-      .logo{
-        width:94px;
+.logo{
+
+width:94px;
+
       }
 
-      .nav-eyewear{
-        display:block;
-        font-size:8px;
+.nav-eyewear{
+
+display:block;
+
+font-size:8px;
+
       }
 
-      .nav-button{
-        width:35px;
-        height:35px;
+.nav-button{
+
+width:35px;
+
+height:35px;
+
       }
 
-      .cart-badge{
-        top:-1px;
-        right:-3px;
-        min-width:16px;
-        height:16px;
-        font-size:8px;
-        line-height:16px;
+.cart-badge{
+
+top:-1px;
+
+right:-3px;
+
+min-width:16px;
+
+height:16px;
+
+font-size:8px;
+
+line-height:16px;
+
       }
 
-      .producto{
-        width:calc(100% - 28px);
-        padding:88px 0 56px;
-        gap:16px;
+.producto{
+
+width:calc(100% - 28px);
+
+padding:88px 0 56px;
+
+gap:16px;
+
       }
 
-      .producto-visual{
-        min-height:310px;
-        border-radius:24px;
+.producto-visual{
+
+min-height:310px;
+
+border-radius:24px;
+
       }
 
-      .producto-visual::before{
-        width:290px;
-        height:290px;
+.producto-visual::before{
+
+width:290px;
+
+height:290px;
+
       }
 
-      .producto-imagen-principal{
-        width:100%;
-        max-height:340px;
+.producto-imagen-principal{
+
+width:100%;
+
+max-height:340px;
+
       }
 
-      .producto-nombre{
-        font-size:58px;
-        margin-bottom:17px;
+.producto-nombre{
+
+font-size:58px;
+
+margin-bottom:17px;
+
       }
 
-      .producto-descripcion{
-        font-size:13px;
-        line-height:1.65;
+.producto-descripcion{
+
+font-size:13px;
+
+line-height:1.65;
+
       }
 
-      .precio{
-        font-size:21px;
+.precio{
+
+font-size:21px;
+
       }
 
-      .envio{
-        font-size:10px;
+.envio{
+
+font-size:10px;
+
       }
 
-      .acciones{
-        grid-template-columns:1fr;
-        gap:8px;
-        margin-bottom:17px;
+.acciones{
+
+grid-template-columns:1fr;
+
+gap:8px;
+
+margin-bottom:17px;
+
       }
 
-      .boton{
-        min-height:53px;
+.boton{
+
+min-height:53px;
+
       }
 
-      .beneficios-mini{
-        grid-template-columns:1fr 1fr;
+.beneficios-mini{
+
+grid-template-columns:1fr 1fr;
+
       }
 
-      .mini{
-        min-height:80px;
+.mini{
+
+min-height:80px;
+
       }
 
-      .mini span{
-        margin-bottom:12px;
+.mini span{
+
+margin-bottom:12px;
+
       }
 
-      .beneficios-seccion{
-        width:calc(100% - 28px);
-        padding:8px 0 72px;
+.beneficios-seccion{
+
+width:calc(100% - 28px);
+
+padding:8px 0 72px;
+
       }
 
-      .beneficios-cabecera{
-        display:block;
-        margin-bottom:18px;
+.beneficios-cabecera{
+
+display:block;
+
+margin-bottom:18px;
+
       }
 
-      .beneficios-cabecera h2{
-        font-size:43px;
+.beneficios-cabecera h2{
+
+font-size:43px;
+
       }
 
-      .beneficios-cabecera p{
-        margin-top:13px;
-        text-align:left;
-        font-size:10px;
+.beneficios-cabecera p{
+
+margin-top:13px;
+
+text-align:left;
+
+font-size:10px;
+
       }
 
-      .beneficio{
-        padding:8px;
-        gap:8px;
-        border-radius:20px;
+.beneficio{
+
+padding:8px;
+
+gap:8px;
+
+border-radius:20px;
+
       }
 
-      .beneficio-media{
-        min-height:255px;
-        aspect-ratio:1/1.07;
-        border-radius:14px;
+.beneficio-media{
+
+min-height:255px;
+
+aspect-ratio:1/1.07;
+
+border-radius:14px;
+
       }
 
-      .beneficio-copy{
-        min-height:205px;
-        padding:12px 9px 8px;
+.beneficio-copy{
+
+min-height:205px;
+
+padding:12px 9px 8px;
+
       }
 
-      .beneficio-numero{
-        margin-bottom:40px;
-        font-size:11px;
+.beneficio-numero{
+
+margin-bottom:40px;
+
+font-size:11px;
+
       }
 
-      .beneficio-copy h3{
-        font-size:35px;
-        margin-bottom:10px;
+.beneficio-copy h3{
+
+font-size:35px;
+
+margin-bottom:10px;
+
       }
 
-      .beneficio-copy p{
-        font-size:10px;
-        line-height:1.6;
+.beneficio-copy p{
+
+font-size:10px;
+
+line-height:1.6;
+
       }
 
-      .beneficio-tag{
-        margin-top:13px;
-        font-size:7px;
+.beneficio-tag{
+
+margin-top:13px;
+
+font-size:7px;
+
       }
+
 .beneficio-control{
-        width:38px;
-        height:38px;
+
+width:38px;
+
+height:38px;
+
       }
 
-      .frase{
-        width:calc(100% - 28px);
-        padding:0 0 72px;
+.frase{
+
+width:calc(100% - 28px);
+
+padding:0 0 72px;
+
       }
 
-      .frase h2{
-        font-size:47px;
+.frase h2{
+
+font-size:47px;
+
       }
 
-      .seguir{
-        width:calc(100% - 28px);
-        padding-bottom:72px;
+.seguir{
+
+width:calc(100% - 28px);
+
+padding-bottom:72px;
+
       }
 
-      .seguir-cabecera{
-        margin-bottom:18px;
+.seguir-cabecera{
+
+margin-bottom:18px;
+
       }
 
-      .seguir-cabecera h2{
-        font-size:43px;
+.seguir-cabecera h2{
+
+font-size:43px;
+
       }
 
-      .productos-resto{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
+.productos-resto{
+
+grid-template-columns:1fr 1fr;
+
+gap:10px;
+
       }
 
-      .producto-resto-imagen{
-        border-radius:14px;
+.producto-resto-imagen{
+
+border-radius:14px;
+
       }
 
-      .producto-resto-info{
-        padding:10px 2px;
+.producto-resto-info{
+
+padding:10px 2px;
+
       }
 
-      .producto-resto-info h3{
-        font-size:14px;
+.producto-resto-info h3{
+
+font-size:14px;
+
       }
 
-      .producto-resto-info span{
-        font-size:10px;
+.producto-resto-info span{
+
+font-size:10px;
+
       }
 
-      .marquee{
-        padding:22px 0;
+.marquee{
+
+padding:22px 0;
+
       }
 
-      .marquee-group{
-        gap:46px;
-        padding-right:46px;
+.marquee-group{
+
+gap:46px;
+
+padding-right:46px;
+
       }
 
-      .marquee-group img{
-        width:112px;
+.marquee-group img{
+
+width:112px;
+
       }
+
     }
 
     @media(max-width:380px){
-      .nav-eyewear{
-        font-size:7px;
-        letter-spacing:.13em;
+
+.nav-eyewear{
+
+font-size:7px;
+
+letter-spacing:.13em;
+
       }
 
-      .logo{
-        width:90px;
+.logo{
+
+width:90px;
+
       }
 
-      .producto-nombre{
-        font-size:53px;
+.producto-nombre{
+
+font-size:53px;
+
       }
 
-      .beneficios-cabecera h2,
-      .seguir-cabecera h2{
-        font-size:39px;
+.beneficios-cabecera h2,
+
+.seguir-cabecera h2{
+
+font-size:39px;
+
       }
 
-      .frase h2{
-        font-size:43px;
+.frase h2{
+
+font-size:43px;
+
       }
+
     }
+
   </style>
+
 </head>
+  <script src="vesira-navbar.js"></script>
 
 <body>
-
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="navbar-left">
@@ -968,634 +1549,1058 @@
       </a>
       <span class="nav-eyewear">EYewear</span>
     </div>
-
     <div class="navbar-actions">
       <button class="nav-button nav-cart-button" id="abrirCarrito" aria-label="Carrito">
         <span class="material-symbols-outlined">shopping_bag</span>
         <span class="cart-badge" id="cartBadge">0</span>
       </button>
-      <button class="nav-button material-symbols-outlined" id="menu" aria-label="Menú">
-        menu
-      </button>
+      <button class="nav-button material-symbols-outlined" id="menu" aria-label="Menú">menu</button>
     </div>
   </nav>
 
-  <!-- PRODUCTO -->
+
+<!-- PRODUCTO -->
+
   <main class="producto">
+
     <section class="producto-visual">
+
       <img
-        id="imagenPrincipal"
-        class="producto-imagen-principal"
-        src=""
-        alt=""
+
+id="imagenPrincipal"
+
+class="producto-imagen-principal"
+
+src=""
+
+alt=""
+
       >
+
     </section>
 
     <section class="producto-info">
+
       <h1 class="producto-nombre" id="productoNombre">Cargando...</h1>
 
       <p class="producto-descripcion" id="productoDescripcion"></p>
 
       <div class="precio-linea">
+
         <span class="precio" id="productoPrecio"></span>
+
         <span class="envio">Envío gratis</span>
+
       </div>
 
       <div class="acciones">
+
         <button class="boton boton-carrito" id="botonCarrito">
+
           Añadir al carrito
+
           <span class="material-symbols-outlined">shopping_bag</span>
+
         </button>
 
         <button class="boton boton-comprar" id="botonComprar">
+
           Comprar ahora
+
           <span class="material-symbols-outlined">arrow_forward</span>
+
         </button>
+
       </div>
 
       <div class="beneficios-mini">
+
         <div class="mini">
+
           <span class="material-symbols-outlined">local_shipping</span>
+
           <strong>Envío gratis</strong>
+
           <p>En todos los pedidos.</p>
+
         </div>
 
         <div class="mini">
+
           <span class="material-symbols-outlined">schedule</span>
+
           <strong>Entrega en menos de 5 días</strong>
+
           <p>Entrega rápida.</p>
+
         </div>
 
         <div class="mini">
+
           <span class="material-symbols-outlined">location_on</span>
+
           <strong>Seguimiento</strong>
+
           <p>Información del pedido.</p>
+
         </div>
 
         <div class="mini">
+
           <span class="material-symbols-outlined">replay</span>
+
           <strong>Devolución</strong>
+
           <p>Solución si existe un problema.</p>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
-  <!-- BENEFICIOS -->
+<!-- BENEFICIOS -->
+
   <section class="beneficios-seccion">
+
     <div class="beneficios-cabecera">
+
       <div>
+
         <span class="beneficios-eyebrow">GAFAS LUZ AZUL</span>
+
         <h2>Hechas para mejorar tu día</h2>
+
       </div>
+
     </div>
 
     <div class="beneficios-grid">
 
       <article class="beneficio">
+
         <div class="beneficio-media">
+
           <img class="beneficio-before" src="img/beneficios/beneficio-1-sin.jpg" alt="">
+
           <img class="beneficio-after" id="after1" src="img/beneficios/beneficio-1-con.jpg" alt="">
+
           <div class="beneficio-linea" id="linea1"></div>
+
           <div class="beneficio-control" aria-hidden="true">
+
             <span class="material-symbols-outlined">chevron_left</span>
+
             <span class="material-symbols-outlined">chevron_right</span>
+
           </div>
+
           <input class="beneficio-slider" id="slider1" type="range" min="0" max="100" value="50" aria-label="Comparar protección de la vista">
+
         </div>
+
         <div class="beneficio-overlay">
+
           <h3>Cuida tu mirada</h3>
+
         </div>
+
       </article>
 
       <article class="beneficio">
+
         <div class="beneficio-media">
+
           <img class="beneficio-before" src="img/beneficios/beneficio-2-sin.jpg" alt="">
+
           <img class="beneficio-after" id="after2" src="img/beneficios/beneficio-2-con.jpg" alt="">
+
           <div class="beneficio-linea" id="linea2"></div>
+
           <div class="beneficio-control" aria-hidden="true">
+
             <span class="material-symbols-outlined">chevron_left</span>
+
             <span class="material-symbols-outlined">chevron_right</span>
+
           </div>
+
           <input class="beneficio-slider" id="slider2" type="range" min="0" max="100" value="50" aria-label="Comparar mantenimiento del foco">
+
         </div>
+
         <div class="beneficio-overlay">
+
           <h3>Descansa como nunca</h3>
+
         </div>
+
       </article>
 
       <article class="beneficio">
+
         <div class="beneficio-media">
+
           <img class="beneficio-before" src="img/beneficios/beneficio-3-sin.jpg" alt="">
+
           <img class="beneficio-after" id="after3" src="img/beneficios/beneficio-3-con.jpg" alt="">
+
           <div class="beneficio-linea" id="linea3"></div>
+
           <div class="beneficio-control" aria-hidden="true">
+
             <span class="material-symbols-outlined">chevron_left</span>
+
             <span class="material-symbols-outlined">chevron_right</span>
+
           </div>
+
           <input class="beneficio-slider" id="slider3" type="range" min="0" max="100" value="50" aria-label="Comparar descanso">
+
         </div>
+
         <div class="beneficio-overlay">
+
           <h3>Mejora tu productividad</h3>
+
         </div>
+
       </article>
 
     </div>
+
   </section>
 
-  <!-- FRASE -->
+<!-- FRASE -->
+
   <section class="frase">
+
     <h2>
+
       Diseñadas para<br>
+
       <span>mirar más allá</span>
+
     </h2>
+
   </section>
 
-  <!-- OTROS PRODUCTOS -->
+<!-- OTROS PRODUCTOS -->
+
   <section class="seguir">
+
     <div class="seguir-cabecera">
+
       <h2>Sigue mirando</h2>
+
     </div>
 
     <div class="productos-resto" id="productosResto"></div>
+
   </section>
 
-  <!-- MARQUEE -->
+<!-- MARQUEE -->
+
   <section class="marquee">
+
     <div class="marquee-track">
+
       <div class="marquee-group">
+
         <img src="img/logo2.png" alt="Vesira">
+
         <img src="img/logo15.png" alt="">
+
         <img src="img/logo2.png" alt="Vesira">
+
         <img src="img/logo15.png" alt="">
+
         <img src="img/logo2.png" alt="Vesira">
+
         <img src="img/logo15.png" alt="">
+
       </div>
 
       <div class="marquee-group">
+
         <img src="img/logo2.png" alt="Vesira">
+
         <img src="img/logo15.png" alt="">
+
         <img src="img/logo2.png" alt="Vesira">
+
         <img src="img/logo15.png" alt="">
+
         <img src="img/logo2.png" alt="Vesira">
+
         <img src="img/logo15.png" alt="">
+
       </div>
+
     </div>
+
   </section>
 
   <div class="toast" id="toast">Añadido al carrito</div>
 
-  <!-- SUPABASE -->
+<!-- SUPABASE -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="supabase.js"></script>
 
   <script>
+
     const imagenPrincipal = document.getElementById("imagenPrincipal");
+
     const productoNombre = document.getElementById("productoNombre");
+
     const productoDescripcion = document.getElementById("productoDescripcion");
+
     const productoPrecio = document.getElementById("productoPrecio");
+
     const productosResto = document.getElementById("productosResto");
 
     const botonCarrito = document.getElementById("botonCarrito");
+
     const botonComprar = document.getElementById("botonComprar");
 
-    const abrirCarrito = document.getElementById("abrirCarrito");
-    const cartBadge = document.getElementById("cartBadge");
-    const menu = document.getElementById("menu");
-    const logoBack = document.getElementById("logoBack");
+    let abrirCarrito = null;
+
+    let cartBadge = null;
+
+    let menu = null;
+
+    let logoBack = null;
+
     const toast = document.getElementById("toast");
 
     const params = new URLSearchParams(window.location.search);
+
     const productoId = params.get("id");
 
     let productoActual = null;
 
-    /* =========================
+/* =========================
+
        TOAST
+
     ========================= */
+
     function mostrarToast(mensaje){
+
       toast.textContent = mensaje;
+
       toast.classList.add("visible");
 
-      clearTimeout(window._vesiraToast);
-      window._vesiraToast = setTimeout(() => {
+clearTimeout(window._vesiraToast);
+
+window._vesiraToast = setTimeout(() => {
+
         toast.classList.remove("visible");
+
       }, 1800);
+
     }
 
-    /* =========================
+/* =========================
+
        NAVEGACIÓN
+
     ========================= */
-    logoBack.addEventListener("click", (event) => {
-      event.preventDefault();
 
-      if(history.length > 1){
-        history.back();
-      }else{
-        window.location.href = "index.html";
+    function inicializarNavbarProducto(){
+
+      abrirCarrito = document.getElementById("abrirCarrito");
+
+      cartBadge = document.getElementById("cartBadge");
+
+      menu = document.getElementById("menu");
+
+      logoBack = document.getElementById("logoBack");
+
+      if(logoBack){
+
+        logoBack.addEventListener("click", (event) => {
+
+          event.preventDefault();
+
+          if(history.length > 1){
+
+            history.back();
+
+          }else{
+
+            window.location.href = "index.html";
+
+          }
+
+        });
+
       }
-    });
 
-    abrirCarrito.addEventListener("click", () => {
-      window.location.href = "carrito.html";
-    });
+      if(abrirCarrito){
 
-    menu.addEventListener("click", () => {
-      mostrarToast("Menú");
-    });
+        abrirCarrito.addEventListener("click", () => {
 
-    /* =========================
+          window.location.href = "carrito.html";
+
+        });
+
+      }
+
+      if(menu){
+
+        menu.addEventListener("click", () => {
+
+          mostrarToast("Menú");
+
+        });
+
+      }
+
+      actualizarContadorCarrito();
+
+    }
+
+    if(document.readyState === "loading"){
+
+      document.addEventListener("DOMContentLoaded", inicializarNavbarProducto, {once:true});
+
+    }else{
+
+      inicializarNavbarProducto();
+
+    }
+
+/* =========================
+
        CARRITO
+
     ========================= */
+
     function obtenerCarrito(){
+
       try{
+
         return JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+
       }catch{
+
         return [];
+
       }
+
     }
 
     function guardarCarrito(carrito){
-      localStorage.setItem("vesiraCarrito", JSON.stringify(carrito));
+
+localStorage.setItem("vesiraCarrito", JSON.stringify(carrito));
+
       actualizarContadorCarrito();
+
     }
 
     function totalProductosCarrito(){
+
       return obtenerCarrito().reduce(
+
         (total, item) => total + Math.max(0, Number(item.cantidad || 0)),
+
         0
+
       );
+
     }
 
     function actualizarContadorCarrito(){
-      const total = totalProductosCarrito();
-
-      if(total <= 0){
-        cartBadge.style.display = "none";
-        cartBadge.textContent = "0";
-        return;
-      }
-
-      cartBadge.textContent = total > 99 ? "99+" : String(total);
-      cartBadge.style.display = "flex";
-
-      cartBadge.classList.remove("bump");
-      void cartBadge.offsetWidth;
-      cartBadge.classList.add("bump");
+      window.dispatchEvent(new CustomEvent("vesiraCartUpdated",{detail:{bump:true}}));
     }
 
     function animarGafasAlCarrito(){
+
       const origen = document.getElementById("imagenPrincipal");
+
       const destino = abrirCarrito;
 
       if(!origen || !destino || !origen.getBoundingClientRect().width) return;
 
       const start = origen.getBoundingClientRect();
+
       const end = destino.getBoundingClientRect();
 
       const clon = origen.cloneNode(true);
+
       clon.className = "cart-fly";
+
       clon.removeAttribute("id");
 
       const startSize = Math.min(Math.max(start.width * 0.34, 92), 175);
 
       clon.style.width = startSize + "px";
+
       clon.style.height = startSize + "px";
+
       clon.style.left = (start.left + start.width / 2 - startSize / 2) + "px";
+
       clon.style.top = (start.top + start.height / 2 - startSize / 2) + "px";
+
       clon.style.opacity = "1";
+
       clon.style.transform = "translate3d(0,0,0) scale(1) rotate(0deg)";
 
-      document.body.appendChild(clon);
+document.body.appendChild(clon);
 
       const startX = start.left + start.width / 2;
+
       const startY = start.top + start.height / 2;
+
       const endX = end.left + end.width / 2;
+
       const endY = end.top + end.height / 2;
 
       const targetX = endX - startX;
+
       const targetY = endY - startY;
 
       const lift = Math.min(-145, targetY * 0.35 - 90);
+
       const animation = clon.animate(
+
         [
+
           {
+
             transform:"translate3d(0,0,0) scale(1) rotate(0deg)",
+
             opacity:1,
+
             offset:0
+
           },
+
           {
+
             transform:`translate3d(${targetX * .26}px, ${targetY * .12 + lift}px, 0) scale(.90) rotate(-8deg)`,
+
             opacity:1,
+
             offset:.24
+
           },
+
           {
+
             transform:`translate3d(${targetX * .62}px, ${targetY * .38 + lift * .70}px, 0) scale(.66) rotate(7deg)`,
+
             opacity:1,
+
             offset:.56
+
           },
+
           {
+
             transform:`translate3d(${targetX * .88}px, ${targetY * .74}px, 0) scale(.36) rotate(-5deg)`,
+
             opacity:.96,
+
             offset:.82
+
           },
+
           {
+
             transform:`translate3d(${targetX}px, ${targetY}px, 0) scale(.08) rotate(12deg)`,
+
             opacity:0,
+
             offset:1
+
           }
+
         ],
+
         {
+
           duration:1320,
+
           easing:"cubic-bezier(.16,.78,.22,1)"
+
         }
+
       );
 
       abrirCarrito.animate(
+
         [
+
           {transform:"scale(1)"},
+
           {transform:"scale(1.05)", offset:.5},
+
           {transform:"scale(1)"}
+
         ],
+
         {duration:1320, easing:"ease-out"}
+
       );
 
       animation.onfinish = () => {
+
         clon.remove();
 
         abrirCarrito.animate(
+
           [
+
             {transform:"scale(1)", background:"transparent"},
+
             {transform:"scale(1.16)", background:"rgba(255,255,255,.11)"},
+
             {transform:"scale(1)", background:"transparent"}
+
           ],
+
           {duration:380, easing:"ease-out"}
+
         );
+
       };
+
     }
 
     function agregarAlCarrito(){
+
       if(!productoActual) return;
 
       const carrito = obtenerCarrito();
 
       const existente = carrito.find(
-        item => String(item.id) === String(productoActual.id)
+
+item => String(item.id) === String(productoActual.id)
+
       );
 
       if(existente){
+
         existente.cantidad += 1;
+
       }else{
+
         carrito.push({
+
           id: productoActual.id,
+
           nombre: productoActual.nombre,
+
           precio: Number(productoActual.precio),
+
           imagen: productoActual.imagen_url,
+
           cantidad: 1
+
         });
+
       }
 
       guardarCarrito(carrito);
+
       animarGafasAlCarrito();
+
       mostrarToast("Añadido al carrito");
+
     }
 
     botonCarrito.addEventListener("click", agregarAlCarrito);
+
     actualizarContadorCarrito();
 
     botonComprar.addEventListener("click", () => {
+
       if(!productoActual) return;
 
       guardarCarrito([{
+
         id: productoActual.id,
+
         nombre: productoActual.nombre,
+
         precio: Number(productoActual.precio),
+
         imagen: productoActual.imagen_url,
+
         cantidad: 1
+
       }]);
 
-      window.location.href = "carrito.html";
+window.location.href = "carrito.html";
+
     });
 
-    /* =========================
+/* =========================
+
        SLIDERS DE BENEFICIOS
+
     ========================= */
+
     function activarComparador(numero){
+
       const slider = document.getElementById(`slider${numero}`);
+
       const after = document.getElementById(`after${numero}`);
+
       const linea = document.getElementById(`linea${numero}`);
+
       const control = slider.parentElement.querySelector(".beneficio-control");
+
       const media = slider.parentElement;
 
       let target = 50;
+
       let current = 50;
+
       let velocity = 0;
+
       let raf = null;
+
       let dragging = false;
+
       let interacted = false;
 
       function loop(){
+
         const delta = target - current;
 
-        // Smooth spring-like follow. Fast enough for dragging, soft enough to look fluid.
+// Smooth spring-like follow. Fast enough for dragging, soft enough to look fluid.
+
         velocity += delta * 0.055;
+
         velocity *= 0.72;
+
         current += velocity;
 
         if(Math.abs(delta) < 0.025 && Math.abs(velocity) < 0.025){
+
           current = target;
+
           velocity = 0;
+
         }
 
         after.style.clipPath = `inset(0 ${100 - current}% 0 0)`;
+
         linea.style.left = `${current}%`;
+
         control.style.left = `${current}%`;
 
         if(Math.abs(target-current) > 0.025 || Math.abs(velocity) > 0.025){
+
           raf = requestAnimationFrame(loop);
+
         }else{
+
           raf = null;
+
         }
+
       }
 
       function aplicar(valor){
+
         target = Math.max(0, Math.min(100, Number(valor)));
+
         slider.value = target;
 
         if(!raf){
+
           raf = requestAnimationFrame(loop);
+
         }
+
       }
 
       function desdePunto(clientX){
+
         const rect = media.getBoundingClientRect();
+
         if(!rect.width) return;
+
         const porcentaje = ((clientX - rect.left) / rect.width) * 100;
+
         aplicar(porcentaje);
+
       }
 
       slider.addEventListener("input", () => {
+
         interacted = true;
+
         aplicar(Number(slider.value));
+
       });
 
       media.addEventListener("pointerdown", (event) => {
+
         interacted = true;
+
         dragging = true;
-        event.preventDefault();
+
+event.preventDefault();
+
         desdePunto(event.clientX);
 
         if(media.setPointerCapture){
+
           try{ media.setPointerCapture(event.pointerId); }catch{}
+
         }
+
       });
 
       media.addEventListener("pointermove", (event) => {
+
         if(!dragging) return;
-        event.preventDefault();
+
+event.preventDefault();
+
         desdePunto(event.clientX);
+
       }, {passive:false});
 
       media.addEventListener("pointerup", (event) => {
+
         dragging = false;
+
         if(media.releasePointerCapture){
+
           try{ media.releasePointerCapture(event.pointerId); }catch{}
+
         }
+
       });
 
       media.addEventListener("pointercancel", () => {
+
         dragging = false;
+
       });
 
       aplicar(50);
 
-      // On load: all three show an obvious smooth movement and then stop at center.
-      setTimeout(() => {
+// On load: all three show an obvious smooth movement and then stop at center.
+
+setTimeout(() => {
+
         if(!interacted) aplicar(25);
+
       }, 700 + numero * 120);
 
-      setTimeout(() => {
+setTimeout(() => {
+
         if(!interacted) aplicar(60);
+
       }, 1400 + numero * 120);
 
-      setTimeout(() => {
+setTimeout(() => {
+
         if(!interacted) aplicar(50);
+
       }, 2200 + numero * 120);
+
     }
 
     activarComparador(1);
+
     activarComparador(2);
+
     activarComparador(3);
 
-    /* =========================
+/* =========================
+
        CARGAR PRODUCTO
+
     ========================= */
+
     async function cargarProducto(){
+
       if(!productoId){
+
         productoNombre.textContent = "Producto no encontrado";
+
         return;
+
       }
 
       const { data, error } = await supabaseClient
+
         .from("Productos")
+
         .select(`
+
           id,
+
           nombre,
+
           descripcion,
+
           precio,
+
           imagen_url,
+
           categoria,
+
           activo
+
         `)
+
         .eq("id", productoId)
+
         .single();
 
       if(error){
-        console.error("Error cargando producto:", error);
+
+console.error("Error cargando producto:", error);
+
         productoNombre.textContent = "No se ha podido cargar";
+
         return;
+
       }
 
       if(!data || !data.activo){
+
         productoNombre.textContent = "Producto no disponible";
+
         return;
+
       }
 
       productoActual = data;
 
       productoNombre.textContent = data.nombre || "";
+
       productoDescripcion.textContent = data.descripcion || "";
 
       productoPrecio.textContent =
+
         `${Number(data.precio).toFixed(2).replace(".", ",")} €`;
 
-      document.title = `${data.nombre || "Producto"} · Vesira`;
+document.title = `${data.nombre || "Producto"} · Vesira`;
 
       if(data.imagen_url){
+
         imagenPrincipal.src = data.imagen_url;
+
         imagenPrincipal.alt = data.nombre || "Vesira";
+
       }
 
       await cargarRestoProductos(data.id);
+
     }
 
-    /* =========================
+/* =========================
+
        RESTO DE PRODUCTOS
+
     ========================= */
+
     async function cargarRestoProductos(idActual){
+
       const { data, error } = await supabaseClient
+
         .from("Productos")
+
         .select(`
+
           id,
+
           nombre,
+
           precio,
+
           imagen_url,
+
           activo
+
         `)
+
         .eq("activo", true)
+
         .neq("id", idActual)
+
         .limit(6);
 
       if(error){
-        console.error("Error cargando productos relacionados:", error);
+
+console.error("Error cargando productos relacionados:", error);
+
         return;
+
       }
 
       productosResto.innerHTML = "";
 
       if(!data || !data.length){
+
         return;
+
       }
 
       data.forEach(producto => {
+
         const item = document.createElement("a");
+
         item.className = "producto-resto";
+
         item.href = `producto.html?id=${encodeURIComponent(producto.id)}`;
 
         const precio = Number(producto.precio)
+
           .toFixed(2)
+
           .replace(".", ",");
 
         item.innerHTML = `
+
           <div class="producto-resto-imagen">
+
             <img
+
               src="${producto.imagen_url || ""}"
+
               alt="${producto.nombre || "Vesira"}"
+
               loading="lazy"
+
             >
+
           </div>
 
           <div class="producto-resto-info">
+
             <h3>${producto.nombre || ""}</h3>
+
             <span>${precio} €</span>
+
           </div>
+
         `;
 
         productosResto.appendChild(item);
+
       });
+
     }
 
     cargarProducto();
+
   </script>
+
 </body>
+
 </html>
