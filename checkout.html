@@ -257,48 +257,19 @@
 
     .address-wrap{
       position:relative;
+      width:100%;
     }
 
-    .address-suggestions{
-      position:absolute;
-      top:calc(100% + 6px);
-      left:0;
-      right:0;
-      display:none;
-      z-index:200;
-      overflow:hidden;
-      border:1px solid var(--b);
-      border-radius:14px;
-      background:#151515;
-      box-shadow:0 18px 45px rgba(0,0,0,.45);
-    }
-
-    .address-suggestions.show{
-      display:block;
-    }
-
-    .address-suggestion{
+    .address-wrap gmp-place-autocomplete{
       display:block;
       width:100%;
-      padding:13px 14px;
-      border:0;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      background:transparent;
-      color:#fff;
-      text-align:left;
-      cursor:pointer;
-      font-size:12px;
-      line-height:1.4;
-    }
-
-    .address-suggestion:last-child{
-      border-bottom:0;
-    }
-
-    .address-suggestion:hover,
-    .address-suggestion:focus{
-      background:#202020;
-      outline:none;
+      --gmpx-color-surface:#101010;
+      --gmpx-color-on-surface:#fff;
+      --gmpx-color-on-surface-variant:#8c8c8c;
+      --gmpx-color-primary:#fff;
+      --gmpx-color-outline:rgba(255,255,255,.10);
+      --gmpx-font-family:"Outfit",Arial,sans-serif;
+      --gmpx-font-size:12px;
     }
 
     .address-status{
@@ -647,307 +618,194 @@
             "PON_AQUI_TU_CLAVE_VESIRA_CHECKOUT"
         ) {
           setAddressStatus(
-            "Puedes escribir la dirección manualmente.",
+            "Introduce tu dirección manualmente.",
             "error"
           );
           return;
         }
 
-        const { AutocompleteSuggestion } =
-          await google.maps.importLibrary("places");
+        await google.maps.importLibrary("places");
 
-        googlePlacesReady = true;
+        const container =
+          document.getElementById("direccion-autocomplete");
 
-        const input =
+        const hiddenInput =
           document.getElementById("direccion");
 
-        const suggestionsBox =
-          document.getElementById(
-            "address-suggestions"
-          );
-
-        if (!input || !suggestionsBox) {
+        if (!container || !hiddenInput) {
           return;
         }
 
-        input.addEventListener(
-          "input",
-          async () => {
-            const value =
-              input.value.trim();
+        const autocomplete =
+          new google.maps.places.PlaceAutocompleteElement({
+            includedRegionCodes: ["es"]
+          });
 
-            const requestId =
-              ++latestAutocompleteRequest;
+        autocomplete.placeholder =
+          "Empieza a escribir tu dirección...";
 
-            if (value.length < 3) {
-              suggestionsBox.replaceChildren();
-              suggestionsBox.classList.remove(
-                "show"
-              );
-              return;
-            }
+        autocomplete.includedRegionCodes = ["es"];
+        autocomplete.requestedLanguage = "es";
+        autocomplete.requestedRegion = "es";
+        autocomplete.setAttribute(
+          "aria-label",
+          "Dirección de entrega"
+        );
 
+        container.replaceChildren(autocomplete);
+
+        autocomplete.addEventListener(
+          "gmp-select",
+          async (event) => {
             try {
-              const { suggestions } =
-                await AutocompleteSuggestion
-                  .fetchAutocompleteSuggestions({
-                    input: value,
-                    includedRegionCodes: ["es"],
-                    language: "es",
-                    region: "es"
-                  });
+              const prediction =
+                event.placePrediction;
 
-              if (
-                requestId !==
-                latestAutocompleteRequest
-              ) {
+              if (!prediction) {
                 return;
               }
 
-              suggestionsBox.replaceChildren();
+              const place =
+                prediction.toPlace();
 
-              const placeSuggestions =
-                (suggestions || []).filter(
-                  suggestion =>
-                    suggestion.placePrediction
-                );
+              await place.fetchFields({
+                fields: [
+                  "addressComponents",
+                  "formattedAddress"
+                ]
+              });
 
-              placeSuggestions
-                .slice(0, 5)
-                .forEach(suggestion => {
-                  const prediction =
-                    suggestion.placePrediction;
+              let street = "";
+              let streetNumber = "";
+              let city = "";
+              let postalCode = "";
+              let countryCode = "ES";
 
-                  const button =
-                    document.createElement(
-                      "button"
-                    );
+              for (const component of place.addressComponents || []) {
+                const types = component.types || [];
+                const longText = component.longText || "";
+                const shortText = component.shortText || "";
 
-                  button.type = "button";
-                  button.className =
-                    "address-suggestion";
+                if (types.includes("route")) {
+                  street = longText;
+                }
 
-                  button.textContent =
-                    prediction.text?.toString() ||
-                    "Dirección";
+                if (types.includes("street_number")) {
+                  streetNumber = longText;
+                }
 
-                  button.addEventListener(
-                    "mousedown",
-                    event => {
-                      event.preventDefault();
-                    }
-                  );
+                if (
+                  !city &&
+                  (
+                    types.includes("locality") ||
+                    types.includes("postal_town") ||
+                    types.includes("sublocality") ||
+                    types.includes("sublocality_level_1")
+                  )
+                ) {
+                  city = longText;
+                }
 
-                  button.addEventListener(
-                    "click",
-                    async () => {
-                      try {
-                        const place =
-                          prediction.toPlace();
+                if (types.includes("postal_code")) {
+                  postalCode = longText;
+                }
 
-                        await place.fetchFields({
-                          fields: [
-                            "addressComponents",
-                            "formattedAddress"
-                          ]
-                        });
+                if (types.includes("country")) {
+                  countryCode = shortText || "ES";
+                }
+              }
 
-                        let street = "";
-                        let streetNumber = "";
-                        let city = "";
-                        let postalCode = "";
-                        let countryCode = "ES";
+              const direccion =
+                [street, streetNumber]
+                  .filter(Boolean)
+                  .join(" ") ||
+                place.formattedAddress ||
+                "";
 
-                        for (
-                          const component of
-                          place.addressComponents || []
-                        ) {
-                          const types =
-                            component.types || [];
+              hiddenInput.value = direccion;
 
-                          const longText =
-                            component.longText || "";
+              const cityInput =
+                document.getElementById("ciudad");
+              const postalInput =
+                document.getElementById("codigoPostal");
+              const country =
+                document.getElementById("pais");
 
-                          const shortText =
-                            component.shortText || "";
+              if (cityInput) {
+                cityInput.value = city;
+              }
 
-                          if (
-                            types.includes("route")
-                          ) {
-                            street = longText;
-                          }
+              if (postalInput) {
+                postalInput.value = postalCode;
+              }
 
-                          if (
-                            types.includes(
-                              "street_number"
-                            )
-                          ) {
-                            streetNumber =
-                              longText;
-                          }
+              if (country && countryCode === "ES") {
+                country.value = "España";
+              }
 
-                          if (
-                            !city &&
-                            (
-                              types.includes(
-                                "locality"
-                              ) ||
-                              types.includes(
-                                "postal_town"
-                              ) ||
-                              types.includes(
-                                "sublocality"
-                              ) ||
-                              types.includes(
-                                "sublocality_level_1"
-                              )
-                            )
-                          ) {
-                            city = longText;
-                          }
-
-                          if (
-                            types.includes(
-                              "postal_code"
-                            )
-                          ) {
-                            postalCode =
-                              longText;
-                          }
-
-                          if (
-                            types.includes("country")
-                          ) {
-                            countryCode =
-                              shortText || "ES";
-                          }
-                        }
-
-                        const direccion =
-                          [street, streetNumber]
-                            .filter(Boolean)
-                            .join(" ") ||
-                          place.formattedAddress ||
-                          "";
-
-                        input.value =
-                          direccion;
-
-                        const cityInput =
-                          document.getElementById(
-                            "ciudad"
-                          );
-
-                        const postalInput =
-                          document.getElementById(
-                            "codigoPostal"
-                          );
-
-                        const country =
-                          document.getElementById(
-                            "pais"
-                          );
-
-                        if (cityInput) {
-                          cityInput.value = city;
-                        }
-
-                        if (postalInput) {
-                          postalInput.value =
-                            postalCode;
-                        }
-
-                        if (
-                          country &&
-                          countryCode === "ES"
-                        ) {
-                          country.value =
-                            "España";
-                        }
-
-                        suggestionsBox
-                          .replaceChildren();
-
-                        suggestionsBox
-                          .classList.remove(
-                            "show"
-                          );
-
-                        setAddressStatus(
-                          "Dirección seleccionada. La comprobaremos antes de continuar.",
-                          "ok"
-                        );
-                      } catch (error) {
-                        console.error(
-                          "Google Places selection error:",
-                          error
-                        );
-
-                        setAddressStatus(
-                          "No se pudieron completar todos los datos. Puedes corregirlos manualmente.",
-                          "error"
-                        );
-                      }
-                    }
-                  );
-
-                  suggestionsBox.appendChild(
-                    button
-                  );
-                });
-
-              suggestionsBox.classList.toggle(
-                "show",
-                placeSuggestions.length > 0
+              setAddressStatus(
+                "Dirección seleccionada. La comprobaremos antes de continuar.",
+                "ok"
               );
             } catch (error) {
               console.error(
-                "Google Places autocomplete error:",
+                "Google Places selection error:",
                 error
               );
 
-              suggestionsBox
-                .replaceChildren();
-
-              suggestionsBox.classList.remove(
-                "show"
-              );
-            }
-          }
-        );
-
-        document.addEventListener(
-          "click",
-          event => {
-            if (
-              event.target !== input &&
-              !suggestionsBox.contains(
-                event.target
-              )
-            ) {
-              suggestionsBox.classList.remove(
-                "show"
+              setAddressStatus(
+                "No se pudieron completar los datos de la dirección.",
+                "error"
               );
             }
           }
         );
 
         setAddressStatus(
-          "Empieza a escribir para buscar tu dirección.",
+          "Empieza a escribir y selecciona una de las sugerencias.",
           ""
         );
-      } catch (error) {
-        googlePlacesReady = false;
 
+      } catch (error) {
         console.error(
           "Google Places no disponible:",
           error
         );
 
         setAddressStatus(
-          "Puedes escribir la dirección manualmente.",
+          "Google no está disponible ahora. Puedes escribir la dirección manualmente.",
           "error"
         );
+
+        // Fallback manual si el widget no carga.
+        const container =
+          document.getElementById("direccion-autocomplete");
+        const hiddenInput =
+          document.getElementById("direccion");
+
+        if (container && hiddenInput) {
+          const input = document.createElement("input");
+          input.type = "text";
+          input.id = "direccion-fallback";
+          input.autocomplete = "street-address";
+          input.placeholder = "Calle y número";
+          input.required = true;
+          input.style.width = "100%";
+          input.style.minHeight = "48px";
+          input.style.padding = "0 13px";
+          input.style.border = "1px solid var(--b)";
+          input.style.borderRadius = "13px";
+          input.style.background = "var(--input)";
+          input.style.color = "#fff";
+          input.style.outline = "none";
+          input.style.fontSize = "12px";
+
+          input.addEventListener("input", () => {
+            hiddenInput.value = input.value;
+          });
+
+          container.replaceChildren(input);
+        }
       }
     }
 
