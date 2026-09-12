@@ -18,7 +18,7 @@
 
   <style>
 
-*:root{
+:root{
 
   --fondo:#0c0c0c;
 
@@ -38,13 +38,13 @@ html{scroll-behavior:smooth}
 
 body{
 
-  background:var(--fondo);
+background:var(--fondo);
 
-  color:var(--texto);
+color:var(--texto);
 
-  font-family:"Outfit",Arial,sans-serif;
+font-family:"Outfit",Arial,sans-serif;
 
-  overflow-x:hidden;
+overflow-x:hidden;
 
 }
 
@@ -54,41 +54,41 @@ button{font:inherit}
 
 .intro{
 
-  position:fixed;
+position:fixed;
 
-  top:0;
+top:0;
 
-  left:0;
+left:0;
 
-  width:100%;
+width:100%;
 
-  height:74px;
+height:74px;
 
-  z-index:10000;
+z-index:10000;
 
-  display:flex;
+display:flex;
 
-  align-items:center;
+align-items:center;
 
-  justify-content:center;
+justify-content:center;
 
-  padding:0 24px;
+padding:0 24px;
 
-  background:rgba(10,10,10,.92);
+background:rgba(10,10,10,.92);
 
-  border-bottom:1px solid rgba(255,255,255,.08);
+border-bottom:1px solid rgba(255,255,255,.08);
 
-  backdrop-filter:blur(18px);
+backdrop-filter:blur(18px);
 
-  -webkit-backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
 
-  opacity:1;
+opacity:1;
 
-  visibility:visible;
+visibility:visible;
 
-  pointer-events:auto;
+pointer-events:auto;
 
-  transition:opacity .55s cubic-bezier(.2,.8,.2,1),visibility .55s ease;
+transition:opacity .55s cubic-bezier(.2,.8,.2,1),visibility .55s ease;
 
 }
 
@@ -96,21 +96,21 @@ button{font:inherit}
 
 .eslogan{
 
-  width:min(450px,82vw);
+width:min(450px,82vw);
 
-  max-height:100px;
+max-height:100px;
 
-  height:auto;
+height:auto;
 
-  object-fit:contain;
+object-fit:contain;
 
-  display:block;
+display:block;
 
-  transform:translateY(10px);
+transform:translateY(10px);
 
-  opacity:0;
+opacity:0;
 
-  animation:introSloganIn .8s cubic-bezier(.16,.78,.22,1) .08s forwards;
+animation:introSloganIn .8s cubic-bezier(.16,.78,.22,1) .08s forwards;
 
 }
 
@@ -144,15 +144,15 @@ button{font:inherit}
 
 .producto-row{
 
-  display:grid;
+display:grid;
 
-  grid-template-columns:minmax(0,1fr) auto;
+grid-template-columns:minmax(0,1fr) auto;
 
-  align-items:center;
+align-items:center;
 
-  gap:12px;
+gap:12px;
 
-  width:100%;
+width:100%;
 
 }
 
@@ -160,27 +160,27 @@ button{font:inherit}
 
 .producto-nombre{
 
-  display:block;
+display:block;
 
-  min-width:0;
+min-width:0;
 
-  font-family:"Bricolage Grotesque",sans-serif;
+font-family:"Bricolage Grotesque",sans-serif;
 
-  font-size:19px;
+font-size:21px;
 
-  font-weight:500;
+font-weight:500;
 
-  line-height:1;
+line-height:1;
 
-  letter-spacing:-.028em;
+letter-spacing:-.028em;
 
-  white-space:nowrap;
+white-space:nowrap;
 
-  overflow:hidden;
+overflow:hidden;
 
-  text-overflow:ellipsis;
+text-overflow:ellipsis;
 
-  text-shadow:0 1px 18px rgba(255,255,255,.05);
+text-shadow:0 1px 18px rgba(255,255,255,.05);
 
 }
 
@@ -188,75 +188,75 @@ button{font:inherit}
 
 .producto-precio{
 
-  justify-self:end;
+justify-self:end;
 
-  margin-left:8px;
+margin-left:8px;
 
-  padding:0;
+padding:0;
 
-  border:0;
+border:0;
 
-  border-radius:0;
+border-radius:0;
 
-  background:transparent;
+background:transparent;
 
-  font-size:12px;
+font-size:14px;
 
-  font-weight:600;
+font-weight:600;
 
-  line-height:1;
+line-height:1;
 
-  white-space:nowrap;
+white-space:nowrap;
 
-  letter-spacing:.01em;
+letter-spacing:.01em;
 
 }
 
 .producto-anadir{
 
-  position:absolute;
+position:absolute;
 
-  top:20px;
+top:20px;
 
-  right:20px;
+right:20px;
 
-  z-index:3;
+z-index:3;
 
-  width:40px;
+width:40px;
 
-  height:40px;
+height:40px;
 
-  padding:0;
+padding:0;
 
-  border:1px solid rgba(255,255,255,.16);
+border:1px solid rgba(255,255,255,.16);
 
-  border-radius:50%;
+border-radius:50%;
 
-  background:#fff;
+background:#fff;
 
-  color:#0c0c0c;
+color:#0c0c0c;
 
-  display:inline-flex;
+display:inline-flex;
 
-  align-items:center;
+align-items:center;
 
-  justify-content:center;
+justify-content:center;
 
-  cursor:pointer;
+cursor:pointer;
 
-  box-shadow:0 6px 18px rgba(0,0,0,.20);
+box-shadow:0 6px 18px rgba(0,0,0,.20);
 
-  transition:transform .24s cubic-bezier(.16,.78,.22,1),background .22s ease,box-shadow .22s ease;
+transition:transform .24s cubic-bezier(.16,.78,.22,1),background .22s ease,box-shadow .22s ease;
 
 }
 
 .producto-anadir:hover{
 
-  transform:translateY(-2px) scale(1.07);
+transform:translateY(-2px) scale(1.07);
 
-  background:#f2f2ef;
+background:#f2f2ef;
 
-  box-shadow:0 10px 24px rgba(0,0,0,.28);
+box-shadow:0 10px 24px rgba(0,0,0,.28);
 
 }
 
@@ -264,11 +264,11 @@ button{font:inherit}
 
 .producto-anadir .material-symbols-outlined{
 
-  font-size:20px;
+font-size:20px;
 
-  line-height:1;
+line-height:1;
 
-  font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
+font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;
 
 }
 
@@ -276,17 +276,17 @@ button{font:inherit}
 
 @media(max-width:700px){
 
-  .producto-row{gap:7px}
+.producto-row{gap:7px}
 
-  .producto-nombre{font-size:15px}
+.producto-nombre{font-size:17px}
 
-  .producto-precio{font-size:10px;padding:0;margin-left:2px}
+.producto-precio{font-size:10px;padding:0;margin-left:2px}
 
-  .producto-anadir{width:34px;height:34px;top:14px;right:14px}
+.producto-anadir{width:34px;height:34px;top:14px;right:14px}
 
-  .producto-anadir .material-symbols-outlined{font-size:18px}
+.producto-anadir .material-symbols-outlined{font-size:18px}
 
-  .producto-descripcion{font-size:8.5px;margin-top:4px}
+.producto-descripcion{font-size:8.5px;margin-top:4px}
 
 }
 
@@ -294,33 +294,33 @@ button{font:inherit}
 
 .imagen-principal{
 
-  position:relative;
+position:relative;
 
-  width:100%;
+width:100%;
 
-  margin-top:0;
+margin-top:0;
 
-  height:min(680px,56vw);
+height:min(680px,56vw);
 
-  min-height:440px;
+min-height:440px;
 
-  overflow:hidden;
+overflow:hidden;
 
-  background:var(--fondo);
+background:var(--fondo);
 
 }
 
 .imagen-principal img{
 
-  width:100%;
+width:100%;
 
-  height:100%;
+height:100%;
 
-  display:block;
+display:block;
 
-  object-fit:cover;
+object-fit:cover;
 
-  object-position:center top;
+object-position:center top;
 
 }
 
@@ -328,37 +328,37 @@ button{font:inherit}
 
 .imagen-principal::after{
 
-  content:"";
+content:"";
 
-  position:absolute;
+position:absolute;
 
-  left:0;
+left:0;
 
-  width:100%;
+width:100%;
 
-  z-index:2;
+z-index:2;
 
-  pointer-events:none;
+pointer-events:none;
 
 }
 
 .imagen-principal::before{
 
-  top:0;
+top:0;
 
-  height:120px;
+height:120px;
 
-  background:linear-gradient(to bottom,var(--fondo),rgba(12,12,12,.76),transparent);
+background:linear-gradient(to bottom,var(--fondo),rgba(12,12,12,.76),transparent);
 
 }
 
 .imagen-principal::after{
 
-  bottom:0;
+bottom:0;
 
-  height:150px;
+height:150px;
 
-  background:linear-gradient(to top,var(--fondo),rgba(12,12,12,.78),transparent);
+background:linear-gradient(to top,var(--fondo),rgba(12,12,12,.78),transparent);
 
 }
 
@@ -366,19 +366,19 @@ button{font:inherit}
 
 .productos{
 
-  padding:54px 5vw 110px;
+padding:54px 5vw 110px;
 
 }
 
 .productos-cabecera{
 
-  margin-bottom:24px;
+margin-bottom:24px;
 
 }
 
 .productos-cabecera h2 {
 
-  font-family:
+font-family:
 
                 "Impact",
 
@@ -386,137 +386,137 @@ button{font:inherit}
 
                 "Bricolage Grotesque",
 
-                sans-serif;
+sans-serif;
 
-  font-size:
+font-size:
 
-                clamp(46px, 5.4vw, 76px);
+clamp(46px, 5.4vw, 76px);
 
-  font-weight:
+font-weight:
 
                 900;
 
-  line-height:
+line-height:
 
                 .82;
 
-  letter-spacing:
+letter-spacing:
 
                 -.055em;
 
-  transform:
+transform:
 
-                skewX(-8deg);
+skewX(-8deg);
 
-  transform-origin:
+transform-origin:
 
-                left center;
+left center;
 
 }
 
 .productos-eyebrow{
 
-  margin-bottom:14px;
+margin-bottom:14px;
 
-  color:var(--suave);
+color:var(--suave);
 
-  font-size:10px;
+font-size:10px;
 
-  font-weight:500;
+font-weight:500;
 
-  letter-spacing:.34em;
+letter-spacing:.34em;
 
-  line-height:1;
+line-height:1;
 
 }
 
 .productos-cabecera h2{
 
-  white-space:nowrap;
+white-space:nowrap;
 
-  letter-spacing:-.045em;
+letter-spacing:-.045em;
 
-  word-spacing:.025em;
+word-spacing:.025em;
 
-  margin-top:10px;
+margin-top:10px;
 
 }
 
 .grid-productos{
 
-  display:grid;
+display:grid;
 
-  grid-template-columns:repeat(3,minmax(0,1fr));
+grid-template-columns:repeat(3,minmax(0,1fr));
 
-  gap:20px;
+gap:20px;
 
 }
 
 .producto-card{
 
-  position:relative;
+position:relative;
 
-  display:block;
+display:block;
 
-  color:var(--texto);
+color:var(--texto);
 
-  text-decoration:none;
+text-decoration:none;
 
-  background:var(--caja);
+background:var(--caja);
 
-  border:1px solid rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.07);
 
-  border-radius:22px;
+border-radius:22px;
 
-  padding:12px;
+padding:12px;
 
-  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
 
 }
 
 .producto-card:hover{
 
-  transform:translateY(-4px);
+transform:translateY(-4px);
 
-  border-color:rgba(255,255,255,.15);
+border-color:rgba(255,255,255,.15);
 
-  box-shadow:0 18px 45px rgba(0,0,0,.25);
+box-shadow:0 18px 45px rgba(0,0,0,.25);
 
 }
 
 .producto-imagen{
 
-  position:relative;
+position:relative;
 
-  width:100%;
+width:100%;
 
-  aspect-ratio:1/.86;
+aspect-ratio:1/.86;
 
-  overflow:hidden;
+overflow:hidden;
 
-  border-radius:16px;
+border-radius:16px;
 
-  background:#f2f2ef;
+background:#f2f2ef;
 
-  display:flex;
+display:flex;
 
-  align-items:center;
+align-items:center;
 
-  justify-content:center;
+justify-content:center;
 
 }
 
 .producto-imagen img{
 
-  width:86%;
+width:86%;
 
-  height:86%;
+height:86%;
 
-  object-fit:contain;
+object-fit:contain;
 
-  display:block;
+display:block;
 
-  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+transition:transform .5s cubic-bezier(.2,.8,.2,1);
 
 }
 
@@ -524,13 +524,13 @@ button{font:inherit}
 
 .productos-mensaje{
 
-  grid-column:1/-1;
+grid-column:1/-1;
 
-  padding:70px 20px;
+padding:70px 20px;
 
-  text-align:center;
+text-align:center;
 
-  color:#999;
+color:#999;
 
 }
 
@@ -538,53 +538,53 @@ button{font:inherit}
 
 .marquee-vesira{
 
-  width:100%;
+width:100%;
 
-  overflow:hidden;
+overflow:hidden;
 
-  background:transparent;
+background:transparent;
 
-  padding:34px 0;
+padding:34px 0;
 
-  border-top:1px solid var(--borde);
+border-top:1px solid var(--borde);
 
 }
 
 .marquee-vesira-track{
 
-  display:flex;
+display:flex;
 
-  width:max-content;
+width:max-content;
 
-  animation:vesiraLoop 18s linear infinite;
+animation:vesiraLoop 18s linear infinite;
 
 }
 
 .marquee-vesira-group{
 
-  display:flex;
+display:flex;
 
-  align-items:center;
+align-items:center;
 
-  gap:70px;
+gap:70px;
 
-  padding-right:70px;
+padding-right:70px;
 
-  flex-shrink:0;
+flex-shrink:0;
 
 }
 
 .marquee-vesira-group img{
 
-  width:155px;
+width:155px;
 
-  height:60px;
+height:60px;
 
-  object-fit:contain;
+object-fit:contain;
 
-  display:block;
+display:block;
 
-  flex-shrink:0;
+flex-shrink:0;
 
 }
 
@@ -600,41 +600,41 @@ button{font:inherit}
 
 .toast{
 
-  position:fixed;
+position:fixed;
 
-  left:50%;
+left:50%;
 
-  bottom:24px;
+bottom:24px;
 
-  z-index:3000;
+z-index:3000;
 
-  transform:translate(-50%,20px);
+transform:translate(-50%,20px);
 
-  opacity:0;
+opacity:0;
 
-  padding:12px 17px;
+padding:12px 17px;
 
-  border:1px solid var(--borde);
+border:1px solid var(--borde);
 
-  border-radius:999px;
+border-radius:999px;
 
-  background:rgba(20,20,20,.95);
+background:rgba(20,20,20,.95);
 
-  backdrop-filter:blur(12px);
+backdrop-filter:blur(12px);
 
-  font-size:11px;
+font-size:11px;
 
-  pointer-events:none;
+pointer-events:none;
 
-  transition:opacity .25s ease,transform .25s ease;
+transition:opacity .25s ease,transform .25s ease;
 
 }
 
 .toast.visible{
 
-  opacity:1;
+opacity:1;
 
-  transform:translate(-50%,0);
+transform:translate(-50%,0);
 
 }
 
@@ -642,77 +642,77 @@ button{font:inherit}
 
 @media(max-width:1000px){
 
-  .grid-productos{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-productos{grid-template-columns:repeat(2,minmax(0,1fr))}
 
 }
 
 @media(max-width:700px){
 
-  .intro{height:70px}
+.intro{height:70px}
 
-  .eslogan{width:min(450px,85vw);max-height:450px}
+.eslogan{width:min(450px,85vw);max-height:450px}
 
-  .imagen-principal{
+.imagen-principal{
 
-    margin-top:70px;
+margin-top:70px;
 
-    height:430px;
+height:430px;
 
-    min-height:430px;
-
-  }
-
-  .imagen-principal img{
-
-    height:100%;
-
-    object-fit:cover;
-
-    object-position:center top;
+min-height:430px;
 
   }
 
-  .imagen-principal::before{height:90px}
+.imagen-principal img{
 
-  .imagen-principal::after{height:120px}
+height:100%;
 
-  .productos{
+object-fit:cover;
 
-    padding:46px 14px 80px;
-
-  }
-
-  .productos-cabecera{margin-bottom:18px; margin-left:6.5px}
-
-  .productos-cabecera h2{font-size:36px;letter-spacing:-.055em}
-
-  .grid-productos{gap:10px}
-
-  .producto-card{
-
-    padding:8px;
-
-    border-radius:17px;
+object-position:center top;
 
   }
 
-  .producto-imagen{border-radius:12px;aspect-ratio:1/.9}
+.imagen-principal::before{height:90px}
 
-  .producto-imagen img{width:84%;height:84%}
+.imagen-principal::after{height:120px}
 
-  .producto-info{padding:11px 2px 3px}
+.productos{
 
-  .producto-nombre{font-size:15px}
+padding:46px 14px 80px;
 
-  .producto-descripcion{font-size:8.5px;margin-top:4px}
+  }
 
-  .producto-precio{font-size:10px}
+.productos-cabecera{margin-bottom:18px; margin-left:6.5px}
 
-  .marquee-vesira{padding:24px 0}
+.productos-cabecera h2{font-size:36px;letter-spacing:-.055em}
 
-  .marquee-vesira-group{gap:45px;padding-right:45px}
+.grid-productos{gap:10px}
 
-  .marquee-vesira-group img{width:115px;height:48px}
+.producto-card{
+
+padding:8px;
+
+border-radius:17px;
+
+  }
+
+.producto-imagen{border-radius:12px;aspect-ratio:1/.9}
+
+.producto-imagen img{width:84%;height:84%}
+
+.producto-info{padding:11px 2px 3px}
+
+.producto-nombre{font-size:15px}
+
+.producto-descripcion{font-size:8.5px;margin-top:4px}
+
+.producto-precio{font-size:12px}
+
+.marquee-vesira{padding:24px 0}
+
+.marquee-vesira-group{gap:45px;padding-right:45px}
+
+.marquee-vesira-group img{width:115px;height:48px}
 
 }
 
@@ -828,9 +828,9 @@ button{font:inherit}
 
       toast.classList.add("visible");
 
-      clearTimeout(window._vesiraToast);
+clearTimeout(window._vesiraToast);
 
-      window._vesiraToast = setTimeout(() => toast.classList.remove("visible"), 1600);
+window._vesiraToast = setTimeout(() => toast.classList.remove("visible"), 1600);
 
     }
 
@@ -852,9 +852,9 @@ button{font:inherit}
 
     function saveHomeCart(cart){
 
-      localStorage.setItem("vesiraCarrito", JSON.stringify(cart));
+localStorage.setItem("vesiraCarrito", JSON.stringify(cart));
 
-      window.dispatchEvent(new CustomEvent("vesiraCartUpdated",{detail:{bump:true}}));
+window.dispatchEvent(new CustomEvent("vesiraCartUpdated",{detail:{bump:true}}));
 
     }
 
@@ -862,172 +862,102 @@ button{font:inherit}
 
       const origen = productImage;
 
-      const destino = document.getElementById("vesiraGlobalCart");
+      const destino =
+        document.getElementById("abrirCarrito") ||
+        document.getElementById("vesiraGlobalCart") ||
+        document.querySelector('.nav-cart-button, [aria-label="Carrito"]');
 
-      if(!origen || !destino || !origen.getBoundingClientRect().width) return;
+      if(!origen || !destino) return;
 
       const start = origen.getBoundingClientRect();
-
       const end = destino.getBoundingClientRect();
 
-      if(!end.width || !end.height) return;
+      if(!start.width || !start.height || !end.width || !end.height) return;
 
       const clon = origen.cloneNode(true);
-
       clon.className = "home-cart-fly";
-
       clon.removeAttribute("id");
+      clon.setAttribute("aria-hidden", "true");
 
       const startSize = Math.min(Math.max(start.width * 0.34, 92), 175);
 
       clon.style.width = startSize + "px";
-
       clon.style.height = startSize + "px";
-
       clon.style.left = (start.left + start.width / 2 - startSize / 2) + "px";
-
       clon.style.top = (start.top + start.height / 2 - startSize / 2) + "px";
-
       clon.style.opacity = "1";
-
+      clon.style.visibility = "visible";
       clon.style.transform = "translate3d(0,0,0) scale(1) rotate(0deg)";
 
       document.body.appendChild(clon);
+      void clon.offsetWidth;
 
       const startX = start.left + start.width / 2;
-
       const startY = start.top + start.height / 2;
-
       const endX = end.left + end.width / 2;
-
       const endY = end.top + end.height / 2;
-
       const targetX = endX - startX;
-
       const targetY = endY - startY;
-
       const lift = Math.min(-145, targetY * 0.35 - 90);
 
       const animation = clon.animate([
-
         {
-
           transform:"translate3d(0,0,0) scale(1) rotate(0deg)",
-
           opacity:1,
-
           offset:0
-
         },
-
         {
-
           transform:`translate3d(${targetX * .26}px, ${targetY * .12 + lift}px, 0) scale(.90) rotate(-8deg)`,
-
           opacity:1,
-
           offset:.24
-
         },
-
         {
-
           transform:`translate3d(${targetX * .62}px, ${targetY * .38 + lift * .70}px, 0) scale(.66) rotate(7deg)`,
-
           opacity:1,
-
           offset:.56
-
         },
-
         {
-
           transform:`translate3d(${targetX * .88}px, ${targetY * .74}px, 0) scale(.36) rotate(-5deg)`,
-
           opacity:.96,
-
           offset:.82
-
         },
-
         {
-
           transform:`translate3d(${targetX}px, ${targetY}px, 0) scale(.08) rotate(12deg)`,
-
           opacity:0,
-
           offset:1
-
         }
-
       ],{
-
         duration:1320,
-
-        easing:"cubic-bezier(.16,.78,.22,1)"
-
+        easing:"cubic-bezier(.16,.78,.22,1)",
+        fill:"forwards"
       });
 
-      destino.animate(
-
-        [
-
-          {transform:"scale(1)"},
-
-          {transform:"scale(1.05)",offset:.5},
-
-          {transform:"scale(1)"}
-
-        ],
-
-        {duration:1320,easing:"ease-out"}
-
-      );
+      destino.animate([
+        {transform:"scale(1)"},
+        {transform:"scale(1.05)",offset:.5},
+        {transform:"scale(1)"}
+      ],{duration:1320,easing:"ease-out"});
 
       animation.onfinish = () => {
-
         clon.remove();
 
-        destino.animate(
+        destino.animate([
+          {transform:"scale(1)"},
+          {transform:"scale(1.16)"},
+          {transform:"scale(1)"}
+        ],{duration:380,easing:"ease-out"});
 
-          [
-
-            {transform:"scale(1)",background:"transparent"},
-
-            {transform:"scale(1.16)",background:"rgba(255,255,255,.11)"},
-
-            {transform:"scale(1)",background:"transparent"}
-
-          ],
-
-          {duration:380,easing:"ease-out"}
-
-        );
-
-        const icon = destino.querySelector("svg");
-
+        const icon = destino.querySelector(".material-symbols-outlined, svg");
         if(icon){
-
-          icon.animate(
-
-            [
-
-              {transform:"scale(1)"},
-
-              {transform:"scale(1.22)"},
-
-              {transform:"scale(1)"}
-
-            ],
-
-            {duration:320,easing:"ease-out"}
-
-          );
-
+          icon.animate([
+            {transform:"scale(1)"},
+            {transform:"scale(1.22)"},
+            {transform:"scale(1)"}
+          ],{duration:320,easing:"ease-out"});
         }
-
       };
 
+      animation.oncancel = () => clon.remove();
     }
 
     function addHomeProductToCart(product,imageElement){
@@ -1056,25 +986,24 @@ button{font:inherit}
 
       animateHomeProductToCart(imageElement);
 
-      mostrarToast("Añadido al carrito");
 
     }
 
-    // La presentación ocupa solo la altura de la navbar.
+// La presentación ocupa solo la altura de la navbar.
 
-    // Después se retira y hacemos entrar la navbar global.
+// Después se retira y hacemos entrar la navbar global.
 
-    document.body.style.overflow = "hidden";
+document.body.style.overflow = "hidden";
 
-    setTimeout(()=>{
+setTimeout(()=>{
 
       intro.classList.add("hide");
 
-      document.body.style.overflow = "";
+document.body.style.overflow = "";
 
-      // La navbar se crea por vesira-navbar.js en DOMContentLoaded,
+// La navbar se crea por vesira-navbar.js en DOMContentLoaded,
 
-      // así que la buscamos aquí y no antes.
+// así que la buscamos aquí y no antes.
 
       const globalNavbar = document.querySelector(".vesira-global-nav");
 
@@ -1084,7 +1013,7 @@ button{font:inherit}
 
       }else{
 
-        // Fallback por si el script de la navbar tarda en cargar.
+// Fallback por si el script de la navbar tarda en cargar.
 
         const showNavbar = () => {
 
@@ -1094,13 +1023,13 @@ button{font:inherit}
 
         };
 
-        window.setTimeout(showNavbar, 100);
+window.setTimeout(showNavbar, 100);
 
-        window.setTimeout(showNavbar, 500);
+window.setTimeout(showNavbar, 500);
 
       }
 
-      setTimeout(()=>intro.remove(),700);
+setTimeout(()=>intro.remove(),700);
 
     },1500);
 
@@ -1204,7 +1133,7 @@ button{font:inherit}
 
               ${
 
-                producto.descripcion
+producto.descripcion
 
                   ? `<p class="producto-descripcion">${producto.descripcion}</p>`
 
@@ -1224,9 +1153,9 @@ button{font:inherit}
 
           addButton.addEventListener("click", (event) => {
 
-            event.preventDefault();
+event.preventDefault();
 
-            event.stopPropagation();
+event.stopPropagation();
 
             addHomeProductToCart(producto, productImage);
 
@@ -1236,7 +1165,7 @@ button{font:inherit}
 
       }catch(error){
 
-        console.error("Error cargando productos:", error);
+console.error("Error cargando productos:", error);
 
         gridProductos.innerHTML = `
 
