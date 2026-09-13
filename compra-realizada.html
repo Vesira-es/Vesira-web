@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compra realizada | Vesira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080808; --panel:#111; --panel2:#161616; --border:#292929;
+  --text:#f6f6f6; --muted:#a3a3a3; --green:#6ee7a1; --paper:#f8f5ef; --ink:#171717;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{
+  background:
+    radial-gradient(circle at 50% -10%, rgba(255,255,255,.08), transparent 34%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,.04), transparent 30%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Outfit",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.page{min-height:100vh;padding:120px 18px 70px;display:flex;justify-content:center}
+.wrap{width:min(820px,100%)}
+.hero{text-align:center;margin-bottom:18px}
+.ok{
+  width:68px;height:68px;margin:0 auto 20px;border-radius:50%;
+  border:1px solid rgba(110,231,161,.35);background:rgba(110,231,161,.08);color:var(--green);
+  display:flex;align-items:center;justify-content:center;font-size:30px;
+  animation:pop .55s cubic-bezier(.2,.9,.2,1) both;
+}
+@keyframes pop{0%{opacity:0;transform:scale(.55)}70%{transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
+h1{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:clamp(32px,5vw,52px);font-weight:500;letter-spacing:-.035em}
+.subtitle{margin-top:10px;color:var(--muted);font-size:15px}
+
+.printer-stage{
+  position:relative;margin:38px auto 26px;height:780px;display:flex;justify-content:center;align-items:flex-start;
+  perspective:1200px;
+}
+.printer{
+  position:absolute;top:0;width:min(430px,92vw);height:185px;border:1px solid #2b2b2b;
+  border-radius:24px 24px 16px 16px;background:linear-gradient(180deg,#1d1d1d,#111);
+  box-shadow:0 30px 90px rgba(0,0,0,.48);z-index:3;
+}
+.printer-top{position:absolute;left:28px;right:28px;top:24px;height:60px;border-radius:14px;background:#0c0c0c;border:1px solid #252525}
+.printer-led{position:absolute;right:28px;top:47px;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px rgba(110,231,161,.65)}
+.printer-slot{position:absolute;left:40px;right:40px;bottom:24px;height:16px;border-radius:99px;background:#050505;box-shadow:inset 0 0 0 1px #242424}
+
+.ticket{
+  position:absolute;top:126px;width:min(350px,82vw);height:0;overflow:hidden;
+  padding:0 24px;background:var(--paper);color:var(--ink);
+  box-shadow:0 24px 60px rgba(0,0,0,.35);z-index:2;transform-origin:top center;
+}
+.ticket.printing{animation:paperOut 7.2s cubic-bezier(.18,.72,.17,1) .35s forwards}
+@keyframes paperOut{
+  0%{height:0;padding-top:0;padding-bottom:0;transform:translateY(0) rotateX(-8deg)}
+  15%{height:78px}
+  32%{height:178px}
+  52%{height:285px}
+  72%{height:390px}
+  100%{height:520px;padding-top:28px;padding-bottom:26px;transform:translateY(72px) rotateX(0)}
+}
+.ticket-inner{width:100%}
+.ticket-content{opacity:0;transform:translateY(8px)}
+.ticket.printing .ticket-head{animation:reveal .55s ease 1.15s forwards}
+.ticket.printing .ticket-status{animation:reveal .55s ease 2.05s forwards}
+.ticket.printing .ticket-items{animation:reveal .55s ease 2.55s forwards}
+.ticket.printing .ticket-total-wrap{animation:reveal .55s ease 5.55s forwards}
+.ticket.printing .ticket-foot{animation:reveal .55s ease 6.35s forwards}
+.ticket.printing .ticket-item{opacity:0;transform:translateY(7px)}
+.ticket.printing .ticket-item:nth-child(1){animation:reveal .42s ease 2.85s forwards}
+.ticket.printing .ticket-item:nth-child(2){animation:reveal .42s ease 3.25s forwards}
+.ticket.printing .ticket-item:nth-child(3){animation:reveal .42s ease 3.65s forwards}
+.ticket.printing .ticket-item:nth-child(4){animation:reveal .42s ease 4.05s forwards}
+.ticket.printing .ticket-item:nth-child(5){animation:reveal .42s ease 4.45s forwards}
+@keyframes reveal{to{opacity:1;transform:translateY(0)}}
+
+.ticket-head{text-align:center;padding-bottom:16px;border-bottom:1px dashed #a6a39b}
+.ticket-logo{width:124px;height:auto;display:block;margin:0 auto 9px;filter:brightness(0)}
+.ticket-small{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#6a6862}
+.ticket-status{text-align:center;margin:18px 0}
+.ticket-status strong{display:block;font-size:16px;margin-bottom:4px}
+.ticket-status span{font-size:11px;color:#6f6d68}
+.ticket-items{border-top:1px solid #d5d0c6}
+.ticket-item{display:grid;grid-template-columns:1fr auto;gap:14px;padding:12px 0;border-bottom:1px dashed #c9c4ba;font-size:12px}
+.item-name{font-weight:600}.item-meta{color:#73706a;margin-top:2px}.item-price{font-weight:600;white-space:nowrap}
+.ticket-total-wrap{padding-top:16px}
+.total-row{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.total-label{font-size:13px;color:#66625c}.total{font-size:23px;font-weight:700}
+.ticket-foot{margin-top:18px;padding-top:14px;border-top:1px dashed #aaa59b;text-align:center;color:#77736c;font-size:10px;line-height:1.5}
+
+.actions{display:flex;justify-content:center;margin-top:0}
+.btn{
+  appearance:none;border:1px solid #303030;background:#fff;color:#111;border-radius:12px;
+  padding:13px 18px;font:600 14px "Outfit",Arial,sans-serif;cursor:pointer;
+}
+.btn:hover{background:#ececec}
+
+.print-receipt{display:none}
+
+/* Hoja formal de justificante */
+@media print{
+  @page{size:A4;margin:16mm}
+  html,body{margin:0!important;padding:0!important;background:#fff!important}
+  body>*{display:none!important}
+  .print-receipt{
+    display:block!important;color:#111!important;background:#fff!important;
+    font-family:Arial,Helvetica,sans-serif;width:100%;font-size:12px;line-height:1.45;
+  }
+  .receipt-sheet{width:100%;max-width:180mm;margin:0 auto}
+  .receipt-header{display:flex;align-items:flex-start;justify-content:space-between;padding-bottom:12px;border-bottom:2px solid #111}
+  .receipt-logo{width:42mm;max-width:180px;height:auto;object-fit:contain;filter:brightness(0)}
+  .receipt-meta{text-align:right;color:#444}
+  .receipt-title{font-size:22px;font-weight:700;letter-spacing:.02em;margin:18px 0 4px;text-transform:uppercase}
+  .receipt-subtitle{color:#555;margin-bottom:18px}
+  .receipt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin-bottom:20px}
+  .receipt-box{border:1px solid #d8d8d8;padding:10px 12px}
+  .receipt-box strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#666;margin-bottom:3px}
+  .receipt-section-title{font-weight:700;border-bottom:1px solid #111;padding-bottom:6px;margin-top:18px}
+  .receipt-table{width:100%;border-collapse:collapse;margin-top:8px}
+  .receipt-table th,.receipt-table td{padding:8px 5px;border-bottom:1px solid #ddd;text-align:left}
+  .receipt-table th{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#666}
+  .receipt-table td:last-child,.receipt-table th:last-child{text-align:right}
+  .receipt-total{margin-top:14px;display:flex;justify-content:flex-end}
+  .receipt-total-box{width:68mm;border-top:2px solid #111;padding-top:8px}
+  .receipt-total-row{display:flex;justify-content:space-between;font-size:18px;font-weight:700}
+  .receipt-footer{margin-top:28px;padding-top:10px;border-top:1px solid #ddd;color:#555;font-size:10px}
+}
+
+@media(max-width:560px){
+  .page{padding-top:100px}
+  .printer-stage{height:720px}
+  .printer{height:150px}
+  .ticket{top:94px}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="wrap">
+    <section class="hero">
+      <div class="ok">✓</div>
+      <h1>Compra realizada correctamente</h1>
+      <p class="subtitle" id="subtitle">Gracias por comprar en Vesira. Tu pedido ha sido recibido.</p>
+    </section>
+
+    <section class="printer-stage" aria-label="Ticket de compra saliendo de una impresora">
+      <div class="printer" aria-hidden="true">
+        <div class="printer-top"></div>
+        <div class="printer-led"></div>
+        <div class="printer-slot"></div>
+      </div>
+
+      <article class="ticket" id="ticket">
+        <div class="ticket-inner">
+          <header class="ticket-head ticket-content">
+            <img src="img/logo2.png" alt="Vesira" class="ticket-logo">
+            <div class="ticket-small">Comprobante de compra</div>
+          </header>
+
+          <div class="ticket-status ticket-content">
+            <strong>Pago confirmado</strong>
+            <span id="ticket-date"></span>
+          </div>
+
+          <section class="ticket-items ticket-content" id="ticket-items"></section>
+
+          <div class="ticket-total-wrap ticket-content">
+            <div class="total-row">
+              <span class="total-label">Total pagado</span>
+              <strong class="total" id="ticket-total">0,00 €</strong>
+            </div>
+          </div>
+
+          <footer class="ticket-foot ticket-content">
+            Gracias por confiar en Vesira.<br>
+            Guarda este comprobante como justificante de tu compra.
+          </footer>
+        </div>
+      </article>
+    </section>
+
+    <div class="actions">
+      <button class="btn" type="button" id="print-button">Imprimir justificante de compra</button>
+    </div>
+  </div>
+</main>
+
+<section class="print-receipt" aria-hidden="true">
+  <div class="receipt-sheet">
+    <header class="receipt-header">
+      <img src="img/logo2.png" alt="Vesira" class="receipt-logo">
+      <div class="receipt-meta">
+        <div>Justificante de compra</div>
+        <div id="receipt-date">—</div>
+      </div>
+    </header>
+
+    <div class="receipt-title">Compra realizada</div>
+    <div class="receipt-subtitle">Documento acreditativo de la compra y del pago realizado.</div>
+
+    <div class="receipt-grid">
+      <div class="receipt-box">
+        <strong>Estado</strong>
+        Pago confirmado correctamente
+      </div>
+      <div class="receipt-box">
+        <strong>Referencia</strong>
+        <span id="receipt-reference">—</span>
+      </div>
+      <div class="receipt-box">
+        <strong>Cliente</strong>
+        <span id="receipt-customer">—</span>
+      </div>
+      <div class="receipt-box">
+        <strong>Correo electrónico</strong>
+        <span id="receipt-email">—</span>
+      </div>
+    </div>
+
+    <div class="receipt-section-title">Productos adquiridos</div>
+    <table class="receipt-table">
+      <thead>
+        <tr><th>Producto</th><th>Cantidad</th><th>Importe</th></tr>
+      </thead>
+      <tbody id="receipt-items"></tbody>
+    </table>
+
+    <div class="receipt-total">
+      <div class="receipt-total-box">
+        <div class="receipt-total-row">
+          <span>Total pagado</span>
+          <span id="receipt-total">0,00 €</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="receipt-footer">
+      Este documento acredita la recepción del pago asociado al pedido indicado.
+      Conserve este justificante junto con la confirmación de su pedido.
+      <br><br>Vesira · Eyewear
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  "use strict";
+
+  function safeParse(key, fallback){
+    try{
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    }catch(e){ return fallback; }
+  }
+
+  function escapeHtml(value){
+    return String(value ?? "")
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+  }
+
+  function price(value){
+    return new Intl.NumberFormat("es-ES",{style:"currency",currency:"EUR"}).format(Number(value)||0);
+  }
+
+  function getPurchase(){
+    return safeParse("vesiraCompraCompletada", null)
+      || safeParse("vesiraCompraPendiente", null)
+      || {};
+  }
+
+  function normalizeItems(purchase){
+    return Array.isArray(purchase.items) ? purchase.items : [];
+  }
+
+  function getTotal(purchase, items){
+    const stored = Number(purchase.total);
+    if(Number.isFinite(stored) && stored >= 0) return stored;
+    return items.reduce((sum,item)=>{
+      const p = Number(item?.precio ?? item?.price ?? 0);
+      const q = Number(item?.cantidad ?? item?.quantity ?? 1);
+      return sum + p*q;
+    },0);
+  }
+
+  function fill(){
+    const purchase=getPurchase();
+    const items=normalizeItems(purchase);
+    const total=getTotal(purchase,items);
+    const date=purchase.date ? new Date(purchase.date) : new Date();
+    const formattedDate=new Intl.DateTimeFormat("es-ES",{dateStyle:"medium",timeStyle:"short"}).format(date);
+
+    document.getElementById("ticket-date").textContent=formattedDate;
+    document.getElementById("ticket-total").textContent=price(total);
+    document.getElementById("receipt-date").textContent=formattedDate;
+    document.getElementById("receipt-total").textContent=price(total);
+
+    const name=[purchase.cliente?.nombre,purchase.cliente?.apellidos].filter(Boolean).join(" ") || "—";
+    const email=purchase.cliente?.email || "—";
+    const reference=purchase.paymentIntentId || purchase.orderId || "Vesira-" + date.getTime();
+
+    document.getElementById("receipt-customer").textContent=name;
+    document.getElementById("receipt-email").textContent=email;
+    document.getElementById("receipt-reference").textContent=reference;
+
+    if(purchase.cliente?.nombre){
+      document.getElementById("subtitle").textContent =
+        "Gracias, " + purchase.cliente.nombre + ". Tu compra ha sido recibida correctamente.";
+    }
+
+    const ticketItems=document.getElementById("ticket-items");
+    const receiptItems=document.getElementById("receipt-items");
+
+    if(!items.length){
+      ticketItems.innerHTML =
+        '<div class="ticket-item"><div><div class="item-name">Compra Vesira</div></div><div class="item-price">'+price(total)+'</div></div>';
+      receiptItems.innerHTML =
+        '<tr><td>Compra Vesira</td><td>1</td><td>'+price(total)+'</td></tr>';
+      return;
+    }
+
+    ticketItems.innerHTML=items.map(item=>{
+      const name=String(item?.nombre ?? item?.name ?? "Producto");
+      const qty=Number(item?.cantidad ?? item?.quantity ?? 1);
+      const p=Number(item?.precio ?? item?.price ?? 0);
+      return '<div class="ticket-item">'
+        + '<div><div class="item-name">'+escapeHtml(name)+'</div><div class="item-meta">Cantidad: '+qty+'</div></div>'
+        + '<div class="item-price">'+price(p*qty)+'</div></div>';
+    }).join("");
+
+    receiptItems.innerHTML=items.map(item=>{
+      const name=String(item?.nombre ?? item?.name ?? "Producto");
+      const qty=Number(item?.cantidad ?? item?.quantity ?? 1);
+      const p=Number(item?.precio ?? item?.price ?? 0);
+      return '<tr><td>'+escapeHtml(name)+'</td><td>'+qty+'</td><td>'+price(p*qty)+'</td></tr>';
+    }).join("");
+  }
+
+  fill();
+
+  const ticket=document.getElementById("ticket");
+  requestAnimationFrame(()=>ticket.classList.add("printing"));
+
+  document.getElementById("print-button").addEventListener("click",()=>{
+    window.print();
+  });
+})();
+</script>
+</body>
+</html>

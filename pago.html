@@ -982,9 +982,6 @@ max-width: 60%;
         <div class="page-title">
 
           <h1>Pago seguro</h1>
-
-          <p>Completa tu pago sin volver a introducir tus datos.</p>
-
         </div>
 
         <div class="layout">
@@ -1011,7 +1008,7 @@ max-width: 60%;
 <div id="express-checkout-element"></div>
 <div class="divider">
 
-                <span>o pagar con tarjeta</span>
+                <span>pagar con tarjeta</span>
 
               </div>
 
@@ -1037,9 +1034,7 @@ disabled
 
               <div class="secure-note">
 
-                Pago procesado de forma segura por Stripe.
-
-                Los datos de tu tarjeta no pasan por tu servidor.
+                Pago procesado de forma segura por Stripe
 
               </div>
 
@@ -2008,7 +2003,7 @@ document.getElementById(
 
               return_url:
 
-                `${window.location.origin}${window.location.pathname}?resultado=ok`
+                `${window.location.origin}/compra-realizada.html?resultado=ok`
 
             }
 
@@ -2069,6 +2064,17 @@ console.error(
       hideError();
 
       setCardButtonLoading(true);
+
+      localStorage.setItem(
+        "vesiraCompraPendiente",
+        JSON.stringify({
+          items: cart,
+          cliente: checkoutData?.cliente || null,
+          total: calculateLocalCartTotal(),
+          paymentIntentId,
+          date: new Date().toISOString()
+        })
+      );
 
       try {
 
@@ -2324,79 +2330,25 @@ country || ""
 
     function handlePaymentSuccess(paymentIntent) {
 
-console.log(
+      const purchaseSnapshot = {
+        items: cart,
+        cliente: checkoutData?.cliente || null,
+        total: calculateLocalCartTotal(),
+        paymentIntentId: paymentIntent?.id || paymentIntentId || null,
+        date: new Date().toISOString()
+      };
 
-        "Pago confirmado:",
-
-paymentIntent?.id || paymentIntentId
-
+      localStorage.setItem(
+        "vesiraCompraCompletada",
+        JSON.stringify(purchaseSnapshot)
       );
 
-/*
+      localStorage.removeItem("vesiraCompraPendiente");
+      localStorage.removeItem("vesiraCarrito");
+      localStorage.removeItem("vesiraCheckout");
 
-        Limpiamos carrito y checkout después
-
-        de haber completado el pago.
-
-      */
-
-localStorage.removeItem("vesiraCarrito");
-
-localStorage.removeItem("vesiraCheckout");
-
-      const currentUrl =
-
-new URL(window.location.href);
-
-      currentUrl.searchParams.set(
-
-        "resultado",
-
-        "ok"
-
-      );
-
-/*
-
-        Evitamos reutilizar el PaymentIntent
-
-        actualizando la URL.
-
-      */
-
-window.history.replaceState(
-
-        {},
-
-        "",
-
-        currentUrl.toString()
-
-      );
-
-document.getElementById(
-
-        "payment-view"
-
-      ).style.display = "none";
-
-document.getElementById(
-
-        "success-view"
-
-      ).style.display = "block";
-
+      window.location.href = "compra-realizada.html";
     }
-
-/*
-
-      ==========================================================
-
-      ESTADO DE RETORNO DE STRIPE
-
-      ==========================================================
-
-    */
 
     function checkReturnState() {
 
