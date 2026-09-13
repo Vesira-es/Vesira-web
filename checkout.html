@@ -349,18 +349,29 @@ font-size:12px;
     }
 
     input,select{
+
 min-height:48px;
+
 height:48px;
+
 max-height:48px;
+
 padding:0 13px;
+
 }
 
     textarea{
+
 min-height:95px;
+
 height:95px;
+
 max-height:95px;
+
 resize:none;
+
 padding:13px;
+
 }
 
     input:focus,select:focus,textarea:focus{
@@ -380,9 +391,13 @@ width:100%;
 .address-wrap > #direccion-autocomplete{
 
 width:100%;
+
 height:48px;
+
 min-height:48px;
+
 max-height:48px;
+
 overflow:visible;
 
     }
@@ -398,9 +413,13 @@ display:none;
 display:block;
 
 width:100%;
+
 height:48px;
+
 min-height:48px;
+
 max-height:48px;
+
 overflow:visible;
 
       --gmpx-color-surface:#101010;
@@ -760,6 +779,18 @@ position:static;
     }
 
     @media(max-width:600px){
+      .address-wrap gmp-place-autocomplete{
+        position:relative;
+        z-index:20;
+        --gmpx-font-size:16px !important;
+      }
+
+      .address-wrap gmp-place-autocomplete input{
+        font-size:16px !important;
+        line-height:48px !important;
+        transform:none !important;
+      }
+
 
 .nav{
 
@@ -821,7 +852,7 @@ grid-column:auto;
 
       }
 
-      
+
 
 .summary{
 
@@ -833,74 +864,120 @@ border-radius:18px;
 
     }
 
-  
-    /* Evita el zoom automático de Safari/iPhone al enfocar campos.
-       16px es el umbral de iOS para no ampliar la página. */
+/* Evita el zoom automático de Safari/iPhone al enfocar campos.*
+
+       *16px es el umbral de iOS para no ampliar la página. */
+
     input, select, textarea,
-    .address-wrap gmp-place-autocomplete {
-      font-size:16px !important;
+
+.address-wrap gmp-place-autocomplete {
+
+font-size:16px !important;
+
     }
 
-    /* Mantén las dimensiones y márgenes estables al enfocar. */
+/* Mantén las dimensiones y márgenes estables al enfocar. */
+
     input, select {
-      height:48px !important;
-      min-height:48px !important;
-      max-height:48px !important;
-      padding-top:0 !important;
-      padding-bottom:0 !important;
+
+height:48px !important;
+
+min-height:48px !important;
+
+max-height:48px !important;
+
+padding-top:0 !important;
+
+padding-bottom:0 !important;
+
     }
 
     textarea {
-      height:95px !important;
-      min-height:95px !important;
-      max-height:95px !important;
-      resize:none !important;
+
+height:95px !important;
+
+min-height:95px !important;
+
+max-height:95px !important;
+
+resize:none !important;
+
     }
 
-    .address-wrap,
-    .address-wrap > #direccion-autocomplete,
-    .address-wrap gmp-place-autocomplete {
-      width:100% !important;
-      min-width:0 !important;
-      height:48px !important;
-      min-height:48px !important;
-      max-height:48px !important;
-      margin:0 !important;
-      padding:0 !important;
+.address-wrap,
+
+.address-wrap > #direccion-autocomplete,
+
+.address-wrap gmp-place-autocomplete {
+
+width:100% !important;
+
+min-width:0 !important;
+
+height:48px !important;
+
+min-height:48px !important;
+
+max-height:48px !important;
+
+margin:0 !important;
+
+padding:0 !important;
+
     }
 
-    .address-wrap {
-      overflow:visible !important;
+.address-wrap {
+
+overflow:visible !important;
+
     }
 
     @media (max-width:600px) {
-      .wrap {
-        width:calc(100% - 32px) !important;
-        max-width:100% !important;
-        margin-left:auto !important;
-        margin-right:auto !important;
+
+.wrap {
+
+width:calc(100% - 32px) !important;
+
+max-width:100% !important;
+
+margin-left:auto !important;
+
+margin-right:auto !important;
+
       }
 
-      .section {
-        width:100% !important;
-        max-width:100% !important;
+.section {
+
+width:100% !important;
+
+max-width:100% !important;
+
       }
 
-      .fields {
-        width:100% !important;
-        min-width:0 !important;
+.fields {
+
+width:100% !important;
+
+min-width:0 !important;
+
       }
 
-      .field,
-      .field.full {
-        min-width:0 !important;
-        width:100% !important;
+.field,
+
+.field.full {
+
+min-width:0 !important;
+
+width:100% !important;
+
       }
+
     }
 
   </style>
 
 </head>
+
 <script src="vesira-navbar.js"></script>
 
 <body>
@@ -1246,6 +1323,7 @@ document.getElementById("ciudad");
 document.getElementById("codigoPostal");
 
 
+
               if (cityInput) {
 
                 cityInput.value = city;
@@ -1257,13 +1335,8 @@ document.getElementById("codigoPostal");
                 postalInput.value = postalCode;
 
               }
-setAddressStatus(
 
-                "Dirección seleccionada. La comprobaremos antes de continuar.",
-
-                "ok"
-
-              );
+setAddressStatus("", "");
 
             } catch (error) {
 
@@ -1528,10 +1601,7 @@ String(
         <section class="wrap">
 
           <header class="head">
-
-            <div class="eyebrow">VESIRA</div>
-
-            <h1>Checkout.</h1>
+<h1>Checkout</h1>
 
           </header>
 
@@ -1543,7 +1613,7 @@ String(
 
                 <div class="section-head">
 
-                  <h2>Contacto.</h2>
+                  <h2>Contacto</h2>
 
                   <span class="section-number">01</span>
 
@@ -1581,7 +1651,7 @@ String(
 
                 <div class="section-head">
 
-                  <h2>Entrega.</h2>
+                  <h2>Entrega</h2>
 
                   <span class="section-number">02</span>
 
@@ -1711,7 +1781,7 @@ String(
 
                 <div class="section-head">
 
-                  <h2>Nota.</h2>
+                  <h2>Nota</h2>
 
                   <span class="section-number">03</span>
 
@@ -1721,11 +1791,7 @@ String(
 
                   <div class="field full">
 
-                    <label for="nota">
-
-                      Nota para el pedido · opcional
-
-                    </label>
+                    <label for="nota" class="note-label"><span class="optional-label">Opcional</span></label>
 
                     <textarea
 
@@ -1920,14 +1986,21 @@ new FormData(form).entries()
         );
 
       const direccionField = document.getElementById("direccion");
+
       if (direccionField) {
+
         data.direccion = String(direccionField.value || "").trim();
+
       }
 
       data.email = String(data.email || "").trim();
+
       data.nombre = String(data.nombre || "").trim();
+
       data.apellidos = String(data.apellidos || "").trim();
+
       data.ciudad = String(data.ciudad || "").trim();
+
       data.codigoPostal = String(data.codigoPostal || "").trim();
 
       if (
