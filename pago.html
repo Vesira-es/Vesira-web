@@ -10,9 +10,239 @@
 
   <title>Pago | Vesira</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
 <!-- Stripe.js debe cargarse directamente desde Stripe -->
 
   <script src="https://js.stripe.com/v3/"></script>
+
+  <style id="vesiraNavbarEmbeddedStyles">
+    #vesiraNavbar { display: contents; }
+
+    .vesira-global-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 74px;
+      z-index: 4000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      background: rgba(10,10,10,.78);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      color: #fff;
+      box-sizing: border-box;
+    }
+
+    .vesira-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .vesira-logo-link {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      text-decoration: none;
+    }
+
+    .vesira-logo {
+      width: 108px;
+      height: auto;
+      display: block;
+    }
+
+    .vesira-nav-eyewear {
+      color: #8d8d8d;
+      font-size: 9px;
+      line-height: 1;
+      letter-spacing: .18em;
+      white-space: nowrap;
+      font-family: "Outfit", Arial, sans-serif;
+    }
+
+    .vesira-navbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .vesira-nav-button {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .vesira-nav-button:hover {
+      background: #151515;
+      transform: translateY(-1px);
+    }
+
+    .vesira-nav-button .material-symbols-outlined,
+    .vesira-menu-close .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 21px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: 'liga';
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .vesira-cart-count {
+      position: absolute;
+      top: 1px;
+      right: -2px;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: #fff;
+      color: #0a0a0a;
+      font-family: "Outfit", Arial, sans-serif;
+      font-size: 8px;
+      font-weight: 700;
+      line-height: 17px;
+      letter-spacing: 0;
+      box-shadow: 0 3px 12px rgba(0,0,0,.28);
+      pointer-events: none;
+    }
+
+    .vesira-cart-count.bump { animation: vesiraCartBump .34s ease; }
+    @keyframes vesiraCartBump {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.32); }
+      65% { transform: scale(.94); }
+      100% { transform: scale(1); }
+    }
+
+    .vesira-menu-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 4100;
+      background: rgba(0,0,0,.48);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .28s ease, visibility .28s ease;
+    }
+
+    .vesira-menu-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .vesira-menu-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(360px,84vw);
+      height: 100dvh;
+      z-index: 4200;
+      padding: 112px 34px 36px;
+      background: #111;
+      border-left: 1px solid rgba(255,255,255,.10);
+      box-shadow: -24px 0 70px rgba(0,0,0,.34);
+      transform: translateX(100%);
+      transition: transform .46s cubic-bezier(.2,.8,.2,1);
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .vesira-menu-drawer.open { transform: translateX(0); }
+
+    .vesira-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .vesira-menu-close:hover { background: #191919; }
+
+    .vesira-menu-close .material-symbols-outlined { font-size: 22px; }
+
+    .vesira-menu-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 8px;
+    }
+
+    .vesira-menu-link {
+      color: #fff;
+      font-family: "Bricolage Grotesque", Arial, sans-serif;
+      font-size: clamp(30px,3vw,42px);
+      font-weight: 400;
+      line-height: .86;
+      letter-spacing: -.045em;
+      text-decoration: none;
+      padding: 2px 0;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+
+    .vesira-menu-link:hover { transform: translateX(8px); opacity: .68; }
+    .vesira-menu-link.hidden { display: none; }
+
+    @media (max-width: 700px) {
+      .vesira-global-nav { height: 68px; padding: 0 18px; }
+      .vesira-logo { width: 94px; }
+      .vesira-nav-left { gap: 9px; }
+      .vesira-nav-eyewear { font-size: 8px; }
+      .vesira-nav-button { width: 35px; height: 35px; }
+      .vesira-cart-count { top: -1px; right: -3px; min-width: 16px; height: 16px; font-size: 7.5px; line-height: 16px; }
+      .vesira-menu-drawer { width: min(235px,52vw); padding: 100px 24px 30px; }
+      .vesira-menu-link { font-size: 28px; }
+    }
+
+    @media (max-width: 380px) {
+      .vesira-logo { width: 90px; }
+      .vesira-nav-eyewear { font-size: 7px; letter-spacing: .13em; }
+    }
+  </style>
 
   <style>
 
@@ -78,22 +308,6 @@ font-family: Arial, Helvetica, sans-serif;
 
     }
 
-    .vesira-navbar-icon-fallback {
-      display: inline-flex;
-      width: 28px;
-      height: 28px;
-      align-items: center;
-      justify-content: center;
-      line-height: 0;
-    }
-
-    .vesira-navbar-icon-fallback svg {
-      width: 24px;
-      height: 24px;
-      display: block;
-      color: currentColor;
-    }
-
     a {
 
 color: inherit;
@@ -106,7 +320,7 @@ text-decoration: none;
 
 min-height: 100vh;
 
-padding: 145px 18px 50px;
+padding: 104px 18px 50px;
 
     }
 
@@ -723,6 +937,42 @@ max-width: 60%;
 </head>
 
   <body>
+
+  <div id="vesiraNavbar">
+    <nav class="vesira-global-nav" id="vesiraGlobalNav" aria-label="Navegación principal">
+      <div class="vesira-nav-left">
+        <a class="vesira-logo-link" href="index.html" aria-label="Ir al inicio">
+          <img src="img/logo2.png" class="vesira-logo" alt="Vesira">
+        </a>
+        <span class="vesira-nav-eyewear">EYEWEAR</span>
+      </div>
+
+      <div class="vesira-navbar-actions">
+        <button class="vesira-nav-button" id="vesiraOpenCart" type="button" aria-label="Carrito" title="Carrito">
+          <span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span>
+          <span class="vesira-cart-count" id="vesiraCartCount" aria-hidden="true">0</span>
+        </button>
+
+        <button class="vesira-nav-button" id="vesiraOpenMenu" type="button" aria-label="Abrir menú" title="Menú">
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="vesira-menu-backdrop" id="vesiraMenuBackdrop"></div>
+
+    <aside class="vesira-menu-drawer" id="vesiraMenuDrawer" aria-hidden="true">
+      <button class="vesira-menu-close" id="vesiraCloseMenu" type="button" aria-label="Cerrar menú" title="Cerrar">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+
+      <nav class="vesira-menu-links" aria-label="Menú">
+        <a class="vesira-menu-link" href="index.html" id="vesiraMenuInicio">Inicio</a>
+        <a class="vesira-menu-link" href="contacto.html">Contacto</a>
+      </nav>
+    </aside>
+  </div>
+
 
   <div class="page">
 
@@ -2291,105 +2541,143 @@ console.error(
     init();
 
   </script>
-  <script src="vesira-navbar.js" defer></script>
-  <script>
-    (function () {
-      function isNavbarElement(el) {
-        if (!el) return false;
-        let cur = el;
-        while (cur && cur !== document.body) {
-          const cs = getComputedStyle(cur);
-          const rect = cur.getBoundingClientRect();
-          if ((cs.position === 'fixed' || cs.position === 'sticky' || cs.position === 'absolute') && rect.top <= 8 && rect.height >= 32 && rect.width >= window.innerWidth * 0.55) {
-            return true;
-          }
-          cur = cur.parentElement;
+
+  <script id="vesiraNavbarEmbeddedScript">
+    (() => {
+      "use strict";
+
+      const CART_ID = "vesiraOpenCart";
+      const CART_COUNT_ID = "vesiraCartCount";
+      const MENU_ID = "vesiraOpenMenu";
+      const DRAWER_ID = "vesiraMenuDrawer";
+      const BACKDROP_ID = "vesiraMenuBackdrop";
+      const CLOSE_ID = "vesiraCloseMenu";
+
+      function getCart() {
+        try {
+          const cart = JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+          return Array.isArray(cart) ? cart : [];
+        } catch {
+          return [];
         }
-        return false;
       }
 
-      function svgForLabel(label) {
-        const text = String(label || '').toLowerCase();
-        if (/shopping|bag|cart|carrito|bolsa/.test(text)) {
-          return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 8h12l1 12H5L6 8Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 9V6a3 3 0 0 1 6 0v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-        }
-        if (/menu|menú/.test(text)) {
-          return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-        }
-        if (/search|buscar/.test(text)) {
-          return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-        }
-        if (/account|cuenta|profile|perfil|user|usuario/.test(text)) {
-          return '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5.5 20c.8-3.2 3.1-5 6.5-5s5.7 1.8 6.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
-        }
-        return null;
+      function getCartUnits() {
+        return getCart().reduce((sum, item) => sum + Math.max(0, Number(item?.cantidad || 0)), 0);
       }
 
-      function repairBrokenNavbarImages() {
-        document.querySelectorAll('img').forEach(img => {
-          if (!img.closest('body')) return;
-          if (!isNavbarElement(img)) return;
-          if (!img.complete || img.naturalWidth > 0) return;
-          const label = img.getAttribute('alt') || '';
-          const svg = svgForLabel(label);
-          if (!svg) {
-            img.removeAttribute('alt');
-            return;
-          }
-          const holder = document.createElement('span');
-          holder.className = 'vesira-navbar-icon-fallback';
-          holder.setAttribute('aria-hidden', 'true');
-          holder.innerHTML = svg;
-          img.replaceWith(holder);
-        });
-      }
-
-      function cleanNavbarTextLabels() {
-        const labels = /^(shopping(?:\s+bag)?|bag|menu|menú|cart|carrito|account|cuenta|profile|perfil|user|usuario|search|buscar)$/i;
-        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-        const remove = [];
-        let node;
-        while ((node = walker.nextNode())) {
-          const text = node.nodeValue.trim();
-          if (!text || !labels.test(text)) continue;
-          const parent = node.parentElement;
-          const rect = parent?.getBoundingClientRect();
-          if (parent && rect && rect.top < 170 && isNavbarElement(parent)) remove.push(node);
+      function updateBadge() {
+        const badge = document.getElementById(CART_COUNT_ID);
+        if (!badge) return;
+        const total = getCartUnits();
+        if (total <= 0) {
+          badge.style.display = "none";
+          badge.textContent = "0";
+          return;
         }
-        remove.forEach(n => n.remove());
+        badge.textContent = total > 99 ? "99+" : String(total);
+        badge.style.display = "flex";
       }
 
-      function reserveNavbarSpace() {
-        let best = 0;
-        document.querySelectorAll('body *').forEach(el => {
-          if (el.classList.contains('page')) return;
-          const cs = getComputedStyle(el);
-          if (cs.position !== 'fixed' && cs.position !== 'sticky' && cs.position !== 'absolute') return;
-          const r = el.getBoundingClientRect();
-          if (r.top <= 8 && r.height >= 40 && r.width >= window.innerWidth * 0.6 && r.height < 220) {
-            best = Math.max(best, Math.ceil(r.bottom));
-          }
-        });
-        const fallback = window.innerWidth <= 800 ? 132 : 145;
-        const top = Math.max(best + 20, fallback);
-        document.querySelector('.page')?.style.setProperty('padding-top', `${top}px`, 'important');
+      function bumpBadge() {
+        const badge = document.getElementById(CART_COUNT_ID);
+        if (!badge) return;
+        badge.classList.remove("bump");
+        void badge.offsetWidth;
+        badge.classList.add("bump");
       }
 
-      function fixNavbar() {
-        repairBrokenNavbarImages();
-        cleanNavbarTextLabels();
-        reserveNavbarSpace();
+      function openMenu() {
+        const drawer = document.getElementById(DRAWER_ID);
+        const backdrop = document.getElementById(BACKDROP_ID);
+        if (!drawer || !backdrop) return;
+        drawer.classList.add("open");
+        backdrop.classList.add("open");
+        drawer.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
       }
 
-      document.addEventListener('DOMContentLoaded', () => {
-        fixNavbar();
-        const observer = new MutationObserver(() => fixNavbar());
-        observer.observe(document.body, { childList: true, subtree: true });
-        window.addEventListener('resize', fixNavbar);
-        [50, 250, 1000].forEach(ms => setTimeout(fixNavbar, ms));
+      function closeMenu() {
+        const drawer = document.getElementById(DRAWER_ID);
+        const backdrop = document.getElementById(BACKDROP_ID);
+        if (!drawer || !backdrop) return;
+        drawer.classList.remove("open");
+        backdrop.classList.remove("open");
+        drawer.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      function bindEvents() {
+        const cartButton = document.getElementById(CART_ID);
+        const menuButton = document.getElementById(MENU_ID);
+        const closeButton = document.getElementById(CLOSE_ID);
+        const backdrop = document.getElementById(BACKDROP_ID);
+
+        if (cartButton && !cartButton.dataset.bound) {
+          cartButton.dataset.bound = "1";
+          cartButton.addEventListener("click", () => {
+            window.location.href = "carrito.html";
+          });
+        }
+
+        if (menuButton && !menuButton.dataset.bound) {
+          menuButton.dataset.bound = "1";
+          menuButton.addEventListener("click", openMenu);
+        }
+
+        if (closeButton && !closeButton.dataset.bound) {
+          closeButton.dataset.bound = "1";
+          closeButton.addEventListener("click", closeMenu);
+        }
+
+        if (backdrop && !backdrop.dataset.bound) {
+          backdrop.dataset.bound = "1";
+          backdrop.addEventListener("click", closeMenu);
+        }
+
+        if (!document.body.dataset.vesiraEscapeBound) {
+          document.body.dataset.vesiraEscapeBound = "1";
+          document.addEventListener("keydown", event => {
+            if (event.key === "Escape") closeMenu();
+          });
+        }
+
+        const currentFile = window.location.pathname.split("/").pop().toLowerCase();
+        if (currentFile === "" || currentFile === "index.html" || currentFile.startsWith("index_")) {
+          document.getElementById("vesiraMenuInicio")?.classList.add("hidden");
+        }
+      }
+
+      function initNavbar() {
+        bindEvents();
+        updateBadge();
+        window.dispatchEvent(new CustomEvent("vesiraNavbarReady"));
+      }
+
+      window.addEventListener("storage", updateBadge);
+      window.addEventListener("vesiraCartUpdated", event => {
+        updateBadge();
+        if (event?.detail?.bump) bumpBadge();
       });
+
+      window.vesiraNavbar = {
+        getCart,
+        getCartUnits,
+        updateBadge,
+        bumpBadge,
+        openMenu,
+        closeMenu,
+        init: initNavbar
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initNavbar, { once: true });
+      } else {
+        initNavbar();
+      }
     })();
   </script>
+
 </body>
 
 </html>
