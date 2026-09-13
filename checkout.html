@@ -1127,323 +1127,184 @@ Boolean(message)
       try {
 
         if (!GOOGLE_MAPS_BROWSER_KEY) {
-
           throw new Error("Falta la clave pública de Google Maps.");
-
         }
 
-// Esperamos a que el script async de Google termine de cargar.
-
         if (window.vesiraGoogleReady) {
-
           await window.vesiraGoogleReady;
-
         }
 
         if (!window.google?.maps?.importLibrary) {
-
           throw new Error("Google Maps JavaScript API no está disponible.");
-
         }
 
-// PlaceAutocompleteElement viene exportado por la librería places.
+        const { Autocomplete } = await google.maps.importLibrary("places");
 
-        const { PlaceAutocompleteElement } =
-
-          await google.maps.importLibrary("places");
-
-        if (!PlaceAutocompleteElement) {
-
-          throw new Error("PlaceAutocompleteElement no está disponible.");
-
+        if (!Autocomplete) {
+          throw new Error("Autocomplete de Google Places no está disponible.");
         }
 
-        const container =
-
-document.getElementById("direccion-autocomplete");
-
-        const hiddenInput =
-
-document.getElementById("direccion");
+        const container = document.getElementById("direccion-autocomplete");
+        const hiddenInput = document.getElementById("direccion");
 
         if (!container || !hiddenInput) {
-
           throw new Error("No se encontró el campo de dirección.");
-
         }
 
-        const autocomplete =
-
-new PlaceAutocompleteElement({
-
-            includedRegionCodes: ["es"]
-
-          });
-
-        autocomplete.placeholder =
-
-          "Empieza a escribir tu dirección...";
-
-        autocomplete.includedRegionCodes = ["es"];
-
-        autocomplete.requestedLanguage = "es";
-
-        autocomplete.requestedRegion = "es";
-
-        autocomplete.setAttribute(
-
-          "aria-label",
-
-          "Dirección de entrega"
-
-        );
-
-        container.replaceChildren(autocomplete);
-
-        autocomplete.addEventListener(
-
-          "gmp-select",
-
-          async (event) => {
-
-            try {
-
-              const prediction =
-
-event.placePrediction;
-
-              if (!prediction) {
-
-                return;
-
-              }
-
-              const place =
-
-                prediction.toPlace();
-
-              await place.fetchFields({
-
-                fields: [
-
-                  "addressComponents",
-
-                  "formattedAddress"
-
-                ]
-
-              });
-
-              let street = "";
-
-              let streetNumber = "";
-
-              let city = "";
-
-              let postalCode = "";
-
-              let countryCode = "ES";
-
-              for (const component of place.addressComponents || []) {
-
-                const types = component.types || [];
-
-                const longText = component.longText || "";
-
-                const shortText = component.shortText || "";
-
-                if (types.includes("route")) {
-
-                  street = longText;
-
-                }
-
-                if (types.includes("street_number")) {
-
-                  streetNumber = longText;
-
-                }
-
-                if (
-
-                  !city &&
-
-                  (
-
-                    types.includes("locality") ||
-
-                    types.includes("postal_town") ||
-
-                    types.includes("sublocality") ||
-
-                    types.includes("sublocality_level_1")
-
-                  )
-
-                ) {
-
-                  city = longText;
-
-                }
-
-                if (types.includes("postal_code")) {
-
-                  postalCode = longText;
-
-                }
-
-                if (types.includes("country")) {
-
-                  countryCode = shortText || "ES";
-
-                }
-
-              }
-
-              const direccion =
-
-                [street, streetNumber]
-
-                  .filter(Boolean)
-
-                  .join(" ") ||
-
-                place.formattedAddress ||
-
-                "";
-
-              hiddenInput.value = direccion;
-
-              const cityInput =
-
-document.getElementById("ciudad");
-
-              const postalInput =
-
-document.getElementById("codigoPostal");
-
-
-
-              if (cityInput) {
-
-                cityInput.value = city;
-
-              }
-
-              if (postalInput) {
-
-                postalInput.value = postalCode;
-
-              }
-
-setAddressStatus("", "");
-
-            } catch (error) {
-
-console.error(
-
-                "Google Places selection error:",
-
-                error
-
-              );
-
-              setAddressStatus(
-
-                "No se pudieron completar los datos de la dirección.",
-
-                "error"
-
-              );
-
+        const input = document.createElement("input");
+        input.type = "text";
+        input.id = "direccion-input";
+        input.autocomplete = "off";
+        input.inputMode = "text";
+        input.placeholder = "Empieza a escribir tu dirección...";
+        input.setAttribute("aria-label", "Dirección de entrega");
+        input.required = true;
+
+        container.replaceChildren(input);
+
+        Object.assign(input.style, {
+          width: "100%",
+          height: "48px",
+          minHeight: "48px",
+          maxHeight: "48px",
+          padding: "0 13px",
+          border: "1px solid var(--b)",
+          borderRadius: "13px",
+          background: "var(--input)",
+          color: "#fff",
+          outline: "none",
+          fontSize: "16px",
+          lineHeight: "48px"
+        });
+
+        const autocomplete = new Autocomplete(input, {
+          componentRestrictions: { country: "es" },
+          fields: ["address_components", "formatted_address"],
+          types: ["address"]
+        });
+
+        autocomplete.addListener("place_changed", () => {
+          try {
+            const place = autocomplete.getPlace();
+
+            if (!place || !place.address_components?.length) {
+              return;
             }
 
+            let street = "";
+            let streetNumber = "";
+            let city = "";
+            let postalCode = "";
+
+            for (const component of place.address_components) {
+              const types = component.types || [];
+
+              if (types.includes("route")) {
+                street = component.long_name || "";
+              }
+
+              if (types.includes("street_number")) {
+                streetNumber = component.long_name || "";
+              }
+
+              if (
+                !city &&
+                (
+                  types.includes("locality") ||
+                  types.includes("postal_town") ||
+                  types.includes("sublocality") ||
+                  types.includes("sublocality_level_1")
+                )
+              ) {
+                city = component.long_name || "";
+              }
+
+              if (types.includes("postal_code")) {
+                postalCode = component.long_name || "";
+              }
+            }
+
+            const direccion =
+              [street, streetNumber]
+                .filter(Boolean)
+                .join(" ") ||
+              place.formatted_address ||
+              input.value ||
+              "";
+
+            hiddenInput.value = direccion;
+            input.value = direccion;
+
+            const cityInput = document.getElementById("ciudad");
+            const postalInput = document.getElementById("codigoPostal");
+
+            if (cityInput) {
+              cityInput.value = city;
+            }
+
+            if (postalInput) {
+              postalInput.value = postalCode;
+            }
+
+            setAddressStatus("", "");
+          } catch (error) {
+            console.error("Google Places selection error:", error);
+            setAddressStatus(
+              "No se pudieron completar los datos de la dirección.",
+              "error"
+            );
           }
+        });
 
-        );
-
-        setAddressStatus(
-
-          "Empieza a escribir y selecciona una de las sugerencias.",
-
-          ""
-
-        );
+        input.addEventListener("input", () => {
+          hiddenInput.value = input.value;
+          setAddressStatus("", "");
+        });
 
       } catch (error) {
+        console.error("Google Places no disponible:", error);
 
-console.error(
-
-          "Google Places no disponible:",
-
-          error
-
-        );
+        const container = document.getElementById("direccion-autocomplete");
+        const hiddenInput = document.getElementById("direccion");
 
         setAddressStatus(
-
           "Google no está disponible ahora. Puedes escribir la dirección manualmente.",
-
           "error"
-
         );
 
-// Fallback manual si el widget no carga.
-
-        const container =
-
-document.getElementById("direccion-autocomplete");
-
-        const hiddenInput =
-
-document.getElementById("direccion");
-
         if (container && hiddenInput) {
-
           const input = document.createElement("input");
 
           input.type = "text";
-
           input.id = "direccion-fallback";
-
+          input.name = "direccion-visible";
           input.autocomplete = "street-address";
-
           input.placeholder = "Calle y número";
-
           input.required = true;
 
-          input.style.width = "100%";
-
-          input.style.minHeight = "48px";
-
-          input.style.padding = "0 13px";
-
-          input.style.border = "1px solid var(--b)";
-
-          input.style.borderRadius = "13px";
-
-          input.style.background = "var(--input)";
-
-          input.style.color = "#fff";
-
-          input.style.outline = "none";
-
-          input.style.fontSize = "12px";
+          Object.assign(input.style, {
+            width: "100%",
+            height: "48px",
+            minHeight: "48px",
+            maxHeight: "48px",
+            padding: "0 13px",
+            border: "1px solid var(--b)",
+            borderRadius: "13px",
+            background: "var(--input)",
+            color: "#fff",
+            outline: "none",
+            fontSize: "16px",
+            lineHeight: "48px"
+          });
 
           input.addEventListener("input", () => {
-
             hiddenInput.value = input.value;
-
           });
 
           container.replaceChildren(input);
-
         }
-
       }
-
     }
-
     async function validateShippingAddress() {
 
       const form =
@@ -1601,7 +1462,7 @@ String(
         <section class="wrap">
 
           <header class="head">
-<h1>Checkout</h1>
+<h1>Checkout.</h1>
 
           </header>
 
@@ -1613,7 +1474,7 @@ String(
 
                 <div class="section-head">
 
-                  <h2>Contacto</h2>
+                  <h2>Contacto.</h2>
 
                   <span class="section-number">01</span>
 
@@ -1651,7 +1512,7 @@ String(
 
                 <div class="section-head">
 
-                  <h2>Entrega</h2>
+                  <h2>Entrega.</h2>
 
                   <span class="section-number">02</span>
 
@@ -1781,7 +1642,7 @@ String(
 
                 <div class="section-head">
 
-                  <h2>Nota</h2>
+                  <h2>Nota.</h2>
 
                   <span class="section-number">03</span>
 
@@ -1791,7 +1652,7 @@ String(
 
                   <div class="field full">
 
-                    <label for="nota" class="note-label"><span class="optional-label">Opcional</span></label>
+                    <label for="nota" class="note-label"><span>Nota</span><span class="optional-label">Opcional</span></label>
 
                     <textarea
 
