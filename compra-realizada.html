@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -19,20 +20,28 @@
   >
 
   <style>
+
+    /* ==========================================================
+       VARIABLES
+    ========================================================== */
+
     :root {
       --bg: #080808;
-      --panel: #111111;
-      --panel-light: #181818;
-      --border: #292929;
       --text: #f5f5f5;
-      --muted: #999999;
+      --muted: #969696;
       --green: #6ee7a1;
 
-      --paper: #f7f4ed;
-      --paper-dark: #e9e5dc;
+      --paper: #f8f5ef;
       --ink: #171717;
       --ink-muted: #77736b;
+
+      --ticket-width: 350px;
     }
+
+
+    /* ==========================================================
+       RESET
+    ========================================================== */
 
     *,
     *::before,
@@ -43,89 +52,138 @@
     html,
     body {
       width: 100%;
+      height: 100%;
       min-width: 0;
       max-width: 100%;
-      min-height: 100%;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     body {
+      min-height: 100dvh;
+
       color: var(--text);
+
       background:
         radial-gradient(
           circle at 50% -15%,
-          rgba(255, 255, 255, .09),
+          rgba(255,255,255,.08),
           transparent 35%
         ),
         radial-gradient(
-          circle at 90% 90%,
-          rgba(255, 255, 255, .04),
+          circle at 90% 100%,
+          rgba(255,255,255,.035),
           transparent 30%
         ),
         var(--bg);
 
-      font-family: "Outfit", Arial, sans-serif;
+      font-family:
+        "Outfit",
+        Arial,
+        sans-serif;
+
       -webkit-font-smoothing: antialiased;
+      overscroll-behavior: none;
     }
 
     button {
       font: inherit;
     }
 
-    button:focus-visible {
-      outline: 2px solid white;
-      outline-offset: 4px;
-    }
+
+    /* ==========================================================
+       PÁGINA
+    ========================================================== */
 
     .page {
+      position: relative;
+
       width: 100%;
-      min-height: 100svh;
+      height: 100dvh;
+      min-height: 100dvh;
+      max-height: 100dvh;
 
-      display: flex;
-      justify-content: center;
+      padding:
+        max(12px, env(safe-area-inset-top))
+        18px
+        max(12px, env(safe-area-inset-bottom));
 
-      padding: 54px 18px 35px;
+      overflow: hidden;
     }
+
+
+    /*
+      Aquí dividimos la pantalla en 3 zonas:
+
+      1. Cabecera
+      2. Impresora + ticket
+      3. Botón
+
+      Esto evita que el ticket se coma el botón.
+    */
 
     .wrap {
       width: min(820px, 100%);
+      max-width: 100%;
+      height: 100%;
       min-width: 0;
+      margin: 0 auto;
+
+      display: grid;
+
+      grid-template-rows:
+        auto
+        minmax(0, 1fr)
+        auto;
+
+      align-items: center;
     }
 
-    /* =========================================
+
+    /* ==========================================================
        CABECERA
-    ========================================= */
+    ========================================================== */
 
     .hero {
+      width: 100%;
+
       text-align: center;
-      margin: 0 auto 12px;
+
+      padding-top: 3px;
     }
 
     .ok {
-      width: 54px;
-      height: 54px;
+      width: 47px;
+      height: 47px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      margin: 0 auto 14px;
-
-      border: 1px solid rgba(110, 231, 161, .4);
-      border-radius: 50%;
+      margin: 0 auto 10px;
 
       color: var(--green);
-      background: rgba(110, 231, 161, .08);
 
-      font-size: 25px;
+      background:
+        rgba(110,231,161,.07);
+
+      border:
+        1px solid rgba(110,231,161,.35);
+
+      border-radius: 50%;
+
+      font-size: 21px;
 
       animation:
-        checkAppear .65s cubic-bezier(.2, .9, .2, 1) both;
+        checkAppear
+        .65s
+        cubic-bezier(.2,.9,.2,1)
+        both;
     }
 
     @keyframes checkAppear {
+
       0% {
         opacity: 0;
         transform: scale(.55);
@@ -139,179 +197,251 @@
         opacity: 1;
         transform: scale(1);
       }
+
     }
 
     h1 {
-      max-width: 700px;
+      max-width: 760px;
+
       margin: 0 auto;
 
-      font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: clamp(32px, 5vw, 54px);
+      font-family:
+        "Bricolage Grotesque",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(31px, 4.4vw, 52px);
+
       font-weight: 500;
-      line-height: .92;
-      letter-spacing: -.055em;
+
+      line-height: .9;
+      letter-spacing: -.06em;
     }
 
     .subtitle {
       max-width: 500px;
-      margin: 13px auto 0;
+
+      margin: 10px auto 0;
 
       color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
+
+      font-size: 13px;
+      line-height: 1.45;
     }
 
-    /* =========================================
-       ESCENARIO DE IMPRESIÓN
-    ========================================= */
+
+    /* ==========================================================
+       ESCENARIO
+    ========================================================== */
 
     .printer-stage {
       position: relative;
 
       width: 100%;
-      height: 600px;
+      height: 100%;
+      min-height: 0;
+      min-width: 0;
 
-      margin: 25px auto 0;
+      margin:
+        8px
+        auto
+        8px;
 
       display: flex;
-      justify-content: center;
       align-items: flex-start;
+      justify-content: center;
 
-      perspective: 1200px;
+      perspective: 1300px;
       isolation: isolate;
+
+      /*
+        MUY IMPORTANTE:
+
+        El escenario recorta visualmente el ticket.
+        El botón está fuera y nunca puede quedar debajo.
+      */
+      overflow: hidden;
     }
 
-    /* Sombra debajo de la impresora */
+
+    /* ==========================================================
+       SOMBRA GENERAL
+    ========================================================== */
 
     .printer-stage::after {
       content: "";
 
       position: absolute;
+
       z-index: 0;
 
-      top: 176px;
+      top: 148px;
       left: 50%;
 
-      width: min(430px, 90%);
-      height: 100px;
+      width:
+        min(430px, 86%);
 
-      transform: translateX(-50%);
+      height: 85px;
 
-      background: radial-gradient(
-        ellipse,
-        rgba(0, 0, 0, .65),
-        transparent 70%
-      );
+      transform:
+        translateX(-50%);
+
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(0,0,0,.62),
+          transparent 70%
+        );
 
       filter: blur(18px);
+
       pointer-events: none;
     }
 
-    /* =========================================
+
+    /* ==========================================================
        IMPRESORA
-    ========================================= */
+    ========================================================== */
 
     .printer {
       position: absolute;
-      z-index: 5;
-      top: 0;
 
-      width: min(430px, 100%);
+      z-index: 5;
+
+      top: 0;
+      left: 50%;
+
+      width:
+        min(430px, 100%);
+
       height: 178px;
 
-      border: 1px solid #303030;
-      border-radius: 25px 25px 17px 17px;
+      transform:
+        translateX(-50%);
+
+      border:
+        1px solid #303030;
+
+      border-radius:
+        25px 25px 17px 17px;
 
       background:
         linear-gradient(
           145deg,
           #252525 0%,
-          #171717 42%,
+          #191919 45%,
           #101010 100%
         );
 
       box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, .07),
-        0 25px 65px rgba(0, 0, 0, .5);
+        inset 0 1px 0 rgba(255,255,255,.07),
+        0 25px 70px rgba(0,0,0,.48);
     }
+
 
     .printer-top {
       position: absolute;
+
       top: 22px;
       left: 28px;
       right: 28px;
 
       height: 60px;
 
-      border: 1px solid #292929;
+      border:
+        1px solid #292929;
+
       border-radius: 14px;
 
       background:
         linear-gradient(
           145deg,
-          #111111,
-          #090909
+          #111,
+          #080808
         );
 
       box-shadow:
-        inset 0 1px 4px rgba(0, 0, 0, .8);
+        inset 0 2px 5px rgba(0,0,0,.8);
     }
+
 
     .printer-top::after {
       content: "VESIRA";
 
       position: absolute;
-      left: 20px;
+
       top: 23px;
+      left: 20px;
 
-      color: #3b3b3b;
+      color: #363636;
 
-      font-family: Arial, sans-serif;
+      font-family:
+        Arial,
+        sans-serif;
+
       font-size: 9px;
       font-weight: 700;
+
       letter-spacing: .18em;
     }
 
+
+    /*
+      LED desplazado a la izquierda.
+    */
+
     .printer-led {
       position: absolute;
+
       top: 47px;
-      right: 29px;
+
+      right: 51px;
 
       width: 8px;
       height: 8px;
 
       border-radius: 50%;
-      background: var(--green);
+
+      background:
+        var(--green);
 
       box-shadow:
-        0 0 0 3px rgba(110, 231, 161, .05),
-        0 0 17px rgba(110, 231, 161, .75);
+        0 0 0 3px rgba(110,231,161,.05),
+        0 0 16px rgba(110,231,161,.7);
     }
+
 
     .printer-slot {
       position: absolute;
+
       z-index: 8;
 
       left: 39px;
       right: 39px;
+
       bottom: 22px;
 
       height: 17px;
 
-      border: 1px solid #282828;
-      border-radius: 999px;
-
       background: #030303;
 
+      border:
+        1px solid #282828;
+
+      border-radius:
+        999px;
+
       box-shadow:
-        inset 0 3px 5px rgba(0, 0, 0, .9),
-        0 1px 0 rgba(255, 255, 255, .03);
+        inset 0 3px 6px rgba(0,0,0,.9),
+        0 1px 0 rgba(255,255,255,.03);
     }
 
     .printer-slot::after {
       content: "";
 
       position: absolute;
+
       top: 5px;
       left: 15px;
       right: 15px;
@@ -319,924 +449,2421 @@
       height: 2px;
 
       border-radius: 50%;
-      background: rgba(255, 255, 255, .035);
+
+      background:
+        rgba(255,255,255,.035);
     }
 
-    /* =========================================
+
+    /* ==========================================================
        TICKET
-    ========================================= */
+    ========================================================== */
 
     .ticket {
       position: absolute;
+
       z-index: 3;
 
-      top: 111px;
+      top: 112px;
       left: 50%;
 
-      width: min(350px, calc(100% - 30px));
+      /*
+        MARGENES LATERALES:
+        el ticket nunca toca los bordes
+      */
+
+      width:
+        min(
+          var(--ticket-width),
+          calc(100% - 52px)
+        );
+
       height: 0;
 
-      transform:
-        translateX(-50%)
-        translateY(-4px)
-        rotateX(-13deg)
-        rotateZ(.15deg);
-
-      transform-origin: top center;
+      padding:
+        0 24px;
 
       overflow: hidden;
 
-      padding: 0 24px;
-
       color: var(--ink);
+
       background:
         linear-gradient(
           90deg,
-          rgba(0, 0, 0, .035),
+          rgba(0,0,0,.035),
           transparent 10%,
           transparent 90%,
-          rgba(0, 0, 0, .035)
+          rgba(0,0,0,.035)
         ),
         var(--paper);
 
-      box-shadow:
-        0 4px 5px rgba(0, 0, 0, .12),
-        0 15px 30px rgba(0, 0, 0, .25);
+      border-radius:
+        0 0 5px 5px;
 
-      clip-path: inset(0 0 100% 0);
+      transform:
+        translateX(-50%)
+        translateY(-3px)
+        rotateX(-14deg)
+        rotateZ(.18deg);
+
+      transform-origin:
+        top center;
+
+      clip-path:
+        inset(0 0 100% 0);
+
+      box-shadow:
+        0 3px 5px rgba(0,0,0,.12);
+
+      will-change:
+        height,
+        transform,
+        clip-path,
+        box-shadow;
     }
 
+
     /*
-      La hoja no aparece de golpe:
-      - empieza dentro de la ranura
-      - crece progresivamente
-      - se inclina ligeramente
-      - termina asentándose
+      Ligerísimo papel irregular.
     */
+
+    .ticket::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,.025),
+          transparent 7%,
+          transparent 93%,
+          rgba(0,0,0,.025)
+        );
+
+      opacity: .8;
+    }
+
+
+    /*
+      Borde serrado inferior.
+    */
+
+    .ticket::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      bottom: -1px;
+
+      height: 7px;
+
+      background:
+        radial-gradient(
+          circle at 4px 0,
+          transparent 4px,
+          var(--paper) 4.5px
+        )
+        0 0 / 8px 8px repeat-x;
+
+      pointer-events: none;
+    }
+
+
+    /* ==========================================================
+       ANIMACIÓN PRINCIPAL
+    ========================================================== */
 
     .ticket.printing {
       animation:
-        ticketPrint 5.8s cubic-bezier(.22, .72, .2, 1) forwards;
+        ticketPrint
+        5.8s
+        cubic-bezier(.18,.73,.22,1)
+        forwards;
     }
 
+
+    /*
+      La animación está dividida para que parezca
+      que realmente sale papel de la ranura.
+
+      No cambia solamente height:
+      también cambia:
+      - inclinación
+      - posición
+      - sombra
+      - máscara
+    */
+
     @keyframes ticketPrint {
+
       0% {
+
         height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
 
         transform:
           translateX(-50%)
           translateY(-3px)
           rotateX(-14deg)
-          rotateZ(.25deg);
+          rotateZ(.22deg);
 
-        clip-path: inset(0 0 100% 0);
+        clip-path:
+          inset(0 0 100% 0);
 
         box-shadow:
-          0 0 0 rgba(0, 0, 0, 0);
+          0 0 0 rgba(0,0,0,0);
       }
 
-      13% {
+
+      10% {
+
         height: 45px;
 
         transform:
           translateX(-50%)
-          translateY(0)
+          translateY(-1px)
           rotateX(-12deg)
-          rotateZ(.2deg);
+          rotateZ(.18deg);
 
-        clip-path: inset(0 0 88% 0);
+        clip-path:
+          inset(0 0 88% 0);
+
+        box-shadow:
+          0 3px 6px rgba(0,0,0,.12);
       }
 
-      31% {
-        height: 155px;
+
+      24% {
+
+        height: 105px;
+
+        transform:
+          translateX(-50%)
+          translateY(1px)
+          rotateX(-10deg)
+          rotateZ(-.12deg);
+
+        clip-path:
+          inset(0 0 70% 0);
+      }
+
+
+      40% {
+
+        height: 180px;
 
         transform:
           translateX(-50%)
           translateY(4px)
-          rotateX(-8deg)
-          rotateZ(-.15deg);
+          rotateX(-7deg)
+          rotateZ(.09deg);
 
-        clip-path: inset(0 0 68% 0);
+        clip-path:
+          inset(0 0 50% 0);
       }
 
-      51% {
-        height: 285px;
+
+      58% {
+
+        height: 270px;
 
         transform:
           translateX(-50%)
-          translateY(10px)
+          translateY(8px)
           rotateX(-4deg)
-          rotateZ(.1deg);
+          rotateZ(-.05deg);
 
-        clip-path: inset(0 0 43% 0);
+        clip-path:
+          inset(0 0 30% 0);
       }
 
-      73% {
-        height: 430px;
+
+      74% {
+
+        height: 350px;
 
         transform:
           translateX(-50%)
-          translateY(17px)
-          rotateX(-1.5deg)
-          rotateZ(-.08deg);
+          translateY(12px)
+          rotateX(-2deg)
+          rotateZ(.025deg);
 
-        clip-path: inset(0 0 16% 0);
+        clip-path:
+          inset(0 0 12% 0);
       }
+
 
       88% {
-        height: 520px;
+
+        height: 415px;
 
         transform:
           translateX(-50%)
-          translateY(24px)
-          rotateX(0)
-          rotateZ(.03deg);
+          translateY(16px)
+          rotateX(-.5deg)
+          rotateZ(0);
 
-        clip-path: inset(0 0 0 0);
+        clip-path:
+          inset(0 0 0 0);
+
+        padding-top: 25px;
+        padding-bottom: 22px;
       }
+
 
       95% {
+
+        height: 415px;
+
         transform:
           translateX(-50%)
-          translateY(20px)
+          translateY(14px)
           rotateX(0)
           rotateZ(0);
       }
+
 
       100% {
-        height: 520px;
 
-        padding-top: 27px;
-        padding-bottom: 24px;
+        height: 415px;
 
         transform:
           translateX(-50%)
-          translateY(23px)
+          translateY(16px)
           rotateX(0)
           rotateZ(0);
 
-        clip-path: inset(0 0 0 0);
+        clip-path:
+          inset(0 0 0 0);
+
+        padding-top: 25px;
+        padding-bottom: 22px;
 
         box-shadow:
-          0 5px 7px rgba(0, 0, 0, .13),
-          0 28px 45px rgba(0, 0, 0, .3);
+          0 5px 7px rgba(0,0,0,.13),
+          0 24px 40px rgba(0,0,0,.27);
       }
+
     }
 
+
+    /* ==========================================================
+       CONTENIDO TICKET
+    ========================================================== */
+
     .ticket-inner {
+      position: relative;
+
+      z-index: 2;
+
       width: 100%;
       min-width: 0;
     }
 
+
     .ticket-content {
       opacity: 0;
-      transform: translateY(8px);
+
+      transform:
+        translateY(8px);
     }
+
 
     .ticket.printing .ticket-head {
-      animation: contentAppear .45s ease 1.05s forwards;
+      animation:
+        contentIn
+        .45s
+        ease
+        1s
+        forwards;
     }
+
 
     .ticket.printing .ticket-status {
-      animation: contentAppear .45s ease 1.65s forwards;
+      animation:
+        contentIn
+        .45s
+        ease
+        1.6s
+        forwards;
     }
+
 
     .ticket.printing .ticket-items {
-      animation: contentAppear .45s ease 2.05s forwards;
+      animation:
+        contentIn
+        .45s
+        ease
+        2s
+        forwards;
     }
+
 
     .ticket.printing .ticket-total-wrap {
-      animation: contentAppear .45s ease 4.25s forwards;
+      animation:
+        contentIn
+        .45s
+        ease
+        4.15s
+        forwards;
     }
 
+
     .ticket.printing .ticket-foot {
-      animation: contentAppear .45s ease 4.8s forwards;
+      animation:
+        contentIn
+        .45s
+        ease
+        4.7s
+        forwards;
     }
+
 
     .ticket.printing .ticket-item {
       opacity: 0;
-      transform: translateY(7px);
+
+      transform:
+        translateY(6px);
     }
 
+
     .ticket.printing .ticket-item:nth-child(1) {
-      animation: contentAppear .35s ease 2.25s forwards;
+      animation:
+        contentIn
+        .35s
+        ease
+        2.2s
+        forwards;
     }
 
     .ticket.printing .ticket-item:nth-child(2) {
-      animation: contentAppear .35s ease 2.55s forwards;
+      animation:
+        contentIn
+        .35s
+        ease
+        2.5s
+        forwards;
     }
 
     .ticket.printing .ticket-item:nth-child(3) {
-      animation: contentAppear .35s ease 2.85s forwards;
+      animation:
+        contentIn
+        .35s
+        ease
+        2.8s
+        forwards;
     }
 
     .ticket.printing .ticket-item:nth-child(4) {
-      animation: contentAppear .35s ease 3.15s forwards;
+      animation:
+        contentIn
+        .35s
+        ease
+        3.1s
+        forwards;
     }
 
     .ticket.printing .ticket-item:nth-child(5) {
-      animation: contentAppear .35s ease 3.45s forwards;
+      animation:
+        contentIn
+        .35s
+        ease
+        3.4s
+        forwards;
     }
 
-    @keyframes contentAppear {
+
+    @keyframes contentIn {
+
       to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+          translateY(0);
       }
+
     }
 
+
+    /* ==========================================================
+       CABECERA TICKET
+    ========================================================== */
+
     .ticket-head {
-      padding-bottom: 15px;
+      padding-bottom: 14px;
+
       text-align: center;
-      border-bottom: 1px dashed #aaa69e;
+
+      border-bottom:
+        1px dashed #aaa69e;
     }
+
 
     .ticket-logo {
       display: block;
 
-      width: 115px;
+      width: 112px;
       max-width: 100%;
+
       height: auto;
 
-      margin: 0 auto 9px;
+      margin:
+        0 auto 8px;
 
-      filter: brightness(0);
+      filter:
+        brightness(0);
     }
+
 
     .ticket-small {
-      color: #6d6961;
+      color:
+        #6d6961;
 
-      font-size: 9px;
+      font-size: 8px;
+
       font-weight: 500;
-      letter-spacing: .17em;
-      text-transform: uppercase;
+
+      letter-spacing:
+        .18em;
+
+      text-transform:
+        uppercase;
     }
+
+
+    /* ==========================================================
+       ESTADO
+    ========================================================== */
 
     .ticket-status {
-      margin: 17px 0;
+      margin:
+        16px 0;
+
       text-align: center;
     }
+
 
     .ticket-status strong {
       display: block;
 
       margin-bottom: 4px;
 
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
     }
 
+
     .ticket-status span {
-      color: #77736b;
-      font-size: 10px;
+      color:
+        #77736b;
+
+      font-size: 9px;
     }
 
+
+    /* ==========================================================
+       PRODUCTOS
+    ========================================================== */
+
     .ticket-items {
-      border-top: 1px solid #d4cfc5;
+      border-top:
+        1px solid #d4cfc5;
     }
+
 
     .ticket-item {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+
+      grid-template-columns:
+        minmax(0,1fr)
+        auto;
+
       gap: 12px;
 
-      padding: 11px 0;
+      padding:
+        10px 0;
 
-      border-bottom: 1px dashed #c8c2b8;
+      border-bottom:
+        1px dashed #c8c2b8;
 
-      font-size: 11px;
-    }
-
-    .item-name {
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-
-    .item-meta {
-      margin-top: 3px;
-      color: #77736b;
       font-size: 10px;
     }
 
-    .item-price {
-      white-space: nowrap;
-      font-size: 11px;
+
+    .item-name {
       font-weight: 700;
-      text-align: right;
+
+      overflow-wrap:
+        anywhere;
     }
 
-    .ticket-total-wrap {
-      padding-top: 15px;
+
+    .item-meta {
+      margin-top: 3px;
+
+      color:
+        #77736b;
+
+      font-size: 9px;
     }
+
+
+    .item-price {
+      white-space:
+        nowrap;
+
+      color:
+        #171717;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      text-align:
+        right;
+    }
+
+
+    /* ==========================================================
+       TOTAL
+    ========================================================== */
+
+    .ticket-total-wrap {
+      padding-top:
+        14px;
+    }
+
 
     .total-row {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+
+      gap: 16px;
     }
+
 
     .total-label {
-      color: #6e6961;
-      font-size: 12px;
+      color:
+        #6e6961;
+
+      font-size: 11px;
     }
+
 
     .total {
-      font-size: 23px;
+      color:
+        #171717;
+
+      font-size: 21px;
+
       font-weight: 700;
-      white-space: nowrap;
+
+      white-space:
+        nowrap;
     }
+
+
+    /* ==========================================================
+       FOOT
+    ========================================================== */
 
     .ticket-foot {
-      margin-top: 17px;
-      padding-top: 13px;
+      margin-top:
+        14px;
 
-      border-top: 1px dashed #aaa69e;
+      padding-top:
+        11px;
 
-      color: #77736b;
+      border-top:
+        1px dashed #aaa69e;
 
-      font-size: 9px;
-      line-height: 1.5;
-      text-align: center;
+      color:
+        #77736b;
+
+      font-size: 8px;
+
+      line-height:
+        1.6;
+
+      text-align:
+        center;
     }
 
-    /* =========================================
+
+    /* ==========================================================
        BOTÓN
-    ========================================= */
+    ========================================================== */
 
     .actions {
-      display: flex;
-      justify-content: center;
+      position: relative;
+
+      z-index: 20;
+
       width: 100%;
-      margin-top: 0;
+
+      min-height: 47px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding:
+        4px
+        0
+        max(4px, env(safe-area-inset-bottom));
     }
 
+
     .btn {
-      max-width: 100%;
+      display: inline-flex;
 
-      appearance: none;
+      align-items:
+        center;
 
-      padding: 13px 18px;
+      justify-content:
+        center;
 
-      color: #111;
-      background: white;
+      width:
+        auto;
 
-      border: 1px solid #303030;
-      border-radius: 999px;
+      min-width:
+        210px;
 
-      font-size: 12px;
-      font-weight: 600;
+      min-height:
+        40px;
+
+      padding:
+        0 19px;
+
+      color:
+        #111;
+
+      background:
+        #fff;
+
+      border:
+        1px solid #303030;
+
+      border-radius:
+        999px;
+
+      font-size:
+        10px;
+
+      font-weight:
+        600;
+
+      cursor:
+        pointer;
 
       transition:
         background .2s ease,
         transform .2s ease;
     }
 
+
     .btn:hover {
-      background: #e9e9e9;
-      transform: translateY(-2px);
+      background:
+        #e9e9e9;
+
+      transform:
+        translateY(-2px);
     }
 
-    /* =========================================
-       JUSTIFICANTE DE IMPRESIÓN
-    ========================================= */
 
-    .print-receipt {
-      display: none;
-    }
+    /* ==========================================================
+       DESKTOP CON POCA ALTURA
+    ========================================================== */
 
-    @media print {
-      @page {
-        size: A4;
-        margin: 16mm;
-      }
+    @media (min-width: 601px) and (max-height: 780px) {
 
-      html,
-      body {
-        min-height: auto;
-        background: white !important;
-      }
-
-      body > * {
-        display: none !important;
-      }
-
-      .print-receipt {
-        display: block !important;
-
-        width: 100%;
-
-        color: #111 !important;
-        background: white !important;
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 12px;
-        line-height: 1.45;
-      }
-
-      .receipt-sheet {
-        width: 100%;
-        max-width: 180mm;
-        margin: 0 auto;
-      }
-
-      .receipt-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 20px;
-
-        padding-bottom: 12px;
-        border-bottom: 2px solid #111;
-      }
-
-      .receipt-logo {
-        width: 42mm;
-        max-width: 180px;
-        height: auto;
-        filter: brightness(0);
-      }
-
-      .receipt-meta {
-        color: #444;
-        text-align: right;
-      }
-
-      .receipt-title {
-        margin: 18px 0 4px;
-
-        font-size: 22px;
-        font-weight: 700;
-        letter-spacing: .02em;
-        text-transform: uppercase;
-      }
-
-      .receipt-subtitle {
-        margin-bottom: 18px;
-        color: #555;
-      }
-
-      .receipt-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px 26px;
-
-        margin-bottom: 20px;
-      }
-
-      .receipt-box {
-        padding: 10px 12px;
-        border: 1px solid #d8d8d8;
-      }
-
-      .receipt-box strong {
-        display: block;
-
-        margin-bottom: 3px;
-
-        color: #666;
-
-        font-size: 10px;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-      }
-
-      .receipt-section-title {
-        margin-top: 18px;
-        padding-bottom: 6px;
-
-        border-bottom: 1px solid #111;
-
-        font-weight: 700;
-      }
-
-      .receipt-table {
-        width: 100%;
-        margin-top: 8px;
-        border-collapse: collapse;
-      }
-
-      .receipt-table th,
-      .receipt-table td {
-        padding: 8px 5px;
-        border-bottom: 1px solid #ddd;
-        text-align: left;
-      }
-
-      .receipt-table th {
-        color: #666;
-        font-size: 10px;
-        letter-spacing: .06em;
-        text-transform: uppercase;
-      }
-
-      .receipt-table th:last-child,
-      .receipt-table td:last-child {
-        text-align: right;
-      }
-
-      .receipt-total {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 14px;
-      }
-
-      .receipt-total-box {
-        width: 68mm;
-        padding-top: 8px;
-        border-top: 2px solid #111;
-      }
-
-      .receipt-total-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-
-        font-size: 18px;
-        font-weight: 700;
-      }
-
-      .receipt-footer {
-        margin-top: 28px;
-        padding-top: 10px;
-
-        border-top: 1px solid #ddd;
-
-        color: #555;
-        font-size: 10px;
-      }
-    }
-
-    /* =========================================
-       TABLET
-    ========================================= */
-
-    @media (max-width: 600px) {
       .page {
-        min-height: 100svh;
-        padding: 24px 12px 22px;
+        padding-top:
+          9px;
+
+        padding-bottom:
+          9px;
       }
 
-      .hero {
-        margin-bottom: 0;
-      }
 
       .ok {
-        width: 46px;
-        height: 46px;
-        margin-bottom: 12px;
-        font-size: 21px;
+        width:
+          39px;
+
+        height:
+          39px;
+
+        margin-bottom:
+          6px;
+
+        font-size:
+          17px;
       }
+
 
       h1 {
-        font-size: clamp(30px, 9.5vw, 48px);
-        line-height: .9;
-        letter-spacing: -.06em;
+        font-size:
+          clamp(
+            27px,
+            4vw,
+            42px
+          );
       }
+
 
       .subtitle {
-        max-width: 320px;
-        margin-top: 10px;
-        font-size: 12px;
-        line-height: 1.45;
+        margin-top:
+          6px;
+
+        font-size:
+          10px;
       }
+
 
       .printer-stage {
-        height: 475px;
-        margin-top: 20px;
+        margin-top:
+          4px;
+
+        margin-bottom:
+          6px;
       }
+
 
       .printer {
-        width: min(330px, 100%);
-        height: 140px;
-        border-radius: 19px 19px 13px 13px;
+        width:
+          360px;
+
+        height:
+          150px;
       }
+
 
       .printer-top {
-        top: 17px;
-        left: 21px;
-        right: 21px;
-        height: 46px;
-        border-radius: 11px;
+        top:
+          18px;
+
+        left:
+          23px;
+
+        right:
+          23px;
+
+        height:
+          49px;
       }
 
-      .printer-top::after {
-        top: 17px;
-        left: 14px;
-        font-size: 7px;
-      }
 
       .printer-led {
-        top: 35px;
-        right: 22px;
-        width: 6px;
-        height: 6px;
+        top:
+          39px;
+
+        /*
+          También ligeramente más a la izquierda.
+        */
+        right:
+          45px;
+
+        width:
+          7px;
+
+        height:
+          7px;
       }
+
 
       .printer-slot {
-        left: 28px;
-        right: 28px;
-        bottom: 18px;
-        height: 14px;
+        left:
+          31px;
+
+        right:
+          31px;
+
+        bottom:
+          18px;
       }
+
 
       .ticket {
-        top: 88px;
-        width: min(300px, calc(100% - 18px));
-        padding-left: 18px;
-        padding-right: 18px;
+        top:
+          94px;
+
+        width:
+          min(
+            315px,
+            calc(100% - 50px)
+          );
       }
+
+
+      .btn {
+        min-height:
+          36px;
+
+        font-size:
+          9px;
+      }
+
+    }
+
+
+    /* ==========================================================
+       MÓVIL
+    ========================================================== */
+
+    @media (max-width: 600px) {
+
+      .page {
+        padding:
+          max(8px, env(safe-area-inset-top))
+          10px
+          max(8px, env(safe-area-inset-bottom));
+      }
+
+
+      .wrap {
+        width:
+          100%;
+
+        grid-template-rows:
+          auto
+          minmax(0, 1fr)
+          auto;
+      }
+
+
+      .hero {
+        padding-top:
+          0;
+      }
+
+
+      .ok {
+        width:
+          37px;
+
+        height:
+          37px;
+
+        margin-bottom:
+          7px;
+
+        font-size:
+          17px;
+      }
+
+
+      h1 {
+        max-width:
+          340px;
+
+        font-size:
+          clamp(
+            25px,
+            8vw,
+            38px
+          );
+
+        line-height:
+          .9;
+
+        letter-spacing:
+          -.055em;
+      }
+
+
+      .subtitle {
+        max-width:
+          290px;
+
+        margin-top:
+          7px;
+
+        font-size:
+          10px;
+
+        line-height:
+          1.4;
+      }
+
+
+      /*
+        El escenario ocupa únicamente el espacio
+        central que queda entre cabecera y botón.
+      */
+
+      .printer-stage {
+        height:
+          100%;
+
+        min-height:
+          0;
+
+        margin:
+          6px
+          0
+          6px;
+
+        overflow:
+          hidden;
+      }
+
+
+      /* --------------------------
+         IMPRESORA
+      -------------------------- */
+
+      .printer {
+        width:
+          min(
+            310px,
+            calc(100% - 24px)
+          );
+
+        height:
+          120px;
+
+        border-radius:
+          19px
+          19px
+          13px
+          13px;
+      }
+
+
+      .printer-top {
+        top:
+          15px;
+
+        left:
+          19px;
+
+        right:
+          19px;
+
+        height:
+          40px;
+
+        border-radius:
+          10px;
+      }
+
+
+      .printer-top::after {
+        top:
+          16px;
+
+        left:
+          13px;
+
+        font-size:
+          6px;
+      }
+
+
+      .printer-led {
+        top:
+          30px;
+
+        /*
+          Más a la izquierda que antes.
+        */
+        right:
+          40px;
+
+        width:
+          6px;
+
+        height:
+          6px;
+      }
+
+
+      .printer-slot {
+        left:
+          26px;
+
+        right:
+          26px;
+
+        bottom:
+          15px;
+
+        height:
+          13px;
+      }
+
+
+      /* --------------------------
+         TICKET
+      -------------------------- */
+
+      .ticket {
+        top:
+          76px;
+
+        /*
+          MARGEN LATERAL CLARO.
+          Nunca tocará el borde.
+        */
+        width:
+          min(
+            276px,
+            calc(100% - 32px)
+          );
+
+        padding-left:
+          17px;
+
+        padding-right:
+          17px;
+      }
+
+
+      /*
+        En móvil el ticket se hace más corto
+        para que SIEMPRE haya sitio para el botón.
+      */
 
       .ticket.printing {
-        animation-name: ticketPrintMobile;
-        animation-duration: 4.9s;
+        animation:
+          ticketPrintMobile
+          4.65s
+          cubic-bezier(.18,.73,.22,1)
+          forwards;
       }
 
+
       @keyframes ticketPrintMobile {
+
         0% {
-          height: 0;
-          padding-top: 0;
-          padding-bottom: 0;
+
+          height:
+            0;
 
           transform:
             translateX(-50%)
             translateY(-2px)
-            rotateX(-13deg)
-            rotateZ(.2deg);
+            rotateX(-14deg)
+            rotateZ(.18deg);
 
-          clip-path: inset(0 0 100% 0);
+          clip-path:
+            inset(0 0 100% 0);
         }
 
-        20% {
-          height: 75px;
+
+        12% {
+
+          height:
+            35px;
+
+          transform:
+            translateX(-50%)
+            translateY(0)
+            rotateX(-12deg)
+            rotateZ(.14deg);
+
+          clip-path:
+            inset(0 0 88% 0);
+        }
+
+
+        27% {
+
+          height:
+            80px;
+
           transform:
             translateX(-50%)
             translateY(2px)
             rotateX(-9deg)
-            rotateZ(-.15deg);
+            rotateZ(-.1deg);
 
-          clip-path: inset(0 0 80% 0);
+          clip-path:
+            inset(0 0 72% 0);
         }
 
-        45% {
-          height: 215px;
-          transform:
-            translateX(-50%)
-            translateY(9px)
-            rotateX(-4deg)
-            rotateZ(.1deg);
 
-          clip-path: inset(0 0 43% 0);
-        }
+        44% {
 
-        72% {
-          height: 365px;
-          transform:
-            translateX(-50%)
-            translateY(16px)
-            rotateX(-1deg)
-            rotateZ(-.05deg);
-
-          clip-path: inset(0 0 10% 0);
-        }
-
-        90% {
-          height: 430px;
-          padding-top: 21px;
-          padding-bottom: 20px;
+          height:
+            140px;
 
           transform:
             translateX(-50%)
-            translateY(20px)
-            rotateX(0)
+            translateY(5px)
+            rotateX(-6deg)
+            rotateZ(.07deg);
+
+          clip-path:
+            inset(0 0 50% 0);
+        }
+
+
+        61% {
+
+          height:
+            205px;
+
+          transform:
+            translateX(-50%)
+            translateY(8px)
+            rotateX(-3deg)
+            rotateZ(-.04deg);
+
+          clip-path:
+            inset(0 0 29% 0);
+        }
+
+
+        76% {
+
+          height:
+            270px;
+
+          transform:
+            translateX(-50%)
+            translateY(11px)
+            rotateX(-1.5deg)
+            rotateZ(.02deg);
+
+          clip-path:
+            inset(0 0 11% 0);
+        }
+
+
+        88% {
+
+          height:
+            310px;
+
+          padding-top:
+            20px;
+
+          padding-bottom:
+            18px;
+
+          transform:
+            translateX(-50%)
+            translateY(14px)
+            rotateX(-.5deg)
             rotateZ(0);
 
-          clip-path: inset(0 0 0 0);
+          clip-path:
+            inset(0 0 0 0);
         }
+
+
+        95% {
+
+          height:
+            310px;
+
+          transform:
+            translateX(-50%)
+            translateY(12px)
+            rotateX(0)
+            rotateZ(0);
+        }
+
 
         100% {
-          height: 430px;
-          padding-top: 21px;
-          padding-bottom: 20px;
+
+          height:
+            310px;
+
+          padding-top:
+            20px;
+
+          padding-bottom:
+            18px;
 
           transform:
             translateX(-50%)
-            translateY(22px)
+            translateY(14px)
             rotateX(0)
             rotateZ(0);
 
-          clip-path: inset(0 0 0 0);
+          clip-path:
+            inset(0 0 0 0);
 
           box-shadow:
-            0 5px 7px rgba(0, 0, 0, .13),
-            0 22px 35px rgba(0, 0, 0, .28);
+            0 4px 6px rgba(0,0,0,.13),
+            0 18px 30px rgba(0,0,0,.25);
         }
+
       }
+
+
+      /* --------------------------
+         CONTENIDO MÓVIL
+      -------------------------- */
 
       .ticket-logo {
-        width: 95px;
-        margin-bottom: 7px;
+        width:
+          88px;
+
+        margin-bottom:
+          7px;
       }
+
 
       .ticket-small {
-        font-size: 7px;
+        font-size:
+          6.5px;
+
+        letter-spacing:
+          .16em;
       }
+
 
       .ticket-status {
-        margin: 12px 0;
+        margin:
+          12px 0
+          14px;
       }
+
 
       .ticket-status strong {
-        font-size: 13px;
+        font-size:
+          12px;
+
+        margin-bottom:
+          4px;
       }
+
 
       .ticket-status span {
-        font-size: 9px;
+        font-size:
+          8px;
       }
+
+
+      /*
+        Más separación entre productos.
+      */
 
       .ticket-item {
-        gap: 8px;
-        padding: 9px 0;
-        font-size: 9px;
+        gap:
+          9px;
+
+        padding:
+          9px 0;
+
+        font-size:
+          8.5px;
       }
+
 
       .item-meta {
-        font-size: 8px;
+        margin-top:
+          3px;
+
+        font-size:
+          7.5px;
       }
+
 
       .item-price {
-        font-size: 9px;
+        font-size:
+          8.5px;
       }
+
 
       .ticket-total-wrap {
-        padding-top: 12px;
+        padding-top:
+          13px;
       }
+
 
       .total-label {
-        font-size: 10px;
+        font-size:
+          9px;
       }
+
 
       .total {
-        font-size: 18px;
+        font-size:
+          16px;
       }
+
 
       .ticket-foot {
-        margin-top: 12px;
-        padding-top: 10px;
-        font-size: 8px;
+        margin-top:
+          12px;
+
+        padding-top:
+          9px;
+
+        font-size:
+          7px;
+
+        line-height:
+          1.6;
       }
+
+
+      /* --------------------------
+         BOTÓN MÓVIL
+      -------------------------- */
+
+      .actions {
+        min-height:
+          48px;
+
+        margin-top:
+          0;
+
+        padding:
+          4px
+          0
+          max(
+            4px,
+            env(safe-area-inset-bottom)
+          );
+      }
+
 
       .btn {
-        width: 100%;
-        min-height: 46px;
-        padding: 0 15px;
-        font-size: 11px;
+        width:
+          min(
+            285px,
+            calc(100% - 20px)
+          );
+
+        min-height:
+          38px;
+
+        padding:
+          0 14px;
+
+        font-size:
+          9px;
       }
+
     }
 
-    /* Móviles muy pequeños */
 
-    @media (max-width: 360px) {
+    /* ==========================================================
+       MÓVIL MUY PEQUEÑO
+    ========================================================== */
+
+    @media (max-width: 380px) {
+
       .page {
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-left:
+          7px;
+
+        padding-right:
+          7px;
       }
+
+
+      .ok {
+        width:
+          33px;
+
+        height:
+          33px;
+
+        margin-bottom:
+          5px;
+
+        font-size:
+          15px;
+      }
+
 
       h1 {
-        font-size: 29px;
+        font-size:
+          24px;
       }
+
 
       .subtitle {
-        font-size: 11px;
+        max-width:
+          260px;
+
+        font-size:
+          9px;
       }
 
-      .printer-stage {
-        height: 440px;
-      }
 
       .printer {
-        width: 285px;
+        width:
+          268px;
+
+        height:
+          108px;
       }
+
+
+      .printer-top {
+        top:
+          13px;
+
+        left:
+          17px;
+
+        right:
+          17px;
+
+        height:
+          36px;
+      }
+
+
+      .printer-led {
+        top:
+          27px;
+
+        right:
+          34px;
+      }
+
+
+      .printer-slot {
+        left:
+          23px;
+
+        right:
+          23px;
+
+        bottom:
+          14px;
+      }
+
 
       .ticket {
-        width: 270px;
+        top:
+          66px;
+
+        width:
+          min(
+            246px,
+            calc(100% - 28px)
+          );
       }
+
+
+      /*
+        En teléfonos pequeños el ticket se
+        mantiene deliberadamente corto.
+      */
+
+      .ticket.printing {
+        animation-name:
+          ticketPrintTiny;
+      }
+
+
+      @keyframes ticketPrintTiny {
+
+        0% {
+
+          height:
+            0;
+
+          transform:
+            translateX(-50%)
+            translateY(-2px)
+            rotateX(-13deg);
+
+          clip-path:
+            inset(0 0 100% 0);
+        }
+
+
+        25% {
+
+          height:
+            65px;
+
+          transform:
+            translateX(-50%)
+            translateY(2px)
+            rotateX(-9deg);
+
+          clip-path:
+            inset(0 0 72% 0);
+        }
+
+
+        50% {
+
+          height:
+            145px;
+
+          transform:
+            translateX(-50%)
+            translateY(6px)
+            rotateX(-4deg);
+
+          clip-path:
+            inset(0 0 45% 0);
+        }
+
+
+        76% {
+
+          height:
+            230px;
+
+          transform:
+            translateX(-50%)
+            translateY(11px)
+            rotateX(-1deg);
+
+          clip-path:
+            inset(0 0 10% 0);
+        }
+
+
+        92% {
+
+          height:
+            275px;
+
+          padding-top:
+            18px;
+
+          padding-bottom:
+            16px;
+
+          transform:
+            translateX(-50%)
+            translateY(13px)
+            rotateX(0);
+
+          clip-path:
+            inset(0 0 0 0);
+        }
+
+
+        100% {
+
+          height:
+            275px;
+
+          padding-top:
+            18px;
+
+          padding-bottom:
+            16px;
+
+          transform:
+            translateX(-50%)
+            translateY(13px)
+            rotateX(0);
+
+          clip-path:
+            inset(0 0 0 0);
+
+          box-shadow:
+            0 4px 6px rgba(0,0,0,.13),
+            0 16px 25px rgba(0,0,0,.25);
+        }
+
+      }
+
+
+      .ticket-item {
+        padding:
+          7px 0;
+
+        font-size:
+          7.5px;
+      }
+
+
+      .item-meta,
+      .ticket-foot {
+        font-size:
+          6.5px;
+      }
+
+
+      .total {
+        font-size:
+          14px;
+      }
+
+
+      .btn {
+        min-height:
+          35px;
+
+        width:
+          calc(100% - 18px);
+
+        font-size:
+          8px;
+      }
+
     }
 
-    /* Accesibilidad y rendimiento */
+
+    /* ==========================================================
+       REDUCIR EN PANTALLAS MUY BAJAS
+    ========================================================== */
+
+    @media (max-height: 680px) and (min-width: 601px) {
+
+      .page {
+        padding-top:
+          7px;
+
+        padding-bottom:
+          7px;
+      }
+
+
+      .ok {
+        width:
+          36px;
+
+        height:
+          36px;
+
+        margin-bottom:
+          5px;
+
+        font-size:
+          16px;
+      }
+
+
+      h1 {
+        font-size:
+          clamp(
+            26px,
+            3.7vw,
+            39px
+          );
+      }
+
+
+      .subtitle {
+        margin-top:
+          5px;
+
+        font-size:
+          10px;
+      }
+
+
+      .printer {
+        width:
+          345px;
+
+        height:
+          140px;
+      }
+
+
+      .printer-top {
+        top:
+          16px;
+
+        left:
+          22px;
+
+        right:
+          22px;
+
+        height:
+          46px;
+      }
+
+
+      .printer-led {
+        top:
+          37px;
+
+        right:
+          43px;
+
+        width:
+          7px;
+
+        height:
+          7px;
+      }
+
+
+      .printer-slot {
+        left:
+          29px;
+
+        right:
+          29px;
+
+        bottom:
+          17px;
+      }
+
+
+      .ticket {
+        top:
+          87px;
+
+        width:
+          min(
+            300px,
+            calc(100% - 50px)
+          );
+      }
+
+
+      .ticket.printing {
+        animation-name:
+          ticketPrintShortDesktop;
+      }
+
+
+      @keyframes ticketPrintShortDesktop {
+
+        0% {
+
+          height:
+            0;
+
+          transform:
+            translateX(-50%)
+            translateY(-2px)
+            rotateX(-13deg);
+        }
+
+
+        25% {
+
+          height:
+            80px;
+
+          transform:
+            translateX(-50%)
+            translateY(2px)
+            rotateX(-8deg);
+        }
+
+
+        50% {
+
+          height:
+            175px;
+
+          transform:
+            translateX(-50%)
+            translateY(7px)
+            rotateX(-3deg);
+        }
+
+
+        76% {
+
+          height:
+            280px;
+
+          transform:
+            translateX(-50%)
+            translateY(12px)
+            rotateX(-1deg);
+        }
+
+
+        92% {
+
+          height:
+            330px;
+
+          padding-top:
+            21px;
+
+          padding-bottom:
+            19px;
+
+          transform:
+            translateX(-50%)
+            translateY(15px)
+            rotateX(0);
+        }
+
+
+        100% {
+
+          height:
+            330px;
+
+          padding-top:
+            21px;
+
+          padding-bottom:
+            19px;
+
+          transform:
+            translateX(-50%)
+            translateY(15px)
+            rotateX(0);
+
+          box-shadow:
+            0 4px 7px rgba(0,0,0,.13),
+            0 20px 32px rgba(0,0,0,.25);
+        }
+
+      }
+
+    }
+
+
+    /* ==========================================================
+       REDUCED MOTION
+    ========================================================== */
 
     @media (prefers-reduced-motion: reduce) {
+
       *,
       *::before,
       *::after {
-        animation-duration: .01ms !important;
-        animation-delay: 0s !important;
-        transition-duration: .01ms !important;
+
+        animation-duration:
+          .01ms !important;
+
+        animation-delay:
+          0s !important;
+
+        transition-duration:
+          .01ms !important;
       }
 
+
       .ticket {
-        height: 520px;
-        padding-top: 27px;
-        padding-bottom: 24px;
+
+        height:
+          330px;
+
+        padding-top:
+          25px;
+
+        padding-bottom:
+          22px;
 
         transform:
           translateX(-50%)
-          translateY(23px)
+          translateY(16px)
           rotateX(0)
           rotateZ(0);
 
-        clip-path: inset(0 0 0 0);
+        clip-path:
+          inset(0 0 0 0);
       }
+
 
       .ticket-content,
       .ticket-item {
-        opacity: 1;
-        transform: none;
+
+        opacity:
+          1;
+
+        transform:
+          none;
       }
+
     }
+
+
+    /* ==========================================================
+       JUSTIFICANTE DE IMPRESIÓN
+    ========================================================== */
+
+    .print-receipt {
+      display:
+        none;
+    }
+
+
+    @media print {
+
+      @page {
+        size:
+          A4;
+
+        margin:
+          16mm;
+      }
+
+
+      html,
+      body {
+
+        width:
+          auto;
+
+        height:
+          auto;
+
+        min-height:
+          auto;
+
+        overflow:
+          visible !important;
+
+        background:
+          white !important;
+      }
+
+
+      body > * {
+        display:
+          none !important;
+      }
+
+
+      .print-receipt {
+        display:
+          block !important;
+
+        width:
+          100%;
+
+        color:
+          #111 !important;
+
+        background:
+          white !important;
+
+        font-family:
+          Arial,
+          Helvetica,
+          sans-serif;
+
+        font-size:
+          12px;
+
+        line-height:
+          1.45;
+      }
+
+
+      .receipt-sheet {
+        width:
+          100%;
+
+        max-width:
+          180mm;
+
+        margin:
+          0 auto;
+      }
+
+
+      .receipt-header {
+        display:
+          flex;
+
+        align-items:
+          flex-start;
+
+        justify-content:
+          space-between;
+
+        gap:
+          20px;
+
+        padding-bottom:
+          12px;
+
+        border-bottom:
+          2px solid #111;
+      }
+
+
+      .receipt-logo {
+        width:
+          42mm;
+
+        max-width:
+          180px;
+
+        height:
+          auto;
+
+        filter:
+          brightness(0);
+      }
+
+
+      .receipt-meta {
+        color:
+          #444;
+
+        text-align:
+          right;
+      }
+
+
+      .receipt-title {
+        margin:
+          18px
+          0
+          4px;
+
+        font-size:
+          22px;
+
+        font-weight:
+          700;
+
+        letter-spacing:
+          .02em;
+
+        text-transform:
+          uppercase;
+      }
+
+
+      .receipt-subtitle {
+        margin-bottom:
+          18px;
+
+        color:
+          #555;
+      }
+
+
+      .receipt-grid {
+        display:
+          grid;
+
+        grid-template-columns:
+          1fr 1fr;
+
+        gap:
+          12px 26px;
+
+        margin-bottom:
+          20px;
+      }
+
+
+      .receipt-box {
+        padding:
+          10px 12px;
+
+        border:
+          1px solid #d8d8d8;
+      }
+
+
+      .receipt-box strong {
+        display:
+          block;
+
+        margin-bottom:
+          3px;
+
+        color:
+          #666;
+
+        font-size:
+          10px;
+
+        letter-spacing:
+          .08em;
+
+        text-transform:
+          uppercase;
+      }
+
+
+      .receipt-section-title {
+        margin-top:
+          18px;
+
+        padding-bottom:
+          6px;
+
+        border-bottom:
+          1px solid #111;
+
+        font-weight:
+          700;
+      }
+
+
+      .receipt-table {
+        width:
+          100%;
+
+        margin-top:
+          8px;
+
+        border-collapse:
+          collapse;
+      }
+
+
+      .receipt-table th,
+      .receipt-table td {
+        padding:
+          8px 5px;
+
+        border-bottom:
+          1px solid #ddd;
+
+        text-align:
+          left;
+      }
+
+
+      .receipt-table th {
+        color:
+          #666;
+
+        font-size:
+          10px;
+
+        letter-spacing:
+          .06em;
+
+        text-transform:
+          uppercase;
+      }
+
+
+      .receipt-table th:last-child,
+      .receipt-table td:last-child {
+        text-align:
+          right;
+      }
+
+
+      .receipt-total {
+        display:
+          flex;
+
+        justify-content:
+          flex-end;
+
+        margin-top:
+          14px;
+      }
+
+
+      .receipt-total-box {
+        width:
+          68mm;
+
+        padding-top:
+          8px;
+
+        border-top:
+          2px solid #111;
+      }
+
+
+      .receipt-total-row {
+        display:
+          flex;
+
+        justify-content:
+          space-between;
+
+        gap:
+          15px;
+
+        font-size:
+          18px;
+
+        font-weight:
+          700;
+      }
+
+
+      .receipt-footer {
+        margin-top:
+          28px;
+
+        padding-top:
+          10px;
+
+        border-top:
+          1px solid #ddd;
+
+        color:
+          #555;
+
+        font-size:
+          10px;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <main class="page">
+
     <div class="wrap">
 
+
+      <!-- ======================================================
+           CABECERA
+      ======================================================= -->
+
       <section class="hero">
-        <div class="ok">✓</div>
+
+        <div class="ok">
+          ✓
+        </div>
+
 
         <h1>
           Compra realizada correctamente
         </h1>
 
-        <p class="subtitle" id="subtitle">
+
+        <p
+          class="subtitle"
+          id="subtitle"
+        >
           Gracias por comprar en Vesira. Tu pedido ha sido recibido.
         </p>
+
       </section>
+
+
+      <!-- ======================================================
+           IMPRESORA + TICKET
+      ======================================================= -->
 
       <section
         class="printer-stage"
         aria-label="Ticket de compra saliendo de una impresora"
       >
 
-        <div class="printer" aria-hidden="true">
+
+        <div
+          class="printer"
+          aria-hidden="true"
+        >
+
           <div class="printer-top"></div>
+
           <div class="printer-led"></div>
+
           <div class="printer-slot"></div>
+
         </div>
 
-        <article class="ticket" id="ticket">
+
+        <article
+          class="ticket"
+          id="ticket"
+        >
 
           <div class="ticket-inner">
 
-            <header class="ticket-head ticket-content">
+
+            <header
+              class="ticket-head ticket-content"
+            >
+
               <img
                 src="img/logo2.png"
                 alt="Vesira"
                 class="ticket-logo"
               >
 
+
               <div class="ticket-small">
                 Comprobante de compra
               </div>
+
             </header>
 
-            <div class="ticket-status ticket-content">
-              <strong>Pago confirmado</strong>
+
+            <div
+              class="ticket-status ticket-content"
+            >
+
+              <strong>
+                Pago confirmado
+              </strong>
+
+
               <span id="ticket-date"></span>
+
             </div>
+
 
             <section
               class="ticket-items ticket-content"
               id="ticket-items"
-            ></section>
+            >
+            </section>
 
-            <div class="ticket-total-wrap ticket-content">
+
+            <div
+              class="ticket-total-wrap ticket-content"
+            >
+
               <div class="total-row">
+
                 <span class="total-label">
                   Total pagado
                 </span>
 
-                <strong class="total" id="ticket-total">
+
+                <strong
+                  class="total"
+                  id="ticket-total"
+                >
                   0,00 €
                 </strong>
+
               </div>
+
             </div>
 
-            <footer class="ticket-foot ticket-content">
+
+            <footer
+              class="ticket-foot ticket-content"
+            >
+
               Gracias por confiar en Vesira.<br>
+
               Guarda este comprobante como justificante de tu compra.
+
             </footer>
+
 
           </div>
 
         </article>
 
+
       </section>
 
+
+      <!-- ======================================================
+           BOTÓN
+      ======================================================= -->
+
       <div class="actions">
+
         <button
           class="btn"
           type="button"
@@ -1244,18 +2871,27 @@
         >
           Imprimir justificante de compra
         </button>
+
       </div>
 
+
     </div>
+
   </main>
 
-  <!-- =========================================
-       JUSTIFICANTE PARA IMPRIMIR
-  ========================================= -->
 
-  <section class="print-receipt" aria-hidden="true">
+
+  <!-- ==========================================================
+       JUSTIFICANTE PARA IMPRESIÓN
+  =========================================================== -->
+
+  <section
+    class="print-receipt"
+    aria-hidden="true"
+  >
 
     <div class="receipt-sheet">
+
 
       <header class="receipt-header">
 
@@ -1265,323 +2901,833 @@
           class="receipt-logo"
         >
 
+
         <div class="receipt-meta">
-          <div>Justificante de compra</div>
-          <div id="receipt-date">—</div>
+
+          <div>
+            Justificante de compra
+          </div>
+
+          <div id="receipt-date">
+            —
+          </div>
+
         </div>
 
       </header>
+
 
       <div class="receipt-title">
         Compra realizada
       </div>
 
+
       <div class="receipt-subtitle">
         Documento acreditativo de la compra y del pago realizado.
       </div>
 
+
       <div class="receipt-grid">
 
+
         <div class="receipt-box">
-          <strong>Estado</strong>
+
+          <strong>
+            Estado
+          </strong>
+
           Pago confirmado correctamente
+
         </div>
 
-        <div class="receipt-box">
-          <strong>Referencia</strong>
-          <span id="receipt-reference">—</span>
-        </div>
 
         <div class="receipt-box">
-          <strong>Cliente</strong>
-          <span id="receipt-customer">—</span>
+
+          <strong>
+            Referencia
+          </strong>
+
+          <span id="receipt-reference">
+            —
+          </span>
+
         </div>
 
+
         <div class="receipt-box">
-          <strong>Correo electrónico</strong>
-          <span id="receipt-email">—</span>
+
+          <strong>
+            Cliente
+          </strong>
+
+          <span id="receipt-customer">
+            —
+          </span>
+
         </div>
+
+
+        <div class="receipt-box">
+
+          <strong>
+            Correo electrónico
+          </strong>
+
+          <span id="receipt-email">
+            —
+          </span>
+
+        </div>
+
 
       </div>
+
 
       <div class="receipt-section-title">
         Productos adquiridos
       </div>
 
+
       <table class="receipt-table">
+
         <thead>
+
           <tr>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Importe</th>
+
+            <th>
+              Producto
+            </th>
+
+            <th>
+              Cantidad
+            </th>
+
+            <th>
+              Importe
+            </th>
+
           </tr>
+
         </thead>
 
-        <tbody id="receipt-items"></tbody>
+
+        <tbody
+          id="receipt-items"
+        >
+        </tbody>
+
       </table>
 
+
       <div class="receipt-total">
+
         <div class="receipt-total-box">
+
           <div class="receipt-total-row">
-            <span>Total pagado</span>
-            <span id="receipt-total">0,00 €</span>
+
+            <span>
+              Total pagado
+            </span>
+
+            <span id="receipt-total">
+              0,00 €
+            </span>
+
           </div>
+
         </div>
+
       </div>
 
+
       <div class="receipt-footer">
-        Este documento acredita la recepción del pago asociado al pedido indicado.
-        Conserve este justificante junto con la confirmación de su pedido.
+
+        Este documento acredita la recepción del pago asociado
+        al pedido indicado.
+
+        Conserve este justificante junto con la confirmación
+        de su pedido.
+
         <br><br>
+
         Vesira · Eyewear
+
       </div>
+
 
     </div>
 
   </section>
 
+
+
   <script>
+
     (() => {
+
       "use strict";
 
-      function safeParse(key, fallback) {
+
+      /* ======================================================
+         LOCAL STORAGE
+      ====================================================== */
+
+      function safeParse(
+        key,
+        fallback
+      ) {
+
         try {
-          const raw = localStorage.getItem(key);
-          return raw ? JSON.parse(raw) : fallback;
+
+          const raw =
+            localStorage.getItem(
+              key
+            );
+
+          return raw
+            ? JSON.parse(raw)
+            : fallback;
+
         } catch {
+
           return fallback;
-        }
-      }
 
-      function escapeHtml(value) {
-        return String(value ?? "")
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
-
-      function formatPrice(value) {
-        return new Intl.NumberFormat("es-ES", {
-          style: "currency",
-          currency: "EUR"
-        }).format(Number(value) || 0);
-      }
-
-      function getPurchase() {
-        return (
-          safeParse("vesiraCompraCompletada", null) ||
-          safeParse("vesiraCompraPendiente", null) ||
-          {}
-        );
-      }
-
-      function getItems(purchase) {
-        return Array.isArray(purchase.items)
-          ? purchase.items
-          : [];
-      }
-
-      function getTotal(purchase, items) {
-        const storedTotal = Number(purchase.total);
-
-        if (
-          Number.isFinite(storedTotal) &&
-          storedTotal >= 0
-        ) {
-          return storedTotal;
         }
 
-        return items.reduce((sum, item) => {
-          const price = Number(
-            item?.precio ??
-            item?.price ??
-            0
-          );
-
-          const quantity = Number(
-            item?.cantidad ??
-            item?.quantity ??
-            1
-          );
-
-          return sum + price * quantity;
-        }, 0);
       }
 
-      function fillPurchase() {
-        const purchase = getPurchase();
-        const items = getItems(purchase);
-        const total = getTotal(purchase, items);
 
-        const date = purchase.date
-          ? new Date(purchase.date)
-          : new Date();
+      /* ======================================================
+         ESCAPE HTML
+      ====================================================== */
 
-        const formattedDate = new Intl.DateTimeFormat(
+      function escapeHtml(
+        value
+      ) {
+
+        return String(
+          value ?? ""
+        )
+
+          .replace(
+            /&/g,
+            "&amp;"
+          )
+
+          .replace(
+            /</g,
+            "&lt;"
+          )
+
+          .replace(
+            />/g,
+            "&gt;"
+          )
+
+          .replace(
+            /"/g,
+            "&quot;"
+          )
+
+          .replace(
+            /'/g,
+            "&#039;"
+          );
+
+      }
+
+
+      /* ======================================================
+         PRECIO
+      ====================================================== */
+
+      function formatPrice(
+        value
+      ) {
+
+        return new Intl.NumberFormat(
           "es-ES",
           {
-            dateStyle: "medium",
-            timeStyle: "short"
+            style: "currency",
+            currency: "EUR"
           }
-        ).format(date);
+        ).format(
+          Number(value) || 0
+        );
 
-        document.getElementById("ticket-date").textContent =
-          formattedDate;
+      }
 
-        document.getElementById("ticket-total").textContent =
-          formatPrice(total);
 
-        document.getElementById("receipt-date").textContent =
-          formattedDate;
+      /* ======================================================
+         COMPRA
+      ====================================================== */
 
-        document.getElementById("receipt-total").textContent =
-          formatPrice(total);
+      function getPurchase() {
 
-        const customerName = [
-          purchase.cliente?.nombre,
-          purchase.cliente?.apellidos
-        ]
-          .filter(Boolean)
-          .join(" ") || "—";
+        return (
 
-        const email =
-          purchase.cliente?.email || "—";
+          safeParse(
+            "vesiraCompraCompletada",
+            null
+          )
 
-        const reference =
-          purchase.paymentIntentId ||
-          purchase.orderId ||
-          "Vesira-" + date.getTime();
+          ||
 
-        document.getElementById("receipt-customer").textContent =
-          customerName;
+          safeParse(
+            "vesiraCompraPendiente",
+            null
+          )
 
-        document.getElementById("receipt-email").textContent =
-          email;
+          ||
 
-        document.getElementById("receipt-reference").textContent =
-          reference;
+          {}
 
-        if (purchase.cliente?.nombre) {
-          document.getElementById("subtitle").textContent =
-            "Gracias, " +
-            purchase.cliente.nombre +
-            ". Tu compra ha sido recibida correctamente.";
+        );
+
+      }
+
+
+      /* ======================================================
+         PRODUCTOS
+      ====================================================== */
+
+      function getItems(
+        purchase
+      ) {
+
+        return Array.isArray(
+          purchase.items
+        )
+
+          ? purchase.items
+
+          : [];
+
+      }
+
+
+      /* ======================================================
+         TOTAL
+      ====================================================== */
+
+      function getTotal(
+        purchase,
+        items
+      ) {
+
+        const storedTotal =
+          Number(
+            purchase.total
+          );
+
+
+        if (
+          Number.isFinite(
+            storedTotal
+          ) &&
+          storedTotal >= 0
+        ) {
+
+          return storedTotal;
+
         }
 
+
+        return items.reduce(
+          (
+            sum,
+            item
+          ) => {
+
+            const price =
+              Number(
+                item?.precio ??
+                item?.price ??
+                0
+              );
+
+
+            const quantity =
+              Number(
+                item?.cantidad ??
+                item?.quantity ??
+                1
+              );
+
+
+            return (
+              sum +
+              price *
+              quantity
+            );
+
+          },
+          0
+        );
+
+      }
+
+
+      /* ======================================================
+         RELLENAR
+      ====================================================== */
+
+      function fillPurchase() {
+
+        const purchase =
+          getPurchase();
+
+
+        const items =
+          getItems(
+            purchase
+          );
+
+
+        const total =
+          getTotal(
+            purchase,
+            items
+          );
+
+
+        const date =
+          purchase.date
+
+            ? new Date(
+                purchase.date
+              )
+
+            : new Date();
+
+
+        const formattedDate =
+          new Intl.DateTimeFormat(
+            "es-ES",
+            {
+              dateStyle:
+                "medium",
+
+              timeStyle:
+                "short"
+            }
+          ).format(
+            date
+          );
+
+
+        /* ---------------------------
+           TICKET
+        ---------------------------- */
+
+        document
+          .getElementById(
+            "ticket-date"
+          )
+          .textContent =
+          formattedDate;
+
+
+        document
+          .getElementById(
+            "ticket-total"
+          )
+          .textContent =
+          formatPrice(
+            total
+          );
+
+
+        /* ---------------------------
+           RECIBO
+        ---------------------------- */
+
+        document
+          .getElementById(
+            "receipt-date"
+          )
+          .textContent =
+          formattedDate;
+
+
+        document
+          .getElementById(
+            "receipt-total"
+          )
+          .textContent =
+          formatPrice(
+            total
+          );
+
+
+        /* ---------------------------
+           CLIENTE
+        ---------------------------- */
+
+        const customerName = [
+
+          purchase.cliente?.nombre,
+
+          purchase.cliente?.apellidos
+
+        ]
+
+          .filter(
+            Boolean
+          )
+
+          .join(
+            " "
+          )
+
+          ||
+          "—";
+
+
+        const email =
+          purchase.cliente?.email
+          ||
+          "—";
+
+
+        const reference =
+
+          purchase.paymentIntentId
+
+          ||
+
+          purchase.orderId
+
+          ||
+
+          "Vesira-" +
+          date.getTime();
+
+
+        document
+          .getElementById(
+            "receipt-customer"
+          )
+          .textContent =
+          customerName;
+
+
+        document
+          .getElementById(
+            "receipt-email"
+          )
+          .textContent =
+          email;
+
+
+        document
+          .getElementById(
+            "receipt-reference"
+          )
+          .textContent =
+          reference;
+
+
+        /* ---------------------------
+           SALUDO
+        ---------------------------- */
+
+        if (
+          purchase.cliente?.nombre
+        ) {
+
+          document
+            .getElementById(
+              "subtitle"
+            )
+            .textContent =
+
+            "Gracias, " +
+
+            purchase.cliente.nombre +
+
+            ". Tu compra ha sido recibida correctamente.";
+
+        }
+
+
+        /* ---------------------------
+           ELEMENTOS
+        ---------------------------- */
+
         const ticketItems =
-          document.getElementById("ticket-items");
+          document.getElementById(
+            "ticket-items"
+          );
+
 
         const receiptItems =
-          document.getElementById("receipt-items");
+          document.getElementById(
+            "receipt-items"
+          );
 
-        if (!items.length) {
+
+        /* ---------------------------
+           SIN PRODUCTOS
+        ---------------------------- */
+
+        if (
+          !items.length
+        ) {
+
           ticketItems.innerHTML = `
+
             <div class="ticket-item">
+
               <div>
-                <div class="item-name">Compra Vesira</div>
-                <div class="item-meta">Cantidad: 1</div>
+
+                <div class="item-name">
+                  Compra Vesira
+                </div>
+
+                <div class="item-meta">
+                  Cantidad: 1
+                </div>
+
               </div>
 
               <div class="item-price">
                 ${formatPrice(total)}
               </div>
+
             </div>
+
           `;
+
 
           receiptItems.innerHTML = `
+
             <tr>
-              <td>Compra Vesira</td>
-              <td>1</td>
-              <td>${formatPrice(total)}</td>
+
+              <td>
+                Compra Vesira
+              </td>
+
+              <td>
+                1
+              </td>
+
+              <td>
+                ${formatPrice(total)}
+              </td>
+
             </tr>
+
           `;
+
 
           return;
+
         }
 
-        ticketItems.innerHTML = items.map((item) => {
-          const name = String(
-            item?.nombre ??
-            item?.name ??
-            "Producto"
-          );
 
-          const quantity = Number(
-            item?.cantidad ??
-            item?.quantity ??
-            1
-          );
+        /* ---------------------------
+           TICKET
+        ---------------------------- */
 
-          const price = Number(
-            item?.precio ??
-            item?.price ??
-            0
-          );
+        ticketItems.innerHTML =
 
-          return `
-            <div class="ticket-item">
-              <div>
-                <div class="item-name">
-                  ${escapeHtml(name)}
-                </div>
+          items
 
-                <div class="item-meta">
-                  Cantidad: ${quantity}
-                </div>
-              </div>
+            .map(
+              (item) => {
 
-              <div class="item-price">
-                ${formatPrice(price * quantity)}
-              </div>
-            </div>
-          `;
-        }).join("");
+                const name =
+                  String(
+                    item?.nombre ??
+                    item?.name ??
+                    "Producto"
+                  );
 
-        receiptItems.innerHTML = items.map((item) => {
-          const name = String(
-            item?.nombre ??
-            item?.name ??
-            "Producto"
-          );
 
-          const quantity = Number(
-            item?.cantidad ??
-            item?.quantity ??
-            1
-          );
+                const quantity =
+                  Number(
+                    item?.cantidad ??
+                    item?.quantity ??
+                    1
+                  );
 
-          const price = Number(
-            item?.precio ??
-            item?.price ??
-            0
-          );
 
-          return `
-            <tr>
-              <td>${escapeHtml(name)}</td>
-              <td>${quantity}</td>
-              <td>${formatPrice(price * quantity)}</td>
-            </tr>
-          `;
-        }).join("");
+                const price =
+                  Number(
+                    item?.precio ??
+                    item?.price ??
+                    0
+                  );
+
+
+                return `
+
+                  <div class="ticket-item">
+
+                    <div>
+
+                      <div class="item-name">
+
+                        ${escapeHtml(name)}
+
+                      </div>
+
+
+                      <div class="item-meta">
+
+                        Cantidad:
+                        ${quantity}
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="item-price">
+
+                      ${
+                        formatPrice(
+                          price *
+                          quantity
+                        )
+                      }
+
+                    </div>
+
+                  </div>
+
+                `;
+
+              }
+            )
+
+            .join("");
+
+
+        /* ---------------------------
+           RECIBO
+        ---------------------------- */
+
+        receiptItems.innerHTML =
+
+          items
+
+            .map(
+              (item) => {
+
+                const name =
+                  String(
+                    item?.nombre ??
+                    item?.name ??
+                    "Producto"
+                  );
+
+
+                const quantity =
+                  Number(
+                    item?.cantidad ??
+                    item?.quantity ??
+                    1
+                  );
+
+
+                const price =
+                  Number(
+                    item?.precio ??
+                    item?.price ??
+                    0
+                  );
+
+
+                return `
+
+                  <tr>
+
+                    <td>
+                      ${escapeHtml(name)}
+                    </td>
+
+                    <td>
+                      ${quantity}
+                    </td>
+
+                    <td>
+                      ${
+                        formatPrice(
+                          price *
+                          quantity
+                        )
+                      }
+                    </td>
+
+                  </tr>
+
+                `;
+
+              }
+            )
+
+            .join("");
+
       }
+
+
+      /* ======================================================
+         ARRANQUE
+      ====================================================== */
 
       fillPurchase();
 
-      const ticket = document.getElementById("ticket");
 
-      requestAnimationFrame(() => {
-        ticket.classList.add("printing");
-      });
+      const ticket =
+        document.getElementById(
+          "ticket"
+        );
+
+
+      /*
+        Dos frames garantizan que el navegador
+        vea primero la hoja cerrada y después
+        ejecute la animación.
+      */
+
+      requestAnimationFrame(
+        () => {
+
+          requestAnimationFrame(
+            () => {
+
+              ticket.classList.add(
+                "printing"
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+      /* ======================================================
+         IMPRIMIR
+      ====================================================== */
 
       document
-        .getElementById("print-button")
-        .addEventListener("click", () => {
-          window.print();
-        });
+        .getElementById(
+          "print-button"
+        )
+        .addEventListener(
+          "click",
+          () => {
+
+            window.print();
+
+          }
+        );
+
     })();
+
   </script>
 
 </body>
