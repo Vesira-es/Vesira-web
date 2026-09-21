@@ -500,7 +500,7 @@ padding:19px;
 
 
     .affiliate-box{
-      margin:15px 0 2px;
+      margin:12px 0 4px;
       padding:13px;
       border:1px solid var(--b);
       border-radius:15px;
@@ -508,10 +508,11 @@ padding:19px;
     }
 
     .affiliate-title{
-      font-size:10px;
-      color:#fff;
+      color:var(--s);
+      font-size:9px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
       margin-bottom:8px;
-      letter-spacing:.02em;
     }
 
     .affiliate-row{
@@ -531,14 +532,14 @@ padding:19px;
 
     .affiliate-apply{
       min-height:44px;
-      padding:0 14px;
+      min-width:78px;
+      padding:0 12px;
       border:1px solid var(--b);
-      border-radius:999px;
+      border-radius:12px;
       background:#fff;
       color:#0a0a0a;
       font-size:10px;
       cursor:pointer;
-      white-space:nowrap;
     }
 
     .affiliate-apply:disabled{
@@ -548,7 +549,7 @@ padding:19px;
 
     .affiliate-status{
       min-height:15px;
-      margin-top:8px;
+      margin-top:7px;
       color:var(--s);
       font-size:10px;
       line-height:1.4;
@@ -560,6 +561,10 @@ padding:19px;
 
     .affiliate-status.error{
       color:#ff9c9c;
+    }
+
+    .affiliate-status.loading{
+      color:var(--s);
     }
 
     .affiliate-hint{
@@ -1396,34 +1401,68 @@ Number(item.cantidad || 0),
       const normalizedCode = normalizeAffiliateCode(code);
 
       if (!normalizedCode) {
-        throw new Error("Introduce un código de afiliado.");
+        throw new Error("Introduce un código de descuento.");
       }
 
-      const response = await fetch(
-        AFFILIATE_VALIDATION_FUNCTION_URL,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            codigo: normalizedCode
-          })
-        }
-      );
+      let response;
+
+      try {
+        response = await fetch(
+          AFFILIATE_VALIDATION_FUNCTION_URL,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({
+              codigo: normalizedCode
+            })
+          }
+        );
+      } catch (error) {
+        throw new Error(
+          "No se pudo conectar con el sistema de códigos. Revisa la configuración de la función validar-afiliado."
+        );
+      }
 
       const result = await response
         .json()
         .catch(() => ({}));
 
-      if (!response.ok || !result?.valido || !result?.afiliado) {
+      if (response.status === 401 || response.status === 403) {
         throw new Error(
-          result?.error ||
-          "El código de afiliado no es válido."
+          "El sistema de códigos no está habilitado para el checkout. Revisa Verify JWT/CORS de validar-afiliado en Supabase."
         );
       }
 
-      return result.afiliado;
+      const valido =
+        result?.valido === true ||
+        result?.valid === true;
+
+      const afiliado =
+        result?.afiliado ||
+        result?.affiliate ||
+        null;
+
+      if (!response.ok || !valido || !afiliado) {
+        throw new Error(
+          result?.error ||
+          "El código de descuento no es válido."
+        );
+      }
+
+      const serverCode = normalizeAffiliateCode(
+        afiliado.codigo || normalizedCode
+      );
+
+      if (serverCode !== normalizedCode) {
+        throw new Error(
+          "El código de descuento no es válido."
+        );
+      }
+
+      return afiliado;
     }
 
     async function applyAffiliateCode(code = null) {
@@ -1494,7 +1533,7 @@ Number(item.cantidad || 0),
 
         if (status) {
           status.textContent =
-            `${afiliado.nombre} · ${discountPercent}% de descuento aplicado.`;
+            `Código descuento aplicado · ${discountPercent}%`;
           status.classList.add("ok");
           status.classList.remove("error");
         }
@@ -1517,7 +1556,7 @@ Number(item.cantidad || 0),
         if (status) {
           status.textContent =
             error?.message ||
-            "El código de afiliado no es válido.";
+            "El código de descuento no es válido.";
           status.classList.add("error");
           status.classList.remove("ok");
         }
@@ -2662,42 +2701,6 @@ String(
 
               <h2>Tu pedido.</h2>
 
-              <div class="affiliate-box">
-                <div class="affiliate-title">
-                  Código de afiliado
-                </div>
-
-                <div class="affiliate-row">
-                  <input
-                    id="affiliateCode"
-                    type="text"
-                    inputmode="text"
-                    autocomplete="off"
-                    placeholder="Ej. CARLOS5"
-                    maxlength="40"
-                    aria-label="Código de afiliado"
-                  >
-
-                  <button
-                    class="affiliate-apply"
-                    type="button"
-                    id="affiliateApplyButton"
-                  >
-                    Aplicar
-                  </button>
-                </div>
-
-                <div
-                  id="affiliateStatus"
-                  class="affiliate-status"
-                  aria-live="polite"
-                ></div>
-
-                <div class="affiliate-hint">
-                  También se aplica automáticamente si has entrado mediante un enlace de afiliado.
-                </div>
-              </div>
-
               <div class="summary-items">
 
                 ${cart.map(item => `
@@ -2757,6 +2760,43 @@ Number(item.cantidad || 1)
                 <strong>${euro(subtotal)}</strong>
 
               </div>
+
+              <div class="affiliate-box">
+                <div class="affiliate-title">
+                  Código de descuento
+                </div>
+
+                <div class="affiliate-row">
+                  <input
+                    id="affiliateCode"
+                    type="text"
+                    inputmode="text"
+                    autocomplete="off"
+                    placeholder="Ej. CARLOS5"
+                    maxlength="40"
+                    aria-label="Código de afiliado"
+                  >
+
+                  <button
+                    class="affiliate-apply"
+                    type="button"
+                    id="affiliateApplyButton"
+                  >
+                    Aplicar
+                  </button>
+                </div>
+
+                <div
+                  id="affiliateStatus"
+                  class="affiliate-status"
+                  aria-live="polite"
+                ></div>
+
+                <div class="affiliate-hint">
+                  También se aplica automáticamente si has entrado mediante un enlace de afiliado.
+                </div>
+              </div>
+
 
               <div
                 class="row"
@@ -2972,7 +3012,7 @@ new FormData(form).entries()
 
             if (!validatedAffiliate) {
               throw new Error(
-                "El código de afiliado no es válido."
+                "El código de descuento no es válido."
               );
             }
           }
