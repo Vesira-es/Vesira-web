@@ -498,6 +498,87 @@ padding:19px;
 
     }
 
+
+    .affiliate-box{
+      margin:15px 0 2px;
+      padding:13px;
+      border:1px solid var(--b);
+      border-radius:15px;
+      background:#101010;
+    }
+
+    .affiliate-title{
+      font-size:10px;
+      color:#fff;
+      margin-bottom:8px;
+      letter-spacing:.02em;
+    }
+
+    .affiliate-row{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:8px;
+    }
+
+    .affiliate-row input{
+      min-width:0;
+      height:44px !important;
+      min-height:44px !important;
+      max-height:44px !important;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .affiliate-apply{
+      min-height:44px;
+      padding:0 14px;
+      border:1px solid var(--b);
+      border-radius:999px;
+      background:#fff;
+      color:#0a0a0a;
+      font-size:10px;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+
+    .affiliate-apply:disabled{
+      cursor:not-allowed;
+      opacity:.55;
+    }
+
+    .affiliate-status{
+      min-height:15px;
+      margin-top:8px;
+      color:var(--s);
+      font-size:10px;
+      line-height:1.4;
+    }
+
+    .affiliate-status.ok{
+      color:#7bdba5;
+    }
+
+    .affiliate-status.error{
+      color:#ff9c9c;
+    }
+
+    .affiliate-hint{
+      margin-top:7px;
+      color:#6f6f6f;
+      font-size:9px;
+      line-height:1.4;
+    }
+
+    @media (max-width:600px){
+      .affiliate-row{
+        grid-template-columns:1fr;
+      }
+
+      .affiliate-apply{
+        width:100%;
+      }
+    }
+
 .summary h2{
 
 font-family:"Bricolage Grotesque",Arial,sans-serif;
@@ -784,6 +865,10 @@ position:static;
 
 
 
+
+
+
+
 .nav{
 
 height:68px;
@@ -852,6 +937,14 @@ grid-column:auto;
 
 
 
+
+
+
+
+
+
+
+
 .summary{
 
 padding:16px;
@@ -863,31 +956,53 @@ border-radius:18px;
     }
 
 /* Evita el zoom automático de Safari/iPhone al enfocar campos.
+
    iOS no amplía los controles cuyo texto usa 16px o más. */
+
     input,
+
     select,
+
     textarea {
-      font-size:16px !important;
+
+font-size:16px !important;
+
     }
 
-    /* Mantén las dimensiones y márgenes estables al enfocar. */
+/* Mantén las dimensiones y márgenes estables al enfocar. */
+
     input,
+
     select {
-      height:48px !important;
-      min-height:48px !important;
-      max-height:48px !important;
-      padding-top:0 !important;
-      padding-bottom:0 !important;
+
+height:48px !important;
+
+min-height:48px !important;
+
+max-height:48px !important;
+
+padding-top:0 !important;
+
+padding-bottom:0 !important;
+
     }
 
     textarea {
-      height:95px !important;
-      min-height:95px !important;
-      max-height:95px !important;
-      resize:none !important;
-      padding:13px !important;
-      text-align:left !important;
-      line-height:1.5 !important;
+
+height:95px !important;
+
+min-height:95px !important;
+
+max-height:95px !important;
+
+resize:none !important;
+
+padding:13px !important;
+
+text-align:left !important;
+
+line-height:1.5 !important;
+
     }
 
 .address-wrap,
@@ -944,101 +1059,176 @@ width:100% !important;
 
 
 
-    /* Sugerencias de dirección: mismas superficies oscuras que el checkout. */
-    .address-autocomplete-box {
-      position: relative;
-      width: 100%;
+
+
+/* Sugerencias de dirección: mismas superficies oscuras que el checkout. */
+
+.address-autocomplete-box {
+
+position: relative;
+
+width: 100%;
+
     }
 
-    .address-suggestions {
-      position: absolute;
-      top: calc(100% + 8px);
-      left: 0;
-      right: 0;
-      z-index: 250;
-      display: none;
-      max-height: 250px;
-      overflow-y: auto;
-      padding: 6px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 14px;
-      background: #111;
-      box-shadow: 0 18px 45px rgba(0,0,0,.45);
-      -webkit-overflow-scrolling: touch;
+.address-suggestions {
+
+position: absolute;
+
+top: calc(100% + 8px);
+
+left: 0;
+
+right: 0;
+
+z-index: 250;
+
+display: none;
+
+max-height: 250px;
+
+overflow-y: auto;
+
+padding: 6px;
+
+border: 1px solid rgba(255,255,255,.12);
+
+border-radius: 14px;
+
+background: #111;
+
+box-shadow: 0 18px 45px rgba(0,0,0,.45);
+
+-webkit-overflow-scrolling: touch;
+
     }
 
-    .address-suggestions.visible {
-      display: grid;
-      gap: 2px;
+.address-suggestions.visible {
+
+display: grid;
+
+gap: 2px;
+
     }
 
-    .address-suggestion {
-      appearance: none;
-      width: 100%;
-      min-height: 52px;
-      padding: 10px 12px;
-      border: 0;
-      border-radius: 10px;
-      background: transparent;
-      color: #fff;
-      text-align: left;
-      font-family: "Outfit", Arial, sans-serif;
-      cursor: pointer;
+.address-suggestion {
+
+appearance: none;
+
+width: 100%;
+
+min-height: 52px;
+
+padding: 10px 12px;
+
+border: 0;
+
+border-radius: 10px;
+
+background: transparent;
+
+color: #fff;
+
+text-align: left;
+
+font-family: "Outfit", Arial, sans-serif;
+
+cursor: pointer;
+
     }
 
-    .address-suggestion:hover,
-    .address-suggestion:focus-visible {
-      background: #1a1a1a;
-      outline: none;
+.address-suggestion:hover,
+
+.address-suggestion:focus-visible {
+
+background: #1a1a1a;
+
+outline: none;
+
     }
 
-    .address-suggestion-main {
-      display: block;
-      color: #f5f5f5;
-      font-size: 12px;
-      font-weight: 500;
-      line-height: 1.35;
+.address-suggestion-main {
+
+display: block;
+
+color: #f5f5f5;
+
+font-size: 12px;
+
+font-weight: 500;
+
+line-height: 1.35;
+
     }
 
-    .address-suggestion-secondary {
-      display: block;
-      margin-top: 3px;
-      color: #8f8f8f;
-      font-size: 10px;
-      line-height: 1.3;
+.address-suggestion-secondary {
+
+display: block;
+
+margin-top: 3px;
+
+color: #8f8f8f;
+
+font-size: 10px;
+
+line-height: 1.3;
+
     }
 
-    /* Placeholder de la nota: alineado como un campo de formulario normal. */
-    #nota {
-      padding:13px !important;
-      text-align:left !important;
-      line-height:1.5 !important;
+/* Placeholder de la nota: alineado como un campo de formulario normal. */
+
+#nota {
+
+padding:13px !important;
+
+text-align:left !important;
+
+line-height:1.5 !important;
+
     }
 
-    #nota::placeholder {
-      color:#8c8c8c;
-      opacity:.9;
-      text-align:left;
+#nota::placeholder {
+
+color:#8c8c8c;
+
+opacity:.9;
+
+text-align:left;
+
     }
 
 @media (max-width: 600px) {
-      .address-suggestions {
-        top: calc(100% + 6px);
-        max-height: 220px;
-        padding: 5px;
-        border-radius: 12px;
+
+.address-suggestions {
+
+top: calc(100% + 6px);
+
+max-height: 220px;
+
+padding: 5px;
+
+border-radius: 12px;
+
       }
 
-      .address-suggestion {
-        min-height: 50px;
-        padding: 10px 11px;
+.address-suggestion {
+
+min-height: 50px;
+
+padding: 10px 11px;
+
       }
 
-      #nota {
-        padding:13px !important;
-        text-align:left !important;
+#nota {
+
+padding:13px !important;
+
+text-align:left !important;
+
       }
+
     }
+
   </style>
 
 </head>
@@ -1081,7 +1271,18 @@ width:100% !important;
 
       "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/validar-direccion";
 
+    const AFFILIATE_VALIDATION_FUNCTION_URL =
+
+      "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/validar-afiliado";
+
     const app = document.getElementById("app");
+
+    let affiliateState = {
+      codigo: "",
+      afiliado: null
+    };
+
+    let affiliateRequestId = 0;
 
     let googlePlacesReady = false;
 
@@ -1137,6 +1338,261 @@ Number(item.cantidad || 0),
 
       );
 
+    }
+
+    function normalizeAffiliateCode(value) {
+      return String(value || "")
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g, "");
+    }
+
+    function calculateAffiliateDiscount(subtotal) {
+      const percent = Number(
+        affiliateState.afiliado?.descuento_porcentaje || 0
+      );
+
+      if (!affiliateState.afiliado || percent <= 0) {
+        return 0;
+      }
+
+      return Math.min(
+        Number(subtotal || 0),
+        Number(subtotal || 0) * percent / 100
+      );
+    }
+
+    function updateAffiliateSummary() {
+      const cart = getCart();
+      const subtotal = totalCart(cart);
+      const discount = calculateAffiliateDiscount(subtotal);
+      const total = Math.max(0, subtotal - discount);
+
+      const discountRow =
+        document.getElementById("affiliateDiscountRow");
+
+      const discountAmount =
+        document.getElementById("affiliateDiscountAmount");
+
+      const checkoutTotal =
+        document.getElementById("checkoutTotal");
+
+      if (discountRow) {
+        discountRow.style.display =
+          discount > 0 ? "flex" : "none";
+      }
+
+      if (discountAmount) {
+        discountAmount.textContent =
+          discount > 0 ? `-${euro(discount)}` : euro(0);
+      }
+
+      if (checkoutTotal) {
+        checkoutTotal.textContent = euro(total);
+      }
+    }
+
+    async function validateAffiliateCode(code) {
+      const normalizedCode = normalizeAffiliateCode(code);
+
+      if (!normalizedCode) {
+        throw new Error("Introduce un código de afiliado.");
+      }
+
+      const response = await fetch(
+        AFFILIATE_VALIDATION_FUNCTION_URL,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            codigo: normalizedCode
+          })
+        }
+      );
+
+      const result = await response
+        .json()
+        .catch(() => ({}));
+
+      if (!response.ok || !result?.valido || !result?.afiliado) {
+        throw new Error(
+          result?.error ||
+          "El código de afiliado no es válido."
+        );
+      }
+
+      return result.afiliado;
+    }
+
+    async function applyAffiliateCode(code = null) {
+      const input =
+        document.getElementById("affiliateCode");
+
+      const button =
+        document.getElementById("affiliateApplyButton");
+
+      const status =
+        document.getElementById("affiliateStatus");
+
+      const normalizedCode = normalizeAffiliateCode(
+        code !== null
+          ? code
+          : input?.value || ""
+      );
+
+      if (input) {
+        input.value = normalizedCode;
+      }
+
+      if (!normalizedCode) {
+        affiliateRequestId++;
+        affiliateState = {
+          codigo: "",
+          afiliado: null
+        };
+
+        if (status) {
+          status.textContent = "";
+          status.classList.remove("ok", "error");
+        }
+
+        updateAffiliateSummary();
+        return null;
+      }
+
+      const requestId = ++affiliateRequestId;
+
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Comprobando...";
+      }
+
+      if (status) {
+        status.textContent = "Comprobando código...";
+        status.classList.remove("ok", "error");
+      }
+
+      try {
+        const afiliado = await validateAffiliateCode(
+          normalizedCode
+        );
+
+        if (requestId !== affiliateRequestId) {
+          return null;
+        }
+
+        affiliateState = {
+          codigo: normalizedCode,
+          afiliado
+        };
+
+        const discountPercent = Number(
+          afiliado?.descuento_porcentaje || 0
+        );
+
+        if (status) {
+          status.textContent =
+            `${afiliado.nombre} · ${discountPercent}% de descuento aplicado.`;
+          status.classList.add("ok");
+          status.classList.remove("error");
+        }
+
+        updateAffiliateSummary();
+
+        return afiliado;
+      } catch (error) {
+        if (requestId !== affiliateRequestId) {
+          return null;
+        }
+
+        affiliateState = {
+          codigo: "",
+          afiliado: null
+        };
+
+        updateAffiliateSummary();
+
+        if (status) {
+          status.textContent =
+            error?.message ||
+            "El código de afiliado no es válido.";
+          status.classList.add("error");
+          status.classList.remove("ok");
+        }
+
+        return null;
+      } finally {
+        if (
+          requestId === affiliateRequestId &&
+          button
+        ) {
+          button.disabled = false;
+          button.textContent = "Aplicar";
+        }
+      }
+    }
+
+    function initAffiliateUI() {
+      const input =
+        document.getElementById("affiliateCode");
+
+      const button =
+        document.getElementById("affiliateApplyButton");
+
+      const status =
+        document.getElementById("affiliateStatus");
+
+      if (!input || !button || !status) {
+        return;
+      }
+
+      input.addEventListener("input", () => {
+        const normalized = normalizeAffiliateCode(
+          input.value
+        );
+
+        input.value = normalized;
+
+        affiliateRequestId++;
+
+        affiliateState = {
+          codigo: "",
+          afiliado: null
+        };
+
+        status.textContent = "";
+        status.classList.remove("ok", "error");
+
+        updateAffiliateSummary();
+      });
+
+      button.addEventListener("click", async () => {
+        await applyAffiliateCode();
+      });
+
+      input.addEventListener("keydown", async event => {
+        if (event.key !== "Enter") {
+          return;
+        }
+
+        event.preventDefault();
+        await applyAffiliateCode();
+      });
+
+      const refCode = normalizeAffiliateCode(
+        new URLSearchParams(window.location.search).get("ref")
+      );
+
+      if (refCode) {
+        input.value = refCode;
+
+        status.textContent =
+          "Enlace de afiliado detectado. Comprobando...";
+
+        applyAffiliateCode(refCode);
+      }
     }
 
     function setAddressStatus(message, state = "") {
@@ -1941,6 +2397,13 @@ String(
 
       const cart = getCart();
 
+      affiliateRequestId++;
+
+      affiliateState = {
+        codigo: "",
+        afiliado: null
+      };
+
       if (!cart.length) {
 
         app.innerHTML = `
@@ -2199,6 +2662,42 @@ String(
 
               <h2>Tu pedido.</h2>
 
+              <div class="affiliate-box">
+                <div class="affiliate-title">
+                  Código de afiliado
+                </div>
+
+                <div class="affiliate-row">
+                  <input
+                    id="affiliateCode"
+                    type="text"
+                    inputmode="text"
+                    autocomplete="off"
+                    placeholder="Ej. CARLOS5"
+                    maxlength="40"
+                    aria-label="Código de afiliado"
+                  >
+
+                  <button
+                    class="affiliate-apply"
+                    type="button"
+                    id="affiliateApplyButton"
+                  >
+                    Aplicar
+                  </button>
+                </div>
+
+                <div
+                  id="affiliateStatus"
+                  class="affiliate-status"
+                  aria-live="polite"
+                ></div>
+
+                <div class="affiliate-hint">
+                  También se aplica automáticamente si has entrado mediante un enlace de afiliado.
+                </div>
+              </div>
+
               <div class="summary-items">
 
                 ${cart.map(item => `
@@ -2259,6 +2758,20 @@ Number(item.cantidad || 1)
 
               </div>
 
+              <div
+                class="row"
+                id="affiliateDiscountRow"
+                style="display:none"
+              >
+
+                <span>Descuento afiliado</span>
+
+                <strong id="affiliateDiscountAmount">
+                  ${euro(0)}
+                </strong>
+
+              </div>
+
               <div class="row">
 
                 <span>Envío</span>
@@ -2271,7 +2784,9 @@ Number(item.cantidad || 1)
 
                 <span>Total</span>
 
-                <strong>${euro(subtotal)}</strong>
+                <strong id="checkoutTotal">
+                  ${euro(subtotal)}
+                </strong>
 
               </div>
 
@@ -2322,6 +2837,8 @@ document
           handleSubmit
 
         );
+
+      initAffiliateUI();
 
       initGooglePlaces();
 
@@ -2425,6 +2942,10 @@ new FormData(form).entries()
 
       }
 
+      const currentAffiliateCode = normalizeAffiliateCode(
+        document.getElementById("affiliateCode")?.value || ""
+      );
+
       const originalButton =
 
         button.innerHTML;
@@ -2433,13 +2954,52 @@ new FormData(form).entries()
 
       button.innerHTML =
 
-        "Comprobando dirección...";
+        currentAffiliateCode
+          ? "Comprobando código..."
+          : "Comprobando dirección...";
 
       try {
 
+        if (currentAffiliateCode) {
+          if (
+            !affiliateState.afiliado ||
+            affiliateState.codigo !== currentAffiliateCode
+          ) {
+            const validatedAffiliate =
+              await applyAffiliateCode(
+                currentAffiliateCode
+              );
+
+            if (!validatedAffiliate) {
+              throw new Error(
+                "El código de afiliado no es válido."
+              );
+            }
+          }
+        } else {
+          affiliateState = {
+            codigo: "",
+            afiliado: null
+          };
+
+          updateAffiliateSummary();
+        }
+
+        button.innerHTML =
+          "Comprobando dirección...";
+
         await validateShippingAddress();
 
-localStorage.setItem(
+        const subtotalOriginal = totalCart(cart);
+        const descuento = calculateAffiliateDiscount(
+          subtotalOriginal
+        );
+        const subtotalPagado = Math.max(
+          0,
+          subtotalOriginal - descuento
+        );
+
+        localStorage.setItem(
 
           "vesiraCheckout",
 
@@ -2486,6 +3046,36 @@ String(
             },
 
             carrito: cart,
+
+            afiliado: affiliateState.afiliado
+              ? {
+                  id:
+                    affiliateState.afiliado.id || null,
+                  nombre:
+                    affiliateState.afiliado.nombre || "",
+                  codigo:
+                    affiliateState.codigo || "",
+                  descuentoPorcentaje:
+                    Number(
+                      affiliateState.afiliado
+                        .descuento_porcentaje || 0
+                    ),
+                  comisionPorcentaje:
+                    Number(
+                      affiliateState.afiliado
+                        .comision_porcentaje || 0
+                    )
+                }
+              : null,
+
+            codigoAfiliado:
+              affiliateState.codigo || null,
+
+            subtotalOriginal,
+
+            descuento,
+
+            subtotalPagado,
 
             creadoEn:
 
