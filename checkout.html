@@ -499,12 +499,35 @@ padding:19px;
     }
 
 
+    .affiliate-toggle{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      margin:10px 0 2px;
+      padding:0;
+      border:0;
+      background:transparent;
+      color:#8c8c8c;
+      font-size:10px;
+      cursor:pointer;
+      text-decoration:underline;
+      text-underline-offset:4px;
+    }
+
+    .affiliate-toggle:hover{
+      color:#fff;
+    }
+
     .affiliate-box{
-      margin:12px 0 4px;
+      margin:10px 0 4px;
       padding:13px;
       border:1px solid var(--b);
       border-radius:15px;
       background:#101010;
+    }
+
+    .affiliate-box[hidden]{
+      display:none !important;
     }
 
     .affiliate-title{
@@ -526,8 +549,8 @@ padding:19px;
       height:44px !important;
       min-height:44px !important;
       max-height:44px !important;
-      text-transform:uppercase;
-      letter-spacing:.08em;
+      text-transform:none;
+      letter-spacing:.03em;
     }
 
     .affiliate-apply{
@@ -1352,6 +1375,12 @@ Number(item.cantidad || 0),
         .replace(/\s+/g, "");
     }
 
+    function cleanAffiliateCodeForInput(value) {
+      return String(value || "")
+        .trim()
+        .replace(/\s+/g, "");
+    }
+
     function calculateAffiliateDiscount(subtotal) {
       const percent = Number(
         affiliateState.afiliado?.descuento_porcentaje || 0
@@ -1446,6 +1475,12 @@ Number(item.cantidad || 0),
         null;
 
       if (!response.ok || !valido || !afiliado) {
+        if (response.status >= 400 && response.status < 500 && response.status !== 401 && response.status !== 403) {
+          throw new Error(
+            "Cupón no válido."
+          );
+        }
+
         throw new Error(
           result?.error ||
           "El código de descuento no es válido."
@@ -1475,14 +1510,17 @@ Number(item.cantidad || 0),
       const status =
         document.getElementById("affiliateStatus");
 
-      const normalizedCode = normalizeAffiliateCode(
+      const inputCode = cleanAffiliateCodeForInput(
         code !== null
           ? code
           : input?.value || ""
       );
 
+      const normalizedCode =
+        normalizeAffiliateCode(inputCode);
+
       if (input) {
-        input.value = normalizedCode;
+        input.value = inputCode;
       }
 
       if (!normalizedCode) {
@@ -1556,7 +1594,7 @@ Number(item.cantidad || 0),
         if (status) {
           status.textContent =
             error?.message ||
-            "El código de descuento no es válido.";
+            "Cupón no válido.";
           status.classList.add("error");
           status.classList.remove("ok");
         }
@@ -1583,16 +1621,38 @@ Number(item.cantidad || 0),
       const status =
         document.getElementById("affiliateStatus");
 
-      if (!input || !button || !status) {
+      const toggle =
+        document.getElementById("affiliateToggleButton");
+
+      const box =
+        document.getElementById("affiliateBox");
+
+      if (!input || !button || !status || !toggle || !box) {
         return;
       }
 
+      toggle.addEventListener("click", () => {
+        const shouldOpen = box.hidden;
+
+        box.hidden = !shouldOpen;
+        toggle.setAttribute(
+          "aria-expanded",
+          String(shouldOpen)
+        );
+
+        if (shouldOpen) {
+          window.requestAnimationFrame(() => {
+            input.focus();
+          });
+        }
+      });
+
       input.addEventListener("input", () => {
-        const normalized = normalizeAffiliateCode(
+        const inputCode = cleanAffiliateCodeForInput(
           input.value
         );
 
-        input.value = normalized;
+        input.value = inputCode;
 
         affiliateRequestId++;
 
@@ -1620,18 +1680,6 @@ Number(item.cantidad || 0),
         await applyAffiliateCode();
       });
 
-      const refCode = normalizeAffiliateCode(
-        new URLSearchParams(window.location.search).get("ref")
-      );
-
-      if (refCode) {
-        input.value = refCode;
-
-        status.textContent =
-          "Enlace de afiliado detectado. Comprobando...";
-
-        applyAffiliateCode(refCode);
-      }
     }
 
     function setAddressStatus(message, state = "") {
@@ -2761,7 +2809,21 @@ Number(item.cantidad || 1)
 
               </div>
 
-              <div class="affiliate-box">
+              <button
+                type="button"
+                class="affiliate-toggle"
+                id="affiliateToggleButton"
+                aria-expanded="false"
+                aria-controls="affiliateBox"
+              >
+                ¿Tienes un código de descuento?
+              </button>
+
+              <div
+                class="affiliate-box"
+                id="affiliateBox"
+                hidden
+              >
                 <div class="affiliate-title">
                   Código de descuento
                 </div>
@@ -2772,9 +2834,9 @@ Number(item.cantidad || 1)
                     type="text"
                     inputmode="text"
                     autocomplete="off"
-                    placeholder="Ej. CARLOS5"
+                    placeholder="Ej. carlos5"
                     maxlength="40"
-                    aria-label="Código de afiliado"
+                    aria-label="Código de descuento"
                   >
 
                   <button
@@ -2792,9 +2854,6 @@ Number(item.cantidad || 1)
                   aria-live="polite"
                 ></div>
 
-                <div class="affiliate-hint">
-                  También se aplica automáticamente si has entrado mediante un enlace de afiliado.
-                </div>
               </div>
 
 
