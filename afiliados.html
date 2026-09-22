@@ -371,6 +371,7 @@
 
         <button type="submit" class="submit" id="submitButton">Crear mi cuenta</button>
         <button type="button" class="forgot" id="forgotButton" hidden>¿Has olvidado tu contraseña?</button>
+        <button type="button" class="forgot" id="resendVerificationButton" hidden>Reenviar correo de verificación</button>
 
         <div id="authMessage" class="message" role="status" aria-live="polite"></div>
       </form>
@@ -423,8 +424,10 @@
       createUserWithEmailAndPassword,
       signInWithEmailAndPassword,
       sendPasswordResetEmail,
+      sendEmailVerification,
       signOut,
-      updateProfile
+      updateProfile,
+      reload
     } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
     import {
       getFirestore,
@@ -459,6 +462,7 @@
     const authIntro = document.getElementById("authIntro");
     const submitButton = document.getElementById("submitButton");
     const forgotButton = document.getElementById("forgotButton");
+    const resendVerificationButton = document.getElementById("resendVerificationButton");
     const authMessage = document.getElementById("authMessage");
     const heroEyebrow = document.getElementById("heroEyebrow");
     const heroTitle = document.getElementById("heroTitle");
@@ -520,6 +524,7 @@
         : "Accede a tu cuenta para ver tu cupón y tus condiciones.";
       submitButton.textContent = isRegister ? "Crear mi cuenta" : "Iniciar sesión";
       forgotButton.hidden = isRegister;
+      resendVerificationButton.hidden = true;
       passwordInput.autocomplete = isRegister ? "new-password" : "current-password";
       setHero(isRegister ? "register" : "login");
       showMessage("");
@@ -550,6 +555,8 @@
         "auth/wrong-password": "La contraseña no es correcta.",
         "auth/too-many-requests": "Demasiados intentos. Prueba de nuevo en unos minutos.",
         "auth/network-request-failed": "No hay conexión. Comprueba tu internet y vuelve a intentarlo.",
+        "auth/invalid-action-code": "El enlace de verificación ya no es válido. Solicita otro correo.",
+        "auth/requires-recent-login": "Vuelve a iniciar sesión y prueba de nuevo.",
         "affiliate/not-registered": "Esta cuenta todavía no es de afiliado. Regístrate primero como afiliado."
       };
       return map[code] || "No se pudo completar la operación. Inténtalo de nuevo.";
@@ -597,7 +604,7 @@
 
     async function renderDashboard(user, affiliate = null) {
       const data = affiliate || await getAffiliate(user);
-      const name = data.name || user.displayName || "Afiliado";
+      const name = data.name || user.displayName || "";
       const code = data.couponCode || "—";
 
       welcomeName.textContent = `Hola, ${name}.`;
@@ -634,6 +641,35 @@
       }
     });
 
+    resendVerificationButton.addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        showMessage("Introduce tu email y contraseña para reenviar el correo de verificación.", "error");
+        return;
+      }
+
+      try {
+        const credential = await signInWithEmailAndPassword(auth, email, password);
+        const user = credential.user;
+        await reload(user);
+
+        if (user.emailVerified) {
+          showMessage("Tu email ya está verificado. Inicia sesión normalmente.", "success");
+          await signOut(auth);
+          resendVerificationButton.hidden = true;
+          return;
+        }
+
+        await sendEmailVerification(user);
+        showMessage("Te hemos reenviado el correo de verificación.", "success");
+        await signOut(auth);
+      } catch (error) {
+        showMessage(humanAuthError(error.code), "error");
+      }
+    });
+
     authForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       showMessage("");
@@ -664,16 +700,36 @@
           const credential = await createUserWithEmailAndPassword(auth, email, password);
           user = credential.user;
           await updateProfile(user, { displayName: name });
-          const affiliate = await createAffiliate(user, name);
-          await renderDashboard(user, affiliate);
+
+          await createAffiliate(user, name);
+          await sendEmailVerification(user);
+          await signOut(auth);
+
+          authForm.reset();
+          setMode("login");
+          showMessage(
+            "Cuenta creada. Te hemos enviado un correo de verificación. Confirma tu email y después inicia sesión.",
+            "success"
+          );
         } else {
           const credential = await signInWithEmailAndPassword(auth, email, password);
           user = credential.user;
+          await reload(user);
+
+          if (!user.emailVerified) {
+            resendVerificationButton.hidden = false;
+            showMessage(
+              "Tu email todavía no está verificado. Revisa tu correo y confirma la cuenta antes de entrar.",
+              "error"
+            );
+            await signOut(auth);
+            return;
+          }
+
           const affiliate = await getAffiliate(user);
           await renderDashboard(user, affiliate);
+          authForm.reset();
         }
-
-        authForm.reset();
       } catch (error) {
         console.error("Affiliate auth error:", error);
         showMessage(humanAuthError(error.code), "error");
@@ -710,10 +766,20 @@
       }
 
       try {
+        await reload(user);
+        if (!user.emailVerified) {
+          dashboard.classList.remove("show");
+          authView.classList.remove("hide");
+          setMode("login");
+          resendVerificationButton.hidden = false;
+          showMessage("Confirma tu email desde el correo que te hemos enviado antes de entrar.", "error");
+          return;
+        }
+
         await renderDashboard(user);
       } catch (error) {
         console.error("Affiliate dashboard error:", error);
-        showMessage("No se pudo cargar tu cuenta. Revisa la configuración de Firebase.", "error");
+        showMessage(humanAuthError(error.code), "error");
       }
     });
   </script>
