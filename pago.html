@@ -2391,6 +2391,8 @@ item.image ??
 
       }
 
+      const affiliateCode = getAffiliateCode();
+
       const response = await fetch(
 
         SUPABASE_FUNCTION_URL,
@@ -2411,7 +2413,7 @@ item.image ??
 
             cliente: checkoutData.cliente,
 
-            codigoAfiliado: getAffiliateCode() || null
+            codigoAfiliado: affiliateCode || null
 
           })
 
@@ -2465,11 +2467,39 @@ item.image ??
 
       }
 
+      /*
+
+        IMPORTANTE:
+        El importe que Stripe va a cobrar lo decide crear-checkout
+        en el servidor. No usamos el descuento del navegador como
+        fuente de verdad para el cobro.
+
+      */
+
+      if (affiliateCode) {
+
+        const serverDiscount = Number(data?.descuento);
+        const serverTotal = Number(data?.subtotalPagado ?? data?.total);
+
+        if (
+          !Number.isFinite(serverDiscount) ||
+          !Number.isFinite(serverTotal)
+        ) {
+
+          throw new Error(
+            "El servidor no devolvió el importe final con el descuento aplicado."
+          );
+
+        }
+
+      }
+
       clientSecret = data.clientSecret;
 
       paymentIntentId = data.paymentIntentId || null;
 
       affiliatePaymentPricing = {
+
         subtotalOriginal:
           data?.subtotalOriginal ??
           checkoutData?.subtotalOriginal ??
@@ -2493,6 +2523,7 @@ item.image ??
                 0
               )
           )
+
       };
 
       renderAffiliatePaymentSummary();
