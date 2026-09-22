@@ -73,6 +73,7 @@
     }
 
     .hero { max-width: 670px; margin-bottom: 26px; }
+    .hero.hide { display: none; }
     .eyebrow {
       color: #777;
       font-size: 9px;
@@ -333,9 +334,9 @@
 
   <main class="wrap">
     <header class="hero">
-      <div class="eyebrow">Programa de afiliados</div>
-      <h1>Tu código. Tus ventas.</h1>
-      <p>Crea tu cuenta y recibe tu cupón único para compartir.</p>
+      <div class="eyebrow" id="heroEyebrow">Programa de afiliados</div>
+      <h1 id="heroTitle">Tu código. Tus ventas.</h1>
+      <p id="heroText">Crea tu cuenta y recibe tu cupón único para compartir.</p>
     </header>
 
     <section id="authView" class="auth-view card">
@@ -459,6 +460,9 @@
     const submitButton = document.getElementById("submitButton");
     const forgotButton = document.getElementById("forgotButton");
     const authMessage = document.getElementById("authMessage");
+    const heroEyebrow = document.getElementById("heroEyebrow");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroText = document.getElementById("heroText");
     const nameField = document.getElementById("nameField");
     const nombreInput = document.getElementById("nombre");
     const emailInput = document.getElementById("email");
@@ -478,6 +482,21 @@
     function showMessage(text = "", type = "") {
       authMessage.textContent = text;
       authMessage.className = `message${text ? " show" : ""}${type ? ` ${type}` : ""}`;
+    }
+
+    function setHero(state = "register", name = "") {
+      if (state === "dashboard") {
+        document.querySelector(".hero").classList.add("hide");
+        return;
+      }
+
+      document.querySelector(".hero").classList.remove("hide");
+
+      heroEyebrow.textContent = "Programa de afiliados";
+      heroTitle.textContent = state === "login" ? "Bienvenido de nuevo." : "Tu código. Tus ventas.";
+      heroText.textContent = state === "login"
+        ? "Inicia sesión con tu email y contraseña para ver tu cupón."
+        : "Crea tu cuenta y recibe tu cupón único para compartir.";
     }
 
     function setLoading(loading) {
@@ -502,6 +521,7 @@
       submitButton.textContent = isRegister ? "Crear mi cuenta" : "Iniciar sesión";
       forgotButton.hidden = isRegister;
       passwordInput.autocomplete = isRegister ? "new-password" : "current-password";
+      setHero(isRegister ? "register" : "login");
       showMessage("");
     }
 
@@ -529,12 +549,13 @@
         "auth/user-not-found": "No existe una cuenta con ese email.",
         "auth/wrong-password": "La contraseña no es correcta.",
         "auth/too-many-requests": "Demasiados intentos. Prueba de nuevo en unos minutos.",
-        "auth/network-request-failed": "No hay conexión. Comprueba tu internet y vuelve a intentarlo."
+        "auth/network-request-failed": "No hay conexión. Comprueba tu internet y vuelve a intentarlo.",
+        "affiliate/not-registered": "Esta cuenta todavía no es de afiliado. Regístrate primero como afiliado."
       };
       return map[code] || "No se pudo completar la operación. Inténtalo de nuevo.";
     }
 
-    async function ensureAffiliate(user, requestedName = "") {
+    async function createAffiliate(user, requestedName = "") {
       const affiliateRef = doc(db, "affiliates", user.uid);
       const snapshot = await getDoc(affiliateRef);
 
@@ -543,7 +564,9 @@
       }
 
       const name = requestedName || user.displayName || "Afiliado";
-      const code = buildCouponCode(user);
+      const prefix = normalizeName(name) || "VS";
+      const uidPart = user.uid.replace(/[^a-z0-9]/gi, "").slice(0, 8).toUpperCase();
+      const code = `VS-${prefix}-${uidPart}`.slice(0, 20);
       const data = {
         uid: user.uid,
         name,
@@ -559,10 +582,23 @@
       return data;
     }
 
-    async function renderDashboard(user) {
-      const affiliate = await ensureAffiliate(user, user.displayName || "");
-      const name = affiliate.name || user.displayName || "Afiliado";
-      const code = affiliate.couponCode || "—";
+    async function getAffiliate(user) {
+      const affiliateRef = doc(db, "affiliates", user.uid);
+      const snapshot = await getDoc(affiliateRef);
+
+      if (!snapshot.exists()) {
+        const error = new Error("Esta cuenta todavía no está registrada como afiliado.");
+        error.code = "affiliate/not-registered";
+        throw error;
+      }
+
+      return snapshot.data();
+    }
+
+    async function renderDashboard(user, affiliate = null) {
+      const data = affiliate || await getAffiliate(user);
+      const name = data.name || user.displayName || "Afiliado";
+      const code = data.couponCode || "—";
 
       welcomeName.textContent = `Hola, ${name}.`;
       accountEmail.textContent = user.email || "";
@@ -571,6 +607,7 @@
 
       authView.classList.add("hide");
       dashboard.classList.add("show");
+      setHero("dashboard", name);
     }
 
     registerTab.addEventListener("click", () => setMode("register"));
@@ -627,15 +664,15 @@
           const credential = await createUserWithEmailAndPassword(auth, email, password);
           user = credential.user;
           await updateProfile(user, { displayName: name });
-          await ensureAffiliate(user, name);
-          showMessage("Cuenta creada. Ya tienes tu cupón.", "success");
+          const affiliate = await createAffiliate(user, name);
+          await renderDashboard(user, affiliate);
         } else {
           const credential = await signInWithEmailAndPassword(auth, email, password);
           user = credential.user;
-          await ensureAffiliate(user, user.displayName || "Afiliado");
+          const affiliate = await getAffiliate(user);
+          await renderDashboard(user, affiliate);
         }
 
-        await renderDashboard(user);
         authForm.reset();
       } catch (error) {
         console.error("Affiliate auth error:", error);
@@ -668,7 +705,7 @@
       if (!user) {
         dashboard.classList.remove("show");
         authView.classList.remove("hide");
-        setMode("register");
+        setMode("login");
         return;
       }
 
