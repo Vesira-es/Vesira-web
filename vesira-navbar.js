@@ -670,9 +670,9 @@
           <a
             class="vesira-menu-link"
             href="afiliados.html"
-            title="Programa afiliados"
+            title="afiliados"
           >
-            Programa afiliados
+            Afiliados
           </a>
 
         </nav>
