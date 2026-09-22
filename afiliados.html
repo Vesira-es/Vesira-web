@@ -1,419 +1,773 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta name="theme-color" content="#080808">
+
   <title>Afiliados · Vesira</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700" rel="stylesheet">
+
   <style>
-    :root {
+
+:root {
+
       --bg: #080808;
+
       --panel: #111;
+
       --panel-2: #151515;
+
       --border: rgba(255,255,255,.10);
+
       --text: #f5f5f5;
+
       --muted: #8b8b8b;
+
       --success: #7bdba5;
+
       --danger: #ff9c9c;
+
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     html, body { min-height: 100%; }
+
     body {
-      background:
-        radial-gradient(900px 500px at 10% -10%, rgba(255,255,255,.055), transparent 55%),
-        radial-gradient(700px 450px at 100% 100%, rgba(255,255,255,.025), transparent 58%),
-        var(--bg);
-      color: var(--text);
-      font-family: "Outfit", Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+
+background:
+
+radial-gradient(900px 500px at 10% -10%, rgba(255,255,255,.055), transparent 55%),
+
+radial-gradient(700px 450px at 100% 100%, rgba(255,255,255,.025), transparent 58%),
+
+var(--bg);
+
+color: var(--text);
+
+font-family: "Outfit", Arial, sans-serif;
+
+-webkit-font-smoothing: antialiased;
+
+overflow-x: hidden;
+
     }
 
     button, input { font: inherit; }
+
     button { cursor: pointer; }
+
     a { color: inherit; text-decoration: none; }
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      height: 68px;
-      padding: 0 26px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(8,8,8,.82);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(18px);
-    }
-    .nav-left { display: flex; align-items: center; gap: 10px; }
-    .logo { width: 96px; display: block; }
-    .eyewear {
-      color: #707070;
-      font-size: 8px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-    .nav-link {
-      color: #aaa;
-      font-size: 10px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .nav-link:hover { color: #fff; }
+.nav {
 
-    .wrap {
-      width: min(860px, calc(100% - 28px));
-      margin: 0 auto;
-      padding: 86px 0 70px;
+position: sticky;
+
+top: 0;
+
+z-index: 20;
+
+height: 68px;
+
+padding: 0 26px;
+
+display: flex;
+
+align-items: center;
+
+justify-content: space-between;
+
+background: rgba(8,8,8,.82);
+
+border-bottom: 1px solid var(--border);
+
+backdrop-filter: blur(18px);
+
     }
 
-    .hero { max-width: 670px; margin-bottom: 26px; }
-    .hero.hide { display: none; }
-    .eyebrow {
-      color: #777;
-      font-size: 9px;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      margin-bottom: 11px;
+.nav-left { display: flex; align-items: center; gap: 10px; }
+
+.logo { width: 96px; display: block; }
+
+.eyewear {
+
+color: #707070;
+
+font-size: 8px;
+
+letter-spacing: .18em;
+
+text-transform: uppercase;
+
     }
+
+.nav-link {
+
+color: #aaa;
+
+font-size: 10px;
+
+letter-spacing: .12em;
+
+text-transform: uppercase;
+
+    }
+
+.nav-link:hover { color: #fff; }
+
+.wrap {
+
+width: min(860px, calc(100% - 28px));
+
+margin: 0 auto;
+
+padding: 86px 0 70px;
+
+    }
+
+.hero { max-width: 670px; margin-bottom: 26px; }
+
+.hero.hide { display: none; }
+
+.eyebrow {
+
+color: #777;
+
+font-size: 9px;
+
+letter-spacing: .22em;
+
+text-transform: uppercase;
+
+margin-bottom: 11px;
+
+    }
+
     h1 {
-      font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: clamp(48px, 8vw, 76px);
-      font-weight: 400;
-      line-height: .9;
-      letter-spacing: -.075em;
-      margin-bottom: 14px;
-    }
-    .hero p { color: var(--muted); font-size: 13px; line-height: 1.6; max-width: 560px; }
 
-    .card {
-      background: linear-gradient(180deg, rgba(18,18,18,.98), rgba(12,12,12,.98));
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 24px;
-      box-shadow: 0 24px 70px rgba(0,0,0,.24);
-    }
-    .card h2 {
-      font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: 28px;
-      font-weight: 400;
-      letter-spacing: -.05em;
-      margin-bottom: 6px;
-    }
-    .card-intro { color: #818181; font-size: 11px; line-height: 1.55; margin-bottom: 20px; }
+font-family: "Bricolage Grotesque", Arial, sans-serif;
 
-    .switcher {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      padding: 4px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: #0d0d0d;
-      border-radius: 14px;
-      margin-bottom: 18px;
-    }
-    .switch {
-      min-height: 40px;
-      border: 0;
-      border-radius: 10px;
-      background: transparent;
-      color: #777;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .switch.active { background: #fff; color: #080808; }
+font-size: clamp(48px, 8vw, 76px);
 
-    .fields { display: grid; gap: 13px; }
-    .field { display: grid; gap: 7px; }
+font-weight: 400;
+
+line-height: .9;
+
+letter-spacing: -.075em;
+
+margin-bottom: 14px;
+
+    }
+
+.hero p { color: var(--muted); font-size: 13px; line-height: 1.6; max-width: 560px; }
+
+.card {
+
+background: linear-gradient(180deg, rgba(18,18,18,.98), rgba(12,12,12,.98));
+
+border: 1px solid var(--border);
+
+border-radius: 22px;
+
+padding: 24px;
+
+box-shadow: 0 24px 70px rgba(0,0,0,.24);
+
+    }
+
+.card h2 {
+
+font-family: "Bricolage Grotesque", Arial, sans-serif;
+
+font-size: 28px;
+
+font-weight: 400;
+
+letter-spacing: -.05em;
+
+margin-bottom: 6px;
+
+    }
+
+.card-intro { color: #818181; font-size: 11px; line-height: 1.55; margin-bottom: 20px; }
+
+.switcher {
+
+display: grid;
+
+grid-template-columns: 1fr 1fr;
+
+gap: 6px;
+
+padding: 4px;
+
+border: 1px solid rgba(255,255,255,.08);
+
+background: #0d0d0d;
+
+border-radius: 14px;
+
+margin-bottom: 18px;
+
+    }
+
+.switch {
+
+min-height: 40px;
+
+border: 0;
+
+border-radius: 10px;
+
+background: transparent;
+
+color: #777;
+
+font-size: 10px;
+
+font-weight: 600;
+
+letter-spacing: .08em;
+
+text-transform: uppercase;
+
+    }
+
+.switch.active { background: #fff; color: #080808; }
+
+.fields { display: grid; gap: 13px; }
+
+.field { display: grid; gap: 7px; }
+
     label {
-      color: #858585;
-      font-size: 9px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
+
+color: #858585;
+
+font-size: 9px;
+
+letter-spacing: .12em;
+
+text-transform: uppercase;
+
     }
+
     input {
-      width: 100%;
-      height: 50px;
-      padding: 0 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 14px;
-      background: #0d0d0d;
-      color: #fff;
-      outline: none;
-      font-size: 16px;
-      transition: border-color .2s ease, background .2s ease;
+
+width: 100%;
+
+height: 50px;
+
+padding: 0 14px;
+
+border: 1px solid rgba(255,255,255,.10);
+
+border-radius: 14px;
+
+background: #0d0d0d;
+
+color: #fff;
+
+outline: none;
+
+font-size: 16px;
+
+transition: border-color .2s ease, background .2s ease;
+
     }
+
     input:focus { border-color: rgba(255,255,255,.28); background: #101010; }
 
-    .password-wrap { position: relative; }
-    .password-wrap input { padding-right: 56px; }
-    .toggle-password {
-      position: absolute;
-      top: 50%;
-      right: 8px;
-      transform: translateY(-50%);
-      min-width: 40px;
-      height: 36px;
-      border: 0;
-      border-radius: 10px;
-      background: rgba(255,255,255,.05);
-      color: #9c9c9c;
-      font-size: 9px;
+.password-wrap { position: relative; }
+
+.password-wrap input { padding-right: 56px; }
+
+.toggle-password {
+
+position: absolute;
+
+top: 50%;
+
+right: 8px;
+
+transform: translateY(-50%);
+
+min-width: 40px;
+
+height: 36px;
+
+border: 0;
+
+border-radius: 10px;
+
+background: rgba(255,255,255,.05);
+
+color: #9c9c9c;
+
+font-size: 9px;
+
     }
 
-    .submit {
-      width: 100%;
-      min-height: 52px;
-      margin-top: 18px;
-      border: 0;
-      border-radius: 999px;
-      background: #fff;
-      color: #0a0a0a;
-      font-size: 11px;
-      font-weight: 600;
-      transition: transform .2s ease, opacity .2s ease;
-    }
-    .submit:hover { transform: translateY(-2px); }
-    .submit:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+.submit {
 
-    .forgot {
-      display: block;
-      width: fit-content;
-      margin: 13px auto 0;
-      border: 0;
-      background: none;
-      color: #777;
-      font-size: 10px;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+width: 100%;
+
+min-height: 52px;
+
+margin-top: 18px;
+
+border: 0;
+
+border-radius: 999px;
+
+background: #fff;
+
+color: #0a0a0a;
+
+font-size: 11px;
+
+font-weight: 600;
+
+transition: transform .2s ease, opacity .2s ease;
+
     }
 
-    .message {
-      display: none;
-      margin-top: 14px;
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-    .message.show { display: block; }
-    .message.error { background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.20); color: var(--danger); }
-    .message.success { background: rgba(123,219,165,.08); border: 1px solid rgba(123,219,165,.20); color: var(--success); }
+.submit:hover { transform: translateY(-2px); }
 
-    .auth-note { margin-top: 14px; color: #666; text-align: center; font-size: 9px; line-height: 1.5; }
+.submit:disabled { opacity: .55; cursor: not-allowed; transform: none; }
 
-    .dashboard { display: none; }
-    .dashboard.show { display: block; }
-    .auth-view.hide { display: none; }
+.forgot {
 
-    .dashboard-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .dashboard-head .small { color: #777; font-size: 10px; }
-    .logout {
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 999px;
-      background: transparent;
-      color: #aaa;
-      padding: 9px 14px;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-    .logout:hover { color: #fff; border-color: rgba(255,255,255,.25); }
+display: block;
 
-    .coupon-card {
-      border: 1px solid rgba(123,219,165,.20);
-      background: rgba(123,219,165,.045);
-      border-radius: 20px;
-      padding: 20px;
-    }
-    .coupon-label {
-      color: #7f7f7f;
-      font-size: 9px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .coupon-code {
-      font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: clamp(34px, 8vw, 54px);
-      line-height: .95;
-      letter-spacing: .03em;
-      margin-bottom: 10px;
-    }
-    .coupon-copy { color: #7f7f7f; font-size: 11px; line-height: 1.5; max-width: 560px; }
+width: fit-content;
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .stat {
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      background: rgba(255,255,255,.025);
-      padding: 16px;
-    }
-    .stat strong {
-      display: block;
-      font-family: "Bricolage Grotesque", Arial, sans-serif;
-      font-size: 24px;
-      font-weight: 400;
-      letter-spacing: -.04em;
-      margin-bottom: 4px;
-    }
-    .stat span { color: #7f7f7f; font-size: 9px; line-height: 1.4; }
+margin: 13px auto 0;
 
-    .copy-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    .copy-input {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      min-width: 0;
-      min-height: 48px;
-      padding: 0 14px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px;
-      background: #0d0d0d;
-      color: #ddd;
-      font-family: monospace;
-      font-size: 13px;
-      letter-spacing: .06em;
-    }
-    .copy-btn {
-      flex: 0 0 auto;
-      min-width: 96px;
-      border: 0;
-      border-radius: 12px;
-      background: #fff;
-      color: #0a0a0a;
-      font-size: 10px;
-      font-weight: 600;
+border: 0;
+
+background: none;
+
+color: #777;
+
+font-size: 10px;
+
+text-decoration: underline;
+
+text-underline-offset: 3px;
+
     }
 
-    .loading { opacity: .7; pointer-events: none; }
+.message {
+
+display: none;
+
+margin-top: 14px;
+
+border-radius: 14px;
+
+padding: 12px 14px;
+
+font-size: 11px;
+
+line-height: 1.5;
+
+    }
+
+.message.show { display: block; }
+
+.message.error { background: rgba(255,107,107,.08); border: 1px solid rgba(255,107,107,.20); color: var(--danger); }
+
+.message.success { background: rgba(123,219,165,.08); border: 1px solid rgba(123,219,165,.20); color: var(--success); }
+
+.auth-note { margin-top: 14px; color: #666; text-align: center; font-size: 9px; line-height: 1.5; }
+
+.dashboard { display: none; }
+
+.dashboard.show { display: block; }
+
+.auth-view.hide { display: none; }
+
+.dashboard-head {
+
+display: flex;
+
+align-items: flex-end;
+
+justify-content: space-between;
+
+gap: 16px;
+
+margin-bottom: 16px;
+
+    }
+
+.dashboard-head .small { color: #777; font-size: 10px; }
+
+.logout {
+
+border: 1px solid rgba(255,255,255,.10);
+
+border-radius: 999px;
+
+background: transparent;
+
+color: #aaa;
+
+padding: 9px 14px;
+
+font-size: 9px;
+
+text-transform: uppercase;
+
+letter-spacing: .08em;
+
+    }
+
+.logout:hover { color: #fff; border-color: rgba(255,255,255,.25); }
+
+.coupon-card {
+
+border: 1px solid rgba(123,219,165,.20);
+
+background: rgba(123,219,165,.045);
+
+border-radius: 20px;
+
+padding: 20px;
+
+    }
+
+.coupon-label {
+
+color: #7f7f7f;
+
+font-size: 9px;
+
+letter-spacing: .12em;
+
+text-transform: uppercase;
+
+margin-bottom: 8px;
+
+    }
+
+.coupon-code {
+
+font-family: "Bricolage Grotesque", Arial, sans-serif;
+
+font-size: clamp(34px, 8vw, 54px);
+
+line-height: .95;
+
+letter-spacing: .03em;
+
+margin-bottom: 10px;
+
+    }
+
+.coupon-copy { color: #7f7f7f; font-size: 11px; line-height: 1.5; max-width: 560px; }
+
+.stats {
+
+display: grid;
+
+grid-template-columns: repeat(3, 1fr);
+
+gap: 10px;
+
+margin-top: 12px;
+
+    }
+
+.stat {
+
+border: 1px solid rgba(255,255,255,.08);
+
+border-radius: 16px;
+
+background: rgba(255,255,255,.025);
+
+padding: 16px;
+
+    }
+
+.stat strong {
+
+display: block;
+
+font-family: "Bricolage Grotesque", Arial, sans-serif;
+
+font-size: 24px;
+
+font-weight: 400;
+
+letter-spacing: -.04em;
+
+margin-bottom: 4px;
+
+    }
+
+.stat span { color: #7f7f7f; font-size: 9px; line-height: 1.4; }
+
+.copy-row {
+
+display: flex;
+
+gap: 8px;
+
+margin-top: 16px;
+
+    }
+
+.copy-input {
+
+flex: 1;
+
+display: flex;
+
+align-items: center;
+
+min-width: 0;
+
+min-height: 48px;
+
+padding: 0 14px;
+
+border: 1px solid rgba(255,255,255,.08);
+
+border-radius: 12px;
+
+background: #0d0d0d;
+
+color: #ddd;
+
+font-family: monospace;
+
+font-size: 13px;
+
+letter-spacing: .06em;
+
+    }
+
+.copy-btn {
+
+flex: 0 0 auto;
+
+min-width: 96px;
+
+border: 0;
+
+border-radius: 12px;
+
+background: #fff;
+
+color: #0a0a0a;
+
+font-size: 10px;
+
+font-weight: 600;
+
+    }
+
+.loading { opacity: .7; pointer-events: none; }
 
     @media (max-width: 620px) {
-      .nav { padding: 0 18px; }
-      .wrap { padding-top: 68px; }
-      .card { padding: 18px; }
-      .stats { grid-template-columns: 1fr; }
-      .dashboard-head { align-items: flex-start; flex-direction: column; }
-      .copy-row { flex-direction: column; }
-      .copy-btn { min-height: 46px; }
+
+.nav { padding: 0 18px; }
+
+.wrap { padding-top: 68px; }
+
+.card { padding: 18px; }
+
+.stats { grid-template-columns: 1fr; }
+
+.dashboard-head { align-items: flex-start; flex-direction: column; }
+
+.copy-row { flex-direction: column; }
+
+.copy-btn { min-height: 46px; }
+
     }
+
   </style>
+
 </head>
+
 <body>
+
   <nav class="nav">
+
     <div class="nav-left">
+
       <a href="index.html" aria-label="Vesira">
+
         <img src="img/logo2.png" class="logo" alt="Vesira">
+
       </a>
+
       <span class="eyewear">Eyewear</span>
+
     </div>
+
     <a href="index.html" class="nav-link">Volver a Vesira</a>
+
   </nav>
 
   <main class="wrap">
+
     <header class="hero">
+
       <div class="eyebrow" id="heroEyebrow">Programa de afiliados</div>
+
       <h1 id="heroTitle">Tu código. Tus ventas.</h1>
+
       <p id="heroText">Crea tu cuenta y recibe tu cupón único para compartir.</p>
+
     </header>
 
     <section id="authView" class="auth-view card">
+
       <h2 id="authTitle">Crear cuenta</h2>
-      <p id="authIntro" class="card-intro">Regístrate con tu email y contraseña para acceder a tu cuenta de afiliado.</p>
+
+      <p id="authIntro" class="card-intro">Regístrate con tu nombre, email y contraseña.</p>
 
       <div class="switcher" role="tablist" aria-label="Acceso">
+
         <button class="switch active" id="registerTab" type="button">Registrarme</button>
+
         <button class="switch" id="loginTab" type="button">Iniciar sesión</button>
+
       </div>
 
       <form id="authForm" novalidate>
+
         <div class="fields">
+
           <div class="field" id="nameField">
+
             <label for="nombre">Nombre</label>
+
             <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre">
+
           </div>
 
           <div class="field">
-            <label for="email">Email</label>
-            <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@email.com" required>
+
+            <label for="email" id="emailLabel">Email</label>
+
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@email.com" inputmode="email" spellcheck="false" required>
+
           </div>
 
           <div class="field">
+
             <label for="password">Contraseña</label>
+
             <div class="password-wrap">
+
               <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres" required minlength="6">
+
               <button class="toggle-password" id="togglePassword" type="button">Ver</button>
+
             </div>
+
           </div>
+
         </div>
 
         <button type="submit" class="submit" id="submitButton">Crear mi cuenta</button>
+
         <button type="button" class="forgot" id="forgotButton" hidden>¿Has olvidado tu contraseña?</button>
+
         <button type="button" class="forgot" id="resendVerificationButton" hidden>Reenviar correo de verificación</button>
 
+        <button type="button" class="forgot" id="checkVerificationButton" hidden>Ya he verificado mi email</button>
+
         <div id="authMessage" class="message" role="status" aria-live="polite"></div>
+
       </form>
-      <div class="auth-note">Tu cuenta se guarda de forma segura con Firebase Authentication.</div>
+
+      <div class="auth-note" id="authNote">Tu cuenta se protege con Firebase Authentication. Para acceder, tu email debe estar verificado.</div>
+
     </section>
 
     <section id="dashboard" class="dashboard">
+
       <div class="dashboard-head">
+
         <div>
+
           <div class="eyebrow">Cuenta de afiliado</div>
+
           <h2 id="welcomeName">Hola.</h2>
+
           <div class="small" id="accountEmail"></div>
+
         </div>
+
         <button class="logout" id="logoutButton" type="button">Cerrar sesión</button>
+
       </div>
 
       <section class="coupon-card">
+
         <div class="coupon-label">Tu cupón</div>
+
         <div class="coupon-code" id="couponCode">—</div>
+
         <div class="coupon-copy">Comparte este código con tus clientes. El descuento se aplica al usarlo en el checkout.</div>
 
         <div class="copy-row">
+
           <div class="copy-input" id="couponCodeSmall">—</div>
+
           <button class="copy-btn" id="copyButton" type="button">Copiar código</button>
+
         </div>
 
         <div class="stats">
+
           <div class="stat">
+
             <strong>5%</strong>
+
             <span>Descuento para tus clientes</span>
+
           </div>
+
           <div class="stat">
+
             <strong>10%</strong>
+
             <span>Comisión sobre el subtotal pagado</span>
+
           </div>
+
           <div class="stat">
+
             <strong>Único</strong>
+
             <span>Tu código queda vinculado a tu cuenta</span>
+
           </div>
+
         </div>
+
       </section>
+
     </section>
+
   </main>
 
   <script type="module">
@@ -437,7 +791,6 @@
       serverTimestamp
     } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-    // Configuración de Firebase · proyecto Vesira Users
     const firebaseConfig = {
       apiKey: "AIzaSyDScLJamSN8ljpvjQtNeELkiW-NvNyjs2Y",
       authDomain: "vesira-users.firebaseapp.com",
@@ -463,6 +816,7 @@
     const submitButton = document.getElementById("submitButton");
     const forgotButton = document.getElementById("forgotButton");
     const resendVerificationButton = document.getElementById("resendVerificationButton");
+    const checkVerificationButton = document.getElementById("checkVerificationButton");
     const authMessage = document.getElementById("authMessage");
     const heroEyebrow = document.getElementById("heroEyebrow");
     const heroTitle = document.getElementById("heroTitle");
@@ -470,6 +824,7 @@
     const nameField = document.getElementById("nameField");
     const nombreInput = document.getElementById("nombre");
     const emailInput = document.getElementById("email");
+    const emailLabel = document.getElementById("emailLabel");
     const passwordInput = document.getElementById("password");
     const registerTab = document.getElementById("registerTab");
     const loginTab = document.getElementById("loginTab");
@@ -482,56 +837,88 @@
     const copyButton = document.getElementById("copyButton");
 
     let mode = "register";
+    let authActionInProgress = false;
+    let pendingVerification = false;
+    let pendingVerificationEmail = "";
 
     function showMessage(text = "", type = "") {
       authMessage.textContent = text;
       authMessage.className = `message${text ? " show" : ""}${type ? ` ${type}` : ""}`;
     }
 
-    function setHero(state = "register", name = "") {
+    function setHero(state = "register") {
+      const hero = document.querySelector(".hero");
+      if (!hero) return;
+
       if (state === "dashboard") {
-        document.querySelector(".hero").classList.add("hide");
+        hero.classList.add("hide");
         return;
       }
 
-      document.querySelector(".hero").classList.remove("hide");
-
+      hero.classList.remove("hide");
       heroEyebrow.textContent = "Programa de afiliados";
-      heroTitle.textContent = state === "login" ? "Bienvenido de nuevo." : "Tu código. Tus ventas.";
-      heroText.textContent = state === "login"
-        ? "Inicia sesión con tu email y contraseña para ver tu cupón."
-        : "Crea tu cuenta y recibe tu cupón único para compartir.";
+      heroTitle.textContent =
+        state === "login" ? "Bienvenido de nuevo." : "Tu código. Tus ventas.";
+      heroText.textContent =
+        state === "login"
+          ? "Entra con tu usuario y contraseña para ver tu cupón."
+          : "Crea tu cuenta, confirma tu email y recibe tu cupón único.";
     }
 
     function setLoading(loading) {
       submitButton.disabled = loading;
       authView.classList.toggle("loading", loading);
-      submitButton.textContent = loading
-        ? (mode === "register" ? "Creando cuenta..." : "Entrando...")
-        : (mode === "register" ? "Crear mi cuenta" : "Iniciar sesión");
+
+      if (loading) {
+        submitButton.textContent =
+          mode === "register" ? "Creando cuenta..." : "Entrando...";
+      } else {
+        submitButton.textContent =
+          mode === "register" ? "Crear mi cuenta" : "Iniciar sesión";
+      }
     }
 
-    function setMode(nextMode) {
+    function setMode(nextMode, { clearMessage = true } = {}) {
       mode = nextMode;
+
       const isRegister = mode === "register";
       registerTab.classList.toggle("active", isRegister);
       loginTab.classList.toggle("active", !isRegister);
+
       nameField.hidden = !isRegister;
       nombreInput.required = isRegister;
+
       authTitle.textContent = isRegister ? "Crear cuenta" : "Iniciar sesión";
       authIntro.textContent = isRegister
-        ? "Regístrate con tu email y contraseña para acceder a tu cuenta de afiliado."
-        : "Accede a tu cuenta para ver tu cupón y tus condiciones.";
-      submitButton.textContent = isRegister ? "Crear mi cuenta" : "Iniciar sesión";
+        ? "Regístrate con tu nombre, email y contraseña."
+        : "Usa solo tu usuario (email) y contraseña.";
+
+      emailLabel.textContent = isRegister ? "Email" : "Usuario";
+      emailInput.placeholder = isRegister ? "tu@email.com" : "tu@email.com";
+      emailInput.autocomplete = "email";
+
+      submitButton.textContent =
+        isRegister ? "Crear mi cuenta" : "Iniciar sesión";
+
       forgotButton.hidden = isRegister;
-      resendVerificationButton.hidden = true;
-      passwordInput.autocomplete = isRegister ? "new-password" : "current-password";
+      if (!pendingVerification) {
+        resendVerificationButton.hidden = true;
+        checkVerificationButton.hidden = true;
+      }
+
+      passwordInput.autocomplete = isRegister
+        ? "new-password"
+        : "current-password";
+
       setHero(isRegister ? "register" : "login");
-      showMessage("");
+
+      if (clearMessage) {
+        showMessage("");
+      }
     }
 
     function normalizeName(value) {
-      return value
+      return String(value || "")
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .toUpperCase()
@@ -539,9 +926,13 @@
         .slice(0, 8);
     }
 
-    function buildCouponCode(user) {
-      const prefix = normalizeName(nombreInput.value || user.displayName || "VS") || "VS";
-      const uidPart = user.uid.replace(/[^a-z0-9]/gi, "").slice(0, 8).toUpperCase();
+    function buildCouponCode(user, name) {
+      const prefix = normalizeName(name || user.displayName || "VS") || "VS";
+      const uidPart = String(user.uid || "")
+        .replace(/[^a-z0-9]/gi, "")
+        .slice(0, 8)
+        .toUpperCase();
+
       return `VS-${prefix}-${uidPart}`.slice(0, 20);
     }
 
@@ -549,36 +940,55 @@
       const map = {
         "auth/email-already-in-use": "Ese email ya tiene una cuenta. Inicia sesión.",
         "auth/invalid-email": "Introduce un email válido.",
-        "auth/invalid-credential": "El email o la contraseña no son correctos.",
+        "auth/invalid-credential": "El usuario o la contraseña no son correctos.",
+        "auth/wrong-password": "El usuario o la contraseña no son correctos.",
+        "auth/user-not-found": "No existe una cuenta con ese usuario.",
         "auth/weak-password": "La contraseña debe tener al menos 6 caracteres.",
-        "auth/user-not-found": "No existe una cuenta con ese email.",
-        "auth/wrong-password": "La contraseña no es correcta.",
-        "auth/too-many-requests": "Demasiados intentos. Prueba de nuevo en unos minutos.",
-        "auth/network-request-failed": "No hay conexión. Comprueba tu internet y vuelve a intentarlo.",
+        "auth/too-many-requests": "Demasiados intentos. Espera unos minutos y vuelve a intentarlo.",
+        "auth/network-request-failed": "No hay conexión. Comprueba internet y vuelve a intentarlo.",
         "auth/invalid-action-code": "El enlace de verificación ya no es válido. Solicita otro correo.",
+        "auth/operation-not-allowed": "El acceso por email y contraseña no está habilitado en Firebase.",
+        "auth/unauthorized-domain": "Este dominio no está autorizado en Firebase Authentication.",
+        "auth/user-disabled": "Esta cuenta está deshabilitada.",
         "auth/requires-recent-login": "Vuelve a iniciar sesión y prueba de nuevo.",
-        "affiliate/not-registered": "Esta cuenta todavía no es de afiliado. Regístrate primero como afiliado."
+        "permission-denied": "No hay permisos para guardar o leer los datos del afiliado.",
+        "affiliate/not-registered": "La cuenta existe, pero todavía no tiene un perfil de afiliado."
       };
+
       return map[code] || "No se pudo completar la operación. Inténtalo de nuevo.";
     }
 
-    async function createAffiliate(user, requestedName = "") {
+    async function createAffiliate(user, requestedName) {
       const affiliateRef = doc(db, "affiliates", user.uid);
       const snapshot = await getDoc(affiliateRef);
 
       if (snapshot.exists()) {
-        return snapshot.data();
+        const existing = snapshot.data();
+        if (!existing.name && requestedName) {
+          const patched = {
+            ...existing,
+            name: requestedName,
+            email: user.email || existing.email || "",
+          };
+          await setDoc(affiliateRef, patched, { merge: true });
+          return patched;
+        }
+        return existing;
       }
 
-      const name = requestedName || user.displayName || "Afiliado";
-      const prefix = normalizeName(name) || "VS";
-      const uidPart = user.uid.replace(/[^a-z0-9]/gi, "").slice(0, 8).toUpperCase();
-      const code = `VS-${prefix}-${uidPart}`.slice(0, 20);
+      const name = String(requestedName || user.displayName || "").trim();
+
+      if (!name) {
+        const error = new Error("Falta el nombre del afiliado.");
+        error.code = "affiliate/missing-name";
+        throw error;
+      }
+
       const data = {
         uid: user.uid,
         name,
         email: user.email || "",
-        couponCode: code,
+        couponCode: buildCouponCode(user, name),
         discountPercent: DISCOUNT_PERCENT,
         commissionPercent: COMMISSION_PERCENT,
         active: true,
@@ -594,7 +1004,7 @@
       const snapshot = await getDoc(affiliateRef);
 
       if (!snapshot.exists()) {
-        const error = new Error("Esta cuenta todavía no está registrada como afiliado.");
+        const error = new Error("La cuenta existe, pero todavía no tiene un perfil de afiliado.");
         error.code = "affiliate/not-registered";
         throw error;
       }
@@ -602,10 +1012,25 @@
       return snapshot.data();
     }
 
+    function getUserName(user, affiliate) {
+      const stored = String(
+        affiliate?.name || user?.displayName || ""
+      ).trim();
+
+      if (stored) return stored;
+
+      const emailLocalPart = String(user?.email || "")
+        .split("@")[0]
+        .replace(/[._-]+/g, " ")
+        .trim();
+
+      return emailLocalPart || "Vesira";
+    }
+
     async function renderDashboard(user, affiliate = null) {
       const data = affiliate || await getAffiliate(user);
-      const name = data.name || user.displayName || "";
-      const code = data.couponCode || "—";
+      const name = getUserName(user, data);
+      const code = String(data.couponCode || "—");
 
       welcomeName.textContent = `Hola, ${name}.`;
       accountEmail.textContent = user.email || "";
@@ -614,11 +1039,81 @@
 
       authView.classList.add("hide");
       dashboard.classList.add("show");
-      setHero("dashboard", name);
+      pendingVerification = false;
+      pendingVerificationEmail = "";
+
+      setHero("dashboard");
     }
 
-    registerTab.addEventListener("click", () => setMode("register"));
-    loginTab.addEventListener("click", () => setMode("login"));
+    function showVerificationState(email = "") {
+      pendingVerification = true;
+      pendingVerificationEmail = String(email || "").trim();
+
+      setMode("login", { clearMessage: false });
+      resendVerificationButton.hidden = false;
+      checkVerificationButton.hidden = false;
+
+      showMessage(
+        "Tu email aún no está verificado. Revisa tu correo y confirma la cuenta antes de entrar.",
+        "error"
+      );
+    }
+
+    async function requireVerifiedUser(email, password) {
+      const cleanEmail = String(email || "").trim();
+      const cleanPassword = String(password || "");
+
+      if (!cleanEmail || !cleanPassword) {
+        showMessage(
+          "Introduce tu usuario y contraseña para comprobar la verificación.",
+          "error"
+        );
+        return false;
+      }
+
+      authActionInProgress = true;
+
+      try {
+        const credential = await signInWithEmailAndPassword(
+          auth,
+          cleanEmail,
+          cleanPassword
+        );
+
+        const user = credential.user;
+        await reload(user);
+
+        if (!user.emailVerified) {
+          await signOut(auth);
+          showVerificationState(cleanEmail);
+          return false;
+        }
+
+        pendingVerification = false;
+        pendingVerificationEmail = "";
+
+        const affiliate = await getAffiliate(user);
+        await renderDashboard(user, affiliate);
+        authForm.reset();
+        return true;
+      } catch (error) {
+        await signOut(auth).catch(() => {});
+        showMessage(humanAuthError(error.code), "error");
+        return false;
+      } finally {
+        authActionInProgress = false;
+      }
+    }
+
+    registerTab.addEventListener("click", () => {
+      pendingVerification = false;
+      pendingVerificationEmail = "";
+      setMode("register");
+    });
+
+    loginTab.addEventListener("click", () => {
+      setMode("login");
+    });
 
     togglePassword.addEventListener("click", () => {
       const hidden = passwordInput.type === "password";
@@ -628,50 +1123,108 @@
 
     forgotButton.addEventListener("click", async () => {
       const email = emailInput.value.trim();
+
       if (!email) {
-        showMessage("Escribe tu email para enviarte el enlace de recuperación.", "error");
+        showMessage(
+          "Escribe tu usuario (email) para enviarte el enlace de recuperación.",
+          "error"
+        );
+        emailInput.focus();
         return;
       }
 
       try {
+        forgotButton.disabled = true;
         await sendPasswordResetEmail(auth, email);
-        showMessage("Te hemos enviado un email para restablecer la contraseña.", "success");
+        showMessage(
+          "Te hemos enviado un email para restablecer la contraseña.",
+          "success"
+        );
       } catch (error) {
         showMessage(humanAuthError(error.code), "error");
+      } finally {
+        forgotButton.disabled = false;
       }
     });
 
     resendVerificationButton.addEventListener("click", async () => {
-      const email = emailInput.value.trim();
+      const email = emailInput.value.trim() || pendingVerificationEmail;
       const password = passwordInput.value;
 
       if (!email || !password) {
-        showMessage("Introduce tu email y contraseña para reenviar el correo de verificación.", "error");
+        showMessage(
+          "Introduce tu usuario y contraseña para reenviar el correo de verificación.",
+          "error"
+        );
         return;
       }
 
       try {
-        const credential = await signInWithEmailAndPassword(auth, email, password);
+        resendVerificationButton.disabled = true;
+
+        const credential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
         const user = credential.user;
         await reload(user);
 
         if (user.emailVerified) {
-          showMessage("Tu email ya está verificado. Inicia sesión normalmente.", "success");
           await signOut(auth);
+          pendingVerification = false;
+          pendingVerificationEmail = "";
           resendVerificationButton.hidden = true;
+          checkVerificationButton.hidden = true;
+          showMessage(
+            "Tu email ya está verificado. Ahora puedes iniciar sesión.",
+            "success"
+          );
           return;
         }
 
         await sendEmailVerification(user);
-        showMessage("Te hemos reenviado el correo de verificación.", "success");
         await signOut(auth);
+
+        pendingVerification = true;
+        pendingVerificationEmail = email;
+        checkVerificationButton.hidden = false;
+
+        showMessage(
+          "Te hemos enviado de nuevo el correo de verificación. Revisa también la carpeta de spam.",
+          "success"
+        );
       } catch (error) {
+        await signOut(auth).catch(() => {});
         showMessage(humanAuthError(error.code), "error");
+      } finally {
+        resendVerificationButton.disabled = false;
       }
+    });
+
+    checkVerificationButton.addEventListener("click", async () => {
+      const email = emailInput.value.trim() || pendingVerificationEmail;
+      const password = passwordInput.value;
+
+      if (!email || !password) {
+        showMessage(
+          "Introduce tu usuario y contraseña para comprobar la verificación.",
+          "error"
+        );
+        return;
+      }
+
+      checkVerificationButton.disabled = true;
+      await requireVerifiedUser(email, password);
+      checkVerificationButton.disabled = false;
     });
 
     authForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+
+      if (authActionInProgress) return;
+
       showMessage("");
 
       const name = nombreInput.value.trim();
@@ -683,46 +1236,76 @@
         nombreInput.focus();
         return;
       }
+
       if (!email || !password) {
-        showMessage("Completa email y contraseña.", "error");
+        showMessage(
+          mode === "register"
+            ? "Completa email y contraseña."
+            : "Completa usuario y contraseña.",
+          "error"
+        );
         return;
       }
+
       if (password.length < 6) {
         showMessage("La contraseña debe tener al menos 6 caracteres.", "error");
         return;
       }
 
+      authActionInProgress = true;
       setLoading(true);
+
       try {
-        let user;
-
         if (mode === "register") {
-          const credential = await createUserWithEmailAndPassword(auth, email, password);
-          user = credential.user;
-          await updateProfile(user, { displayName: name });
+          const credential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
 
-          await createAffiliate(user, name);
+          const user = credential.user;
+
+          await updateProfile(user, {
+            displayName: name
+          });
+
+          const affiliate = await createAffiliate(user, name);
+
           await sendEmailVerification(user);
+
           await signOut(auth);
 
+          pendingVerification = true;
+          pendingVerificationEmail = email;
+
           authForm.reset();
-          setMode("login");
+          setMode("login", { clearMessage: false });
+
+          emailInput.value = email;
+          passwordInput.value = "";
+          resendVerificationButton.hidden = false;
+          checkVerificationButton.hidden = false;
+
           showMessage(
-            "Cuenta creada. Te hemos enviado un correo de verificación. Confirma tu email y después inicia sesión.",
+            `Cuenta creada correctamente, ${name}. Te hemos enviado un correo de verificación. Confirma tu email y después inicia sesión.`,
             "success"
           );
         } else {
-          const credential = await signInWithEmailAndPassword(auth, email, password);
-          user = credential.user;
+          pendingVerification = false;
+          pendingVerificationEmail = "";
+
+          const credential = await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+          const user = credential.user;
           await reload(user);
 
           if (!user.emailVerified) {
-            resendVerificationButton.hidden = false;
-            showMessage(
-              "Tu email todavía no está verificado. Revisa tu correo y confirma la cuenta antes de entrar.",
-              "error"
-            );
             await signOut(auth);
+            showVerificationState(email);
             return;
           }
 
@@ -732,56 +1315,98 @@
         }
       } catch (error) {
         console.error("Affiliate auth error:", error);
-        showMessage(humanAuthError(error.code), "error");
+
+        if (mode === "register" && error?.code === "auth/too-many-requests") {
+          showMessage(
+            "Firebase ha limitado temporalmente los intentos. Espera unos minutos y vuelve a intentarlo.",
+            "error"
+          );
+        } else {
+          showMessage(humanAuthError(error.code), "error");
+        }
+
+        await signOut(auth).catch(() => {});
       } finally {
+        authActionInProgress = false;
         setLoading(false);
       }
     });
 
     logoutButton.addEventListener("click", async () => {
-      await signOut(auth);
+      await signOut(auth).catch(() => {});
+
+      pendingVerification = false;
+      pendingVerificationEmail = "";
+
       dashboard.classList.remove("show");
       authView.classList.remove("hide");
+      authForm.reset();
       setMode("login");
     });
 
     copyButton.addEventListener("click", async () => {
       const code = couponCode.textContent.trim();
+
       if (!code || code === "—") return;
+
       try {
         await navigator.clipboard.writeText(code);
         copyButton.textContent = "Copiado";
-        setTimeout(() => (copyButton.textContent = "Copiar código"), 1500);
+        setTimeout(() => {
+          copyButton.textContent = "Copiar código";
+        }, 1500);
       } catch {
-        showMessage("No se pudo copiar automáticamente. Selecciona el código y cópialo.", "error");
+        showMessage(
+          "No se pudo copiar automáticamente. Selecciona el código y cópialo.",
+          "error"
+        );
       }
     });
 
     onAuthStateChanged(auth, async (user) => {
+      if (authActionInProgress) return;
+
       if (!user) {
         dashboard.classList.remove("show");
         authView.classList.remove("hide");
-        setMode("login");
+
+        if (pendingVerification) {
+          setMode("login", { clearMessage: false });
+          if (pendingVerificationEmail) {
+            emailInput.value = pendingVerificationEmail;
+          }
+          resendVerificationButton.hidden = false;
+          checkVerificationButton.hidden = false;
+          return;
+        }
+
+        setMode("login", {
+          clearMessage: !authMessage.classList.contains("show")
+        });
         return;
       }
 
       try {
         await reload(user);
+
         if (!user.emailVerified) {
-          dashboard.classList.remove("show");
-          authView.classList.remove("hide");
-          setMode("login");
-          resendVerificationButton.hidden = false;
-          showMessage("Confirma tu email desde el correo que te hemos enviado antes de entrar.", "error");
+          await signOut(auth);
+          showVerificationState(user.email || "");
           return;
         }
 
-        await renderDashboard(user);
+        const affiliate = await getAffiliate(user);
+        await renderDashboard(user, affiliate);
       } catch (error) {
         console.error("Affiliate dashboard error:", error);
+        await signOut(auth).catch(() => {});
         showMessage(humanAuthError(error.code), "error");
       }
     });
+
+    setMode("register");
   </script>
+
 </body>
+
 </html>

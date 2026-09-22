@@ -667,6 +667,14 @@
             Contacto
           </a>
 
+          <a
+            class="vesira-menu-link"
+            href="afiliados.html"
+            title="Programa afiliados"
+          >
+            Programa afiliados
+          </a>
+
         </nav>
 
       </aside>
