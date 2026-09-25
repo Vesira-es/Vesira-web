@@ -20,7 +20,11 @@
 
 
 
-<!-- Stripe.js debe cargarse directamente desde Stripe -->
+
+
+
+
+*<!-- Stripe.js debe cargarse directamente desde Stripe -->*
 
   <script src="https://js.stripe.com/v3/"></script>
 
@@ -712,6 +716,10 @@ width: 100%;
 
 
 
+
+
+
+
 .divider {
 
 display: flex;
@@ -1145,6 +1153,8 @@ max-width: 60%;
       }
 
     }
+
+
 
 
 
@@ -1590,6 +1600,10 @@ letter-spacing:-.04em;
 
 
 
+
+
+
+
   <div class="page">
 
     <div class="container">
@@ -1604,7 +1618,7 @@ letter-spacing:-.04em;
 
         <div class="layout">
 
-<!-- COLUMNA DE PAGO -->
+*<!-- COLUMNA DE PAGO -->*
 
           <main>
 
@@ -1662,7 +1676,7 @@ disabled
 
           </main>
 
-<!-- RESUMEN -->
+*<!-- RESUMEN -->*
 
           <aside class="summary">
 
@@ -1685,30 +1699,102 @@ disabled
               <div class="total-box">
 
                 <div
-                  class="affiliate-payment-row"
-                  id="affiliate-payment-row"
-                  style="display:none;"
+
+class="affiliate-payment-row"
+
+id="affiliate-payment-row"
+
+style="display:none;"
+
                 >
+
                   <span
-                    class="affiliate-payment-label"
-                    id="affiliate-payment-label"
+
+class="affiliate-payment-label"
+
+id="affiliate-payment-label"
+
                   >
+
                     Código descuento aplicado
+
                   </span>
 
                   <strong
-                    id="affiliate-payment-discount"
-                    class="affiliate-payment-discount"
+
+id="affiliate-payment-discount"
+
+class="affiliate-payment-discount"
+
                   >
+
                     -0,00 €
+
                   </strong>
+
                 </div>
 
                 <div class="total-row">
 
                   <span class="total-label">Total</span>
 
-                  <strong id="total-price" class="total-value">0,00 €</strong>
+                  <strong id="total-price" class="total-value"></strong>
+
+              <script>
+                // Inicializa el total antes de que el resto del checkout termine de cargar,
+                // evitando el parpadeo inicial de "0,00 €".
+                (() => {
+                  const totalElement = document.getElementById("total-price");
+                  if (!totalElement) return;
+
+                  const money = (value) =>
+                    new Intl.NumberFormat("es-ES", {
+                      style: "currency",
+                      currency: "EUR"
+                    }).format(Number(value) || 0);
+
+                  try {
+                    const checkout = JSON.parse(
+                      localStorage.getItem("vesiraCheckout") || "null"
+                    );
+                    const storedCart = JSON.parse(
+                      localStorage.getItem("vesiraCarrito") || "[]"
+                    );
+                    const items = Array.isArray(storedCart) ? storedCart : [];
+
+                    const storedTotal = Number(checkout?.subtotalPagado);
+
+                    if (Number.isFinite(storedTotal) && storedTotal >= 0) {
+                      totalElement.textContent = money(storedTotal);
+                      return;
+                    }
+
+                    const subtotal = items.reduce((sum, item) => {
+                      const price = Number(item?.precio ?? item?.price ?? 0);
+                      const quantity = Number(item?.cantidad ?? item?.quantity ?? 1);
+                      return sum + (price * quantity);
+                    }, 0);
+
+                    const storedDiscount = Number(checkout?.descuento);
+                    const percent = Number(
+                      checkout?.afiliado?.descuentoPorcentaje || 0
+                    );
+
+                    const discount =
+                      Number.isFinite(storedDiscount) && storedDiscount >= 0
+                        ? storedDiscount
+                        : percent > 0
+                          ? Math.min(subtotal, subtotal * percent / 100)
+                          : 0;
+
+                    totalElement.textContent = money(
+                      Math.max(0, subtotal - discount)
+                    );
+                  } catch {
+                    // El flujo normal de inicialización actualizará el total.
+                  }
+                })();
+              </script>
 
                 </div>
 
@@ -1722,7 +1808,7 @@ disabled
 
       </div>
 
-<!-- ESTADO DE ÉXITO -->
+*<!-- ESTADO DE ÉXITO -->*
 
       <section id="success-view" class="card success-page">
 
@@ -1754,13 +1840,13 @@ disabled
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      CONFIGURACIÓN
+      *CONFIGURACIÓN*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     const STRIPE_PUBLISHABLE_KEY = "pk_live_51UDtwY1OfdcxS98rJb2cdPhIwfEafeCT97a13f4qlJugVdNvVFtmu1GIdclfNJgZuHa0EGkXRuP00jX2HqgiJ5pX00f7FxB9OQ";
 
@@ -1768,9 +1854,9 @@ disabled
 
       Ejemplo:
 
-      https://TU-PROYECTO.supabase.co/functions/v1/crear-checkout
+      *https://TU-PROYECTO.supabase.co/functions/v1/crear-checkout*
 
-    */
+    **/
 
     const SUPABASE_FUNCTION_URL =
 
@@ -1778,13 +1864,13 @@ disabled
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
       ESTADO
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     let stripe = null;
 
@@ -1803,20 +1889,24 @@ disabled
     let paymentIntentId = null;
 
     let affiliatePaymentPricing = {
+
       subtotalOriginal: null,
+
       descuento: null,
+
       total: null
+
     };
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
       UTILIDADES
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     function formatPrice(value) {
 
@@ -1950,23 +2040,28 @@ console.error("Error leyendo vesiraCarrito:", error);
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      CARGAR DATOS DEL CLIENTE
+      *CARGAR DATOS DEL CLIENTE*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     function getAffiliateCode() {
 
       const code =
+
         checkoutData?.codigoAfiliado ||
+
         checkoutData?.afiliado?.codigo ||
+
         "";
 
       return String(code || "")
+
         .trim()
+
         .replace(/\s+/g, "");
 
     }
@@ -1974,29 +2069,43 @@ console.error("Error leyendo vesiraCarrito:", error);
     function getStoredAffiliateDiscount() {
 
       const storedDiscount = Number(
+
         checkoutData?.descuento
+
       );
 
       if (
-        Number.isFinite(storedDiscount) &&
+
+Number.isFinite(storedDiscount) &&
+
         storedDiscount >= 0
+
       ) {
+
         return storedDiscount;
+
       }
 
       const percent = Number(
+
         checkoutData?.afiliado?.descuentoPorcentaje || 0
+
       );
 
       if (!Number.isFinite(percent) || percent <= 0) {
+
         return 0;
+
       }
 
       const subtotal = calculateLocalCartTotal();
 
       return Math.min(
+
         subtotal,
+
         subtotal * percent / 100
+
       );
 
     }
@@ -2004,14 +2113,21 @@ console.error("Error leyendo vesiraCarrito:", error);
     function getAffiliateDiscountAmount() {
 
       const serverDiscount = Number(
+
         affiliatePaymentPricing?.descuento
+
       );
 
       if (
-        Number.isFinite(serverDiscount) &&
+
+Number.isFinite(serverDiscount) &&
+
         serverDiscount >= 0
+
       ) {
+
         return serverDiscount;
+
       }
 
       return getStoredAffiliateDiscount();
@@ -2020,32 +2136,48 @@ console.error("Error leyendo vesiraCarrito:", error);
 
     function getPayableTotal() {
 
-      const serverTotal = Number(
-        affiliatePaymentPricing?.total
-      );
+      const serverTotal =
+        affiliatePaymentPricing?.total != null
+          ? Number(affiliatePaymentPricing.total)
+          : NaN;
 
       if (
+
         Number.isFinite(serverTotal) &&
+
         serverTotal >= 0
+
       ) {
+
         return serverTotal;
+
       }
 
-      const storedTotal = Number(
-        checkoutData?.subtotalPagado
-      );
+      const storedTotal =
+        checkoutData?.subtotalPagado != null
+          ? Number(checkoutData.subtotalPagado)
+          : NaN;
 
       if (
+
         Number.isFinite(storedTotal) &&
+
         storedTotal >= 0
+
       ) {
+
         return storedTotal;
+
       }
 
       return Math.max(
+
         0,
+
         calculateLocalCartTotal() -
+
           getAffiliateDiscountAmount()
+
       );
 
     }
@@ -2053,28 +2185,41 @@ console.error("Error leyendo vesiraCarrito:", error);
     function renderAffiliatePaymentSummary() {
 
       const row =
-        document.getElementById(
+
+document.getElementById(
+
           "affiliate-payment-row"
+
         );
 
       const label =
-        document.getElementById(
+
+document.getElementById(
+
           "affiliate-payment-label"
+
         );
 
       const amount =
-        document.getElementById(
+
+document.getElementById(
+
           "affiliate-payment-discount"
+
         );
 
       const total =
-        document.getElementById("total-price");
+
+document.getElementById("total-price");
 
       if (!row || !label || !amount || !total) {
+
         return;
+
       }
 
       const code = getAffiliateCode();
+
       const discount = getAffiliateDiscountAmount();
 
       if (code && discount > 0) {
@@ -2082,15 +2227,21 @@ console.error("Error leyendo vesiraCarrito:", error);
         row.style.display = "flex";
 
         const percent = Number(
+
           checkoutData?.afiliado?.descuentoPorcentaje || 0
+
         );
 
         label.textContent =
+
           percent > 0
+
             ? `Código descuento aplicado · ${percent}%`
+
             : "Código descuento aplicado";
 
         amount.textContent =
+
           `-${formatPrice(discount)}`;
 
       } else {
@@ -2100,6 +2251,7 @@ console.error("Error leyendo vesiraCarrito:", error);
       }
 
       total.textContent =
+
         formatPrice(getPayableTotal());
 
     }
@@ -2202,13 +2354,13 @@ console.error("Error leyendo vesiraCarrito:", error);
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      CARRITO / RESUMEN
+      *CARRITO / RESUMEN*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     function calculateLocalCartTotal() {
 
@@ -2360,13 +2512,13 @@ item.image ??
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      CREAR PAYMENT INTENT
+      *CREAR PAYMENT INTENT*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     async function createPaymentIntent() {
 
@@ -2441,7 +2593,9 @@ item.image ??
         if (response.status === 401) {
 
           throw new Error(
+
             "La función de pago no está autorizando la petición. Revisa la configuración de crear-checkout en Supabase."
+
           );
 
         }
@@ -2466,27 +2620,36 @@ item.image ??
 
       }
 
-      /*
+/*
 
         IMPORTANTE:
-        El importe que Stripe va a cobrar lo decide crear-checkout
-        en el servidor. No usamos el descuento del navegador como
-        fuente de verdad para el cobro.
 
-      */
+        *El importe que Stripe va a cobrar lo decide crear-checkout*
+
+        *en el servidor. No usamos el descuento del navegador como*
+
+        *fuente de verdad para el cobro.*
+
+      **/
 
       if (affiliateCode) {
 
         const serverDiscount = Number(data?.descuento);
+
         const serverTotal = Number(data?.subtotalPagado ?? data?.total);
 
         if (
+
           !Number.isFinite(serverDiscount) ||
+
           !Number.isFinite(serverTotal)
+
         ) {
 
           throw new Error(
+
             "El servidor no devolvió el importe final con el descuento aplicado."
+
           );
 
         }
@@ -2500,27 +2663,45 @@ item.image ??
       affiliatePaymentPricing = {
 
         subtotalOriginal:
+
           data?.subtotalOriginal ??
+
           checkoutData?.subtotalOriginal ??
+
           calculateLocalCartTotal(),
 
         descuento:
+
           data?.descuento ??
+
           checkoutData?.descuento ??
+
           0,
 
         total:
+
           data?.subtotalPagado ??
+
           data?.total ??
+
           checkoutData?.subtotalPagado ??
-          Math.max(
+
+Math.max(
+
             0,
+
             calculateLocalCartTotal() -
-              Number(
+
+Number(
+
                 data?.descuento ??
+
                 checkoutData?.descuento ??
+
                 0
+
               )
+
           )
 
       };
@@ -2531,13 +2712,13 @@ item.image ??
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      STRIPE / ELEMENTS
+      *STRIPE / ELEMENTS*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     async function initStripe() {
 
@@ -2567,13 +2748,13 @@ item.image ??
 
 /*
 
-        Aunque el importe real lo decide el servidor,
+        *Aunque el importe real lo decide el servidor,*
 
-        Elements necesita amount/currency para representar
+        *Elements necesita amount/currency para representar*
 
-        correctamente Apple Pay / Google Pay.
+        *correctamente Apple Pay / Google Pay.*
 
-      */
+      **/
 
       elements = stripe.elements({
 
@@ -2629,13 +2810,13 @@ item.image ??
 
 /*
 
-        ========================================================
+        *========================================================*
 
-        EXPRESS CHECKOUT
+        *EXPRESS CHECKOUT*
 
-        ========================================================
+        *========================================================*
 
-      */
+      **/
 
       const expressOptions = {
 
@@ -2711,13 +2892,13 @@ expressCheckoutElement.on(
 
 /*
 
-        ========================================================
+        *========================================================*
 
         CARD
 
-        ========================================================
+        *========================================================*
 
-      */
+      **/
 
       cardElement = elements.create("card", {
 
@@ -2795,13 +2976,13 @@ document.getElementById(
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      WALLET PAYMENT
+      *WALLET PAYMENT*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     async function handleWalletPayment(event) {
 
@@ -2817,11 +2998,11 @@ document.getElementById(
 
 /*
 
-          Stripe recomienda ejecutar elements.submit()
+          *Stripe recomienda ejecutar elements.submit()*
 
-          antes de confirmar el pago.
+          *antes de confirmar el pago.*
 
-        */
+        **/
 
         const { error: submitError } =
 
@@ -2843,11 +3024,11 @@ document.getElementById(
 
 /*
 
-          Confirmamos el PaymentIntent ya creado por
+          *Confirmamos el PaymentIntent ya creado por*
 
-          la Edge Function.
+          *la Edge Function.*
 
-        */
+        **/
 
         const { error } =
 
@@ -2903,13 +3084,13 @@ console.error(
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      PAGO CON TARJETA
+      *PAGO CON TARJETA*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     async function handleCardPayment() {
 
@@ -3031,11 +3212,11 @@ JSON.stringify({
 
 /*
 
-          Stripe puede devolver aquí un PaymentIntent
+          *Stripe puede devolver aquí un PaymentIntent*
 
-          confirmado directamente o requerir una acción.
+          *confirmado directamente o requerir una acción.*
 
-        */
+        **/
 
         const paymentIntent =
 
@@ -3081,13 +3262,13 @@ JSON.stringify({
 
 /*
 
-            En la práctica confirmCardPayment()
+            *En la práctica confirmCardPayment()*
 
-            gestiona automáticamente la acción
+            *gestiona automáticamente la acción*
 
-            cuando es necesaria.
+            *cuando es necesaria.*
 
-          */
+          **/
 
           return;
 
@@ -3127,13 +3308,13 @@ console.error(
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      PAÍS
+      *PAÍS*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     function getCountryCode(country) {
 
@@ -3193,13 +3374,13 @@ country || ""
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      ÉXITO
+      *ÉXITO*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     function handlePaymentSuccess(paymentIntent) {
 
@@ -3279,23 +3460,23 @@ document.getElementById(
 
 /*
 
-      ==========================================================
+      *==========================================================*
 
-      INICIALIZACIÓN
+      *INICIALIZACIÓN*
 
-      ==========================================================
+      *==========================================================*
 
-    */
+    **/
 
     async function init() {
 
 /*
 
-        Si Stripe nos ha devuelto después de
+        *Si Stripe nos ha devuelto después de*
 
-        una autenticación 3DS, mostramos éxito.
+        *una autenticación 3DS, mostramos éxito.*
 
-      */
+      **/
 
       if (checkReturnState()) {
 
