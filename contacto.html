@@ -1,6 +1,5 @@
-```html
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -68,6 +67,7 @@
     }
 
     /* HERO */
+
     .contact-hero {
       padding: 33px 7vw 10px;
       display: flex;
@@ -76,7 +76,7 @@
     }
 
     h1 {
-      font-family: "Bricolage Grotesque", "Arial Black", "Bricolage Grotesque", sans-serif;
+      font-family: "Bricolage Grotesque", "Arial Black", sans-serif;
       font-size: clamp(52px, 7vw, 94px);
       font-weight: 900;
       line-height: 0.84;
@@ -86,6 +86,7 @@
     }
 
     /* FORMULARIO */
+
     .contact-wrap {
       width: 100%;
       display: flex;
@@ -187,6 +188,7 @@
     }
 
     /* MARQUEE */
+
     .marquee-vesira {
       width: 100%;
       overflow: hidden;
@@ -228,6 +230,7 @@
     }
 
     /* TOAST */
+
     .toast {
       position: fixed;
       left: 50%;
@@ -286,6 +289,7 @@
         width: 115px;
         height: 48px;
       }
+
     }
 
   </style>
@@ -338,6 +342,7 @@
 
           </div>
 
+
           <div class="field">
 
             <label for="subject">Asunto</label>
@@ -351,6 +356,7 @@
             >
 
           </div>
+
 
           <div class="field">
 
@@ -368,7 +374,11 @@
 
           <div class="submit-row">
 
-            <button class="submit" type="submit" id="submitButton">
+            <button
+              class="submit"
+              type="submit"
+              id="submitButton"
+            >
               Enviar mensaje
             </button>
 
@@ -386,6 +396,7 @@
 
     </section>
 
+
     <section class="marquee-vesira">
 
       <div class="marquee-vesira-track">
@@ -394,19 +405,24 @@
 
           <img src="img/logo2.png" alt="Vesira">
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
           <img src="img/logo15.png" alt="">
 
         </div>
 
+
         <div class="marquee-vesira-group">
 
           <img src="img/logo2.png" alt="Vesira">
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
           <img src="img/logo15.png" alt="">
+
           <img src="img/logo2.png" alt="Vesira">
           <img src="img/logo15.png" alt="">
 
@@ -418,87 +434,92 @@
 
   </main>
 
+
   <div class="toast" id="toast">Menú</div>
 
+
   <script>
+
+    /* ============================
+       TOAST
+       ============================ */
 
     const toast = document.getElementById("toast");
 
     function mostrarToast(mensaje) {
 
       toast.textContent = mensaje;
+
       toast.classList.add("visible");
 
       clearTimeout(window._vesiraToast);
 
       window._vesiraToast = setTimeout(() => {
+
         toast.classList.remove("visible");
+
       }, 1600);
 
     }
+
+
+    /* ============================
+       FORMULARIO
+       ============================ */
 
     const contactForm = document.getElementById("contactForm");
     const submitButton = document.getElementById("submitButton");
     const statusElement = document.getElementById("status");
 
+
+    /* URL DE GOOGLE APPS SCRIPT */
+
+    const SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbwV2h4j-lU_BAZUB8uQ90nDQSFdvZ2EV1Sfjz2KAHS2HL9MOHIPMO3QTGdy_egoCyIF_A/exec";
+
+
+    /* ENVÍO DEL FORMULARIO */
+
     contactForm.addEventListener("submit", async (e) => {
 
       e.preventDefault();
 
+
       const formData = new FormData(contactForm);
+
 
       submitButton.disabled = true;
       submitButton.textContent = "Enviando…";
       statusElement.textContent = "";
 
+
       try {
 
-        const contactForm = document.getElementById("contactForm");
-const submitButton = document.getElementById("submitButton");
-const statusElement = document.getElementById("status");
+        await fetch(SCRIPT_URL, {
 
-const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbwV2h4j-lU_BAZUB8uQ90nDQSFdvZ2EV1Sfjz2KAHS2HL9MOHIPMO3QTGdy_egoCyIF_A/exec";
+          method: "POST",
 
-contactForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
+          mode: "no-cors",
 
-  const formData = new FormData(contactForm);
+          body: new URLSearchParams(formData)
 
-  submitButton.disabled = true;
-  submitButton.textContent = "Enviando…";
-  statusElement.textContent = "";
+        });
 
-  try {
-    await fetch(SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      body: new URLSearchParams(formData)
-    });
-
-    contactForm.reset();
-
-    statusElement.textContent =
-      "Mensaje enviado correctamente.";
-
-  } catch (error) {
-    console.error("Error al enviar el formulario:", error);
-
-    statusElement.textContent =
-      "No se pudo enviar. Inténtalo de nuevo.";
-
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "Enviar mensaje";
-  }
-});
 
         contactForm.reset();
-        statusElement.textContent = "Mensaje enviado correctamente.";
+
+
+        statusElement.textContent =
+          "Mensaje enviado correctamente.";
+
 
       } catch (error) {
 
-        console.error("Error al enviar el formulario:", error);
+        console.error(
+          "Error al enviar el formulario:",
+          error
+        );
+
 
         statusElement.textContent =
           "No se pudo enviar. Inténtalo de nuevo.";
@@ -506,7 +527,9 @@ contactForm.addEventListener("submit", async (e) => {
       } finally {
 
         submitButton.disabled = false;
-        submitButton.textContent = "Enviar mensaje";
+
+        submitButton.textContent =
+          "Enviar mensaje";
 
       }
 
@@ -514,7 +537,9 @@ contactForm.addEventListener("submit", async (e) => {
 
   </script>
 
+
   <!-- Navbar global de VESIRA -->
+
   <script src="vesira-navbar.js"></script>
 
 </body>
