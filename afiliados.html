@@ -3,421 +3,267 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0a0a">
-  <title>Afiliados · Vesira</title>
+  <meta name="theme-color" content="#08090b">
+  <meta name="description" content="Área de afiliados Vesira">
+  <title>Cuenta de afiliado · Vesira</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#0a0a0a;
-      --panel:#111;
-      --panel2:#0d0d0d;
-      --text:#f5f5f5;
-      --muted:#8d8d8d;
-      --muted2:#666;
-      --border:rgba(255,255,255,.10);
-      --border2:rgba(255,255,255,.16);
-      --success:#7bdba5;
-      --danger:#ff9c9c;
-      --shadow:0 28px 90px rgba(0,0,0,.38);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{min-height:100%;background:var(--bg)}
-    body{
-      color:var(--text);
-      font-family:"Outfit",Arial,sans-serif;
-      -webkit-font-smoothing:antialiased;
-      overflow-x:hidden;
-      background:
-        radial-gradient(850px 520px at 7% -8%,rgba(255,255,255,.055),transparent 58%),
-        radial-gradient(760px 520px at 100% 100%,rgba(255,255,255,.025),transparent 60%),
-        var(--bg);
-    }
-    button,input{font:inherit}
-    button{cursor:pointer}
-    a{color:inherit;text-decoration:none}
-
-    /* ==========================================================
-       NAVBAR VESIRA — MISMA ESTRUCTURA VISUAL DEL ARCHIVO DE REFERENCIA
-       ========================================================== */
-    #vesiraNavbar{display:contents}
-    .vesira-global-nav{
-      position:fixed;top:0;left:0;width:100%;height:74px;z-index:4000;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 30px;background:rgba(10,10,10,.78);
-      border-bottom:1px solid rgba(255,255,255,.08);
-      backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-      color:#fff;box-sizing:border-box;
-    }
-    .vesira-nav-left{display:flex;align-items:center;gap:12px;min-width:0}
-    .vesira-logo-link{display:flex;align-items:center;min-width:0;text-decoration:none}
-    .vesira-logo{width:108px;height:auto;display:block}
-    .vesira-nav-eyewear{
-      color:#8d8d8d;font-size:9px;line-height:1;letter-spacing:.18em;
-      white-space:nowrap;font-family:"Outfit",Arial,sans-serif
-    }
-    .vesira-navbar-actions{display:flex;align-items:center;gap:3px}
-    .vesira-nav-button{
-      position:relative;width:40px;height:40px;padding:0;border:0;border-radius:50%;
-      background:transparent;color:#fff;display:flex;align-items:center;justify-content:center;
-      cursor:pointer;transition:background .2s ease,transform .2s ease
-    }
-    .vesira-nav-button:hover{background:#151515;transform:translateY(-1px)}
-    .vesira-nav-button .material-symbols-outlined,.vesira-menu-close .material-symbols-outlined{
-      font-family:'Material Symbols Outlined';font-weight:normal;font-style:normal;font-size:21px;
-      line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;
-      white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:'liga';
-      -webkit-font-smoothing:antialiased;font-feature-settings:'liga';
-      font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
-    }
-    .vesira-cart-count{
-      position:absolute;top:1px;right:-2px;min-width:17px;height:17px;padding:0 4px;
-      display:none;align-items:center;justify-content:center;border-radius:999px;
-      background:#fff;color:#0a0a0a;font-family:"Outfit",Arial,sans-serif;font-size:8px;font-weight:700;
-      line-height:17px;letter-spacing:0;box-shadow:0 3px 12px rgba(0,0,0,.28);pointer-events:none
-    }
-    .vesira-cart-count.bump{animation:vesiraCartBump .34s ease}
-    @keyframes vesiraCartBump{0%{transform:scale(1)}35%{transform:scale(1.32)}65%{transform:scale(.94)}100%{transform:scale(1)}}
-    .vesira-menu-backdrop{
-      position:fixed;inset:0;z-index:4100;background:rgba(0,0,0,.48);opacity:0;visibility:hidden;
-      pointer-events:none;transition:opacity .28s ease,visibility .28s ease
-    }
-    .vesira-menu-backdrop.open{opacity:1;visibility:visible;pointer-events:auto}
-    .vesira-menu-drawer{
-      position:fixed;top:0;right:0;width:min(360px,84vw);height:100dvh;z-index:4200;
-      padding:112px 34px 36px;background:#111;border-left:1px solid rgba(255,255,255,.10);
-      box-shadow:-24px 0 70px rgba(0,0,0,.34);transform:translateX(100%);
-      transition:transform .46s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-sizing:border-box
-    }
-    .vesira-menu-drawer.open{transform:translateX(0)}
-    .vesira-menu-close{
-      position:absolute;top:20px;right:20px;width:40px;height:40px;padding:0;border:0;
-      border-radius:50%;background:transparent;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer
-    }
-    .vesira-menu-close:hover{background:#191919}
-    .vesira-menu-close .material-symbols-outlined{font-size:22px}
-    .vesira-menu-links{display:flex;flex-direction:column;align-items:center;gap:15px;margin-top:8px}
-    .vesira-menu-link{
-      color:#fff;font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:clamp(30px,3vw,42px);
-      font-weight:400;line-height:.86;letter-spacing:-.045em;text-decoration:none;padding:2px 0;
-      transition:transform .25s ease,opacity .25s ease
-    }
-    .vesira-menu-link:hover{transform:translateX(8px);opacity:.68}
-
-    /* ==========================================================
-       PAGE
-       ========================================================== */
-    .page{width:min(1080px,calc(100% - 28px));margin:0 auto;padding:128px 0 80px}
-    .intro{max-width:760px;margin:0 auto 24px;text-align:center}
-    .eyebrow{color:#777;font-size:9px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:12px}
-    h1{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:clamp(46px,6vw,76px);font-weight:400;line-height:.9;letter-spacing:-.075em}
-    .intro p{max-width:560px;margin:14px auto 0;color:var(--muted);font-size:12px;line-height:1.6}
-
-    .shell{
-      width:min(920px,100%);margin:0 auto;display:grid;grid-template-columns:minmax(0,.92fr) minmax(390px,1.08fr);
-      border:1px solid var(--border);border-radius:26px;background:rgba(16,16,16,.95);box-shadow:var(--shadow);overflow:hidden
-    }
-    .side{padding:34px;background:linear-gradient(145deg,#151515,#0f0f0f);border-right:1px solid var(--border)}
-    .side h2{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:34px;font-weight:400;letter-spacing:-.055em;line-height:.95;margin-bottom:12px}
-    .side-copy{color:#828282;font-size:11px;line-height:1.6;max-width:300px;margin-bottom:30px}
-    .steps{display:grid;gap:15px}
-    .step{display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start}
-    .step-num{width:30px;height:30px;border:1px solid rgba(255,255,255,.13);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#9b9b9b;font-size:9px}
-    .step strong{display:block;font-size:11px;font-weight:600;margin-bottom:4px}
-    .step span{display:block;color:#707070;font-size:9.5px;line-height:1.5}
-    .side-note{margin-top:28px;padding-top:18px;border-top:1px solid var(--border);color:#626262;font-size:9px;line-height:1.55}
-
-    .panel{padding:30px;background:#101010}
-    .tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:#0c0c0c;margin-bottom:24px}
-    .tab{min-height:42px;border:0;border-radius:10px;background:transparent;color:#777;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
-    .tab.active{background:#fff;color:#0a0a0a}
-    .panel-head{margin-bottom:18px}
-    .panel-head h2{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:31px;font-weight:400;letter-spacing:-.055em;line-height:1;margin-bottom:7px}
-    .panel-head p{color:#747474;font-size:10px;line-height:1.55}
-    .fields{display:grid;gap:13px}
-    .field{display:grid;gap:7px}
-    label{color:#858585;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
-    .input-wrap{position:relative}
-    input{
-      width:100%;height:50px;padding:0 14px;border:1px solid rgba(255,255,255,.10);border-radius:13px;
-      background:#0c0c0c;color:#fff;outline:none;font-size:16px;transition:border-color .2s ease,background .2s ease
-    }
-    input:focus{border-color:rgba(255,255,255,.28);background:#101010}
-    .input-wrap input{padding-right:58px}
-    .eye-btn{
-      position:absolute;right:6px;top:50%;transform:translateY(-50%);width:42px;height:38px;border:0;border-radius:10px;
-      background:rgba(255,255,255,.045);color:#8e8e8e;font-size:9px
-    }
-    .helper{color:#606060;font-size:9px;line-height:1.45;margin-top:1px}
-    .submit{
-      width:100%;min-height:52px;margin-top:17px;border:0;border-radius:999px;background:#fff;color:#0a0a0a;
-      font-size:10px;font-weight:700;transition:transform .2s ease,opacity .2s ease
-    }
-    .submit:hover{transform:translateY(-2px)}
-    .submit:disabled{opacity:.55;cursor:not-allowed;transform:none}
-    .link-btn{display:block;width:max-content;margin:12px auto 0;border:0;background:transparent;color:#777;font-size:9.5px;text-decoration:underline;text-underline-offset:4px}
-    .link-btn:hover{color:#fff}
-    .message{display:none;margin-top:14px;padding:12px 14px;border-radius:13px;font-size:10px;line-height:1.5}
-    .message.show{display:block}
-    .message.error{background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.20);color:var(--danger)}
-    .message.success{background:rgba(123,219,165,.08);border:1px solid rgba(123,219,165,.20);color:var(--success)}
-    .message.neutral{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#aaa}
-    .form-foot{margin-top:15px;color:#626262;text-align:center;font-size:8.5px;line-height:1.5}
-
-    .state{display:none}
-    .state.show{display:block}
-    .verify-card{padding:18px 0 0;text-align:center}
-    .verify-icon{width:64px;height:64px;border-radius:22px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.11);background:#151515;color:#fff}
-    .verify-icon .material-symbols-outlined{font-size:30px}
-    .verify-card h2{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:36px;font-weight:400;letter-spacing:-.055em;margin-bottom:8px}
-    .verify-card p{max-width:420px;margin:0 auto;color:#777;font-size:10.5px;line-height:1.6}
-    .verify-email{display:inline-block;margin:10px auto 0;padding:8px 12px;border:1px solid rgba(255,255,255,.09);border-radius:999px;background:#0c0c0c;color:#ddd;font-size:10px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .verify-actions{display:grid;gap:8px;margin-top:20px}
-    .verify-actions .secondary{min-height:46px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:#151515;color:#fff;font-size:10px}
-    .verify-actions .secondary:hover{background:#1b1b1b}
-    .verify-hint{margin-top:14px;color:#5f5f5f;font-size:8.5px;line-height:1.55}
-    .cooldown{margin-top:8px;color:#707070;font-size:9px;min-height:14px}
-
-    .dashboard-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:18px}
-    .welcome h2{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:42px;font-weight:400;letter-spacing:-.06em;line-height:.9;margin-bottom:7px}
-    .welcome p{color:#737373;font-size:9.5px}
-    .logout{border:1px solid rgba(255,255,255,.10);border-radius:999px;background:transparent;color:#aaa;padding:9px 14px;font-size:9px;text-transform:uppercase;letter-spacing:.08em}
-    .logout:hover{color:#fff;border-color:rgba(255,255,255,.25)}
-    .coupon-card{border:1px solid rgba(123,219,165,.20);background:rgba(123,219,165,.045);border-radius:22px;padding:22px}
-    .coupon-label{color:#7f7f7f;font-size:9px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-    .coupon-code{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:clamp(34px,7vw,56px);line-height:.94;letter-spacing:.03em;margin-bottom:10px;overflow-wrap:anywhere}
-    .coupon-copy{color:#7f7f7f;font-size:10px;line-height:1.5}
-    .copy-row{display:flex;gap:8px;margin-top:16px}
-    .copy-input{flex:1;display:flex;align-items:center;min-width:0;min-height:48px;padding:0 14px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:#0d0d0d;color:#ddd;font-family:monospace;font-size:13px;letter-spacing:.06em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .copy-btn{min-width:108px;border:0;border-radius:12px;background:#fff;color:#0a0a0a;font-size:10px;font-weight:600}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-    .stat{border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.025);padding:15px}
-    .stat strong{display:block;font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:24px;font-weight:400;letter-spacing:-.04em;margin-bottom:4px}
-    .stat span{color:#7f7f7f;font-size:9px;line-height:1.4}
-
-    @media(max-width:850px){
-      .page{padding-top:110px}
-      .shell{grid-template-columns:1fr}
-      .side{border-right:0;border-bottom:1px solid var(--border);padding:24px}
-      .panel{padding:24px}
-      .side h2{font-size:30px}
-    }
-    @media(max-width:600px){
-      .vesira-global-nav{height:68px;padding:0 18px}
-      .vesira-logo{width:94px}
-      .vesira-nav-left{gap:9px}
-      .vesira-nav-eyewear{font-size:8px}
-      .vesira-nav-button{width:35px;height:35px}
-      .vesira-cart-count{top:-1px;right:-3px;min-width:16px;height:16px;font-size:7.5px;line-height:16px}
-      .vesira-menu-drawer{width:min(235px,52vw);padding:100px 24px 30px}
-      .vesira-menu-link{font-size:28px}
-      .page{width:calc(100% - 22px);padding:95px 0 40px}
-      .intro{text-align:left;margin-bottom:18px}
-      h1{font-size:49px}
-      .intro p{font-size:11px}
-      .shell{border-radius:20px}
-      .side{padding:20px}
-      .side-copy{margin-bottom:21px}
-      .panel{padding:18px}
-      .tabs{margin-bottom:20px}
-      .panel-head h2{font-size:29px}
-      .stats{grid-template-columns:1fr}
-      .copy-row{flex-direction:column}
-      .copy-btn{min-height:46px}
-      .dashboard-head{align-items:flex-start;flex-direction:column}
-    }
-    @media(max-width:380px){
-      .vesira-logo{width:90px}
-      .vesira-nav-eyewear{font-size:7px;letter-spacing:.13em}
-      .page{width:calc(100% - 18px)}
-      h1{font-size:44px}
-    }
-  </style>
+:root{
+  --bg:#000;
+  --panel:#0a0a0a;
+  --panel2:#111;
+  --text:#fff;
+  --muted:#777;
+  --line:#262626;
+  --danger:#fff;
+  --success:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:var(--bg)}
+body{color:var(--text);font-family:"Outfit",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:#000}
+button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+.global-nav{position:fixed;inset:0 0 auto;height:70px;z-index:4000;display:flex;align-items:center;justify-content:space-between;padding:0 26px;background:#000;border-bottom:1px solid #1a1a1a}
+.nav-left,.nav-actions{display:flex;align-items:center}.nav-left{gap:10px}.nav-actions{gap:4px}.logo{width:98px;height:auto;display:block}.nav-eyewear{font-size:8px;letter-spacing:.18em;color:#666}
+.nav-button,.menu-close{width:38px;height:38px;border:0;border-radius:50%;background:transparent;color:#fff;display:flex;align-items:center;justify-content:center}.nav-button:hover,.menu-close:hover{background:#151515}
+.material-symbols-outlined{font-family:'Material Symbols Outlined';font-weight:400;font-style:normal;font-size:21px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;direction:ltr;-webkit-font-smoothing:antialiased;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}
+.cart-count{position:absolute;top:4px;right:20px;min-width:16px;height:16px;padding:0 4px;display:none;align-items:center;justify-content:center;border-radius:999px;background:#fff;color:#000;font-size:8px;font-weight:700;pointer-events:none}
+.menu-backdrop{position:fixed;inset:0;z-index:4100;background:rgba(0,0,0,.65);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease}.menu-backdrop.open{opacity:1;visibility:visible;pointer-events:auto}
+.menu-drawer{position:fixed;top:0;right:0;width:min(300px,84vw);height:100dvh;z-index:4200;padding:100px 28px 30px;background:#050505;border-left:1px solid #1e1e1e;transform:translateX(100%);transition:transform .3s ease}.menu-drawer.open{transform:translateX(0)}
+.menu-close{position:absolute;top:18px;right:18px}.menu-links{display:flex;flex-direction:column;gap:18px}.menu-link{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:32px;letter-spacing:-.04em}.menu-link:hover{opacity:.65}
+.page{width:min(520px,calc(100% - 28px));margin:0 auto;padding:106px 0 54px}.intro{text-align:center;margin-bottom:20px}.eyebrow,.panel-kicker{color:#676767;font-size:8px;letter-spacing:.18em;text-transform:uppercase}.intro h1{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:42px;font-weight:400;letter-spacing:-.07em;line-height:.95}.intro-copy,.benefits,.trust-line{display:none}
+.auth-card,.dashboard-card{border:1px solid var(--line);border-radius:22px;background:var(--panel);box-shadow:0 24px 70px rgba(0,0,0,.42)}.auth-card{padding:22px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:3px;border:1px solid var(--line);border-radius:13px;background:#050505;margin-bottom:22px}.tab{min-height:40px;border:0;border-radius:9px;background:transparent;color:#686868;font-size:10px;font-weight:600}.tab.active{background:#fff;color:#000}
+.panel-head{margin-bottom:18px}.panel-kicker{margin-bottom:7px}.panel-head h2{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:31px;font-weight:400;letter-spacing:-.055em;line-height:1}.panel-head p{color:#727272;font-size:10px;line-height:1.5;margin-top:7px}
+.fields{display:grid;gap:12px}.field{display:grid;gap:7px}.field label{color:#868686;font-size:8px;letter-spacing:.12em;text-transform:uppercase}.input-wrap{position:relative}.field input{width:100%;height:50px;padding:0 13px;border:1px solid var(--line);border-radius:12px;background:#050505;color:#fff;outline:none;font-size:15px;transition:border-color .2s ease,background .2s ease}.field input:focus{border-color:#fff;background:#0a0a0a}.input-wrap input{padding-right:72px}.eye-btn{position:absolute;right:6px;top:50%;transform:translateY(-50%);min-width:58px;height:36px;border:0;border-radius:9px;background:#111;color:#aaa;font-size:8px}.eye-btn:hover{color:#fff}
+.password-meter{display:none}.password-hint{display:none}.submit{width:100%;min-height:50px;margin-top:16px;border:1px solid #fff;border-radius:12px;background:#fff;color:#000;font-size:10px;font-weight:700}.submit:hover{background:#e9e9e9}.submit:disabled{opacity:.55;cursor:not-allowed}.link-btn{display:block;width:max-content;margin:12px auto 0;border:0;background:transparent;color:#777;font-size:9px;text-decoration:underline;text-underline-offset:4px}.link-btn:hover{color:#fff}.form-foot{display:none}
+.message{display:none;margin-top:12px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#080808;color:#ddd;font-size:9px;line-height:1.5}.message.show{display:block}.message.error,.message.success,.message.neutral{background:#080808;border-color:#333;color:#fff}
+.state{display:none}.state.show{display:block}
+.verify{text-align:center;padding:14px 2px 2px}.verify-icon{width:52px;height:52px;margin:0 auto 14px;border:1px solid #2b2b2b;border-radius:16px;background:#050505;display:flex;align-items:center;justify-content:center}.verify-icon .material-symbols-outlined{font-size:25px}.verify h2,.dashboard h2{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:32px;font-weight:400;letter-spacing:-.055em;margin-bottom:8px}.verify p{max-width:360px;margin:0 auto;color:#737373;font-size:10px;line-height:1.5}.verify-email{display:inline-block;margin:10px auto 0;padding:8px 11px;border:1px solid #222;border-radius:999px;background:#050505;color:#ddd;font-size:9px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.verify-actions{display:grid;gap:8px;margin-top:18px}.secondary{min-height:46px;border:1px solid #2a2a2a;border-radius:11px;background:#0b0b0b;color:#fff;font-size:10px}.secondary:hover{background:#121212}.cooldown{margin-top:8px;color:#666;font-size:8.5px;min-height:13px}.verify-tip{display:flex;align-items:center;justify-content:center;gap:6px;margin:10px auto 0;color:#666;font-size:8px}.verify-tip .material-symbols-outlined{font-size:13px}.dashboard{width:100%;margin:20px auto 0}.dashboard-card{padding:22px}.dashboard-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}.welcome h2{margin-bottom:5px}.welcome p{color:#727272;font-size:9px}.logout{border:1px solid #292929;border-radius:999px;background:transparent;color:#aaa;padding:9px 13px;font-size:8px;text-transform:uppercase;letter-spacing:.08em}.logout:hover{color:#fff;border-color:#fff}.dashboard-grid{display:block}.coupon-card{border:1px solid #292929;border-radius:16px;background:#050505;padding:20px}.coupon-label{color:#777;font-size:8px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}.coupon-code{font-family:"Bricolage Grotesque",Arial,sans-serif;font-size:clamp(32px,8vw,54px);line-height:.94;letter-spacing:.03em;margin-bottom:10px;overflow-wrap:anywhere}.coupon-copy,.dashboard-note,.mini-copy,.side-stack{display:none}.copy-row{display:flex;gap:8px;margin-top:15px}.copy-value{flex:1;min-width:0;min-height:46px;display:flex;align-items:center;padding:0 12px;border:1px solid #242424;border-radius:11px;background:#090909;color:#ddd;font-family:monospace;font-size:12px;letter-spacing:.04em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.copy-btn{min-width:106px;border:0;border-radius:11px;background:#fff;color:#000;font-size:9px;font-weight:700}.copy-btn:hover{background:#e9e9e9}
+@media(max-width:600px){.global-nav{height:64px;padding:0 16px}.logo{width:90px}.cart-count{right:10px}.page{width:calc(100% - 20px);padding:88px 0 36px}.intro{margin-bottom:14px}.intro h1{font-size:38px}.auth-card,.dashboard-card{padding:16px;border-radius:18px}.dashboard-head{align-items:flex-start;flex-direction:column}.copy-row{flex-direction:column}.copy-btn{min-height:46px}.menu-drawer{width:min(260px,80vw)}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
+
 <body>
   <div id="vesiraNavbar">
-    <nav class="vesira-global-nav" id="vesiraGlobalNav" aria-label="Navegación principal">
-      <div class="vesira-nav-left">
-        <a class="vesira-logo-link" href="index.html" aria-label="Ir al inicio">
-          <img src="img/logo2.png" class="vesira-logo" alt="Vesira">
+    <nav class="global-nav" id="vesiraGlobalNav" aria-label="Navegación principal">
+      <div class="nav-left">
+        <a href="index.html" aria-label="Ir al inicio">
+          <img src="img/logo2.png" class="logo" alt="Vesira">
         </a>
-        <span class="vesira-nav-eyewear">EYEWEAR</span>
+        <span class="nav-eyewear">EYEWEAR</span>
       </div>
-      <div class="vesira-navbar-actions">
-        <button class="vesira-nav-button" id="vesiraOpenCart" type="button" aria-label="Carrito" title="Carrito">
+
+      <div class="nav-actions">
+        <button class="nav-button" id="vesiraOpenCart" type="button" aria-label="Carrito" title="Carrito">
           <span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span>
-          <span class="vesira-cart-count" id="vesiraCartCount" aria-hidden="true">0</span>
+          <span class="cart-count" id="vesiraCartCount" aria-hidden="true">0</span>
         </button>
-        <button class="vesira-nav-button" id="vesiraOpenMenu" type="button" aria-label="Abrir menú" title="Menú">
+        <button class="nav-button" id="vesiraOpenMenu" type="button" aria-label="Abrir menú" title="Menú">
           <span class="material-symbols-outlined" aria-hidden="true">menu</span>
         </button>
       </div>
     </nav>
-    <div class="vesira-menu-backdrop" id="vesiraMenuBackdrop"></div>
-    <aside class="vesira-menu-drawer" id="vesiraMenuDrawer" aria-hidden="true">
-      <button class="vesira-menu-close" id="vesiraCloseMenu" type="button" aria-label="Cerrar menú" title="Cerrar">
-        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+
+    <div class="menu-backdrop" id="vesiraMenuBackdrop"></div>
+    <aside class="menu-drawer" id="vesiraMenuDrawer" aria-hidden="true">
+      <button class="menu-close" id="vesiraCloseMenu" type="button" aria-label="Cerrar menú">
+        <span class="material-symbols-outlined">close</span>
       </button>
-      <nav class="vesira-menu-links" aria-label="Menú">
-        <a class="vesira-menu-link" href="index.html">Inicio</a>
-        <a class="vesira-menu-link" href="carrito.html">Carrito</a>
-        <a class="vesira-menu-link" href="contacto.html">Contacto</a>
+      <nav class="menu-links" aria-label="Menú">
+        <a class="menu-link" href="index.html">Inicio</a>
+        <a class="menu-link" href="contacto.html">Contacto</a>
       </nav>
     </aside>
   </div>
 
   <main class="page">
     <header class="intro">
-      <div class="eyebrow">Programa de afiliados</div>
-      <h1 id="pageTitle">Vende con Vesira.</h1>
-      <p id="pageIntro">Crea tu cuenta, confirma tu email y consigue tu código personal para compartir con tus clientes.</p>
+      <div class="eyebrow">Área de afiliados</div>
+      <h1>Cuenta Vesira</h1>
     </header>
 
-    <section class="shell" id="authShell">
-      <aside class="side">
-        <div class="eyebrow">Cómo funciona</div>
-        <h2>Simple.<br>Claro.<br>Sin líos.</h2>
-        <p class="side-copy">Tu cuenta de afiliado queda vinculada a un código único. El cliente lo introduce en el checkout y el descuento se aplica automáticamente.</p>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">01</div>
-            <div><strong>Crea tu cuenta</strong><span>Nombre, email y una contraseña.</span></div>
-          </div>
-          <div class="step">
-            <div class="step-num">02</div>
-            <div><strong>Confirma tu email</strong><span>Te enviamos un correo para comprobar que el email es tuyo.</span></div>
-          </div>
-          <div class="step">
-            <div class="step-num">03</div>
-            <div><strong>Accede a tu panel</strong><span>Verás tu código, descuento y comisión.</span></div>
-          </div>
-        </div>
-        <div class="side-note">Nunca compartas tu contraseña. Vesira no te pedirá tu contraseña por correo.</div>
-      </aside>
+    <section class="auth-card" id="authShell" aria-label="Acceso de afiliados">
+      <div class="tabs" role="tablist" aria-label="Acceso">
+        <button class="tab active" id="loginTab" type="button" role="tab" aria-selected="true">Iniciar sesión</button>
+        <button class="tab" id="registerTab" type="button" role="tab" aria-selected="false">Crear cuenta</button>
+      </div>
 
-      <section class="panel">
-        <div class="tabs" role="tablist" aria-label="Acceso de afiliados">
-          <button class="tab active" id="loginTab" type="button" role="tab" aria-selected="true">Entrar</button>
-          <button class="tab" id="registerTab" type="button" role="tab" aria-selected="false">Crear cuenta</button>
+      <div class="state show" id="authState">
+        <div class="panel-head">
+          <div class="panel-kicker" id="authKicker">Acceso</div>
+          <h2 id="authTitle">Iniciar sesión</h2>
+          <p id="authIntro">Accede con tu correo y contraseña.</p>
         </div>
 
-        <div class="state show" id="authState">
-          <div class="panel-head">
-            <h2 id="authTitle">Bienvenido de nuevo.</h2>
-            <p id="authIntro">Entra con tu email y contraseña para acceder a tu cuenta.</p>
-          </div>
-
-          <form id="authForm" novalidate>
-            <div class="fields">
-              <div class="field" id="nameField" hidden>
-                <label for="nombre">Nombre</label>
-                <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" maxlength="80">
-              </div>
-
-              <div class="field">
-                <label for="email">Usuario / email</label>
-                <input id="email" name="email" type="email" autocomplete="username email" placeholder="tu@email.com" required inputmode="email">
-                <div class="helper">Usa el mismo email con el que creaste tu cuenta.</div>
-              </div>
-
-              <div class="field">
-                <label for="password">Contraseña</label>
-                <div class="input-wrap">
-                  <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Tu contraseña" required minlength="6">
-                  <button class="eye-btn" id="togglePassword" type="button" aria-label="Mostrar contraseña">Ver</button>
-                </div>
-              </div>
-
-              <div class="field" id="confirmPasswordField" hidden>
-                <label for="confirmPassword">Repetir contraseña</label>
-                <div class="input-wrap">
-                  <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Repite tu contraseña" minlength="6">
-                  <button class="eye-btn" id="toggleConfirmPassword" type="button" aria-label="Mostrar contraseña">Ver</button>
-                </div>
-              </div>
+        <form id="authForm" novalidate>
+          <div class="fields">
+            <div class="field" id="nameField" hidden>
+              <label for="nombre">Nombre de usuario</label>
+              <input id="nombre" type="text" autocomplete="nickname" placeholder="Nombre de usuario" maxlength="40">
             </div>
 
-            <button type="submit" class="submit" id="submitButton">Iniciar sesión</button>
-            <button type="button" class="link-btn" id="forgotButton">He olvidado mi contraseña</button>
-            <div id="authMessage" class="message" role="status" aria-live="polite"></div>
-          </form>
-
-          <div class="form-foot" id="authFoot">Al continuar aceptas usar este acceso exclusivamente para tu cuenta de afiliado.</div>
-        </div>
-
-        <div class="state" id="verifyState">
-          <div class="verify-card">
-            <div class="verify-icon"><span class="material-symbols-outlined">mark_email_unread</span></div>
-            <h2>Confirma tu email.</h2>
-            <p>Hemos enviado un correo de confirmación. Abre el mensaje y pulsa el enlace para activar tu cuenta.</p>
-            <div class="verify-email" id="verifyEmail">—</div>
-            <div class="verify-actions">
-              <button class="submit" id="checkVerificationButton" type="button">Ya he verificado mi email</button>
-              <button class="secondary" id="resendVerificationButton" type="button">Reenviar correo</button>
-              <button class="secondary" id="backToLoginButton" type="button">Volver a iniciar sesión</button>
+            <div class="field">
+              <label for="email">Correo</label>
+              <input id="email" type="email" autocomplete="username email" placeholder="tu@email.com" required inputmode="email">
             </div>
-            <div class="cooldown" id="resendCooldown"></div>
-            <div class="verify-hint">No lo ves todavía: revisa Spam, Promociones o Correo no deseado. El botón de reenvío tiene un pequeño límite para evitar bloqueos.</div>
-            <div id="verifyMessage" class="message" role="status" aria-live="polite"></div>
+
+            <div class="field">
+              <label for="password">Contraseña</label>
+              <div class="input-wrap">
+                <input id="password" type="password" autocomplete="current-password" placeholder="Contraseña" required minlength="6">
+                <button class="eye-btn" id="togglePassword" type="button">Mostrar</button>
+              </div>
+              <div class="password-meter" id="passwordMeter" data-level="0" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+              <div class="password-hint" id="passwordHint">Mínimo 6 caracteres.</div>
+            </div>
+
+            <div class="field" id="confirmPasswordField" hidden>
+              <label for="confirmPassword">Repetir contraseña</label>
+              <div class="input-wrap">
+                <input id="confirmPassword" type="password" autocomplete="new-password" placeholder="Repite la contraseña" minlength="6">
+                <button class="eye-btn" id="toggleConfirmPassword" type="button">Mostrar</button>
+              </div>
+            </div>
           </div>
+
+          <button type="submit" class="submit" id="submitButton">Iniciar sesión</button>
+          <button type="button" class="link-btn" id="forgotButton">He olvidado mi contraseña</button>
+          <div id="authMessage" class="message" role="status" aria-live="polite"></div>
+          <p class="form-foot" id="formFoot">Cuenta de afiliado Vesira.</p>
+        </form>
+      </div>
+
+      <div class="state" id="verifyState">
+        <div class="verify">
+          <div class="verify-icon"><span class="material-symbols-outlined">mail</span></div>
+          <h2>Verifica tu correo</h2>
+          <p id="verifyDescription">Enviaremos un correo de verificación a esta dirección.</p>
+          <div class="verify-email" id="verifyEmail">—</div>
+
+          <div class="verify-actions">
+            <button class="submit" id="checkVerificationButton" type="button">Comprobar verificación</button>
+            <button class="secondary" id="resendVerificationButton" type="button">Reenviar correo</button>
+            <button class="secondary" id="backToLoginButton" type="button">Volver</button>
+          </div>
+
+          <div class="cooldown" id="resendCooldown"></div>
+          <div class="verify-tip"><span class="material-symbols-outlined">info</span><span>También revisa Spam.</span></div>
+          <div id="verifyMessage" class="message" role="status" aria-live="polite"></div>
         </div>
-      </section>
+      </div>
     </section>
 
-    <section class="state" id="dashboardState" style="margin-top:24px">
-      <div class="shell" style="display:block">
-        <div class="panel" style="padding:30px">
-          <div class="dashboard-head">
-            <div class="welcome">
-              <div class="eyebrow">Cuenta de afiliado</div>
-              <h2 id="welcomeName">Hola.</h2>
-              <p id="accountEmail">—</p>
-            </div>
-            <button class="logout" id="logoutButton" type="button">Cerrar sesión</button>
+    <section class="dashboard state" id="dashboardState">
+      <div class="dashboard-card">
+        <div class="dashboard-head">
+          <div class="welcome">
+            <div class="eyebrow">Cuenta</div>
+            <h2 id="welcomeName">Hola.</h2>
+            <p id="accountEmail">—</p>
           </div>
-          <section class="coupon-card">
-            <div class="coupon-label">Tu código</div>
-            <div class="coupon-code" id="couponCode">—</div>
-            <div class="coupon-copy">Comparte este código con tus clientes. El descuento se aplica cuando lo introducen en el checkout de Vesira.</div>
-            <div class="copy-row">
-              <div class="copy-input" id="couponCodeSmall">—</div>
-              <button class="copy-btn" id="copyButton" type="button">Copiar código</button>
-            </div>
-            <div class="stats">
-              <div class="stat"><strong id="discountValue">5%</strong><span>Descuento para tus clientes</span></div>
-              <div class="stat"><strong id="commissionValue">10%</strong><span>Comisión sobre el subtotal pagado</span></div>
-              <div class="stat"><strong>Único</strong><span>Tu código queda vinculado a tu cuenta</span></div>
-            </div>
-          </section>
-          <div id="dashboardMessage" class="message" role="status" aria-live="polite"></div>
+          <button class="logout" id="logoutButton" type="button">Cerrar sesión</button>
+        </div>
+
+        <section class="coupon-card">
+          <div class="coupon-label">Código de afiliado</div>
+          <div class="coupon-code" id="couponCode">—</div>
+          <div class="copy-row">
+            <div class="copy-value" id="couponCodeSmall">—</div>
+            <button class="copy-btn" id="copyButton" type="button">Copiar</button>
+          </div>
+        </section>
+
+        <div id="dashboardMessage" class="message" role="status" aria-live="polite"></div>
+
+        <div hidden>
+          <span id="discountValue">—</span>
+          <span id="commissionValue">—</span>
         </div>
       </div>
     </section>
   </main>
 
-  <script id="vesiraNavbarEmbeddedScript">
+  <script>
     (() => {
       "use strict";
+
       const CART_ID = "vesiraOpenCart";
       const CART_COUNT_ID = "vesiraCartCount";
       const MENU_ID = "vesiraOpenMenu";
       const DRAWER_ID = "vesiraMenuDrawer";
       const BACKDROP_ID = "vesiraMenuBackdrop";
       const CLOSE_ID = "vesiraCloseMenu";
-      function getCart(){try{const cart=JSON.parse(localStorage.getItem("vesiraCarrito")||"[]");return Array.isArray(cart)?cart:[]}catch{return[]}}
-      function getCartUnits(){return getCart().reduce((sum,item)=>sum+Math.max(0,Number(item?.cantidad||0)),0)}
-      function updateBadge(){const badge=document.getElementById(CART_COUNT_ID);if(!badge)return;const total=getCartUnits();if(total<=0){badge.style.display="none";badge.textContent="0";return}badge.textContent=total>99?"99+":String(total);badge.style.display="flex"}
-      function bumpBadge(){const badge=document.getElementById(CART_COUNT_ID);if(!badge)return;badge.classList.remove("bump");void badge.offsetWidth;badge.classList.add("bump")}
-      function openMenu(){const drawer=document.getElementById(DRAWER_ID),backdrop=document.getElementById(BACKDROP_ID);if(!drawer||!backdrop)return;drawer.classList.add("open");backdrop.classList.add("open");drawer.setAttribute("aria-hidden","false");document.body.style.overflow="hidden"}
-      function closeMenu(){const drawer=document.getElementById(DRAWER_ID),backdrop=document.getElementById(BACKDROP_ID);if(!drawer||!backdrop)return;drawer.classList.remove("open");backdrop.classList.remove("open");drawer.setAttribute("aria-hidden","true");document.body.style.overflow=""}
-      document.getElementById(CART_ID)?.addEventListener("click",()=>{window.location.href="carrito.html"});
-      document.getElementById(MENU_ID)?.addEventListener("click",openMenu);
-      document.getElementById(CLOSE_ID)?.addEventListener("click",closeMenu);
-      document.getElementById(BACKDROP_ID)?.addEventListener("click",closeMenu);
-      document.addEventListener("keydown",event=>{if(event.key==="Escape")closeMenu()});
-      window.addEventListener("storage",()=>updateBadge());
-      window.addEventListener("vesira:cart-updated",()=>{updateBadge();bumpBadge()});
+
+      function getCart() {
+        try {
+          const cart = JSON.parse(localStorage.getItem("vesiraCarrito") || "[]");
+          return Array.isArray(cart) ? cart : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function getCartUnits() {
+        return getCart().reduce((sum, item) => sum + Math.max(0, Number(item?.cantidad || 0)), 0);
+      }
+
+      function updateBadge() {
+        const badge = document.getElementById(CART_COUNT_ID);
+        if (!badge) return;
+
+        const total = getCartUnits();
+        if (total <= 0) {
+          badge.style.display = "none";
+          badge.textContent = "0";
+          return;
+        }
+
+        badge.textContent = total > 99 ? "99+" : String(total);
+        badge.style.display = "flex";
+      }
+
+      function openMenu() {
+        const drawer = document.getElementById(DRAWER_ID);
+        const backdrop = document.getElementById(BACKDROP_ID);
+        if (!drawer || !backdrop) return;
+
+        drawer.classList.add("open");
+        backdrop.classList.add("open");
+        drawer.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        const drawer = document.getElementById(DRAWER_ID);
+        const backdrop = document.getElementById(BACKDROP_ID);
+        if (!drawer || !backdrop) return;
+
+        drawer.classList.remove("open");
+        backdrop.classList.remove("open");
+        drawer.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+      }
+
+      document.getElementById(CART_ID)?.addEventListener("click", () => {
+        window.location.href = "carrito.html";
+      });
+
+      document.getElementById(MENU_ID)?.addEventListener("click", openMenu);
+      document.getElementById(CLOSE_ID)?.addEventListener("click", closeMenu);
+      document.getElementById(BACKDROP_ID)?.addEventListener("click", closeMenu);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMenu();
+      });
+
+      window.addEventListener("storage", updateBadge);
+      window.addEventListener("vesira:cart-updated", updateBadge);
       updateBadge();
     })();
   </script>
@@ -433,8 +279,7 @@
       sendEmailVerification,
       signOut,
       updateProfile,
-      reload,
-      applyActionCode
+      reload
     } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
     import {
       getFirestore,
@@ -445,7 +290,7 @@
     } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyDScLJamSN8ljpvjQtNeELkiW-NvNyjs2Y",
+      apiKey: "AIzaSyDScLJamSN8ljpvjQtNeELkiW-NvNyjs2",
       authDomain: "vesira-users.firebaseapp.com",
       projectId: "vesira-users",
       storageBucket: "vesira-users.firebasestorage.app",
@@ -454,9 +299,15 @@
       measurementId: "G-45DT5KT889"
     };
 
+    const REGISTER_AFFILIATE_URL =
+      "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/registrar-afiliado";
+    const VALIDATE_AFFILIATE_URL =
+      "https://smxdiexgxxwjlvsdmzrq.supabase.co/functions/v1/validar-afiliado";
+
     const DISCOUNT_PERCENT = 5;
     const COMMISSION_PERCENT = 10;
     const RESEND_COOLDOWN_MS = 45000;
+    const SUPABASE_TIMEOUT_MS = 10000;
 
     const firebaseApp = initializeApp(firebaseConfig);
     const auth = getAuth(firebaseApp);
@@ -469,13 +320,14 @@
     const verifyState = document.getElementById("verifyState");
     const dashboardState = document.getElementById("dashboardState");
     const authForm = document.getElementById("authForm");
+
+    const authKicker = document.getElementById("authKicker");
     const authTitle = document.getElementById("authTitle");
     const authIntro = document.getElementById("authIntro");
     const submitButton = document.getElementById("submitButton");
     const forgotButton = document.getElementById("forgotButton");
     const authMessage = document.getElementById("authMessage");
-    const verifyMessage = document.getElementById("verifyMessage");
-    const dashboardMessage = document.getElementById("dashboardMessage");
+
     const nameField = document.getElementById("nameField");
     const nombreInput = document.getElementById("nombre");
     const emailInput = document.getElementById("email");
@@ -484,26 +336,32 @@
     const confirmPasswordInput = document.getElementById("confirmPassword");
     const togglePassword = document.getElementById("togglePassword");
     const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
+    const passwordMeter = document.getElementById("passwordMeter");
+    const passwordHint = document.getElementById("passwordHint");
+
+    const verifyMessage = document.getElementById("verifyMessage");
+    const verifyDescription = document.getElementById("verifyDescription");
     const verifyEmail = document.getElementById("verifyEmail");
     const checkVerificationButton = document.getElementById("checkVerificationButton");
     const resendVerificationButton = document.getElementById("resendVerificationButton");
     const backToLoginButton = document.getElementById("backToLoginButton");
     const resendCooldown = document.getElementById("resendCooldown");
+
     const welcomeName = document.getElementById("welcomeName");
     const accountEmail = document.getElementById("accountEmail");
     const couponCode = document.getElementById("couponCode");
     const couponCodeSmall = document.getElementById("couponCodeSmall");
-    const copyButton = document.getElementById("copyButton");
-    const logoutButton = document.getElementById("logoutButton");
     const discountValue = document.getElementById("discountValue");
     const commissionValue = document.getElementById("commissionValue");
-    const pageTitle = document.getElementById("pageTitle");
-    const pageIntro = document.getElementById("pageIntro");
+    const copyButton = document.getElementById("copyButton");
+    const logoutButton = document.getElementById("logoutButton");
+    const dashboardMessage = document.getElementById("dashboardMessage");
 
     let mode = "login";
     let currentUser = null;
     let resendTimer = null;
     let lastVerificationSentAt = 0;
+    let verificationPoll = null;
 
     function showMessage(element, text = "", type = "neutral") {
       element.textContent = text || "";
@@ -514,31 +372,45 @@
       authState.classList.toggle("show", name === "auth");
       verifyState.classList.toggle("show", name === "verify");
       dashboardState.classList.toggle("show", name === "dashboard");
+
+      if (name === "verify") startVerificationPolling();
+      else stopVerificationPolling();
     }
 
     function setMode(nextMode) {
       mode = nextMode;
       const register = mode === "register";
+
       loginTab.classList.toggle("active", !register);
       registerTab.classList.toggle("active", register);
       loginTab.setAttribute("aria-selected", String(!register));
       registerTab.setAttribute("aria-selected", String(register));
+
       nameField.hidden = !register;
       confirmPasswordField.hidden = !register;
+
       nombreInput.required = register;
       confirmPasswordInput.required = register;
       passwordInput.autocomplete = register ? "new-password" : "current-password";
-      authTitle.textContent = register ? "Crea tu cuenta." : "Bienvenido de nuevo.";
+
+      authKicker.textContent = register ? "Registro" : "Acceso";
+      authTitle.textContent = register ? "Crear cuenta" : "Iniciar sesión";
       authIntro.textContent = register
-        ? "Solo necesitas tu nombre, email y una contraseña. Después confirmarás tu correo."
-        : "Entra con tu email y contraseña para acceder a tu cuenta.";
+        ? "Crea tu cuenta con nombre de usuario, correo y contraseña."
+        : "Introduce tu correo y contraseña para entrar en tu cuenta.";
+
       submitButton.textContent = register ? "Crear cuenta" : "Iniciar sesión";
       forgotButton.hidden = register;
+
+      passwordHint.textContent = register
+        ? "Usa al menos 6 caracteres. Mejor si combinas letras y números."
+        : "Introduce tu contraseña para acceder.";
+
+      if (!register) {
+        passwordMeter.dataset.level = "0";
+      }
+
       showMessage(authMessage, "");
-      pageTitle.textContent = register ? "Empieza con Vesira." : "Vende con Vesira.";
-      pageIntro.textContent = register
-        ? "Crea tu cuenta de afiliado. Después confirma tu email y tendrás acceso a tu código."
-        : "Accede a tu cuenta para consultar tu código personal, descuento y comisión.";
     }
 
     function setLoading(loading) {
@@ -553,7 +425,30 @@
     function togglePasswordVisibility(input, button) {
       const hidden = input.type === "password";
       input.type = hidden ? "text" : "password";
-      button.textContent = hidden ? "Ocultar" : "Ver";
+      button.textContent = hidden ? "Ocultar" : "Mostrar";
+    }
+
+    function updatePasswordMeter(value) {
+      const password = String(value || "");
+      if (!password) {
+        passwordMeter.dataset.level = "0";
+        return;
+      }
+
+      let score = 0;
+      if (password.length >= 6) score++;
+      if (password.length >= 9) score++;
+      if (/[A-Z]/.test(password) && /[a-z]/.test(password)) score++;
+      if (/\d|[^A-Za-z0-9]/.test(password)) score++;
+
+      passwordMeter.dataset.level = String(Math.min(score, 4));
+    }
+
+    function normalizeUsername(value) {
+      return String(value || "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .slice(0, 40);
     }
 
     function normalizeName(value) {
@@ -567,61 +462,170 @@
 
     function buildCouponCode(user, name) {
       const prefix = normalizeName(name || user.displayName || "VS") || "VS";
-      const uidPart = String(user.uid || "").replace(/[^a-z0-9]/gi, "").slice(0, 8).toUpperCase();
+      const uidPart = String(user.uid || "")
+        .replace(/[^a-z0-9]/gi, "")
+        .slice(0, 8)
+        .toUpperCase();
+
       return `VS-${prefix}-${uidPart}`.slice(0, 20);
     }
 
     function humanAuthError(code) {
       const map = {
-        "auth/email-already-in-use": "Ese email ya tiene una cuenta. Entra en Iniciar sesión.",
-        "auth/invalid-email": "Introduce un email válido.",
-        "auth/invalid-credential": "El email o la contraseña no son correctos.",
-        "auth/wrong-password": "El email o la contraseña no son correctos.",
-        "auth/user-not-found": "No existe una cuenta con ese email.",
+        "auth/email-already-in-use": "Ese correo ya tiene una cuenta. Inicia sesión.",
+        "auth/invalid-email": "Introduce un correo válido.",
+        "auth/invalid-credential": "El correo o la contraseña no son correctos.",
+        "auth/wrong-password": "El correo o la contraseña no son correctos.",
+        "auth/user-not-found": "No existe una cuenta con ese correo.",
         "auth/weak-password": "La contraseña debe tener al menos 6 caracteres.",
         "auth/password-does-not-meet-requirements": "La contraseña no cumple los requisitos mínimos.",
-        "auth/too-many-requests": "Hay demasiados intentos. Espera unos minutos antes de probar otra vez.",
-        "auth/network-request-failed": "No hay conexión. Comprueba internet y vuelve a intentarlo.",
-        "auth/operation-not-allowed": "El acceso por email y contraseña no está activado en Firebase.",
-        "auth/invalid-action-code": "El enlace de verificación ya no es válido. Solicita otro correo.",
-        "auth/expired-action-code": "El enlace de verificación ha caducado. Solicita otro correo.",
-        "auth/unauthorized-continue-uri": "Firebase no permite todavía esta dirección para el enlace de verificación. El correo se intentará enviar sin redirección automática.",
-        "auth/quota-exceeded": "Se ha alcanzado el límite temporal de correos. Espera un poco y vuelve a intentarlo.",
-        "auth/internal-error": "Firebase ha devuelto un error interno. Prueba de nuevo en unos segundos."
+        "auth/too-many-requests": "Firebase ha bloqueado temporalmente este intento. Espera unos minutos.",
+        "auth/network-request-failed": "No hay conexión con Firebase.",
+        "auth/operation-not-allowed": "El acceso por correo y contraseña no está activado en Firebase.",
+        "auth/quota-exceeded": "Se ha alcanzado el límite de correos de Firebase. Revisa la cuota del proyecto.",
+        "auth/internal-error": "Firebase ha devuelto un error interno.",
+        "auth/invalid-action-code": "El enlace de verificación no es válido.",
+        "auth/expired-action-code": "El enlace de verificación ha caducado.",
+        "EMAIL_NOT_FOUND": "No existe esa cuenta en Firebase.",
+        "INVALID_ID_TOKEN": "La sesión de Firebase ha caducado. Vuelve a iniciar sesión.",
+        "TOO_MANY_ATTEMPTS_TRY_LATER": "Firebase ha bloqueado temporalmente el envío. Espera unos minutos.",
+        "QUOTA_EXCEEDED": "Se ha alcanzado la cuota de envío de correos de Firebase.",
+        "OPERATION_NOT_ALLOWED": "El proveedor de correo y contraseña no está habilitado.",
+        "USER_NOT_FOUND": "No existe esa cuenta en Firebase.",
+        "INVALID_EMAIL": "El correo no es válido.",
+        "MISSING_ID_TOKEN": "No hay una sesión válida para enviar el correo.",
+        "NETWORK_ERROR": "No se pudo conectar con Firebase.",
+        "auth/captcha-check-failed": "Firebase rechazó la solicitud de seguridad. Comprueba el dominio autorizado.",
+        "auth/admin-restricted-operation": "Esta operación está restringida por la configuración de Firebase."
       };
       return map[code] || "No se pudo completar la operación. Inténtalo de nuevo.";
     }
 
-    async function sendVerification(user) {
-      if (!user) throw new Error("No hay una sesión activa para enviar la verificación.");
-      const continueUrl = `${window.location.origin}${window.location.pathname}?mode=verifyEmail`;
-      const settings = {
-        url: continueUrl,
-        handleCodeInApp: false
-      };
+    async function fetchJson(url, body) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), SUPABASE_TIMEOUT_MS);
+
       try {
-        await sendEmailVerification(user, settings);
-      } catch (error) {
-        if (error?.code === "auth/unauthorized-continue-uri") {
-          await sendEmailVerification(user);
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(body),
+          signal: controller.signal
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        return { response, payload };
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    async function validateSupabaseCoupon(code) {
+      const { response, payload } = await fetchJson(
+        VALIDATE_AFFILIATE_URL,
+        { codigo: code }
+      );
+
+      const affiliate = payload?.afiliado || payload?.affiliate || null;
+      if (!response.ok || payload?.valido !== true || !affiliate || affiliate.activo === false) {
+        return null;
+      }
+
+      if (String(affiliate.codigo || "").trim() !== code) return null;
+      return affiliate;
+    }
+
+    async function registerAffiliateInSupabase(user, name, email, requestedCode) {
+      const { response, payload } = await fetchJson(
+        REGISTER_AFFILIATE_URL,
+        {
+          nombre: name,
+          email,
+          codigo: requestedCode,
+          uid: user.uid
+        }
+      );
+
+      if (response.ok && payload?.ok && payload?.afiliado) {
+        return payload.afiliado;
+      }
+
+      if (response.status === 409 || response.status === 422) {
+        const existing = await validateSupabaseCoupon(requestedCode).catch(() => null);
+        if (existing) return existing;
+      }
+
+      throw new Error(payload?.error || "No se pudo activar tu código de afiliado.");
+    }
+
+    async function sendVerification(user) {
+      if (!user) throw new Error("No hay una cuenta activa para enviar la verificación.");
+
+      let sdkError = null;
+      try {
+        await sendEmailVerification(user);
         lastVerificationSentAt = Date.now();
         startResendCooldown();
-        return;
+        return { method: "sdk" };
+      } catch (error) {
+        sdkError = error;
+        console.warn("Firebase SDK no pudo enviar la verificación; probando API REST:", error);
       }
-      throw error;
+
+      try {
+        const idToken = await user.getIdToken(true);
+        const response = await fetch(
+          `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${encodeURIComponent(firebaseConfig.apiKey)}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Firebase-Locale": "es"
+            },
+            body: JSON.stringify({
+              requestType: "VERIFY_EMAIL",
+              idToken
+            })
+          }
+        );
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const code = String(payload?.error?.message || "NETWORK_ERROR");
+          const error = new Error(code);
+          error.code = code;
+          throw error;
+        }
+
+        lastVerificationSentAt = Date.now();
+        startResendCooldown();
+        return { method: "rest" };
+      } catch (restError) {
+        console.error("Firebase no pudo enviar el correo por ningún canal:", { sdkError, restError });
+        const finalCode = restError?.code || sdkError?.code || "NETWORK_ERROR";
+        const error = new Error(finalCode);
+        error.code = finalCode;
+        throw error;
       }
-      lastVerificationSentAt = Date.now();
-      startResendCooldown();
     }
 
     function startResendCooldown(ms = RESEND_COOLDOWN_MS) {
       clearInterval(resendTimer);
+
       const end = Date.now() + ms;
       resendVerificationButton.disabled = true;
+
       resendTimer = setInterval(() => {
         const left = Math.max(0, end - Date.now());
         const seconds = Math.ceil(left / 1000);
-        resendCooldown.textContent = left > 0 ? `Puedes reenviarlo de nuevo en ${seconds}s.` : "Ya puedes reenviar el correo.";
+
+        resendCooldown.textContent = left > 0
+          ? `Puedes reenviarlo de nuevo en ${seconds}s.`
+          : "Ya puedes reenviar el correo.";
+
         if (left <= 0) {
           clearInterval(resendTimer);
           resendVerificationButton.disabled = false;
@@ -629,54 +633,87 @@
       }, 250);
     }
 
+    function stopVerificationPolling() {
+      clearInterval(verificationPoll);
+      verificationPoll = null;
+    }
+
+    function startVerificationPolling() {
+      stopVerificationPolling();
+
+      verificationPoll = setInterval(async () => {
+        if (!currentUser) return;
+
+        try {
+          await reload(currentUser);
+          if (currentUser.emailVerified) {
+            stopVerificationPolling();
+            await showDashboard(currentUser);
+            showMessage(dashboardMessage, "Correo confirmado. Ya tienes acceso a tu panel.", "success");
+          }
+        } catch (error) {
+          console.warn("No se pudo comprobar automáticamente la verificación:", error);
+        }
+      }, 5000);
+    }
+
     async function ensureAffiliate(user) {
       const ref = doc(db, "affiliates", user.uid);
       const snap = await getDoc(ref);
+
       if (snap.exists()) {
-        const existing = snap.data() || {};
-        const desiredName = String(user.displayName || "").trim();
-        if (desiredName && (!existing.name || existing.name === "Afiliado") ) {
-          await setDoc(ref, { name: desiredName, email: user.email || existing.email || "" }, { merge: true });
-          return { ...existing, name: desiredName, email: user.email || existing.email || "" };
-        }
-        return existing;
+        return snap.data() || {};
       }
+
       const name = String(user.displayName || "").trim() || "Afiliado";
+      const requestedCode = buildCouponCode(user, name);
+      const affiliate = await registerAffiliateInSupabase(
+        user,
+        name,
+        user.email || "",
+        requestedCode
+      );
+
+      const code = String(affiliate.codigo || requestedCode).trim();
+
       const data = {
         uid: user.uid,
         name,
         email: user.email || "",
-        couponCode: buildCouponCode(user, name),
-        discountPercent: DISCOUNT_PERCENT,
-        commissionPercent: COMMISSION_PERCENT,
-        active: true,
+        couponCode: code,
+        discountPercent: Number(affiliate.descuento_porcentaje ?? DISCOUNT_PERCENT),
+        commissionPercent: Number(affiliate.comision_porcentaje ?? COMMISSION_PERCENT),
+        active: affiliate.activo !== false,
+        supabaseAffiliateId: affiliate.id || null,
         createdAt: serverTimestamp()
       };
+
       await setDoc(ref, data);
       return data;
     }
 
     async function showDashboard(user) {
       const affiliate = await ensureAffiliate(user);
+
       currentUser = user;
-      welcomeName.textContent = `Hola, ${affiliate.name || user.displayName || ""}.`;
+      welcomeName.textContent = `Hola, ${affiliate.name || user.displayName || "Afiliado"}.`;
       accountEmail.textContent = user.email || "";
       couponCode.textContent = affiliate.couponCode || "—";
       couponCodeSmall.textContent = affiliate.couponCode || "—";
       discountValue.textContent = `${Number(affiliate.discountPercent ?? DISCOUNT_PERCENT)}%`;
       commissionValue.textContent = `${Number(affiliate.commissionPercent ?? COMMISSION_PERCENT)}%`;
+
       setState("dashboard");
-      pageTitle.textContent = "Tu cuenta Vesira.";
-      pageIntro.textContent = "Aquí tienes tu código personal y las condiciones de tu programa de afiliados.";
     }
 
-    async function showVerification(user, message = "") {
+    async function showVerification(user, message = "", type = "success") {
       currentUser = user;
-      verifyEmail.textContent = user?.email || "";
+      verifyEmail.textContent = user?.email || "—";
+      verifyDescription.textContent = "Enviaremos el correo de verificación a esta dirección.";
+
       setState("verify");
-      pageTitle.textContent = "Solo falta un paso.";
-      pageIntro.textContent = "Confirma tu email para activar tu cuenta de afiliado.";
-      if (message) showMessage(verifyMessage, message, "success");
+
+      if (message) showMessage(verifyMessage, message, type);
       else showMessage(verifyMessage, "");
     }
 
@@ -685,43 +722,62 @@
         showMessage(verifyMessage, "Primero inicia sesión con tu cuenta.", "error");
         return;
       }
+
       checkVerificationButton.disabled = true;
       checkVerificationButton.textContent = "Comprobando...";
+
       try {
         await reload(currentUser);
+
         if (!currentUser.emailVerified) {
-          showMessage(verifyMessage, "Todavía no aparece como verificado. Abre el correo y pulsa el enlace; después vuelve a comprobarlo.", "neutral");
+          showMessage(
+            verifyMessage,
+            "Todavía no aparece como verificado. Abre el correo y vuelve a intentarlo.",
+            "neutral"
+          );
           return;
         }
+
         await showDashboard(currentUser);
       } catch (error) {
         console.error(error);
         showMessage(verifyMessage, humanAuthError(error.code), "error");
       } finally {
         checkVerificationButton.disabled = false;
-        checkVerificationButton.textContent = "Ya he verificado mi email";
+        checkVerificationButton.textContent = "Ya he verificado mi correo";
       }
     }
 
     async function resendVerification() {
       if (!currentUser) {
-        showMessage(verifyMessage, "Primero inicia sesión para reenviar el correo.", "error");
+        showMessage(verifyMessage, "Primero inicia sesión.", "error");
         return;
       }
+
       if (Date.now() - lastVerificationSentAt < RESEND_COOLDOWN_MS) {
         startResendCooldown(RESEND_COOLDOWN_MS - (Date.now() - lastVerificationSentAt));
         return;
       }
+
       resendVerificationButton.disabled = true;
       resendVerificationButton.textContent = "Enviando...";
+
       try {
         await reload(currentUser);
+
         if (currentUser.emailVerified) {
+          clearInterval(resendTimer);
+          resendVerificationButton.disabled = false;
           await showDashboard(currentUser);
           return;
         }
+
         await sendVerification(currentUser);
-        showMessage(verifyMessage, "Correo enviado. Revisa tu bandeja de entrada y también Spam o Promociones.", "success");
+        showMessage(
+          verifyMessage,
+          "Correo enviado.",
+          "success"
+        );
       } catch (error) {
         console.error("Error enviando verificación:", error);
         showMessage(verifyMessage, humanAuthError(error.code), "error");
@@ -731,52 +787,60 @@
       }
     }
 
-    async function handleEmailAction() {
-      const params = new URLSearchParams(window.location.search);
-      const modeParam = params.get("mode");
-      const oobCode = params.get("oobCode");
-      if (modeParam !== "verifyEmail" || !oobCode) return;
-      try {
-        await applyActionCode(auth, oobCode);
-        window.history.replaceState({}, document.title, window.location.pathname);
-        setMode("login");
-        setState("auth");
-        showMessage(authMessage, "Email confirmado correctamente. Ya puedes iniciar sesión.", "success");
-      } catch (error) {
-        console.error("Error verificando email:", error);
-        window.history.replaceState({}, document.title, window.location.pathname);
-        setMode("login");
-        setState("auth");
-        showMessage(authMessage, humanAuthError(error.code), "error");
-      }
-    }
+    loginTab.addEventListener("click", () => {
+      setState("auth");
+      setMode("login");
+    });
 
-    loginTab.addEventListener("click", () => { setState("auth"); setMode("login"); });
-    registerTab.addEventListener("click", () => { setState("auth"); setMode("register"); });
-    togglePassword.addEventListener("click", () => togglePasswordVisibility(passwordInput, togglePassword));
-    toggleConfirmPassword.addEventListener("click", () => togglePasswordVisibility(confirmPasswordInput, toggleConfirmPassword));
+    registerTab.addEventListener("click", () => {
+      setState("auth");
+      setMode("register");
+      nombreInput.focus();
+    });
+
+    togglePassword.addEventListener(
+      "click",
+      () => togglePasswordVisibility(passwordInput, togglePassword)
+    );
+
+    toggleConfirmPassword.addEventListener(
+      "click",
+      () => togglePasswordVisibility(confirmPasswordInput, toggleConfirmPassword)
+    );
+
+    passwordInput.addEventListener("input", () => {
+      updatePasswordMeter(passwordInput.value);
+    });
+
     backToLoginButton.addEventListener("click", async () => {
       await signOut(auth).catch(() => {});
       currentUser = null;
       setState("auth");
       setMode("login");
-      showMessage(authMessage, "", "");
+      authForm.reset();
       emailInput.focus();
     });
+
     checkVerificationButton.addEventListener("click", checkVerified);
     resendVerificationButton.addEventListener("click", resendVerification);
 
     forgotButton.addEventListener("click", async () => {
       const email = emailInput.value.trim();
       showMessage(authMessage, "");
+
       if (!email) {
-        showMessage(authMessage, "Escribe tu email y después pulsa «He olvidado mi contraseña».", "error");
+        showMessage(authMessage, "Escribe tu correo primero.", "error");
         emailInput.focus();
         return;
       }
+
       try {
         await sendPasswordResetEmail(auth, email);
-        showMessage(authMessage, "Te hemos enviado un email para restablecer la contraseña. Revisa también Spam o Promociones.", "success");
+        showMessage(
+          authMessage,
+          "Te hemos enviado un email para restablecer la contraseña. Revisa también Spam o Promociones.",
+          "success"
+        );
       } catch (error) {
         showMessage(authMessage, humanAuthError(error.code), "error");
       }
@@ -785,25 +849,29 @@
     authForm.addEventListener("submit", async (event) => {
       event.preventDefault();
       showMessage(authMessage, "");
-      const name = nombreInput.value.trim();
+
+      const username = normalizeUsername(nombreInput.value);
       const email = emailInput.value.trim().toLowerCase();
       const password = passwordInput.value;
       const confirm = confirmPasswordInput.value;
 
-      if (mode === "register" && !name) {
-        showMessage(authMessage, "Escribe tu nombre.", "error");
+      if (mode === "register" && !username) {
+        showMessage(authMessage, "Escribe un nombre de usuario.", "error");
         nombreInput.focus();
         return;
       }
+
       if (!email || !password) {
-        showMessage(authMessage, "Completa email y contraseña.", "error");
+        showMessage(authMessage, "Completa correo y contraseña.", "error");
         return;
       }
+
       if (password.length < 6) {
         showMessage(authMessage, "La contraseña debe tener al menos 6 caracteres.", "error");
         passwordInput.focus();
         return;
       }
+
       if (mode === "register" && password !== confirm) {
         showMessage(authMessage, "Las contraseñas no coinciden.", "error");
         confirmPasswordInput.focus();
@@ -811,36 +879,124 @@
       }
 
       setLoading(true);
+      let createdRegistrationUser = null;
+
       try {
         if (mode === "register") {
+          /*
+           * IMPORTANTE:
+           * El email de verificación se envía justo después de crear
+           * el usuario. Antes, este paso estaba después de Supabase
+           * y Firestore; si una de esas llamadas fallaba, nunca se
+           * alcanzaba sendEmailVerification().
+           */
           const credential = await createUserWithEmailAndPassword(auth, email, password);
           const user = credential.user;
           currentUser = user;
-          await updateProfile(user, { displayName: name });
+          createdRegistrationUser = user;
+
+          let verificationSent = false;
+
           try {
             await sendVerification(user);
-          } catch (verifyError) {
-            console.error("No se pudo enviar el correo de verificación:", verifyError);
-            await signOut(auth).catch(() => {});
-            throw verifyError;
+            verificationSent = true;
+          } catch (verificationError) {
+            console.error("No se pudo enviar la verificación al crear la cuenta:", verificationError);
           }
+
+          /*
+           * El perfil y el afiliado se preparan después, sin bloquear
+           * el primer envío de verificación.
+           */
+          await updateProfile(user, { displayName: username });
+
+          const requestedCode = buildCouponCode(user, username);
+          const affiliate = await registerAffiliateInSupabase(
+            user,
+            username,
+            email,
+            requestedCode
+          );
+
+          await setDoc(doc(db, "affiliates", user.uid), {
+            uid: user.uid,
+            name: username,
+            email,
+            couponCode: String(affiliate.codigo || requestedCode).trim(),
+            discountPercent: Number(affiliate.descuento_porcentaje ?? DISCOUNT_PERCENT),
+            commissionPercent: Number(affiliate.comision_porcentaje ?? COMMISSION_PERCENT),
+            active: affiliate.activo !== false,
+            supabaseAffiliateId: affiliate.id || null,
+            createdAt: serverTimestamp()
+          });
+
           authForm.reset();
-          await showVerification(user, "Cuenta creada. Revisa tu email para terminar de activarla.");
+          updatePasswordMeter("");
+
+          if (verificationSent) {
+            await showVerification(
+              user,
+              "Correo de verificación enviado.",
+              "success"
+            );
+          } else {
+            await showVerification(
+              user,
+              "La cuenta se ha creado, pero Firebase rechazó el envío. Pulsa «Reenviar correo» o revisa la configuración de correo de Firebase.",
+              "error"
+            );
+          }
         } else {
           const credential = await signInWithEmailAndPassword(auth, email, password);
           const user = credential.user;
           currentUser = user;
+
           await reload(user);
+
           if (!user.emailVerified) {
-            await showVerification(user, "Este email todavía no está verificado. Confírmalo para entrar en tu panel.");
+            await showVerification(
+              user,
+              "Tu cuenta está creada, pero necesitas confirmar tu correo.",
+              "neutral"
+            );
             return;
           }
+
           await showDashboard(user);
           authForm.reset();
+          updatePasswordMeter("");
         }
       } catch (error) {
         console.error("Affiliate auth error:", error);
-        showMessage(authMessage, humanAuthError(error.code), "error");
+
+        /*
+         * Si Firebase ya creó la cuenta, no devolvemos al usuario
+         * a un formulario que haría parecer que el alta no existe.
+         * Mostramos el paso de verificación y dejamos que el panel
+         * termine de provisionar el afiliado al entrar.
+         */
+        if (mode === "register" && createdRegistrationUser?.uid === currentUser?.uid) {
+          authForm.reset();
+          updatePasswordMeter("");
+
+          await showVerification(
+            currentUser,
+            "Tu cuenta se ha creado. El resto de la configuración se completará al terminar la verificación.",
+            "neutral"
+          );
+          return;
+        }
+
+        const rawMessage = error instanceof Error ? error.message : "";
+        const isAuthError = String(error?.code || "").startsWith("auth/");
+
+        showMessage(
+          authMessage,
+          isAuthError
+            ? humanAuthError(error.code)
+            : (rawMessage || "No se pudo completar la operación. Inténtalo de nuevo."),
+          "error"
+        );
       } finally {
         setLoading(false);
       }
@@ -852,47 +1008,54 @@
       setState("auth");
       setMode("login");
       authForm.reset();
-      showMessage(authMessage, "Has cerrado sesión.", "success");
+      updatePasswordMeter("");
     });
 
     copyButton.addEventListener("click", async () => {
       const code = couponCode.textContent.trim();
       if (!code || code === "—") return;
+
       try {
         await navigator.clipboard.writeText(code);
         copyButton.textContent = "Copiado";
         setTimeout(() => { copyButton.textContent = "Copiar código"; }, 1500);
       } catch {
-        showMessage(dashboardMessage, "No se pudo copiar automáticamente. Selecciona el código y cópialo.", "error");
+        showMessage(dashboardMessage, "No se pudo copiar automáticamente.", "error");
       }
     });
 
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         currentUser = null;
-        if (!new URLSearchParams(window.location.search).get("mode")) {
-          setState("auth");
-          setMode("login");
-        }
+        setState("auth");
+        setMode("login");
         return;
       }
+
       currentUser = user;
+
       try {
         await reload(user);
+
         if (!user.emailVerified) {
           await showVerification(user);
           return;
         }
+
+        stopVerificationPolling();
         await showDashboard(user);
       } catch (error) {
         console.error("Dashboard error:", error);
         setState("auth");
         setMode("login");
-        showMessage(authMessage, humanAuthError(error.code), "error");
+        showMessage(
+          authMessage,
+          error.message || humanAuthError(error.code),
+          "error"
+        );
       }
     });
 
-    await handleEmailAction();
     setMode("login");
   </script>
 </body>

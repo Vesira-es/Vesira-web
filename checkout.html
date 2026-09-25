@@ -438,18 +438,27 @@ display:none;
 
     }
 
-    /* Google Places nuevo: mantiene el estilo oscuro del checkout. */
-    #direccion-autocomplete{
-      display:block;
-      width:100%;
-      min-height:48px;
-      height:48px;
+/* Google Places nuevo: mantiene el estilo oscuro del checkout. */
+
+#direccion-autocomplete{
+
+display:block;
+
+width:100%;
+
+min-height:48px;
+
+height:48px;
+
       --gmpx-color-surface:#101010;
+
       --gmpx-color-on-surface:#fff;
+
       --gmpx-color-on-surface-variant:#8c8c8c;
+
     }
 
-    #direccion-autocomplete::part(input){
+    #direccion-autocomplete > input {
       width:100%;
       height:48px;
       min-height:48px;
@@ -466,8 +475,46 @@ display:none;
       box-shadow:none;
     }
 
-    #direccion-autocomplete::part(input):focus{
+    #direccion-autocomplete > input:focus{
       border-color:rgba(255,255,255,.28);
+    }
+
+#direccion-autocomplete::part(input){
+
+width:100%;
+
+height:48px;
+
+min-height:48px;
+
+max-height:48px;
+
+padding:0 13px;
+
+border:1px solid var(--b);
+
+border-radius:13px;
+
+background:var(--input);
+
+color:#fff;
+
+font-family:"Outfit",Arial,sans-serif;
+
+font-size:16px;
+
+line-height:48px;
+
+outline:none;
+
+box-shadow:none;
+
+    }
+
+#direccion-autocomplete::part(input):focus{
+
+border-color:rgba(255,255,255,.28);
+
     }
 
 .address-status{
@@ -531,112 +578,189 @@ padding:19px;
     }
 
 
-    .affiliate-toggle{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      margin:10px 0 2px;
-      padding:0;
-      border:0;
-      background:transparent;
-      color:#8c8c8c;
-      font-size:10px;
-      cursor:pointer;
-      text-decoration:underline;
-      text-underline-offset:4px;
+
+.affiliate-toggle{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:7px;
+
+margin:10px 0 2px;
+
+padding:0;
+
+border:0;
+
+background:transparent;
+
+color:#8c8c8c;
+
+font-size:10px;
+
+cursor:pointer;
+
+text-decoration:underline;
+
+text-underline-offset:4px;
+
     }
 
-    .affiliate-toggle:hover{
-      color:#fff;
+.affiliate-toggle:hover{
+
+color:#fff;
+
     }
 
-    .affiliate-box{
-      margin:10px 0 4px;
-      padding:13px;
-      border:1px solid var(--b);
-      border-radius:15px;
-      background:#101010;
+.affiliate-box{
+
+margin:10px 0 4px;
+
+padding:13px;
+
+border:1px solid var(--b);
+
+border-radius:15px;
+
+background:#101010;
+
     }
 
-    .affiliate-box[hidden]{
-      display:none !important;
+.affiliate-box[hidden]{
+
+display:none !important;
+
     }
 
-    .affiliate-title{
-      color:var(--s);
-      font-size:9px;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      margin-bottom:8px;
+.affiliate-title{
+
+color:var(--s);
+
+font-size:9px;
+
+letter-spacing:.10em;
+
+text-transform:uppercase;
+
+margin-bottom:8px;
+
     }
 
-    .affiliate-row{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) auto;
-      gap:8px;
+.affiliate-row{
+
+display:grid;
+
+grid-template-columns:minmax(0,1fr) auto;
+
+gap:8px;
+
     }
 
-    .affiliate-row input{
-      min-width:0;
-      height:44px !important;
-      min-height:44px !important;
-      max-height:44px !important;
-      text-transform:none;
-      letter-spacing:.03em;
+.affiliate-row input{
+
+min-width:0;
+
+height:44px !important;
+
+min-height:44px !important;
+
+max-height:44px !important;
+
+text-transform:none;
+
+letter-spacing:.03em;
+
     }
 
-    .affiliate-apply{
-      min-height:44px;
-      min-width:78px;
-      padding:0 12px;
-      border:1px solid var(--b);
-      border-radius:12px;
-      background:#fff;
-      color:#0a0a0a;
-      font-size:10px;
-      cursor:pointer;
+.affiliate-apply{
+
+min-height:44px;
+
+min-width:78px;
+
+padding:0 12px;
+
+border:1px solid var(--b);
+
+border-radius:12px;
+
+background:#fff;
+
+color:#0a0a0a;
+
+font-size:10px;
+
+cursor:pointer;
+
     }
 
-    .affiliate-apply:disabled{
-      cursor:not-allowed;
-      opacity:.55;
+.affiliate-apply:disabled{
+
+cursor:not-allowed;
+
+opacity:.55;
+
     }
 
-    .affiliate-status{
-      min-height:15px;
-      margin-top:7px;
-      color:var(--s);
-      font-size:10px;
-      line-height:1.4;
+.affiliate-status{
+
+min-height:15px;
+
+margin-top:7px;
+
+color:var(--s);
+
+font-size:10px;
+
+line-height:1.4;
+
     }
 
-    .affiliate-status.ok{
-      color:#7bdba5;
+.affiliate-status.ok{
+
+color:#7bdba5;
+
     }
 
-    .affiliate-status.error{
-      color:#ff9c9c;
+.affiliate-status.error{
+
+color:#ff9c9c;
+
     }
 
-    .affiliate-status.loading{
-      color:var(--s);
+.affiliate-status.loading{
+
+color:var(--s);
+
     }
 
-    .affiliate-hint{
-      margin-top:7px;
-      color:#6f6f6f;
-      font-size:9px;
-      line-height:1.4;
+.affiliate-hint{
+
+margin-top:7px;
+
+color:#6f6f6f;
+
+font-size:9px;
+
+line-height:1.4;
+
     }
 
     @media (max-width:600px){
-      .affiliate-row{
-        grid-template-columns:1fr;
+
+.affiliate-row{
+
+grid-template-columns:1fr;
+
       }
 
-      .affiliate-apply{
-        width:100%;
+.affiliate-apply{
+
+width:100%;
+
       }
+
     }
 
 .summary h2{
@@ -929,6 +1053,14 @@ position:static;
 
 
 
+
+
+
+
+
+
+
+
 .nav{
 
 height:68px;
@@ -1005,6 +1137,22 @@ grid-column:auto;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .summary{
 
 padding:16px;
@@ -1016,7 +1164,6 @@ border-radius:18px;
     }
 
 /* Evita el zoom automático de Safari/iPhone al enfocar campos.
-
    iOS no amplía los controles cuyo texto usa 16px o más. */
 
     input,
@@ -1121,6 +1268,10 @@ width:100% !important;
 
 
 
+
+
+
+
 /* Sugerencias de dirección: mismas superficies oscuras que el checkout. */
 
 .address-autocomplete-box {
@@ -1219,6 +1370,15 @@ font-weight: 500;
 
 line-height: 1.35;
 
+    }
+
+    .address-powered-by-google {
+      padding:8px 9px 5px;
+      color:#777;
+      font-size:9px;
+      line-height:1.2;
+      text-align:right;
+      user-select:none;
     }
 
 .address-suggestion-secondary {
@@ -1338,8 +1498,11 @@ text-align:left !important;
     const app = document.getElementById("app");
 
     let affiliateState = {
+
       codigo: "",
+
       afiliado: null
+
     };
 
     let affiliateRequestId = 0;
@@ -1401,385 +1564,623 @@ Number(item.cantidad || 0),
     }
 
     function normalizeAffiliateCode(value) {
+
       return String(value || "")
+
         .trim()
+
         .replace(/\s+/g, "");
+
     }
 
     function cleanAffiliateCodeForInput(value) {
+
       return String(value || "")
+
         .trim()
+
         .replace(/\s+/g, "");
+
     }
 
     function calculateAffiliateDiscount(subtotal) {
+
       const percent = Number(
+
         affiliateState.afiliado?.descuento_porcentaje || 0
+
       );
 
       if (!affiliateState.afiliado || percent <= 0) {
+
         return 0;
+
       }
 
       return Math.min(
-        Number(subtotal || 0),
-        Number(subtotal || 0) * percent / 100
+
+Number(subtotal || 0),
+
+Number(subtotal || 0) * percent / 100
+
       );
+
     }
 
     function updateAffiliateSummary() {
+
       const cart = getCart();
+
       const subtotal = totalCart(cart);
+
       const discount = calculateAffiliateDiscount(subtotal);
+
       const total = Math.max(0, subtotal - discount);
 
       const discountRow =
-        document.getElementById("affiliateDiscountRow");
+
+document.getElementById("affiliateDiscountRow");
 
       const discountAmount =
-        document.getElementById("affiliateDiscountAmount");
+
+document.getElementById("affiliateDiscountAmount");
 
       const checkoutTotal =
-        document.getElementById("checkoutTotal");
+
+document.getElementById("checkoutTotal");
 
       if (discountRow) {
+
         discountRow.style.display =
+
           discount > 0 ? "flex" : "none";
+
       }
 
       if (discountAmount) {
+
         discountAmount.textContent =
+
           discount > 0 ? `-${euro(discount)}` : euro(0);
+
       }
 
       if (checkoutTotal) {
+
         checkoutTotal.textContent = euro(total);
+
       }
+
     }
 
     async function validateAffiliateCode(code) {
+
       const exactCode = normalizeAffiliateCode(code);
 
       if (!exactCode) {
+
         throw new Error("Cupón no válido.");
+
       }
 
       const controller = new AbortController();
 
       const timeoutId = window.setTimeout(() => {
+
         controller.abort();
+
       }, 8000);
 
       let response;
 
       try {
+
         response = await fetch(
+
           AFFILIATE_VALIDATION_FUNCTION_URL,
+
           {
+
             method: "POST",
+
             headers: {
+
               "Content-Type": "application/json",
+
               "Accept": "application/json"
+
             },
+
             body: JSON.stringify({
+
               codigo: exactCode
+
             }),
+
             signal: controller.signal
+
           }
+
         );
+
       } catch (error) {
+
         if (error?.name === "AbortError") {
+
           throw new Error(
+
             "No se pudo comprobar el cupón. Inténtalo de nuevo."
+
           );
+
         }
 
         throw new Error(
+
           "No se pudo comprobar el cupón. Inténtalo de nuevo."
+
         );
+
       } finally {
-        window.clearTimeout(timeoutId);
+
+window.clearTimeout(timeoutId);
+
       }
 
       const result = await response
+
         .json()
+
         .catch(() => ({}));
 
       if (
+
         response.status === 401 ||
+
         response.status === 403
+
       ) {
+
         throw new Error(
+
           "No se pudo comprobar el cupón. Revisa validar-afiliado en Supabase."
+
         );
+
       }
 
       const valido =
+
         result?.valido === true ||
+
         result?.valid === true;
 
       const afiliado =
+
         result?.afiliado ||
+
         result?.affiliate ||
+
         null;
 
       if (!response.ok || !valido || !afiliado) {
+
         throw new Error("Cupón no válido.");
+
       }
 
       const serverCode = String(
+
         afiliado.codigo ?? ""
+
       ).trim();
 
       if (serverCode !== exactCode) {
+
         throw new Error("Cupón no válido.");
+
       }
 
       return afiliado;
+
     }
 
     async function applyAffiliateCode(code = null) {
+
       const input =
-        document.getElementById("affiliateCode");
+
+document.getElementById("affiliateCode");
 
       const button =
-        document.getElementById(
+
+document.getElementById(
+
           "affiliateApplyButton"
+
         );
 
       const status =
-        document.getElementById("affiliateStatus");
+
+document.getElementById("affiliateStatus");
 
       const inputCode =
+
         cleanAffiliateCodeForInput(
-          code !== null
+
+code !== null
+
             ? code
+
             : input?.value || ""
+
         );
 
       const exactCode =
+
         normalizeAffiliateCode(inputCode);
 
       if (input) {
+
         input.value = inputCode;
+
       }
 
-      /*
+/*
+
        * Escribir un nuevo código NO elimina el cupón aplicado.
+
        * Solo un código nuevo y válido reemplaza al anterior.
+
        */
+
       const previousAffiliateState = {
+
         codigo: affiliateState.codigo,
+
         afiliado: affiliateState.afiliado
+
       };
 
       if (!exactCode) {
+
         affiliateRequestId++;
 
         if (status) {
+
           status.textContent =
+
             "Cupón no válido.";
+
           status.classList.remove(
+
             "ok",
+
             "loading"
+
           );
+
           status.classList.add("error");
+
           status.style.display = "block";
+
         }
 
         affiliateState =
+
           previousAffiliateState;
+
         updateAffiliateSummary();
 
         return null;
+
       }
 
       if (
+
         previousAffiliateState.codigo === exactCode &&
+
         previousAffiliateState.afiliado
+
       ) {
+
         const discountPercent =
-          Number(
+
+Number(
+
             previousAffiliateState.afiliado
+
               ?.descuento_porcentaje || 0
+
           );
 
         if (status) {
+
           status.textContent =
+
             `Código descuento aplicado · ${discountPercent}%`;
+
           status.classList.add("ok");
+
           status.classList.remove("error");
+
           status.style.display = "block";
+
         }
 
         updateAffiliateSummary();
+
         return previousAffiliateState.afiliado;
+
       }
 
       const requestId =
+
         ++affiliateRequestId;
 
       if (button) {
+
         button.disabled = true;
+
         button.textContent =
+
           "Comprobando...";
+
       }
 
       if (status) {
+
         status.textContent = "";
+
         status.classList.remove(
+
           "ok",
+
           "error",
+
           "loading"
+
         );
+
         status.style.display = "none";
+
       }
 
       try {
+
         const afiliado =
+
           await validateAffiliateCode(
+
             exactCode
+
           );
 
         if (
+
           requestId !== affiliateRequestId
+
         ) {
+
           return null;
+
         }
 
-        /* Solo aquí sustituimos el cupón anterior. */
+/* Solo aquí sustituimos el cupón anterior. */
+
         affiliateState = {
+
           codigo: exactCode,
+
           afiliado
+
         };
 
         const discountPercent =
-          Number(
+
+Number(
+
             afiliado?.descuento_porcentaje || 0
+
           );
 
         if (status) {
+
           status.textContent =
+
             `Código descuento aplicado · ${discountPercent}%`;
+
           status.classList.add("ok");
+
           status.classList.remove("error");
+
           status.style.display = "block";
+
         }
 
         updateAffiliateSummary();
 
         return afiliado;
+
       } catch (error) {
+
         if (
+
           requestId !== affiliateRequestId
+
         ) {
+
           return null;
+
         }
 
-        /* El cupón anterior sigue activo si el nuevo falla. */
+/* El cupón anterior sigue activo si el nuevo falla. */
+
         affiliateState =
+
           previousAffiliateState;
 
         updateAffiliateSummary();
 
         if (status) {
+
           status.textContent =
+
             error?.message ||
+
             "Cupón no válido.";
 
           status.classList.remove(
+
             "ok",
+
             "loading"
+
           );
+
           status.classList.add("error");
+
           status.style.display = "block";
+
         }
 
         return null;
+
       } finally {
+
         if (
+
           requestId === affiliateRequestId &&
+
           button
+
         ) {
+
           button.disabled = false;
+
           button.textContent =
+
             "Aplicar";
+
         }
+
       }
+
     }
 
     function initAffiliateUI() {
+
       const input =
-        document.getElementById("affiliateCode");
+
+document.getElementById("affiliateCode");
 
       const button =
-        document.getElementById("affiliateApplyButton");
+
+document.getElementById("affiliateApplyButton");
 
       const status =
-        document.getElementById("affiliateStatus");
+
+document.getElementById("affiliateStatus");
 
       const toggle =
-        document.getElementById("affiliateToggleButton");
+
+document.getElementById("affiliateToggleButton");
 
       const box =
-        document.getElementById("affiliateBox");
+
+document.getElementById("affiliateBox");
 
       if (!input || !button || !status || !toggle || !box) {
+
         return;
+
       }
 
       toggle.addEventListener("click", () => {
+
         const shouldOpen = box.hidden;
 
         box.hidden = !shouldOpen;
+
         toggle.setAttribute(
+
           "aria-expanded",
-          String(shouldOpen)
+
+String(shouldOpen)
+
         );
 
         if (shouldOpen) {
-          window.requestAnimationFrame(() => {
+
+window.requestAnimationFrame(() => {
+
             input.focus();
+
           });
+
         }
+
       });
 
       input.addEventListener("input", () => {
+
         const inputCode =
+
           cleanAffiliateCodeForInput(
+
             input.value
+
           );
 
         input.value = inputCode;
 
-        /*
+/*
+
          * Solo invalidamos comprobaciones en curso.
+
          * El cupón activo no cambia al escribir.
+
          */
+
         affiliateRequestId++;
 
         if (!affiliateState.afiliado) {
+
           status.textContent = "";
+
           status.classList.remove(
+
             "ok",
+
             "error",
+
             "loading"
+
           );
+
           status.style.display = "none";
+
         }
+
       });
 
       button.addEventListener("click", async () => {
+
         await applyAffiliateCode();
+
       });
 
       input.addEventListener("keydown", async event => {
+
         if (event.key !== "Enter") {
+
           return;
+
         }
 
-        event.preventDefault();
+event.preventDefault();
+
         await applyAffiliateCode();
+
       });
 
     }
@@ -1835,10 +2236,14 @@ Boolean(message)
     async function initGooglePlaces() {
       const container =
         document.getElementById("direccion-autocomplete");
+
       const hiddenInput =
         document.getElementById("direccion");
 
-      if (!container || !hiddenInput) {
+      const suggestionsBox =
+        document.getElementById("address-suggestions");
+
+      if (!container || !hiddenInput || !suggestionsBox) {
         return;
       }
 
@@ -1887,12 +2292,205 @@ Boolean(message)
         });
 
         container.replaceChildren(input);
+        suggestionsBox.replaceChildren();
+        suggestionsBox.hidden = true;
+        suggestionsBox.classList.remove("visible");
 
         if (message) {
           setAddressStatus(message, "error");
         }
 
         window.googlePlacesReady = false;
+      }
+
+      let input = null;
+      let activeSuggestions = [];
+      let latestRequestId = 0;
+      let sessionToken = null;
+
+      function hideSuggestions() {
+        suggestionsBox.replaceChildren();
+        suggestionsBox.hidden = true;
+        suggestionsBox.classList.remove("visible");
+        if (input) {
+          input.setAttribute("aria-expanded", "false");
+        }
+      }
+
+      function showSuggestions() {
+        suggestionsBox.hidden = false;
+        suggestionsBox.classList.add("visible");
+        if (input) {
+          input.setAttribute("aria-expanded", "true");
+        }
+      }
+
+      function getSuggestionText(value) {
+        return value?.text?.toString?.() ||
+          String(value?.text || "");
+      }
+
+      async function selectSuggestion(suggestion, AutocompleteSessionToken) {
+        const prediction = suggestion?.placePrediction;
+        if (!prediction) {
+          return;
+        }
+
+        try {
+          const place = prediction.toPlace();
+
+          await place.fetchFields({
+            fields: [
+              "addressComponents",
+              "formattedAddress"
+            ]
+          });
+
+          const components =
+            place.addressComponents || [];
+
+          const street =
+            getComponent(components, "route");
+
+          const streetNumber =
+            getComponent(
+              components,
+              "street_number"
+            );
+
+          const city =
+            getComponent(
+              components,
+              "locality"
+            ) ||
+            getComponent(
+              components,
+              "postal_town"
+            ) ||
+            getComponent(
+              components,
+              "sublocality"
+            ) ||
+            getComponent(
+              components,
+              "sublocality_level_1"
+            ) ||
+            getComponent(
+              components,
+              "administrative_area_level_2"
+            );
+
+          const postalCode =
+            getComponent(
+              components,
+              "postal_code"
+            );
+
+          const direccion =
+            [street, streetNumber]
+              .filter(Boolean)
+              .join(" ")
+              .trim() ||
+            place.formattedAddress ||
+            getSuggestionText(prediction) ||
+            input.value ||
+            "";
+
+          input.value = direccion;
+          hiddenInput.value = direccion;
+
+          const cityInput =
+            document.getElementById("ciudad");
+
+          const postalInput =
+            document.getElementById(
+              "codigoPostal"
+            );
+
+          if (cityInput) {
+            cityInput.value = city;
+          }
+
+          if (postalInput) {
+            postalInput.value = postalCode;
+          }
+
+          activeSuggestions = [];
+          hideSuggestions();
+          setAddressStatus("", "");
+
+          sessionToken = new AutocompleteSessionToken();
+        } catch (error) {
+          console.error(
+            "Google Places selection error:",
+            error
+          );
+
+          hiddenInput.value = "";
+          setAddressStatus(
+            "No se pudieron completar los datos de la dirección.",
+            "error"
+          );
+        }
+      }
+
+      function renderSuggestions(suggestions, AutocompleteSessionToken) {
+        activeSuggestions = (suggestions || [])
+          .filter(suggestion => Boolean(suggestion?.placePrediction));
+
+        suggestionsBox.replaceChildren();
+
+        if (!activeSuggestions.length) {
+          hideSuggestions();
+          return;
+        }
+
+        activeSuggestions.forEach((suggestion, index) => {
+          const prediction = suggestion.placePrediction;
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "address-suggestion";
+          button.setAttribute("role", "option");
+          button.dataset.index = String(index);
+
+          const main = document.createElement("span");
+          main.className = "address-suggestion-main";
+          main.textContent =
+            prediction.mainText?.text ||
+            getSuggestionText(prediction);
+
+          const secondary = document.createElement("span");
+          secondary.className = "address-suggestion-secondary";
+          secondary.textContent =
+            prediction.secondaryText?.text || "";
+
+          button.append(main);
+
+          if (secondary.textContent) {
+            button.append(secondary);
+          }
+
+          button.addEventListener("mousedown", event => {
+            event.preventDefault();
+          });
+
+          button.addEventListener("click", () => {
+            selectSuggestion(
+              activeSuggestions[index],
+              AutocompleteSessionToken
+            );
+          });
+
+          suggestionsBox.append(button);
+        });
+
+        const attribution = document.createElement("div");
+        attribution.className = "address-powered-by-google";
+        attribution.textContent = "Powered by Google";
+        suggestionsBox.append(attribution);
+
+        showSuggestions();
       }
 
       try {
@@ -1903,170 +2501,193 @@ Boolean(message)
         }
 
         const {
-          PlaceAutocompleteElement
+          AutocompleteSessionToken,
+          AutocompleteSuggestion
         } = await google.maps.importLibrary("places");
 
-        if (!PlaceAutocompleteElement) {
+        if (!AutocompleteSuggestion || !AutocompleteSessionToken) {
           throw new Error(
-            "PlaceAutocompleteElement no está disponible."
+            "El autocompletado de Google Places no está disponible."
           );
         }
 
-        const placeAutocomplete =
-          new PlaceAutocompleteElement({
-            includedRegionCodes: ["es"],
-            requestedLanguage: "es",
-            requestedRegion: "es",
-            placeholder:
-              "Empieza a escribir tu dirección...",
-            noInputIcon: true,
-            name: "direccion-autocomplete"
-          });
+        sessionToken = new AutocompleteSessionToken();
 
-        placeAutocomplete.style.width = "100%";
-        placeAutocomplete.style.height = "48px";
-        placeAutocomplete.style.minHeight = "48px";
-        placeAutocomplete.style.fontFamily =
-          '"Outfit", Arial, sans-serif';
-        placeAutocomplete.style.fontSize = "16px";
-        placeAutocomplete.style.color = "#fff";
-        placeAutocomplete.style.colorScheme = "dark";
+        input = document.createElement("input");
+        input.type = "text";
+        input.id = "direccion-input";
+        input.name = "direccion-visible";
+        input.autocomplete = "off";
+        input.inputMode = "text";
+        input.placeholder = "Empieza a escribir tu dirección...";
+        input.setAttribute("aria-label", "Dirección");
+        input.setAttribute("aria-autocomplete", "list");
+        input.setAttribute("aria-controls", "address-suggestions");
+        input.setAttribute("aria-expanded", "false");
+        input.setAttribute("role", "combobox");
 
-        container.replaceChildren(placeAutocomplete);
+        container.replaceChildren(input);
 
-        placeAutocomplete.addEventListener(
-          "gmp-select",
-          async event => {
-            try {
-              const prediction =
-                event?.placePrediction;
+        input.addEventListener("input", async () => {
+          const query = String(input.value || "");
 
-              if (!prediction) {
-                throw new Error(
-                  "No se recibió la dirección seleccionada."
-                );
-              }
+          hiddenInput.value = query;
+          setAddressStatus("", "");
 
-              const place = prediction.toPlace();
-
-              await place.fetchFields({
-                fields: [
-                  "addressComponents",
-                  "formattedAddress"
-                ]
-              });
-
-              const components =
-                place.addressComponents || [];
-
-              const street =
-                getComponent(components, "route");
-
-              const streetNumber =
-                getComponent(
-                  components,
-                  "street_number"
-                );
-
-              const city =
-                getComponent(
-                  components,
-                  "locality"
-                ) ||
-                getComponent(
-                  components,
-                  "postal_town"
-                ) ||
-                getComponent(
-                  components,
-                  "sublocality"
-                ) ||
-                getComponent(
-                  components,
-                  "sublocality_level_1"
-                ) ||
-                getComponent(
-                  components,
-                  "administrative_area_level_2"
-                );
-
-              const postalCode =
-                getComponent(
-                  components,
-                  "postal_code"
-                );
-
-              const direccion =
-                [street, streetNumber]
-                  .filter(Boolean)
-                  .join(" ")
-                  .trim() ||
-                place.formattedAddress ||
-                placeAutocomplete.value ||
-                "";
-
-              placeAutocomplete.value =
-                direccion;
-
-              hiddenInput.value =
-                direccion;
-
-              const cityInput =
-                document.getElementById("ciudad");
-
-              const postalInput =
-                document.getElementById(
-                  "codigoPostal"
-                );
-
-              if (cityInput) {
-                cityInput.value = city;
-              }
-
-              if (postalInput) {
-                postalInput.value = postalCode;
-              }
-
-              setAddressStatus("", "");
-            } catch (error) {
-              console.error(
-                "Google Places selection error:",
-                error
-              );
-
-              hiddenInput.value = "";
-
-              setAddressStatus(
-                "No se pudieron completar los datos de la dirección.",
-                "error"
-              );
-            }
+          if (!query.trim()) {
+            activeSuggestions = [];
+            hideSuggestions();
+            return;
           }
-        );
 
-        placeAutocomplete.addEventListener(
-          "gmp-error",
-          event => {
+          if (query.trim().length < 3) {
+            activeSuggestions = [];
+            hideSuggestions();
+            return;
+          }
+
+          const requestId = ++latestRequestId;
+
+          try {
+            const request = {
+              input: query,
+              includedRegionCodes: ["es"],
+              language: "es",
+              region: "es",
+              sessionToken
+            };
+
+            const { suggestions } =
+              await AutocompleteSuggestion.fetchAutocompleteSuggestions(
+                request
+              );
+
+            if (requestId !== latestRequestId) {
+              return;
+            }
+
+            renderSuggestions(
+              suggestions,
+              AutocompleteSessionToken
+            );
+          } catch (error) {
+            if (requestId !== latestRequestId) {
+              return;
+            }
+
             console.error(
-              "Google Places backend error:",
-              event
+              "Google Places autocomplete error:",
+              error
             );
 
+            activeSuggestions = [];
+            hideSuggestions();
             setAddressStatus(
               "Google Places no está disponible. Comprueba que Places API (New) está habilitada y permitida para esta clave.",
               "error"
             );
           }
-        );
+        });
 
-        placeAutocomplete.addEventListener(
-          "input",
-          () => {
-            hiddenInput.value =
-              String(placeAutocomplete.value || "");
-            setAddressStatus("", "");
+        input.addEventListener("focus", () => {
+          if (activeSuggestions.length) {
+            showSuggestions();
           }
-        );
+        });
+
+        input.addEventListener("keydown", event => {
+          if (!activeSuggestions.length) {
+            if (event.key === "Escape") {
+              hideSuggestions();
+            }
+            return;
+          }
+
+          const focusedButton =
+            suggestionsBox.querySelector(
+              ".address-suggestion:focus"
+            );
+
+          const currentIndex = focusedButton
+            ? Number.parseInt(focusedButton.dataset.index || "-1", 10)
+            : -1;
+
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
+
+            const nextIndex = Math.min(
+              currentIndex + 1,
+              activeSuggestions.length - 1
+            );
+
+            suggestionsBox
+              .querySelector(
+                `.address-suggestion[data-index="${nextIndex}"]`
+              )
+              ?.focus();
+          } else if (event.key === "Escape") {
+            event.preventDefault();
+            hideSuggestions();
+          }
+        });
+
+        suggestionsBox.addEventListener("keydown", event => {
+          const button =
+            event.target?.closest?.(".address-suggestion");
+
+          if (!button) {
+            return;
+          }
+
+          const index = Number(button.dataset.index);
+
+          if (event.key === "Enter") {
+            event.preventDefault();
+            selectSuggestion(
+              activeSuggestions[index],
+              AutocompleteSessionToken
+            );
+          } else if (event.key === "ArrowDown") {
+            event.preventDefault();
+            const nextIndex = Math.min(
+              index + 1,
+              activeSuggestions.length - 1
+            );
+            suggestionsBox
+              .querySelector(
+                `.address-suggestion[data-index="${nextIndex}"]`
+              )
+              ?.focus();
+          } else if (event.key === "ArrowUp") {
+            event.preventDefault();
+            if (index <= 0) {
+              input.focus();
+              return;
+            }
+            suggestionsBox
+              .querySelector(
+                `.address-suggestion[data-index="${index - 1}"]`
+              )
+              ?.focus();
+          } else if (event.key === "Escape") {
+            event.preventDefault();
+            input.focus();
+            hideSuggestions();
+          }
+        });
+
+        input.addEventListener("blur", () => {
+          window.setTimeout(() => {
+            if (
+              document.activeElement?.closest?.(
+                "#address-suggestions"
+              )
+            ) {
+              return;
+            }
+            hideSuggestions();
+          }, 150);
+        });
 
         window.googlePlacesReady = true;
       } catch (error) {
@@ -2214,8 +2835,11 @@ String(
       affiliateRequestId++;
 
       affiliateState = {
+
         codigo: "",
+
         afiliado: null
+
       };
 
       if (!cart.length) {
@@ -2539,63 +3163,105 @@ Number(item.cantidad || 1)
               </div>
 
               <button
+
                 type="button"
+
                 class="affiliate-toggle"
+
                 id="affiliateToggleButton"
+
                 aria-expanded="false"
+
                 aria-controls="affiliateBox"
+
               >
+
                 ¿Tienes un código de descuento?
+
               </button>
 
               <div
+
                 class="affiliate-box"
+
                 id="affiliateBox"
+
                 hidden
+
               >
+
                 <div class="affiliate-title">
+
                   Código de descuento
+
                 </div>
 
                 <div class="affiliate-row">
+
                   <input
+
                     id="affiliateCode"
+
                     type="text"
+
                     inputmode="text"
+
                     autocomplete="off"
+
                     placeholder="Ej. carlos5"
+
                     maxlength="40"
+
                     aria-label="Código de descuento"
+
                   >
 
                   <button
+
                     class="affiliate-apply"
+
                     type="button"
+
                     id="affiliateApplyButton"
+
                   >
+
                     Aplicar
+
                   </button>
+
                 </div>
 
                 <div
+
                   id="affiliateStatus"
+
                   class="affiliate-status"
+
                   aria-live="polite"
+
                 ></div>
 
               </div>
 
 
+
               <div
+
                 class="row"
+
                 id="affiliateDiscountRow"
+
                 style="display:none"
+
               >
 
                 <span>Descuento afiliado</span>
 
                 <strong id="affiliateDiscountAmount">
+
                   ${euro(0)}
+
                 </strong>
 
               </div>
@@ -2613,7 +3279,9 @@ Number(item.cantidad || 1)
                 <span>Total</span>
 
                 <strong id="checkoutTotal">
+
                   ${euro(subtotal)}
+
                 </strong>
 
               </div>
@@ -2770,13 +3438,20 @@ new FormData(form).entries()
 
       }
 
-      /*
+/*
+
        * El pedido utiliza el último cupón aplicado correctamente.
+
        * El texto que el usuario esté escribiendo todavía es un borrador.
+
        */
+
       const currentAffiliateCode =
+
         cleanAffiliateCodeForInput(
+
           affiliateState.codigo || ""
+
         );
 
       const originalButton =
@@ -2786,6 +3461,7 @@ new FormData(form).entries()
       button.disabled = true;
 
       button.innerHTML =
+
         "Comprobando dirección...";
 
       try {
@@ -2793,15 +3469,22 @@ new FormData(form).entries()
         await validateShippingAddress();
 
         const subtotalOriginal = totalCart(cart);
+
         const descuento = calculateAffiliateDiscount(
+
           subtotalOriginal
-        );
-        const subtotalPagado = Math.max(
-          0,
-          subtotalOriginal - descuento
+
         );
 
-        localStorage.setItem(
+        const subtotalPagado = Math.max(
+
+          0,
+
+          subtotalOriginal - descuento
+
+        );
+
+localStorage.setItem(
 
           "vesiraCheckout",
 
@@ -2850,27 +3533,47 @@ String(
             carrito: cart,
 
             afiliado: affiliateState.afiliado
+
               ? {
+
                   id:
+
                     affiliateState.afiliado.id || null,
+
                   nombre:
+
                     affiliateState.afiliado.nombre || "",
+
                   codigo:
+
                     affiliateState.codigo || "",
+
                   descuentoPorcentaje:
-                    Number(
+
+Number(
+
                       affiliateState.afiliado
+
                         .descuento_porcentaje || 0
+
                     ),
+
                   comisionPorcentaje:
-                    Number(
+
+Number(
+
                       affiliateState.afiliado
+
                         .comision_porcentaje || 0
+
                     )
+
                 }
+
               : null,
 
             codigoAfiliado:
+
               affiliateState.codigo || null,
 
             subtotalOriginal,
