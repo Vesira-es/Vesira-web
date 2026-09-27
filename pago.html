@@ -1885,6 +1885,7 @@ class="affiliate-payment-discount"
     let cart = [];
 
     let clientSecret = null;
+    let codigoPedido = null;
 
     let paymentIntentId = null;
 
@@ -2658,9 +2659,13 @@ item.image ??
 
       clientSecret = data.clientSecret;
 
-      paymentIntentId = data.paymentIntentId || null;
+paymentIntentId =
+  data.paymentIntentId || null;
 
-      affiliatePaymentPricing = {
+codigoPedido =
+  data.codigoPedido || null;
+
+affiliatePaymentPricing = {
 
         subtotalOriginal:
 
@@ -3120,11 +3125,16 @@ JSON.stringify({
 
           descuento: getAffiliateDiscountAmount(),
 
-          codigoAfiliado: getAffiliateCode() || null,
+          codigoAfiliado:
+  getAffiliateCode() || null,
 
-          paymentIntentId,
+codigoPedido:
+  codigoPedido || null,
 
-          date: new Date().toISOString()
+paymentIntentId,
+
+date:
+  new Date().toISOString()
 
         })
 
@@ -3398,9 +3408,14 @@ country || ""
 
         codigoAfiliado: getAffiliateCode() || null,
 
-        paymentIntentId: paymentIntent?.id || paymentIntentId || null,
+codigoPedido: codigoPedido || null,
 
-        date: new Date().toISOString()
+paymentIntentId:
+  paymentIntent?.id ||
+  paymentIntentId ||
+  null,
+
+date: new Date().toISOString()
 
       };
 

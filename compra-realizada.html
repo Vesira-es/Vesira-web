@@ -283,7 +283,7 @@
       min-width: 0;
       margin: 0 auto;
       display: grid;
-      grid-template-rows: auto minmax(0, 1fr) auto;
+      grid-template-rows: minmax(0, 1fr) auto;
       align-items: center;
     }
 
@@ -1283,15 +1283,7 @@
   <main class="page">
     <div class="wrap">
 
-      <section class="hero">
-        <div class="ok">✓</div>
-
-        <h1>Compra realizada correctamente</h1>
-
-        <p class="subtitle" id="subtitle">
-          Gracias por comprar en Vesira. Tu pedido ha sido recibido.
-        </p>
-      </section>
+     
 
       <section class="printer-stage" aria-label="Ticket de compra saliendo de una impresora">
 
@@ -1310,18 +1302,50 @@
             </header>
 
             <div class="ticket-status ticket-content">
-              <strong>Pago confirmado</strong>
-              <span id="ticket-date"></span>
-            </div>
+
+  <strong>Pago confirmado</strong>
+
+  <span id="ticket-order-code"></span>
+
+  <span id="ticket-date"></span>
+
+</div>
 
             <section class="ticket-items ticket-content" id="ticket-items"></section>
 
             <div class="ticket-total-wrap ticket-content">
-              <div class="total-row">
-                <span class="total-label">Total pagado</span>
-                <strong class="total" id="ticket-total">0,00 €</strong>
-              </div>
-            </div>
+
+  <div
+    class="total-row"
+    id="ticket-discount-row"
+    style="display: none;"
+  >
+
+    <span class="total-label">Descuento</span>
+
+    <strong
+      class="total"
+      id="ticket-discount"
+    >
+      -0,00 €
+    </strong>
+
+  </div>
+
+  <div class="total-row">
+
+    <span class="total-label">Total pagado</span>
+
+    <strong
+      class="total"
+      id="ticket-total"
+    >
+      0,00 €
+    </strong>
+
+  </div>
+
+</div>
 
             <footer class="ticket-foot ticket-content">
               Gracias por confiar en Vesira.<br>
@@ -1398,13 +1422,36 @@
       </table>
 
       <div class="receipt-total">
-        <div class="receipt-total-box">
-          <div class="receipt-total-row">
-            <span>Total pagado</span>
-            <span id="receipt-total">0,00 €</span>
-          </div>
-        </div>
-      </div>
+
+  <div class="receipt-total-box">
+
+    <div
+      class="receipt-total-row"
+      id="receipt-discount-row"
+      style="display: none;"
+    >
+
+      <span>Descuento</span>
+
+      <span id="receipt-discount">
+        -0,00 €
+      </span>
+
+    </div>
+
+    <div class="receipt-total-row">
+
+      <span>Total pagado</span>
+
+      <span id="receipt-total">
+        0,00 €
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
 
       <div class="receipt-footer">
         Este documento acredita la recepción del pago asociado al pedido indicado.
@@ -1476,6 +1523,22 @@
         const items = getItems(purchase);
         const total = getTotal(purchase, items);
 
+        const discount = Number(purchase.descuento) || 0;
+
+const discountRow =
+  document.getElementById("ticket-discount-row");
+
+const discountElement =
+  document.getElementById("ticket-discount");
+
+if (discount > 0) {
+  discountRow.style.display = "flex";
+  discountElement.textContent =
+    "-" + formatPrice(discount);
+} else {
+  discountRow.style.display = "none";
+}
+
         const date = purchase.date ? new Date(purchase.date) : new Date();
 
         const formattedDate = new Intl.DateTimeFormat("es-ES", {
@@ -1483,12 +1546,36 @@
           timeStyle: "short"
         }).format(date);
 
-        document.getElementById("ticket-date").textContent = formattedDate;
-        document.getElementById("ticket-total").textContent = formatPrice(total);
+        document.getElementById("ticket-order-code").textContent =
+  purchase.codigoPedido
+    ? "Pedido #" + purchase.codigoPedido
+    : "";
 
-        document.getElementById("receipt-date").textContent = formattedDate;
-        document.getElementById("receipt-total").textContent = formatPrice(total);
+document.getElementById("ticket-date").textContent =
+  formattedDate;
 
+document.getElementById("ticket-total").textContent =
+  formatPrice(total);
+
+document.getElementById("receipt-date").textContent =
+  formattedDate;
+
+const receiptDiscountRow =
+  document.getElementById("receipt-discount-row");
+
+const receiptDiscountElement =
+  document.getElementById("receipt-discount");
+
+if (discount > 0) {
+  receiptDiscountRow.style.display = "flex";
+  receiptDiscountElement.textContent =
+    "-" + formatPrice(discount);
+} else {
+  receiptDiscountRow.style.display = "none";
+}
+
+document.getElementById("receipt-total").textContent =
+  formatPrice(total);
         const customerName = [
           purchase.cliente?.nombre,
           purchase.cliente?.apellidos
