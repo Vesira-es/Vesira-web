@@ -438,104 +438,157 @@
   <div class="toast" id="toast">Menú</div>
 
 
-  <script>
+<script>
+  /* ============================
+     TOAST
+  ============================ */
 
-    /* ============================
-       TOAST
-       ============================ */
+  const toast = document.getElementById("toast");
 
-    const toast = document.getElementById("toast");
+  function mostrarToast(mensaje) {
+    toast.textContent = mensaje;
+    toast.classList.add("visible");
 
-    function mostrarToast(mensaje) {
+    clearTimeout(window._vesiraToast);
 
-      toast.textContent = mensaje;
-
-      toast.classList.add("visible");
-
-      clearTimeout(window._vesiraToast);
-
-      window._vesiraToast = setTimeout(() => {
-
-        toast.classList.remove("visible");
-
-      }, 1600);
-
-    }
+    window._vesiraToast = setTimeout(() => {
+      toast.classList.remove("visible");
+    }, 1600);
+  }
 
 
-    /* ============================
-       FORMULARIO
-       ============================ */
+  /* ============================
+     FORMULARIO
+  ============================ */
 
-    const contactForm = document.getElementById("contactForm");
-    const submitButton = document.getElementById("submitButton");
-    const statusElement = document.getElementById("status");
+  const contactForm =
+    document.getElementById("contactForm");
 
+  const submitButton =
+    document.getElementById("submitButton");
 
-    /* URL DE GOOGLE APPS SCRIPT */
-
-    const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbwV2h4j-lU_BAZUB8uQ90nDQSFdvZ2EV1Sfjz2KAHS2HL9MOHIPMO3QTGdy_egoCyIF_A/exec";
-
-
-    /* ENVÍO DEL FORMULARIO */
-
-    contactForm.addEventListener("submit", async (e) => {
-
-      e.preventDefault();
+  const statusElement =
+    document.getElementById("status");
 
 
-      const formData = new FormData(contactForm);
+  /* ============================
+     GOOGLE APPS SCRIPT
+  ============================ */
+
+  const SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbwV2h4j-lU_BAZUB8uQ90nDQSFdvZ2EV1Sfjz2KAHS2HL9MOHIPMO3QTGdy_egoCyIF_A/exec";
 
 
-      submitButton.disabled = true;
-      submitButton.textContent = "Enviando…";
-      statusElement.textContent = "";
+  /* ============================
+     ENVÍO
+  ============================ */
+
+  contactForm.addEventListener("submit", (e) => {
+
+    e.preventDefault();
 
 
-      try {
-
-        await fetch(SCRIPT_URL, {
-
-          method: "POST",
-
-          mode: "no-cors",
-
-          body: new URLSearchParams(formData)
-
-        });
+    const formData =
+      new FormData(contactForm);
 
 
-        contactForm.reset();
+    submitButton.disabled = true;
+
+    submitButton.textContent =
+      "Enviando…";
+
+    statusElement.textContent =
+      "";
 
 
-        statusElement.textContent =
-          "Mensaje enviado correctamente.";
+    /*
+     * Enviamos el mensaje sin esperar
+     * a que Google responda.
+     *
+     * Esto evita el retraso que tenías.
+     */
+
+    const datos =
+      new URLSearchParams(formData);
 
 
-      } catch (error) {
+    const enviado =
+      navigator.sendBeacon(
+        SCRIPT_URL,
+        datos
+      );
+
+
+    /*
+     * Si el navegador ha aceptado el envío,
+     * mostramos inmediatamente el mensaje.
+     */
+
+    if (enviado) {
+
+      contactForm.reset();
+
+      statusElement.textContent =
+        "Mensaje enviado correctamente.";
+
+      mostrarToast(
+        "Mensaje enviado correctamente."
+      );
+
+
+    } else {
+
+      /*
+       * Fallback por si sendBeacon no puede
+       * realizar el envío.
+       */
+
+      fetch(SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: datos,
+        keepalive: true
+      })
+      .catch(error => {
 
         console.error(
           "Error al enviar el formulario:",
           error
         );
 
-
         statusElement.textContent =
           "No se pudo enviar. Inténtalo de nuevo.";
 
-      } finally {
+      });
 
-        submitButton.disabled = false;
 
-        submitButton.textContent =
-          "Enviar mensaje";
+      /*
+       * No bloqueamos la interfaz.
+       */
 
-      }
+      contactForm.reset();
 
-    });
+      statusElement.textContent =
+        "Mensaje enviado correctamente.";
 
-  </script>
+      mostrarToast(
+        "Mensaje enviado correctamente."
+      );
+
+    }
+
+
+    /*
+     * Reactivar botón inmediatamente.
+     */
+
+    submitButton.disabled = false;
+
+    submitButton.textContent =
+      "Enviar mensaje";
+
+  });
+</script>
 
 
   <!-- Navbar global de VESIRA -->
