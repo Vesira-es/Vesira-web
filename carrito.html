@@ -1,594 +1,843 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Carrito · Vesira</title>
 
-<title>Carrito · Vesira</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
+    rel="stylesheet"
+  >
 
-<link
-  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
-  rel="stylesheet"
->
+  <style>
+    :root {
+      --f: #0a0a0a;
+      --t: #fff;
+      --s: #8c8c8c;
+      --b: rgba(255,255,255,.1);
+      --c: #141414;
+    }
 
-<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-:root{
-  --f:#0a0a0a;
-  --t:#fff;
-  --s:#8c8c8c;
-  --b:rgba(255,255,255,.1);
-  --c:#141414;
-}
+    body {
+      background: var(--f);
+      color: var(--t);
+      font-family: Outfit, Arial, sans-serif;
+    }
 
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-body{
-  background:var(--f);
-  color:var(--t);
-  font-family:Outfit,Arial,sans-serif;
-}
+    button {
+      font: inherit;
+    }
 
-a{
-  color:inherit;
-  text-decoration:none;
-}
+    .wrap {
+      width: min(1100px, calc(100% - 28px));
+      margin: auto;
+      padding: 115px 0 80px;
+    }
 
-button{
-  font:inherit;
-}
+    .head {
+      margin-bottom: 28px;
+    }
 
-.wrap{
-  width:min(1100px,calc(100% - 28px));
-  margin:auto;
-  padding:115px 0 80px;
-}
+    .eyebrow {
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--s);
+      margin-bottom: 10px;
+    }
 
-.head{
-  margin-bottom:28px;
-}
+    h1 {
+      font-family: Bricolage Grotesque, Arial, sans-serif;
+      font-weight: 400;
+      font-size: clamp(52px, 7vw, 88px);
+      letter-spacing: -.075em;
+      line-height: .82;
+    }
 
-.eyebrow{
-  font-size:9px;
-  letter-spacing:.22em;
-  text-transform:uppercase;
-  color:var(--s);
-  margin-bottom:10px;
-}
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 18px;
+      align-items: start;
+    }
 
-h1{
-  font-family:Bricolage Grotesque,Arial,sans-serif;
-  font-weight:400;
-  font-size:clamp(52px,7vw,88px);
-  letter-spacing:-.075em;
-  line-height:.82;
-}
+    .items {
+      display: grid;
+      gap: 10px;
+    }
 
-.layout{
-  display:grid;
-  grid-template-columns:1fr 330px;
-  gap:18px;
-  align-items:start;
-}
+    .item {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      gap: 16px;
+      padding: 10px;
+      border: 1px solid var(--b);
+      border-radius: 20px;
+      background: #101010;
+    }
 
-.items{
-  display:grid;
-  gap:10px;
-}
+    .img {
+      width: 130px;
+      aspect-ratio: 1 / .9;
+      background: #f2f2ef;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-.item{
-  display:grid;
-  grid-template-columns:130px 1fr auto;
-  gap:16px;
-  padding:10px;
-  border:1px solid var(--b);
-  border-radius:20px;
-  background:#101010;
-}
+    .img img {
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+    }
 
-.img{
-  width:130px;
-  aspect-ratio:1/.9;
-  background:#f2f2ef;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
+    .info h2 {
+      font-family: Bricolage Grotesque, Arial, sans-serif;
+      font-size: 25px;
+      font-weight: 400;
+      letter-spacing: -.05em;
+      margin-bottom: 6px;
+    }
 
-.img img{
-  width:88%;
-  height:88%;
-  object-fit:contain;
-}
+    .price {
+      font-size: 11px;
+      color: var(--s);
+      margin-bottom: 12px;
+    }
 
-.info h2{
-  font-family:Bricolage Grotesque,Arial,sans-serif;
-  font-size:25px;
-  font-weight:400;
-  letter-spacing:-.05em;
-  margin-bottom:6px;
-}
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-.price{
-  font-size:11px;
-  color:var(--s);
-  margin-bottom:12px;
-}
+    .qty {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--b);
+      border-radius: 999px;
+    }
 
-.controls{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
+    .qty button {
+      width: 30px;
+      height: 29px;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+    }
 
-.qty{
-  display:flex;
-  align-items:center;
-  border:1px solid var(--b);
-  border-radius:999px;
-}
+    .qty span {
+      min-width: 28px;
+      text-align: center;
+      font-size: 10px;
+    }
 
-.qty button{
-  width:30px;
-  height:29px;
-  border:0;
-  background:transparent;
-  color:#fff;
-  cursor:pointer;
-}
+    .del {
+      border: 0;
+      background: transparent;
+      color: #707070;
+      font-size: 9px;
+      cursor: pointer;
+    }
 
-.qty span{
-  min-width:28px;
-  text-align:center;
-  font-size:10px;
-}
+    .totalitem {
+      font-size: 12px;
+      white-space: nowrap;
+    }
 
-.del{
-  border:0;
-  background:transparent;
-  color:#707070;
-  font-size:9px;
-  cursor:pointer;
-}
+    .summary {
+      position: sticky;
+      top: 90px;
+      align-self: start;
+      padding: 17px 19px;
+      border: 1px solid var(--b);
+      border-radius: 22px;
+      background: #101010;
+    }
 
-.totalitem{
-  font-size:12px;
-  white-space:nowrap;
-}
+    .summary h2 {
+      font-family: Bricolage Grotesque, Arial, sans-serif;
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: -.05em;
+      margin-bottom: 14px;
+    }
 
-.summary{
-  position:sticky;
-  top:90px;
-  align-self:start;
-  padding:17px 19px;
-  border:1px solid var(--b);
-  border-radius:22px;
-  background:#101010;
-}
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 0;
+      color: var(--s);
+      font-size: 11px;
+    }
 
-.summary h2{
-  font-family:Bricolage Grotesque,Arial,sans-serif;
-  font-size:26px;
-  font-weight:400;
-  letter-spacing:-.05em;
-  margin-bottom:14px;
-}
+    .buy {
+      width: 100%;
+      min-height: 50px;
+      margin-top: 15px;
+      border: 0;
+      border-radius: 999px;
+      background: #fff;
+      color: #0a0a0a;
+      font-size: 11px;
+      cursor: pointer;
+    }
 
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:3px 0;
-  color:var(--s);
-  font-size:11px;
-}
+    .continue {
+      display: block;
+      margin-top: 11px;
+      color: var(--s);
+      font-size: 9px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
 
-.buy{
-  width:100%;
-  min-height:50px;
-  margin-top:15px;
-  border:0;
-  border-radius:999px;
-  background:#fff;
-  color:#0a0a0a;
-  font-size:11px;
-  cursor:pointer;
-}
+    .empty {
+      border: 1px solid var(--b);
+      border-radius: 22px;
+      padding: 70px 20px;
+      text-align: center;
+    }
 
-.continue{
-  display:block;
-  margin-top:11px;
-  color:var(--s);
-  font-size:9px;
-  text-decoration:underline;
-  text-underline-offset:4px;
-}
+    .empty h2 {
+      font-family: Bricolage Grotesque, Arial, sans-serif;
+      font-size: 40px;
+      font-weight: 400;
+      letter-spacing: -.06em;
+      margin-bottom: 10px;
+    }
 
-.empty{
-  border:1px solid var(--b);
-  border-radius:22px;
-  padding:70px 20px;
-  text-align:center;
-}
+    .empty p {
+      color: var(--s);
+      font-size: 11px;
+      margin-bottom: 20px;
+    }
 
-.empty h2{
-  font-family:Bricolage Grotesque,Arial,sans-serif;
-  font-size:40px;
-  font-weight:400;
-  letter-spacing:-.06em;
-  margin-bottom:10px;
-}
+    .empty a {
+      display: inline-flex;
+      padding: 0 20px;
+      height: 46px;
+      align-items: center;
+      border-radius: 999px;
+      background: #fff;
+      color: #0a0a0a;
+      font-size: 10px;
+    }
 
-.empty p{
-  color:var(--s);
-  font-size:11px;
-  margin-bottom:20px;
-}
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translate(-50%, 15px);
+      opacity: 0;
+      background: #161616;
+      border: 1px solid var(--b);
+      border-radius: 999px;
+      padding: 11px 15px;
+      font-size: 10px;
+      transition: .25s;
+      z-index: 20;
+      pointer-events: none;
+    }
 
-.empty a{
-  display:inline-flex;
-  padding:0 20px;
-  height:46px;
-  align-items:center;
-  border-radius:999px;
-  background:#fff;
-  color:#0a0a0a;
-  font-size:10px;
-}
+    .toast.on {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
 
-.toast{
-  position:fixed;
-  bottom:20px;
-  left:50%;
-  transform:translate(-50%,15px);
-  opacity:0;
-  background:#161616;
-  border:1px solid var(--b);
-  border-radius:999px;
-  padding:11px 15px;
-  font-size:10px;
-  transition:.25s;
-  z-index:20;
-}
+    @media (max-width: 850px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
 
-.toast.on{
-  opacity:1;
-  transform:translate(-50%,0);
-}
+      .summary {
+        position: static;
+      }
+    }
 
-@media(max-width:850px){
+    @media (max-width: 600px) {
+      .wrap {
+        padding-top: 100px;
+      }
 
-  .layout{
-    grid-template-columns:1fr;
-  }
+      .item {
+        grid-template-columns: 92px 1fr;
+        gap: 10px;
+      }
 
-  .summary{
-    position:static;
-  }
+      .img {
+        width: 92px;
+      }
 
-}
+      .info h2 {
+        font-size: 20px;
+      }
 
-@media(max-width:600px){
+      .totalitem {
+        grid-column: 2;
+        justify-self: end;
+        margin-top: -24px;
+      }
 
-  .wrap{
-    padding-top:100px;
-  }
+      .summary {
+        padding: 15px 16px;
+      }
 
-  .item{
-    grid-template-columns:92px 1fr;
-    gap:10px;
-  }
+      .summary h2 {
+        font-size: 24px;
+        margin-bottom: 12px;
+      }
 
-  .img{
-    width:92px;
-  }
-
-  .info h2{
-    font-size:20px;
-  }
-
-  .totalitem{
-    grid-column:2;
-    justify-self:end;
-    margin-top:-24px;
-  }
-
-  .summary{
-    padding:15px 16px;
-  }
-
-  .summary h2{
-    font-size:24px;
-    margin-bottom:12px;
-  }
-
-  .empty h2{
-    font-size:34px;
-  }
-
-}
-
-</style>
-
+      .empty h2 {
+        font-size: 34px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<script src="vesira-navbar.js"></script>
+  <!-- NAVBAR -->
+  <script src="vesira-navbar.js"></script>
 
-<main class="wrap">
+  <main class="wrap">
 
-  <header class="head">
+    <header class="head">
+      <h1>Tu carrito</h1>
+    </header>
 
-    <h1>Tu carrito</h1>
+    <div id="content"></div>
 
-  </header>
+  </main>
 
-  <div id="content"></div>
+  <div class="toast" id="toast"></div>
 
-</main>
+  <script>
+    const content = document.getElementById('content');
+    const toast = document.getElementById('toast');
 
-<div class="toast" id="toast"></div>
+    const CART_KEY = 'vesiraCarrito';
 
-<script>
 
-const content = document.getElementById('content');
-const toast = document.getElementById('toast');
+    /* =========================================================
+       LEER CARRITO
+    ========================================================= */
 
-function getCart(){
+    function getCart() {
+      try {
+        const raw = localStorage.getItem(CART_KEY);
 
-  try{
+        if (!raw) {
+          return [];
+        }
 
-    return JSON.parse(
-      localStorage.getItem('vesiraCarrito') || '[]'
-    );
+        const cart = JSON.parse(raw);
 
-  }catch{
+        return Array.isArray(cart) ? cart : [];
 
-    return [];
+      } catch (error) {
+        console.error('Error leyendo el carrito:', error);
+        return [];
+      }
+    }
 
-  }
 
-}
+    /* =========================================================
+       CONTAR UNIDADES REALES
+       
+       IMPORTANTE:
+       NO usamos cart.length.
 
-function saveCart(c){
+       Ejemplo:
+       1 producto con cantidad 4 = 4
+       2 productos con cantidades 2 y 3 = 5
+    ========================================================= */
 
-  localStorage.setItem(
-    'vesiraCarrito',
-    JSON.stringify(c)
-  );
+    function getCartCount(cart = getCart()) {
+      return cart.reduce((total, item) => {
+        return total + Math.max(
+          0,
+          Number(item.cantidad || 0)
+        );
+      }, 0);
+    }
 
-}
 
-function eur(n){
+    /* =========================================================
+       ACTUALIZAR CONTADOR DE LA NAVBAR
+    ========================================================= */
 
-  return Number(n)
-    .toFixed(2)
-    .replace('.',',') + ' €';
+    function updateNavbarCartCount() {
+      const count = getCartCount();
 
-}
+      /*
+       * Intentamos localizar el contador del carrito
+       * independientemente de cómo esté construido
+       * el navbar.
+       */
+      const counters = document.querySelectorAll(
+        '[data-cart-count], ' +
+        '[data-cart-badge], ' +
+        '.cart-count, ' +
+        '.cart-badge, ' +
+        '#cart-count, ' +
+        '#cart-badge'
+      );
 
-function msg(t){
+      counters.forEach(counter => {
+        counter.textContent = count;
 
-  toast.textContent = t;
+        if (count > 0) {
+          counter.style.display = '';
+        } else {
+          counter.style.display = 'none';
+        }
+      });
 
-  toast.classList.add('on');
+      /*
+       * IMPORTANTE:
+       * Emitimos también un evento global.
+       *
+       * vesira-navbar.js podrá escuchar este evento
+       * para actualizar su propio contador.
+       */
+      window.dispatchEvent(
+        new CustomEvent('vesira:cart-updated', {
+          detail: {
+            cart: getCart(),
+            count: count
+          }
+        })
+      );
+    }
 
-  clearTimeout(window._t);
 
-  window._t = setTimeout(
-    () => toast.classList.remove('on'),
-    1400
-  );
+    /* =========================================================
+       GUARDAR CARRITO
+    ========================================================= */
 
-}
+    function saveCart(cart) {
 
-function qty(id,d){
+      localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+      );
 
-  const c = getCart();
+      /*
+       * Actualización inmediata.
+       */
+      updateNavbarCartCount();
+    }
 
-  const x = c.find(
-    i => String(i.id) === String(id)
-  );
 
-  if(!x) return;
+    /* =========================================================
+       FORMATO DE PRECIO
+    ========================================================= */
 
-  x.cantidad = Math.max(
-    1,
-    Number(x.cantidad || 1) + d
-  );
+    function eur(n) {
+      return Number(n || 0)
+        .toFixed(2)
+        .replace('.', ',') + ' €';
+    }
 
-  saveCart(c);
 
-  render();
+    /* =========================================================
+       TOAST
+    ========================================================= */
 
-}
+    function msg(text) {
 
-function removeItem(id){
+      toast.textContent = text;
 
-  saveCart(
-    getCart().filter(
-      i => String(i.id) !== String(id)
-    )
-  );
+      toast.classList.add('on');
 
-  render();
+      clearTimeout(window._t);
 
-  msg('Producto eliminado');
+      window._t = setTimeout(() => {
+        toast.classList.remove('on');
+      }, 1400);
+    }
 
-}
 
-function render(){
+    /* =========================================================
+       CAMBIAR CANTIDAD
+    ========================================================= */
 
-  const c = getCart();
+    function qty(id, delta) {
 
-  const sub = c.reduce(
-    (s,i) =>
-      s +
-      Number(i.precio || 0) *
-      Number(i.cantidad || 0),
-    0
-  );
+      const cart = getCart();
 
-  if(!c.length){
+      const item = cart.find(
+        i => String(i.id) === String(id)
+      );
 
-    content.innerHTML = `
+      if (!item) {
+        return;
+      }
 
-      <section class="empty">
+      const currentQuantity = Math.max(
+        1,
+        Number(item.cantidad || 1)
+      );
 
-        <h2>Tu carrito está vacío.</h2>
+      item.cantidad = Math.max(
+        1,
+        currentQuantity + Number(delta)
+      );
 
-        <p>Aún no has añadido ningún par.</p>
+      /*
+       * Guarda el nuevo carrito Y actualiza la navbar.
+       */
+      saveCart(cart);
 
-        <a href="index.html">
-          Ver gafas
-        </a>
+      /*
+       * Redibuja el carrito.
+       */
+      render();
 
-      </section>
+      if (delta > 0) {
+        msg('Unidad añadida');
+      } else {
+        msg('Unidad retirada');
+      }
+    }
 
-    `;
 
-    return;
+    /* =========================================================
+       ELIMINAR PRODUCTO
+    ========================================================= */
 
-  }
+    function removeItem(id) {
 
-  content.innerHTML = `
+      const cart = getCart();
 
-    <div class="layout">
+      const newCart = cart.filter(
+        i => String(i.id) !== String(id)
+      );
 
-      <section class="items">
+      /*
+       * Guarda y actualiza la navbar.
+       */
+      saveCart(newCart);
 
-        ${c.map(i => `
+      /*
+       * Redibuja el carrito.
+       */
+      render();
 
-          <article class="item">
+      msg('Producto eliminado');
+    }
 
-            <div class="img">
 
-              <img
-                src="${i.imagen || ''}"
-                alt="${i.nombre || 'Vesira'}"
-              >
+    /* =========================================================
+       ESCAPAR HTML
+    ========================================================= */
+
+    function escapeHtml(value) {
+
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+
+    /* =========================================================
+       RENDER
+    ========================================================= */
+
+    function render() {
+
+      const cart = getCart();
+
+      /*
+       * SIEMPRE sincronizamos el contador primero.
+       */
+      updateNavbarCartCount();
+
+
+      const subtotal = cart.reduce(
+        (sum, item) => {
+
+          const precio = Number(
+            item.precio || 0
+          );
+
+          const cantidad = Number(
+            item.cantidad || 0
+          );
+
+          return sum + (
+            precio * cantidad
+          );
+
+        },
+        0
+      );
+
+
+      /* =======================================================
+         CARRITO VACÍO
+      ======================================================= */
+
+      if (!cart.length) {
+
+        content.innerHTML = `
+          <section class="empty">
+
+            <h2>
+              Tu carrito está vacío.
+            </h2>
+
+            <p>
+              Aún no has añadido ningún par.
+            </p>
+
+            <a href="index.html">
+              Ver gafas
+            </a>
+
+          </section>
+        `;
+
+        return;
+      }
+
+
+      /* =======================================================
+         PRODUCTOS
+      ======================================================= */
+
+      content.innerHTML = `
+        <div class="layout">
+
+          <section class="items">
+
+            ${cart.map(item => {
+
+              const cantidad = Math.max(
+                1,
+                Number(item.cantidad || 1)
+              );
+
+              const precio = Number(
+                item.precio || 0
+              );
+
+              const totalItem =
+                precio * cantidad;
+
+
+              return `
+                <article class="item">
+
+                  <div class="img">
+
+                    <img
+                      src="${escapeHtml(item.imagen || '')}"
+                      alt="${escapeHtml(item.nombre || 'Vesira')}"
+                    >
+
+                  </div>
+
+
+                  <div class="info">
+
+                    <h2>
+                      ${escapeHtml(item.nombre || '')}
+                    </h2>
+
+                    <div class="price">
+                      ${eur(precio)}
+                    </div>
+
+
+                    <div class="controls">
+
+                      <div class="qty">
+
+                        <button
+                          type="button"
+                          aria-label="Quitar una unidad"
+                          onclick='qty(
+                            ${JSON.stringify(item.id)},
+                            -1
+                          )'
+                        >
+                          −
+                        </button>
+
+
+                        <span>
+                          ${cantidad}
+                        </span>
+
+
+                        <button
+                          type="button"
+                          aria-label="Añadir una unidad"
+                          onclick='qty(
+                            ${JSON.stringify(item.id)},
+                            1
+                          )'
+                        >
+                          +
+                        </button>
+
+                      </div>
+
+
+                      <button
+                        type="button"
+                        class="del"
+                        onclick='removeItem(
+                          ${JSON.stringify(item.id)}
+                        )'
+                      >
+                        Eliminar
+                      </button>
+
+                    </div>
+
+                  </div>
+
+
+                  <div class="totalitem">
+                    ${eur(totalItem)}
+                  </div>
+
+                </article>
+              `;
+
+            }).join('')}
+
+          </section>
+
+
+          <aside class="summary">
+
+            <h2>
+              Resumen
+            </h2>
+
+
+            <div class="row">
+
+              <span>
+                Subtotal
+              </span>
+
+              <strong>
+                ${eur(subtotal)}
+              </strong>
 
             </div>
 
-            <div class="info">
 
-              <h2>
-                ${i.nombre || ''}
-              </h2>
+            <button
+              class="buy"
+              id="buy"
+              type="button"
+            >
+              Continuar con el pedido
+            </button>
 
-              <div class="price">
-                ${eur(i.precio)}
-              </div>
 
-              <div class="controls">
+            <a
+              class="continue"
+              href="index.html"
+            >
+              Seguir comprando
+            </a>
 
-                <div class="qty">
-
-                  <button
-                    onclick='qty(${JSON.stringify(i.id)},-1)'
-                  >
-                    −
-                  </button>
-
-                  <span>
-                    ${Number(i.cantidad || 1)}
-                  </span>
-
-                  <button
-                    onclick='qty(${JSON.stringify(i.id)},1)'
-                  >
-                    +
-                  </button>
-
-                </div>
-
-                <button
-                  class="del"
-                  onclick='removeItem(${JSON.stringify(i.id)})'
-                >
-                  Eliminar
-                </button>
-
-              </div>
-
-            </div>
-
-            <div class="totalitem">
-
-              ${eur(
-                Number(i.precio) *
-                Number(i.cantidad || 1)
-              )}
-
-            </div>
-
-          </article>
-
-        `).join('')}
-
-      </section>
-
-      <aside class="summary">
-
-        <h2>Resumen</h2>
-
-        <div class="row">
-
-          <span>Subtotal</span>
-
-          <strong>
-            ${eur(sub)}
-          </strong>
+          </aside>
 
         </div>
+      `;
 
-        <button
-          class="buy"
-          id="buy"
-        >
-          Continuar con el pedido
-        </button>
 
-        <a
-          class="continue"
-          href="index.html"
-        >
-          Seguir comprando
-        </a>
+      const buy = document.getElementById('buy');
 
-      </aside>
+      if (buy) {
 
-    </div>
+        buy.onclick = () => {
 
-  `;
+          if (!getCart().length) {
+            return;
+          }
 
-  document.getElementById('buy').onclick = () => {
+          window.location.href =
+            'checkout.html';
+        };
+      }
+    }
 
-    if(!getCart().length) return;
 
-    window.location.href = 'checkout.html';
+    /* =========================================================
+       CAMBIOS DESDE OTRA PESTAÑA
+    ========================================================= */
 
-  };
+    window.addEventListener('storage', event => {
 
-}
+      if (event.key !== CART_KEY) {
+        return;
+      }
 
-render();
+      render();
 
-</script>
+    });
+
+
+    /* =========================================================
+       CAMBIOS DESDE OTRAS PARTES DE VESIRA
+    ========================================================= */
+
+    window.addEventListener(
+      'vesira:cart-updated',
+      () => {
+
+        /*
+         * No hacemos render aquí porque ya lo hacemos
+         * después de qty/removeItem.
+         *
+         * Solo mantenemos el contador sincronizado.
+         */
+        updateNavbarCartCount();
+
+      }
+    );
+
+
+    /* =========================================================
+       INICIO
+    ========================================================= */
+
+    render();
+
+  </script>
 
 </body>
-
 </html>
