@@ -2890,29 +2890,38 @@ String(
 
                 <div class="fields">
 
-                  <div class="field full">
+  <div class="field">
 
-                    <label for="email">Email</label>
+    <label for="email">Email</label>
 
-                    <input
+    <input
+      id="email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      required
+      placeholder="tu@email.com"
+    >
 
-                      id="email"
+  </div>
 
-                      name="email"
+  <div class="field">
 
-                      type="email"
+    <label for="telefono">Teléfono</label>
 
-                      autocomplete="email"
+    <input
+      id="telefono"
+      name="telefono"
+      type="tel"
+      autocomplete="tel"
+      inputmode="tel"
+      required
+      placeholder="+34 600 000 000"
+    >
 
-                      required
+  </div>
 
-                      placeholder="tu@email.com"
-
-                    >
-
-                  </div>
-
-                </div>
+</div>
 
               </section>
 
@@ -3390,13 +3399,15 @@ new FormData(form).entries()
 
       data.email = String(data.email || "").trim();
 
-      data.nombre = String(data.nombre || "").trim();
+data.telefono = String(data.telefono || "").trim();
 
-      data.apellidos = String(data.apellidos || "").trim();
+data.nombre = String(data.nombre || "").trim();
 
-      data.ciudad = String(data.ciudad || "").trim();
+data.apellidos = String(data.apellidos || "").trim();
 
-      data.codigoPostal = String(data.codigoPostal || "").trim();
+data.ciudad = String(data.ciudad || "").trim();
+
+data.codigoPostal = String(data.codigoPostal || "").trim();
 
       if (
 
@@ -3491,18 +3502,13 @@ localStorage.setItem(
 JSON.stringify({
 
             cliente: {
+  email: String(data.email).trim(),
 
-              email:
+  telefono: String(data.telefono).trim(),
 
-String(data.email).trim(),
+  nombre: String(data.nombre).trim(),
 
-              nombre:
-
-String(data.nombre).trim(),
-
-              apellidos:
-
-String(data.apellidos).trim(),
+  apellidos: String(data.apellidos).trim(),
 
               direccion:
 
