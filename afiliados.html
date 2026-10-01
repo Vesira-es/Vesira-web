@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
@@ -7,785 +6,690 @@
   <meta charset="UTF-8">
 
   <meta
-
-name="viewport"
-
-content="width=device-width, initial-scale=1.0"
-
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
   >
 
   <meta
-
-name="description"
-
-content="Colabora con Vesira como creador y consigue tu código personal."
-
+    name="description"
+    content="Programa de Afiliados Vesira. Forma parte de la marca, comparte Vesira y gana una comisión por cada venta realizada con tu código."
   >
 
-  <title>Creadores · VESIRA</title>
+  <title>Afiliados · VESIRA</title>
 
-<!-- =========================================================
 
+  <!-- =========================================================
        FUENTES
-
        ========================================================= -->
 
   <link
-
-rel="preconnect"
-
-href="https://fonts.googleapis.com"
-
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
   >
 
   <link
-
-rel="preconnect"
-
-href="https://fonts.gstatic.com"
-
-crossorigin
-
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
   >
 
   <link
-
-href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
-
-rel="stylesheet"
-
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Outfit:wght@300;400;500;600;700&family=Material+Symbols+Outlined"
+    rel="stylesheet"
   >
+
 
   <style>
 
-/* =========================================================
-
+    /* =========================================================
        VARIABLES
-
        ========================================================= */
 
-:root {
-
+    :root {
       --bg: #0c0c0c;
-
       --text: #ffffff;
-
-      --muted: #888888;
-
-      --muted-dark: #666666;
-
-      --line: #262626;
-
-      --card: #111111;
-
+      --muted: #858585;
+      --muted-dark: #555555;
+      --line: #242424;
+      --soft-line: #1b1b1b;
     }
 
-/* =========================================================
 
+    /* =========================================================
        RESET
-
        ========================================================= */
 
     * {
-
-box-sizing: border-box;
-
-margin: 0;
-
-padding: 0;
-
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html {
-
-scroll-behavior: smooth;
-
+      scroll-behavior: smooth;
     }
 
     body {
+      min-height: 100vh;
 
-min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
 
-background: var(--bg);
-
-color: var(--text);
-
-font-family:
-
+      font-family:
         "Outfit",
+        Arial,
+        sans-serif;
 
-Arial,
+      overflow-x: hidden;
 
-sans-serif;
-
-overflow-x: hidden;
-
--webkit-font-smoothing: antialiased;
-
-text-rendering: optimizeLegibility;
-
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     a {
-
-color: inherit;
-
-text-decoration: none;
-
+      color: inherit;
+      text-decoration: none;
     }
 
     button {
-
-font: inherit;
-
+      font: inherit;
     }
 
-/* =========================================================
 
+    /* =========================================================
        CONTENIDO
-
        ========================================================= */
 
     main {
-
-width: min(
-
+      width: min(
         760px,
-
-calc(100% - 28px)
-
+        calc(100% - 32px)
       );
 
-margin: 0 auto;
+      margin: 0 auto;
 
-padding:
-
+      padding:
         125px
-
         0
-
-        90px;
-
+        100px;
     }
 
-/* =========================================================
 
+    /* =========================================================
        HERO
-
        ========================================================= */
 
-.hero {
+    .hero {
+      text-align: center;
 
-text-align: center;
-
-margin-bottom: 42px;
-
+      margin-bottom: 75px;
     }
 
-.eyebrow {
+    .eyebrow {
+      margin-bottom: 18px;
 
-margin-bottom: 16px;
+      color: var(--muted-dark);
 
-color: var(--muted-dark);
+      font-size: 9px;
+      font-weight: 500;
 
-font-size: 9px;
+      letter-spacing: .28em;
 
-font-weight: 500;
+      line-height: 1;
 
-letter-spacing: .28em;
-
-line-height: 1;
-
-text-transform: uppercase;
-
+      text-transform: uppercase;
     }
 
-.hero h1 {
-
-font-family:
-
+    .hero h1 {
+      font-family:
         "Bricolage Grotesque",
+        Arial,
+        sans-serif;
 
-Arial,
-
-sans-serif;
-
-font-size:
-
-clamp(
-
-          60px,
-
+      font-size:
+        clamp(
+          62px,
           10vw,
-
-          105px
-
+          108px
         );
 
-font-weight: 400;
+      font-weight: 400;
 
-line-height: .82;
+      line-height: .82;
 
-letter-spacing: -.075em;
+      letter-spacing: -.075em;
 
-transform:
-
-skewX(-7deg);
-
+      transform: skewX(-7deg);
     }
 
-.lead {
-
-width: min(
-
-        480px,
-
+    .lead {
+      width: min(
+        500px,
         100%
-
       );
 
-margin:
-
-        25px
-
-auto
-
+      margin:
+        30px
+        auto
         0;
 
-color: var(--muted);
+      color: var(--muted);
 
-font-size: 11px;
+      font-size: 11px;
 
-line-height: 1.65;
-
+      line-height: 1.75;
     }
 
-/* =========================================================
 
-       TARJETA
-
+    /* =========================================================
+       INTRO
        ========================================================= */
 
-.card {
-
-padding: 32px;
-
-border:
-
-        1px solid
-
-var(--line);
-
-border-radius: 24px;
-
-background:
-
-var(--card);
-
-box-shadow:
-
-        0 25px 80px
-
-rgba(0, 0, 0, .30);
-
-    }
-
-.card-kicker {
-
-margin-bottom: 12px;
-
-color: var(--muted-dark);
-
-font-size: 8px;
-
-font-weight: 500;
-
-letter-spacing: .22em;
-
-text-transform: uppercase;
-
-    }
-
-.card h2 {
-
-margin-bottom: 22px;
-
-font-family:
-
-        "Bricolage Grotesque",
-
-Arial,
-
-sans-serif;
-
-font-size:
-
-clamp(
-
-          44px,
-
-          7vw,
-
-          68px
-
-        );
-
-font-weight: 400;
-
-line-height: .84;
-
-letter-spacing: -.06em;
-
-    }
-
-.text {
-
-color: #858585;
-
-font-size: 11px;
-
-line-height: 1.7;
-
-    }
-
-.text + .text {
-
-margin-top: 10px;
-
-    }
-
-/* =========================================================
-
-       PASOS
-
-       ========================================================= */
-
-.steps {
-
-display: grid;
-
-grid-template-columns:
-
-repeat(
-
-          3,
-
-          1fr
-
-        );
-
-gap: 9px;
-
-margin-top: 28px;
-
-    }
-
-.step {
-
-padding: 16px;
-
-border:
-
-        1px solid
-
-        #242424;
-
-border-radius: 16px;
-
-background: #090909;
-
-    }
-
-.step h3 {
-
-margin-bottom: 6px;
-
-font-family:
-
-        "Bricolage Grotesque",
-
-Arial,
-
-sans-serif;
-
-font-size: 18px;
-
-font-weight: 400;
-
-letter-spacing: -.03em;
-
-    }
-
-.step p {
-
-color: #666;
-
-font-size: 9px;
-
-line-height: 1.5;
-
-    }
-
-/* =========================================================
-
-       BOTÓN
-
-       ========================================================= */
-
-.cta {
-
-width: 100%;
-
-min-height: 52px;
-
-margin-top: 25px;
-
-padding:
-
+    .intro {
+      padding:
         0
+        0
+        62px;
 
-        18px;
-
-display: flex;
-
-align-items: center;
-
-justify-content: space-between;
-
-gap: 15px;
-
-border:
-
+      border-bottom:
         1px solid
+        var(--line);
+    }
 
+    .section-label {
+      margin-bottom: 18px;
+
+      color: var(--muted-dark);
+
+      font-size: 8px;
+      font-weight: 500;
+
+      letter-spacing: .22em;
+
+      text-transform: uppercase;
+    }
+
+    .intro h2 {
+      max-width: 650px;
+
+      font-family:
+        "Bricolage Grotesque",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          40px,
+          6vw,
+          62px
+        );
+
+      font-weight: 400;
+
+      line-height: .92;
+
+      letter-spacing: -.06em;
+    }
+
+    .intro-copy {
+      max-width: 530px;
+
+      margin-top: 25px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      line-height: 1.75;
+    }
+
+    .intro-copy strong {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+
+    /* =========================================================
+       AFILIADOS
+       ========================================================= */
+
+    .affiliate-content {
+      padding:
+        58px
+        0
+        58px;
+    }
+
+    .affiliate-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          1fr
+        );
+
+      gap: 45px;
+    }
+
+    .affiliate-block {
+      padding-top: 18px;
+
+      border-top:
+        1px solid
+        var(--soft-line);
+    }
+
+    .affiliate-block h3 {
+      margin-bottom: 12px;
+
+      font-family:
+        "Bricolage Grotesque",
+        Arial,
+        sans-serif;
+
+      font-size: 25px;
+
+      font-weight: 400;
+
+      letter-spacing: -.04em;
+    }
+
+    .affiliate-block p {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.7;
+    }
+
+    .affiliate-block p strong {
+      color: #ffffff;
+
+      font-weight: 500;
+    }
+
+
+    /* =========================================================
+       MENSAJE CENTRAL
+       ========================================================= */
+
+    .statement {
+      padding:
+        58px
+        0
+        62px;
+
+      border-top:
+        1px solid
+        var(--line);
+
+      border-bottom:
+        1px solid
+        var(--line);
+    }
+
+    .statement p {
+      max-width: 680px;
+
+      font-family:
+        "Bricolage Grotesque",
+        Arial,
+        sans-serif;
+
+      font-size:
+        clamp(
+          34px,
+          5.5vw,
+          55px
+        );
+
+      font-weight: 400;
+
+      line-height: .96;
+
+      letter-spacing: -.055em;
+    }
+
+    .statement p span {
+      color: #555555;
+    }
+
+
+    /* =========================================================
+       CTA
+       ========================================================= */
+
+    .cta-wrap {
+      padding-top: 48px;
+    }
+
+    .cta-label {
+      margin-bottom: 14px;
+
+      color: var(--muted-dark);
+
+      font-size: 8px;
+
+      font-weight: 500;
+
+      letter-spacing: .22em;
+
+      text-transform: uppercase;
+    }
+
+    .cta {
+      width: 100%;
+
+      min-height: 56px;
+
+      padding:
+        0
+        20px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      border:
+        1px solid
         #ffffff;
 
-border-radius: 999px;
+      border-radius: 999px;
 
-background: #ffffff;
+      background: #ffffff;
 
-color: #080808;
+      color: #080808;
 
-font-size: 9px;
+      font-size: 9px;
 
-font-weight: 600;
+      font-weight: 600;
 
-letter-spacing: .1em;
+      letter-spacing: .1em;
 
-text-transform: uppercase;
+      text-transform: uppercase;
 
-transition:
-
-background .25s ease,
-
-color .25s ease,
-
+      transition:
+        background .25s ease,
+        color .25s ease,
         transform .25s ease;
-
     }
 
-.cta:hover {
+    .cta:hover {
+      background: transparent;
 
-background: transparent;
+      color: #ffffff;
 
-color: #ffffff;
-
-transform:
-
-translateY(-2px);
-
+      transform:
+        translateY(-2px);
     }
 
-.cta .material-symbols-outlined {
+    .cta .material-symbols-outlined {
+      font-size: 18px;
 
-font-size: 18px;
-
-flex-shrink: 0;
-
+      flex-shrink: 0;
     }
 
-.note {
+    .note {
+      margin-top: 12px;
 
-margin-top: 12px;
+      color: #505050;
 
-color: #555;
+      font-size: 8px;
 
-font-size: 8px;
+      line-height: 1.5;
 
-line-height: 1.5;
-
-text-align: center;
-
+      text-align: center;
     }
 
-/* =========================================================
 
-       MARQUEE INFERIOR
-
+    /* =========================================================
+       MARQUEE
        ========================================================= */
 
-.marquee-vesira {
+    .marquee-vesira {
+      width: 100%;
 
-width: 100%;
+      overflow: hidden;
 
-overflow: hidden;
-
-padding:
-
+      padding:
         34px
-
         0;
 
-border-top:
-
+      border-top:
         1px solid
-
-var(--line);
-
+        var(--line);
     }
 
-.marquee-vesira-track {
+    .marquee-vesira-track {
+      display: flex;
 
-display: flex;
+      width: max-content;
 
-width: max-content;
-
-animation:
-
+      animation:
         vesiraLoop
-
         18s
-
-linear
-
-infinite;
-
+        linear
+        infinite;
     }
 
-.marquee-vesira-group {
+    .marquee-vesira-group {
+      display: flex;
 
-display: flex;
+      align-items: center;
 
-align-items: center;
+      gap: 70px;
 
-gap: 70px;
+      padding-right: 70px;
 
-padding-right: 70px;
-
-flex-shrink: 0;
-
+      flex-shrink: 0;
     }
 
-.marquee-vesira-group img {
+    .marquee-vesira-group img {
+      width: 155px;
 
-width: 155px;
+      height: 60px;
 
-height: 60px;
+      display: block;
 
-display: block;
+      object-fit: contain;
 
-object-fit: contain;
-
-flex-shrink: 0;
-
+      flex-shrink: 0;
     }
 
     @keyframes vesiraLoop {
 
       from {
-
-transform:
-
-translateX(0);
-
+        transform:
+          translateX(0);
       }
 
       to {
-
-transform:
-
-translateX(-50%);
-
+        transform:
+          translateX(-50%);
       }
 
     }
 
-/* =========================================================
 
+    /* =========================================================
        MÓVIL
-
        ========================================================= */
 
     @media (max-width: 600px) {
 
       main {
+        width:
+          calc(100% - 22px);
 
-width:
-
-calc(100% - 20px);
-
-padding:
-
+        padding:
           100px
-
           0
-
-          60px;
-
+          65px;
       }
 
-.hero {
 
-margin-bottom: 30px;
-
+      .hero {
+        margin-bottom: 58px;
       }
 
-.eyebrow {
 
-font-size: 8px;
+      .eyebrow {
+        font-size: 8px;
 
-letter-spacing: .24em;
-
+        letter-spacing: .24em;
       }
 
-.hero h1 {
 
-font-size:
-
-          62px;
-
+      .hero h1 {
+        font-size: 63px;
       }
 
-.lead {
 
-font-size: 10px;
+      .lead {
+        max-width: 340px;
 
-margin-top: 20px;
+        margin-top: 22px;
 
+        font-size: 10px;
+
+        line-height: 1.7;
       }
 
-.card {
 
-padding:
-
-          22px 18px;
-
-border-radius:
-
-          20px;
-
+      .intro {
+        padding-bottom: 48px;
       }
 
-.card h2 {
 
-font-size:
-
-          48px;
-
+      .intro h2 {
+        font-size: 43px;
       }
 
-.text {
 
-font-size: 10px;
+      .intro-copy {
+        margin-top: 21px;
 
+        font-size: 10px;
+
+        line-height: 1.75;
       }
 
-.steps {
 
-grid-template-columns: 1fr;
-
-gap: 8px;
-
-margin-top: 24px;
-
+      .affiliate-content {
+        padding:
+          45px
+          0;
       }
 
-.step {
 
-padding: 15px;
+      .affiliate-grid {
+        grid-template-columns: 1fr;
 
+        gap: 38px;
       }
 
-.step h3 {
 
-font-size: 18px;
-
+      .affiliate-block {
+        padding-top: 16px;
       }
 
-.cta {
 
-min-height: 50px;
-
-font-size: 8px;
-
-padding:
-
-          0 16px;
-
+      .affiliate-block h3 {
+        font-size: 22px;
       }
 
-.note {
 
-font-size: 7.5px;
-
+      .affiliate-block p {
+        font-size: 10px;
       }
 
-.marquee-vesira {
 
-padding:
-
-          24px 0;
-
+      .statement {
+        padding:
+          45px
+          0
+          50px;
       }
 
-.marquee-vesira-group {
 
-gap: 45px;
+      .statement p {
+        font-size: 37px;
 
-padding-right: 45px;
-
+        line-height: .96;
       }
 
-.marquee-vesira-group img {
 
-width: 115px;
+      .cta-wrap {
+        padding-top: 38px;
+      }
 
-height: 48px;
 
+      .cta {
+        min-height: 52px;
+
+        padding:
+          0
+          16px;
+
+        font-size: 8px;
+      }
+
+
+      .note {
+        font-size: 7.5px;
+      }
+
+
+      .marquee-vesira {
+        padding:
+          24px
+          0;
+      }
+
+
+      .marquee-vesira-group {
+        gap: 45px;
+
+        padding-right: 45px;
+      }
+
+
+      .marquee-vesira-group img {
+        width: 115px;
+
+        height: 48px;
       }
 
     }
 
-/* =========================================================
 
+    /* =========================================================
        MENOS ANIMACIÓN
-
        ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
       html {
-
-scroll-behavior: auto;
-
+        scroll-behavior: auto;
       }
 
       *,
       *::before,
       *::after {
 
-animation-duration:
-
+        animation-duration:
           .01ms !important;
 
-animation-iteration-count:
-
+        animation-iteration-count:
           1 !important;
 
-transition-duration:
-
+        transition-duration:
           .01ms !important;
-
       }
 
     }
@@ -794,320 +698,296 @@ transition-duration:
 
 </head>
 
+
 <body>
 
-<!-- ========================================================
 
-       NAVBAR VESIRA
-
+  <!-- ========================================================
+       NAVBAR
        ======================================================== -->
 
   <script src="vesira-navbar.js"></script>
 
-<!-- ========================================================
 
+  <!-- ========================================================
        CONTENIDO
-
        ======================================================== -->
 
   <main>
 
-<!-- ======================================================
 
+    <!-- ======================================================
          HERO
-
          ====================================================== -->
 
     <section class="hero">
 
       <div class="eyebrow">
-
-        Programa de creadores
-
+        Programa de Afiliados Vesira
       </div>
 
       <h1>
-
-        Colabora<br>
-
-        con Vesira.
-
+        Forma parte<br>
+        de Vesira.
       </h1>
 
       <p class="lead">
-
-        ¿Tienes una comunidad o creas contenido?
-
-        Escríbenos por Instagram: @vesira.co y te contamos cómo formar parte.
-
+        Vesira también puede ser tuya.
+        Comparte la marca, recomiéndala a tu manera
+        y gana una comisión por cada venta realizada
+        con tu código personal.
       </p>
 
     </section>
 
-<!-- ======================================================
 
-         TARJETA
-
+    <!-- ======================================================
+         INTRO
          ====================================================== -->
 
-    <section class="card">
+    <section class="intro">
 
-      <div class="card-kicker">
-
-        Código de creador
-
+      <div class="section-label">
+        Afiliados Vesira
       </div>
 
       <h2>
-
-        Comparte.<br>
-
-        Descuenta.<br>
-
-        Gana.
-
+        No necesitas ser creador de contenido.
       </h2>
 
-      <p class="text">
-
-        Escríbenos por Instagram (@vesira.co) y dinos que quieres
-
-        colaborar con Vesira. Te daremos un código de creador personal
-
-        para que puedas compartirlo con tu comunidad.
-
+      <p class="intro-copy">
+        No hace falta tener miles de seguidores,
+        una comunidad o una cuenta grande en redes.
+        <strong>Cualquiera puede formar parte del programa de afiliados de Vesira.</strong>
       </p>
 
-      <p class="text">
-
-        Tus seguidores podrán utilizarlo para conseguir un descuento
-
-        en sus compras y tú recibirás una comisión por las ventas
-
-        realizadas con tu código.
-
+      <p class="intro-copy">
+        Puedes compartir Vesira con tus amigos,
+        familiares, compañeros o simplemente con
+        personas que creas que conectan con la marca.
+        Tú compartes. Ellos compran. Tú ganas.
       </p>
 
-<!-- ====================================================
+    </section>
 
-           PASOS
 
-           ==================================================== -->
+    <!-- ======================================================
+         INFORMACIÓN AFILIADOS
+         ====================================================== -->
 
-      <div class="steps">
+    <section class="affiliate-content">
 
-        <div class="step">
-<h3>
+      <div class="affiliate-grid">
 
-            Escríbenos
 
+        <div class="affiliate-block">
+
+          <h3>
+            Tu código.
           </h3>
 
           <p>
-
-            Escríbenos por Instagram: @vesira.co.
-
+            Recibirás un <strong>código personal de afiliado</strong>
+            que podrás compartir con quien quieras.
+            Tus compras quedarán asociadas a ti.
           </p>
 
         </div>
 
-        <div class="step">
-<h3>
 
-            Te damos tu código
+        <div class="affiliate-block">
 
+          <h3>
+            Tu comisión.
           </h3>
 
           <p>
-
-            Recibirás tu código personal de creador.
-
+            Cuando alguien compra utilizando
+            <strong>tu código de afiliado</strong>,
+            recibes una comisión por esa venta.
           </p>
 
         </div>
 
-        <div class="step">
-<h3>
 
-            Compártelo
+        <div class="affiliate-block">
 
+          <h3>
+            A tu manera.
           </h3>
 
           <p>
-
-            Tu comunidad consigue descuento y tú comisión.
-
+            No tienes que crear contenido ni publicar todos los días.
+            Comparte Vesira como quieras y con quien quieras.
+            <strong>No hay una audiencia mínima para formar parte.</strong>
           </p>
 
         </div>
+
+
+        <div class="affiliate-block">
+
+          <h3>
+            Dentro de Vesira.
+          </h3>
+
+          <p>
+            No se trata solo de recomendar un producto.
+            Se trata de <strong>formar parte de la marca</strong>,
+            compartir lo que hacemos y crecer con Vesira.
+          </p>
+
+        </div>
+
 
       </div>
 
-<!-- ====================================================
+    </section>
 
-           INSTAGRAM
 
-           ==================================================== -->
+    <!-- ======================================================
+         STATEMENT
+         ====================================================== -->
+
+    <section class="statement">
+
+      <p>
+        Vesira no es solo algo que puedes comprar.
+        <span>
+          También es algo de lo que puedes formar parte.
+        </span>
+      </p>
+
+    </section>
+
+
+    <!-- ======================================================
+         CTA
+         ====================================================== -->
+
+    <section class="cta-wrap">
+
+      <div class="cta-label">
+        Únete al programa de afiliados
+      </div>
 
       <a
-
-class="cta"
-
-href="https://www.instagram.com/vesira.co/"
-
-target="_blank"
-
-rel="noopener noreferrer"
-
+        class="cta"
+        href="https://www.instagram.com/vesira.co/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Escribir a Vesira por Instagram"
       >
 
         <span>
-
-          Escríbenos por Instagram
-
+          Quiero ser afiliado de Vesira
         </span>
 
         <span
-
-class="material-symbols-outlined"
-
-aria-hidden="true"
-
+          class="material-symbols-outlined"
+          aria-hidden="true"
         >
-
           arrow_outward
-
         </span>
 
       </a>
 
       <div class="note">
-
-        Escríbenos por Instagram: @vesira.co
-
+        Escríbenos por Instagram · @vesira.co
       </div>
 
     </section>
 
+
   </main>
 
-<!-- ========================================================
 
+  <!-- ========================================================
        MARQUEE
-
        ======================================================== -->
 
-  <section class="marquee-vesira">
+  <section
+    class="marquee-vesira"
+    aria-hidden="true"
+  >
 
     <div class="marquee-vesira-track">
 
-      <div class="marquee-vesira-group">
-
-        <img
-
-src="img/logo2.png"
-
-alt="Vesira"
-
-        >
-
-        <img
-
-src="img/logo15.png"
-
-alt=""
-
-        >
-
-        <img
-
-src="img/logo2.png"
-
-alt="Vesira"
-
-        >
-
-        <img
-
-src="img/logo15.png"
-
-alt=""
-
-        >
-
-        <img
-
-src="img/logo2.png"
-
-alt="Vesira"
-
-        >
-
-        <img
-
-src="img/logo15.png"
-
-alt=""
-
-        >
-
-      </div>
 
       <div class="marquee-vesira-group">
 
         <img
-
-src="img/logo2.png"
-
-alt="Vesira"
-
+          src="img/logo2.png"
+          alt="Vesira"
         >
 
         <img
-
-src="img/logo15.png"
-
-alt=""
-
+          src="img/logo15.png"
+          alt=""
         >
 
         <img
-
-src="img/logo2.png"
-
-alt="Vesira"
-
+          src="img/logo2.png"
+          alt="Vesira"
         >
 
         <img
-
-src="img/logo15.png"
-
-alt=""
-
+          src="img/logo15.png"
+          alt=""
         >
 
         <img
-
-src="img/logo2.png"
-
-alt="Vesira"
-
+          src="img/logo2.png"
+          alt="Vesira"
         >
 
         <img
-
-src="img/logo15.png"
-
-alt=""
-
+          src="img/logo15.png"
+          alt=""
         >
 
       </div>
+
+
+      <div class="marquee-vesira-group">
+
+        <img
+          src="img/logo2.png"
+          alt="Vesira"
+        >
+
+        <img
+          src="img/logo15.png"
+          alt=""
+        >
+
+        <img
+          src="img/logo2.png"
+          alt="Vesira"
+        >
+
+        <img
+          src="img/logo15.png"
+          alt=""
+        >
+
+        <img
+          src="img/logo2.png"
+          alt="Vesira"
+        >
+
+        <img
+          src="img/logo15.png"
+          alt=""
+        >
+
+      </div>
+
 
     </div>
 
   </section>
+
 
 </body>
 
